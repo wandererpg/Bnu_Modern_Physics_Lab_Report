@@ -20,6 +20,10 @@
 *.vrb
 *.xdv
 
+# Generated build and visual-inspection directories
+**/build/
+**/tmp/
+
 # Local editor and OS files
 .DS_Store
 Thumbs.db

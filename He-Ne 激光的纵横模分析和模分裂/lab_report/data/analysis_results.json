@@ -1,0 +1,67 @@
+{
+  "data_notice": "All numerical records are simulated and must not be represented as actual measurements.",
+  "fsr_mhz": 1810.0,
+  "period_mean_ms": 10.001999999999999,
+  "period_u_ms": 0.012935738607954616,
+  "frequency_scale_mhz_per_ms": 180.9638072385523,
+  "frequency_scale_u_mhz_per_ms": 0.23404324214539077,
+  "resolution_limit_mhz": 15.381923615276945,
+  "resolution_limit_u_mhz": 0.24583241066562914,
+  "finesse": 117.67058823529412,
+  "resolving_power": 30799494.03280405,
+  "tube_results": {
+    "A": {
+      "higher_mode": "TEM10",
+      "longitudinal_time_ms": 2.4233333333333333,
+      "longitudinal_time_u_ms": 0.008819171036881863,
+      "longitudinal_spacing_mhz": 438.53562620809174,
+      "longitudinal_spacing_u_mhz": 1.693733967162574,
+      "transverse_time_ms": 0.3650000000000001,
+      "transverse_time_u_ms": 0.006454972243679022,
+      "transverse_spacing_mhz": 66.05178964207161,
+      "transverse_spacing_u_mhz": 1.1712358337362883,
+      "effective_length_m": 0.3418108359772622,
+      "ruler_length_m": 0.343,
+      "theoretical_spacing_mhz": 437.0152448979592,
+      "relative_deviation_pct": 0.347901206624397
+    },
+    "B": {
+      "higher_mode": "TEM01",
+      "longitudinal_time_ms": 1.668,
+      "longitudinal_time_u_ms": 0.006879922480183507,
+      "longitudinal_spacing_mhz": 301.8476304739052,
+      "longitudinal_spacing_u_mhz": 1.3047861938831151,
+      "transverse_time_ms": 0.47333333333333344,
+      "transverse_time_u_ms": 0.006146362971528595,
+      "transverse_spacing_mhz": 85.65620209291478,
+      "transverse_spacing_u_mhz": 1.1177724201386283,
+      "effective_length_m": 0.496595678967765,
+      "ruler_length_m": 0.5,
+      "theoretical_spacing_mhz": 299.792458,
+      "relative_deviation_pct": 0.6855317467343364
+    }
+  },
+  "gain_fit_coefficients": [
+    -1.8619076529137395e-06,
+    -1.1796106792332525e-05,
+    0.9922236708088609
+  ],
+  "gain_fit_r2": 0.999351722783351,
+  "gain_roots_mhz": [
+    -733.1794331077457,
+    726.8439380181408
+  ],
+  "output_bandwidth_mhz": 1460.0233711258866,
+  "output_bandwidth_u_mhz": 30.0,
+  "fluorescence_width_mhz": 1500.0,
+  "bandwidth_deviation_pct": 2.665108591607562,
+  "splitting_fit_slope_mhz": 1000.7023848517415,
+  "splitting_fit_intercept_mhz": 2.74601993075722,
+  "splitting_fit_r2": 0.997237732577749,
+  "o_polarization_r2": 0.9996312555906426,
+  "e_polarization_r2": 0.9988659935304255,
+  "o_max_angle_deg": 3.7,
+  "e_max_angle_deg": 93.9,
+  "polarization_separation_deg": 89.8,
+  "competition_correlation": -0.9990681879554668
+}

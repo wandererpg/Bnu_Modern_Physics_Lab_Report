@@ -1,0 +1,149 @@
+\documentclass[UTF8,a4paper,10pt]{ctexart}
+
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{a4paper,left=1.8cm,right=1.8cm,top=1.6cm,bottom=1.6cm}
+\linespread{1.15}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.05em}
+\setlist{nosep,leftmargin=2.4em}
+\setlist[enumerate]{itemsep=0.15em,topsep=0.2em}
+
+\ctexset{
+  section = {
+    format = \zihao{-4}\heiti\raggedright,
+    beforeskip = 0.65ex,
+    afterskip = 0.35ex
+  },
+  subsection = {
+    format = \zihao{5}\heiti\raggedright,
+    beforeskip = 0.35ex,
+    afterskip = 0.15ex
+  }
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\placeholder}[1]{\underline{\makebox[3.2cm][c]{#1}}}
+
+\begin{document}
+
+\begin{center}
+  {\zihao{2}\heiti He-Ne 激光的纵横模分析和模分裂\par}
+  \vspace{0.35em}
+  \begin{tabular}{>{\heiti}l l >{\heiti}l l}
+    学号： & \placeholder{待填写} & 姓名： & \placeholder{待填写} \\
+    指导老师： & \placeholder{待填写} & 实验日期： & \placeholder{待填写}
+  \end{tabular}
+\end{center}
+
+\section{实验目的}
+
+理解 He-Ne 激光器纵模、横模和模竞争的物理机制；用共焦球面扫描干涉仪测量两根激光管的模谱、纵模间隔和横模间隔；观察石英晶体双折射引起的纵模分裂，并用偏振片分析两条分裂谱线的偏振关系。
+
+\section{实验原理}
+
+\subsection{激光为什么会有纵模和横模}
+
+He-Ne 激光器可以简单看成“会发光的介质”和“两面反射镜”的组合。放电先让介质获得产生激光所需的能量，光在两面镜子之间来回反射并不断被放大。只有光波每次往返后仍能和自己同相叠加，才能稳定留下来；这就像琴弦只有在长度合适时才能形成稳定振动。
+
+沿着谐振腔长度方向形成的稳定模式叫纵模。它的相邻频率间隔为
+\begin{equation}
+  \Delta\nu_{\text{纵}}=\frac{c}{2\mu L},
+  \label{eq:longitudinal}
+\end{equation}
+其中 $c$ 是光速，$\mu$ 是腔内折射率，$L$ 是腔长，频率间隔单位为 \si{\hertz}。这个式子说明：腔越长，相邻纵模越接近，因此可能有更多纵模落在激光的增益范围内。
+
+横模描述的是激光光斑在横截面上的形状。由于镜面和通光孔径有限，光传播时会发生衍射，横截面上可能形成一个亮斑、多个亮斑或带暗线的图案。$\mathrm{TEM}_{mnq}$ 只是模式的编号，其中 $m,n$ 用来描述横向亮暗结构，$q$ 表示纵向模式。实验中要把横向光斑形状和模谱峰间距结合起来判断横模，而不是只看公式。
+
+\subsection{扫描干涉仪怎样把频率显示出来}
+
+扫描干涉仪可以理解为一把“频率尺”。它由两个球面反射镜组成，其中一个镜子安装在压电陶瓷上。改变压电陶瓷电压，镜子会发生很小的移动，干涉仪的腔长也随之变化。
+
+当某个频率的光正好满足干涉条件时，它能够较强地透过干涉仪，形成一个峰。光电二极管把透射光强变成电信号，接到示波器 $Y$ 轴；扫描电压接到 $X$ 轴。因此，示波器上的每个峰代表一个激光模式，峰与峰之间的距离代表频率间隔。
+
+一个自由光谱区的频率范围为
+\begin{equation}
+  \Delta\nu_{\mathrm{SR}}=\frac{c}{4\mu L}.
+  \label{eq:fsr}
+\end{equation}
+实验中先利用重复出现的模谱确定一个自由光谱区，再用它标定示波器横坐标，最后由峰间距估计纵模、横模和分裂模的频率差。
+
+\subsection{双折射为什么会导致模分裂}
+
+石英晶体会把光分成两个相互垂直的偏振分量。由于两种偏振光在晶体中的折射率不同，它们通过晶体时走过的“光学距离”不同。于是，同一个纵模对这两种光来说相当于有两个略有不同的腔长，原来的一条谱线就会变成两条。
+
+两条谱线的频率差可用下面的关系估计：
+\begin{equation}
+  \Delta\nu=\frac{\nu}{L}\delta.
+  \label{eq:splitting}
+\end{equation}
+其中 $\delta$ 是双折射造成的光程差，$\nu$ 是原来的光频率，$L$ 是谐振腔长度。旋转石英晶体会改变光程差，所以可以调节两条谱线之间的距离。放入偏振片并旋转它，可以观察两条谱线强度的互补变化，从而判断它们的偏振关系。
+
+模竞争的意思是：不同模式共用同一个增益介质。当某个模式变强时，它会消耗更多反转粒子，使其他模式得到的增益变小。因此实验中可能看到某些峰增强、另一些峰减弱甚至消失。
+
+\section{实验仪器}
+
+He-Ne 激光管及 JDW-3 激光电源、共焦球面扫描干涉仪、压电陶瓷和锯齿波驱动器、光电二极管及放大器、示波器或采集卡、模分裂激光器、腔内石英晶片和偏振片。激光器、扫描干涉仪和接收器依次安装在光具座上；光电信号接示波器 $Y$ 轴，扫描电压接 $X$ 轴。
+
+\section{实验方法}
+
+\subsection{两根激光管的模谱测量}
+
+\begin{enumerate}
+  \item 在光具座上安装激光管和扫描干涉仪，输出端对准干涉仪入口；按正、负极接好 JDW-3 电源。
+  \item 打开激光电源、干涉仪、放大器和示波器，调节光路，使反射光斑基本同心、模谱峰值最大。
+  \item 改变偏置电压和锯齿波幅度，观察模谱变化；利用重复模谱确定一个自由光谱区。
+  \item 测量相邻纵模和横模的峰间距，结合横向光斑形状判断横模；记录一个自由光谱区的模谱轮廓。
+  \item 两根激光管均测量完毕后，关闭电源并盖好防尘盖。
+\end{enumerate}
+
+\subsection{纵模分裂和模竞争的观察}
+
+\begin{enumerate}
+  \item 连接模分裂激光器、通用电源、压电陶瓷电源和扫描干涉仪，按要求将工作电流调至约 \SI{5}{\milli\ampere}，调好光路。
+  \item 改变压电陶瓷电压，记录模谱左右消失点，用两点间频率范围估计出光带宽，并选取若干点描绘增益曲线轮廓。
+  \item 旋转腔内石英晶片，使纵模分裂清晰；记录两条谱线的位置和间距。
+  \item 在输出镜与干涉仪之间放置偏振片并旋转，记录两条分裂谱线的幅值变化，判断偏振关系并解释模竞争现象。
+\end{enumerate}
+
+\section{实验内容}
+
+本次实验需要完成以下任务：
+\begin{enumerate}
+  \item 分别测量两根 He-Ne 激光管的模谱，记录纵模间隔、横模间隔、自由光谱区和模谱轮廓。
+  \item 根据峰间距、横向光斑和理论公式判断激光器包含的横模。
+  \item 观察模分裂激光器的出光带宽、纵模分裂和模竞争，记录分裂谱线的频率间隔及偏振片转动时的幅值变化。
+  \item 实验记录应包括：示波器波形或手绘模谱、峰位和峰高、扫描条件、光路调节情况、异常现象及后续数据处理所需的单位和有效数字。
+\end{enumerate}
+
+\section{预习思考题简答}
+
+\begin{enumerate}
+  \item \textbf{纵模和横模有何不同？}\quad 纵模由腔轴方向驻波条件产生，横模由有限孔径和横向衍射产生。纵模数量主要由增益带宽与纵模间隔、腔内损耗和阈值增益决定；腔长增大时纵模间隔减小，通常可容纳更多纵模。
+  \item \textbf{干涉仪如何分析模式？}\quad 压电陶瓷周期改变共焦腔长，不同频率的光依次透射；光电探测器把透射强度送入示波器，峰的位置表示频率，峰间距表示模式间隔。
+  \item \textbf{同精细常数下，长度不同的干涉仪有何区别？}\quad $L$ 越大，自由光谱区越小；精细常数相同则最小可分辨频宽也越小，所以长干涉仪绝对分辨能力较强，但无重叠测量范围较窄。
+  \item \textbf{双折射为何造成纵模分裂？}\quad 两个正交偏振分量具有不同折射率和光程，满足驻波条件的等效腔长不同，故同一纵模对应两个不同共振频率。
+  \item \textbf{实验如何实现模分裂？}\quad 将石英晶片置于谐振腔内，旋转晶片改变晶轴与光束夹角，调节双折射光程差；扫描干涉仪显示两条分裂谱线，偏振片用于判断其偏振关系。
+\end{enumerate}
+
+\section{安全注意事项}
+
+220 V 电源必须可靠接地；激光电源输出端有高压，严禁触摸。严禁直视激光主光束或镜面反射光。扫描干涉仪不得剧烈振动、拆卸或随意调准；仪器出入光口使用后盖好防尘盖，实验结束后依次关闭全部电源。
+
+\section{参考文献}
+
+\begin{enumerate}[label={[\arabic*]},itemsep=0pt]
+  \item He-Ne 激光的纵横模分析和模分裂实验讲义。
+  \item 陈英礼．激光导论．北京：电子工业出版社，1986．
+  \item 张书练．正交偏振激光原理．北京：清华大学出版社，2004．
+\end{enumerate}
+
+\end{document}
