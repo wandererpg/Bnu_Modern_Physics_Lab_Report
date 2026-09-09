@@ -74,7 +74,7 @@ Copy-Item -LiteralPath build\lab_report.pdf -Destination lab_report.pdf -Force
 预习报告应简述：
 
 - 实验目的；
-- 物理原理、实验原理和仪器原理；
+- 物理原理和实验原理；
 - 实验方法与主要实验内容；
 - 第一次课后留的问题和实验思考题；
 - 对实验的思考、理解以及对实验内容的掌握。
