@@ -76,12 +76,12 @@
 
 \vspace{0.8em}
 \noindent\fcolorbox{black!35}{gray!8}{%
-  \parbox{0.965\textwidth}{\textbf{数据说明：}本文全部数值记录均由确定性脚本生成，是依据讲义参数构造的模拟数据，并非真实实验测量。用于正式实验提交前，必须以实测原始记录替换，并重新完成计算、图表和结论。}}
+  \parbox{0.965\textwidth}{\textbf{数据说明：}管长测量与激光模式分析采用 \texttt{实验数据.xlsx} 及 Fig.~\ref{fig:exp1-scope}、Fig.~\ref{fig:exp2-scope} 所示的真实实验记录；出光带宽、石英晶体模分裂、偏振和模竞争部分仍保留原有模拟数据，仅作为后续报告结构与分析示例。}}
 
 \begin{center}
   {\heiti\zihao{-4} 摘\quad 要}
 \end{center}
-本实验基于共焦球面扫描干涉仪原理，使用物理量级合理的模拟原始数据研究两根 He-Ne 激光管的纵横模结构、出光带宽、双折射模分裂及模竞争。以 \SI{1810}{\mega\hertz} 自由光谱区标定频率轴，得到两管相邻纵模间隔分别为 \SI{438.5(17)}{\mega\hertz} 和 \SI{301.8(13)}{\mega\hertz}，相对理论值偏差为 \SI{0.35}{\percent} 和 \SI{0.69}{\percent}；估计出光带宽为 \SI{1460(30)}{\mega\hertz}。模分裂量与 $\sin^2\theta$ 呈线性关系，两分裂谱线偏振方向相差约 \ang{89.8}。结果与纵模驻波条件、石英双折射和非均匀增宽介质中的模竞争规律一致。
+本实验利用共焦球面扫描干涉仪研究 He-Ne 激光的纵横模结构。以前两项真实实验所用的 \SI{2667}{\mega\hertz} 自由光谱区标定频率轴，两组相邻纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，反算激光管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。在模式分析中，$\mathrm{TEM}_{00}$ 状态的纵模频差为 \SI{495.79}{\mega\hertz}；调至观察屏呈“8”字形的 $\mathrm{TEM}_{01}$ 状态后，测得横模和纵模频差分别为 \SI{150.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}。后续既有分析给出的出光带宽为 \SI{1460(30)}{\mega\hertz}，石英晶体分裂谱线的偏振方向相差约 \ang{89.8}。
 
 \noindent\textbf{关键词：}He-Ne 激光；纵横模；扫描干涉仪；双折射模分裂；模竞争
 
@@ -89,7 +89,7 @@
 
 激光谐振腔只允许满足相位自洽条件的电磁场稳定振荡，因此激光输出表现为离散的纵模频率和特定的横向光强分布。纵模决定轴向驻波结构，横模反映有限孔径、衍射及腔镜几何对横向场的约束。模式结构不仅决定激光器的频谱纯度、相干性和光束质量，也影响精密测量、干涉计量与激光稳频等应用。
 
-共焦球面扫描干涉仪把微小频率差转换为随扫描电压变化的透射峰位置，是观察激光模谱的常用工具。若在谐振腔内加入石英晶体，两个正交偏振分量因折射率不同而具有不同光程，同一纵模可分裂为两个频率。通过改变晶片方向和腔长，还能观察偏振态变化与模式间的增益竞争。本实验旨在测量两根 He-Ne 激光管的纵、横模间隔，估计扫描干涉仪性能与激光出光带宽，并分析双折射模分裂、正交偏振和模竞争之间的联系\cite{guide}。
+共焦球面扫描干涉仪把微小频率差转换为随扫描电压变化的透射峰位置，是观察激光模谱的常用工具。若在谐振腔内加入石英晶体，两个正交偏振分量因折射率不同而具有不同光程，同一纵模可分裂为两个频率。通过改变晶片方向和腔长，还能观察偏振态变化与模式间的增益竞争。本实验前两项工作分别利用纵模频差反算单根 He-Ne 激光管的管长，以及通过螺旋测微器改变激光模式、测量 $\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 状态的纵横模频差；后续内容分析出光带宽、双折射模分裂、正交偏振和模竞争\cite{guide}。
 
 \section{原理}
 
@@ -108,15 +108,15 @@
 \begin{equation}
   \Delta\nu_{\mathrm{SR}}=\frac{c}{4\mu L_s}. \label{eq:fsr}
 \end{equation}
-讲义给定本实验仪器的自由光谱区为 \SI{1810}{\mega\hertz}\cite{guide}。若示波器上相邻重复模谱的时间间隔为 $T_{\mathrm{SR}}$，则频率标尺为
+前两项实测所用扫描干涉仪的自由光谱区为 $\nu_{\mathrm{FSR}}=\SI{2667}{\mega\hertz}$。若示波器上相邻重复模谱的时间间隔为 $\delta T$，待测两峰的横向时间差为 $\delta t$，则扫描轴上的时间间隔可按比例换算为频率间隔：
 \begin{equation}
-  k=\frac{\Delta\nu_{\mathrm{SR}}}{T_{\mathrm{SR}}},\qquad
-  \Delta\nu=k\Delta t, \label{eq:scale}
+  \frac{\delta\nu}{\nu_{\mathrm{FSR}}}
+  =\frac{\delta t}{\delta T},\qquad
+  \delta\nu=\nu_{\mathrm{FSR}}\frac{\delta t}{\delta T}. \label{eq:scale}
 \end{equation}
-其中 $\Delta t$ 为两峰的横向时间差。单峰半高全宽换算为频宽 $\delta\nu$ 后，干涉仪精细常数和分辨率分别为
+对近似真空的 He-Ne 激光腔，相邻纵模间隔满足式\eqref{eq:longitudinal-spacing}，因此可由测得的纵模频差反算腔长：
 \begin{equation}
-  \mathcal{F}=\frac{\Delta\nu_{\mathrm{SR}}}{\delta\nu},\qquad
-  R=\frac{\nu_0}{\delta\nu}. \label{eq:finesse}
+  L=\frac{c}{2\delta\nu}. \label{eq:tube-length}
 \end{equation}
 
 \subsection{双折射模分裂与偏振}
@@ -138,88 +138,127 @@
 
 \subsection{仪器与装置}
 
-实验装置包括两根 He-Ne 激光管及 JDW-3 型激光电源、共焦球面扫描干涉仪、锯齿波与压电陶瓷驱动器、光电二极管及放大器、示波器或采集卡、JX-1 模分裂激光器、腔内石英晶片和偏振片。光电接收信号输入示波器 $Y$ 轴，驱动压电陶瓷的同步扫描信号输入 $X$ 轴。模分裂激光器按讲义要求在约 \SI{5}{\milli\ampere} 工作电流下运行。
+前两项实验使用 He-Ne 激光管、共焦球面扫描干涉仪、锯齿波与压电陶瓷驱动器、光电接收器、示波器、观察屏和螺旋测微器。光束分为两路：一路投射到观察屏以辨认横向光斑，另一路进入扫描干涉仪，光电接收信号与同步扫描信号分别送入示波器。后续实验沿用 JX-1 模分裂激光器、腔内石英晶片和偏振片等原有装置。
 
 \subsection{实验方法}
 
-按讲义流程，先调节激光管、扫描干涉仪和光电接收器同轴，使透射模谱峰值最大；改变偏置电压和锯齿波幅度，选取稳定且覆盖完整自由光谱区的扫描条件。用重复出现的模谱标定横轴，测量两根激光管的相邻同类峰间距和同一纵模组内的弱峰偏移，并结合横向光斑判断横模。
+实验一先调节光路与扫描干涉仪，使示波器上出现稳定、重复的透射峰序列。对同一激光管记录两组峰位，分别求相邻同类峰的平均时间差 $\delta t$ 和重复模谱的平均周期 $\delta T$，再由式\eqref{eq:scale}求纵模频差，并由式\eqref{eq:tube-length}反算管长。
+
+实验二通过螺旋测微器改变激光腔的工作状态，同时观察屏上光斑形状和示波器模谱。选取基横模 $\mathrm{TEM}_{00}$ 与呈“8”字形光斑的 $\mathrm{TEM}_{01}$ 状态，测量同类峰间隔和横模峰偏移。数据筛选保留锯齿波近似线性的扫描段内、峰形清晰且远离回扫跳变的峰间距。
 
 随后改变模分裂激光器的压电陶瓷电压，记录谱线左右消失点和若干中间点以估计出光带宽；旋转腔内石英晶片，测量分裂间距随晶片角度的变化；在输出镜与扫描干涉仪之间插入偏振片，记录两分裂峰随偏振片角度的幅值变化。最后改变相对 PZT 控制电压，比较两模式强度的反向变化。
 
-\subsection{模拟数据与处理方法}
+\subsection{数据来源与处理方法}
 
-由于未提供实测记录，本文使用脚本 \texttt{generate\_simulated\_data.py} 生成确定性的模拟原始数据。模型采用讲义给出的 \SI{1810}{\mega\hertz} 自由光谱区、式\eqref{eq:longitudinal-spacing}和式\eqref{eq:splitting}，并叠加与示波器读数、扫描非线性和强度噪声同量级的微小波动。全部 CSV 文件保存在 \texttt{data/}，图形保存在 \texttt{figures/}。
+管长测量和激光模式分析的数据取自 \texttt{实验数据.xlsx}，四张原始示波器照片见 Fig.~\ref{fig:exp1-scope} 和 Fig.~\ref{fig:exp2-scope}。表格中的平均值与频率换算均按原工作簿公式复核。出光带宽及石英晶体之后的内容不在本次实测数据范围内，仍保留脚本 \texttt{generate\_simulated\_data.py} 产生的既有模拟数据和图形。
 
 重复测量量 $x_i$ 的合成标准不确定度采用
 \begin{equation}
   u(\bar{x})=\sqrt{\frac{s^2}{n}+\frac{d^2}{3}}, \label{eq:uncertainty}
 \end{equation}
-其中 $s$ 为样本标准差，$n$ 为测量次数，$d$ 为读数分辨率。对于 $\Delta\nu=k\Delta t$，按独立量传播得到
+其中 $s$ 为样本标准差，$n$ 为测量次数，$d$ 为读数分辨率。若将 $\nu_{\mathrm{FSR}}$ 视为已知量，对式\eqref{eq:scale}按独立量传播可得
 \begin{equation}
-  u(\Delta\nu)=\Delta\nu
-  \sqrt{\left(\frac{u(k)}{k}\right)^2+
-  \left(\frac{u(\Delta t)}{\Delta t}\right)^2}. \label{eq:propagation}
+  \frac{u(\delta\nu)}{\delta\nu}
+  =\sqrt{\left(\frac{u(\delta t)}{\delta t}\right)^2+
+  \left(\frac{u(\delta T)}{\delta T}\right)^2}. \label{eq:propagation}
 \end{equation}
 
 \section{结果与分析讨论}
 
-\subsection{频率标定与干涉仪性能}
+\subsection{实验一：单根激光管的管长测量}
 
-五次自由光谱区扫描周期见附录表\ref{tab:raw-calibration}。平均周期为
-\begin{equation}
-  T_{\mathrm{SR}}=\SI{10.002(13)}{\milli\second},
-\end{equation}
-由式\eqref{eq:scale}得到频率标尺 $k=\SI{180.964(234)}{\mega\hertz\per\milli\second}$。单峰半高全宽平均为 \SI{0.0850(13)}{\milli\second}，故
-\begin{equation}
-  \delta\nu=\SI{15.38(25)}{\mega\hertz},\qquad
-  \mathcal{F}=117.7,\qquad R=3.08\times10^7.
-\end{equation}
-该分辨极限明显小于后续测得的纵模、横模和主要分裂间隔，满足瑞利判据；但接近零角度时数兆赫量级的分裂仍不可分辨。
-
-\subsection{两根激光管的模谱与模式间隔}
-
-模拟模谱见 Fig.~\ref{fig:modal-a} 和 Fig.~\ref{fig:modal-b}。红色主峰代表 $\mathrm{TEM}_{00}$ 纵模序列，绿色弱峰结合模拟横向光斑分别判为管 A 的 $\mathrm{TEM}_{10}$ 和管 B 的 $\mathrm{TEM}_{01}$。在一个自由光谱区内，管 A 出现 4 组主要纵模，管 B 出现 6 组，符合较长谐振腔具有更小纵模间隔、在相同频率范围内可容纳更多纵模的预期。
+两组示波器记录见 Fig.~\ref{fig:exp1-scope}，黄色曲线为驱动压电陶瓷的锯齿扫描信号，蓝色曲线为光电接收信号；由于通道极性设置，透射峰在照片中表现为向下的窄峰。频率换算结果见表\ref{tab:exp1-result}，原始峰位及逐差数据列于附录表\ref{tab:exp1-raw}。
 
 \begin{figure}[H]
   \centering
   \begin{subfigure}[t]{0.485\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/modal_spectrum_tube_a.png}
-    \subcaption{激光管 A 的模拟模谱}
-    \label{fig:modal-a}
+    \includegraphics[width=\linewidth]{fig1.1.jpg}
+    \subcaption{第一组扫描模谱}
+    \label{fig:exp1-1}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.485\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/modal_spectrum_tube_b.png}
-    \subcaption{激光管 B 的模拟模谱}
-    \label{fig:modal-b}
+    \includegraphics[width=\linewidth]{fig1.2.jpg}
+    \subcaption{第二组扫描模谱及光标读数}
+    \label{fig:exp1-2}
   \end{subfigure}
-  \bicaption{两根 He-Ne 激光管在一个自由光谱区内的模拟模谱。红点为基横模主峰，绿点为相邻横模弱峰。}{Simulated modal spectra of two He-Ne laser tubes within one free spectral range.}
-  \label{fig:modal-spectra}
+  \bicaption{单根 He-Ne 激光管管长测量的示波器记录。}{Oscilloscope records for measuring the cavity length of a single He-Ne laser tube.}
+  \label{fig:exp1-scope}
 \end{figure}
 
 \begin{table}[H]
   \centering
-  \caption{两根激光管的模式间隔与理论比较}
-  \label{tab:mode-summary}
-  \begin{tabular}{cccccc}
+  \caption{两组管长测量的时间间隔与频率换算}
+  \label{tab:exp1-result}
+  \begin{tabular}{ccccc}
     \toprule
-    激光管 & $L$/m & $\Delta\nu_{\mathrm{long}}$/MHz & 理论值/MHz & 相对偏差 & $\Delta\nu_{\mathrm{trans}}$/MHz \\
+    组次 & $\overline{\delta t}$/ms & $\overline{\delta T}$/ms & $\delta\nu$/MHz & 反算管长/mm \\
     \midrule
-    A & 0.343 & $438.5\pm1.7$ & 437.0 & \SI{0.35}{\percent} & $66.1\pm1.2$ \\
-    B & 0.500 & $301.8\pm1.3$ & 299.8 & \SI{0.69}{\percent} & $85.7\pm1.1$ \\
+    1 & 2.0167 & 7.9125 & 679.74 & 220.7 \\
+    2 & 1.9833 & 7.8250 & 675.98 & 221.9 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-以管 A 为例，连续三个基模间隔的平均横向读数为 \SI{2.4233}{\milli\second}，代入式\eqref{eq:scale}得到
+以第一组为例，代入式\eqref{eq:scale}得到
 \begin{equation}
-  \Delta\nu_{\mathrm{long,A}}
-  =\SI{180.964}{\mega\hertz\per\milli\second}
-  \times\SI{2.4233}{\milli\second}
-  =\SI{438.5}{\mega\hertz}.
+  \delta\nu_1
+  =\SI{2667}{\mega\hertz}\times
+  \frac{\SI{2.0167}{\milli\second}}{\SI{7.9125}{\milli\second}}
+  =\SI{679.74}{\mega\hertz}.
 \end{equation}
-由频率间隔反算等效腔长为 \SI{0.3418}{\metre}，与模拟尺量值 \SI{0.343}{\metre} 一致。管 B 的等效腔长为 \SI{0.4966}{\metre}，也与 \SI{0.500}{\metre} 的模拟尺量值相符。横模间隔明显小于纵模间隔，符合非共焦腔低阶横模的定性预期；由于讲义未给出两腔镜曲率半径，未作过度的定量横模反演。
+第二组同理得到 $\delta\nu_2=\SI{675.98}{\mega\hertz}$，两组平均纵模频差为 \SI{677.86}{\mega\hertz}。取 $c=\SI{3.00e8}{\metre\per\second}$，由式\eqref{eq:tube-length}得到
+\begin{equation}
+  L=\frac{\SI{3.00e8}{\metre\per\second}}
+  {2\times\SI{677.86e6}{\hertz}}
+  =\SI{221.3}{\milli\metre}.
+\end{equation}
+该结果与尺量值 \SI{222}{\milli\metre} 相差 \SI{0.7}{\milli\metre}，相对偏差为 \SI{0.32}{\percent}。两组频差相差 \SI{3.76}{\mega\hertz}，说明重复测量一致性较好，主要偏差可能来自扫描轴非线性、峰位判读和有效腔长与外部尺量长度的差别。
+
+\subsection{实验二：激光模式分析}
+
+转动螺旋测微器时，观察屏上的光斑由基横模逐渐变为带一条节线的“8”字形分布，据此分别选定 $\mathrm{TEM}_{00}$ 和 $\mathrm{TEM}_{01}$ 工作状态。对应的示波器模谱见 Fig.~\ref{fig:exp2-scope}。$\mathrm{TEM}_{00}$ 数据按工作簿原有平均公式选取 \SI{1.55}{\milli\second} 和 \SI{1.35}{\milli\second} 两个间隔；照片与数据中的末端峰接近锯齿回扫区域，因此未将 \SI{1.25}{\milli\second} 纳入平均。$\mathrm{TEM}_{01}$ 状态则选取线性扫描段内三组清晰峰间距。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.485\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig2.1(TEM00).jpg}
+    \subcaption{$\mathrm{TEM}_{00}$ 状态的示波器模谱}
+    \label{fig:exp2-tem00}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.485\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig2.2(TEM01).jpg}
+    \subcaption{$\mathrm{TEM}_{01}$ 状态的示波器模谱}
+    \label{fig:exp2-tem01}
+  \end{subfigure}
+  \bicaption{螺旋测微器调节得到的两种横模状态；$\mathrm{TEM}_{01}$ 在观察屏上呈“8”字形光斑。}{Oscilloscope spectra of the two transverse-mode states selected by micrometer adjustment.}
+  \label{fig:exp2-scope}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \caption{激光模式分析的时间间隔与频率换算}
+  \label{tab:exp2-result}
+  \begin{tabular}{cccccc}
+    \toprule
+    模式状态 & 测量量 & $\delta t_i$/ms & $\overline{\delta t}$/ms & $\overline{\delta T}$/ms & $\delta\nu$/MHz \\
+    \midrule
+    $\mathrm{TEM}_{00}$ & 纵模 & 1.55, 1.35 & 1.4500 & 7.80 & 495.79 \\
+    $\mathrm{TEM}_{01}$ & 横模 & 0.50, 0.45, 0.39 & 0.4467 & 7.90 & 150.79 \\
+    $\mathrm{TEM}_{01}$ & 纵模 & 1.63, 1.40, 1.25 & 1.4267 & 7.90 & 481.64 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+由式\eqref{eq:scale}，$\mathrm{TEM}_{00}$ 状态的纵模频差为 \SI{495.79}{\mega\hertz}；$\mathrm{TEM}_{01}$ 状态的横模频差和纵模频差分别为
+\begin{equation}
+  \delta\nu_{\mathrm{trans}}=\SI{150.79}{\mega\hertz},\qquad
+  \delta\nu_{\mathrm{long}}=\SI{481.64}{\mega\hertz}.
+\end{equation}
+两种状态所得纵模频差相差 \SI{14.15}{\mega\hertz}，相对其平均值 \SI{488.71}{\mega\hertz} 的差异为 \SI{2.90}{\percent}。两者数量级一致，差异可由螺旋测微器调节后腔长变化、模式跳变以及锯齿扫描非线性解释。横模频差明显小于纵模频差，且与观察屏上的 $\mathrm{TEM}_{01}$ “8”字形强度分布相互印证。
 
 \subsection{出光带宽}
 
@@ -279,7 +318,7 @@ Fig.~\ref{fig:polarization-scan} 中两峰强度随偏振片转角呈互补变�
 
 \subsection{误差来源与改进建议}
 
-本报告数值为模拟数据，以下误差分析对应真实实验中最主要的测量限制。
+前两项结果来自真实实验记录，出光带宽及石英晶体之后的结果仍为既有模拟数据。以下误差分析同时说明实测频差换算和后续实验中主要的测量限制。
 
 \begin{enumerate}
   \item \textbf{扫描非线性与 PZT 滞回。}式\eqref{eq:scale}把示波器横轴近似视为线性频率轴，而压电陶瓷存在滞回和蠕变。可分别记录正、反向扫描，并利用每个自由光谱区的重复峰作分段标定或低阶多项式校正。
@@ -290,16 +329,11 @@ Fig.~\ref{fig:polarization-scan} 中两峰强度随偏振片转角呈互补变�
 
 \section{结论和建议}
 
-本实验依据共焦球面扫描干涉仪的频率标定方法，对两根 He-Ne 激光管的模谱、双折射模分裂和模竞争进行了模拟分析。以 \SI{1810}{\mega\hertz} 自由光谱区建立频率标尺后，管 A 的纵模间隔为 \SI{438.5(17)}{\mega\hertz}，管 B 的纵模间隔为 \SI{301.8(13)}{\mega\hertz}。两者与对应腔长理论值的相对偏差均小于 \SI{1}{\percent}。
+本实验依据共焦球面扫描干涉仪的比例标定方法，以 \SI{2667}{\mega\hertz} 自由光谱区处理前两项真实实验数据。单管管长测量的两组纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，平均值为 \SI{677.86}{\mega\hertz}；反算管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。
 
-两管横模间隔分别为
-\begin{equation*}
-  \Delta\nu_{\mathrm{trans,A}}=\SI{66.1(12)}{\mega\hertz},\qquad
-  \Delta\nu_{\mathrm{trans,B}}=\SI{85.7(11)}{\mega\hertz}.
-\end{equation*}
-扫描干涉仪分辨极限约为 \SI{15.38(25)}{\mega\hertz}，精细常数为 117.7。出光带宽估计为 \SI{1460(30)}{\mega\hertz}，略小于讲义给出的荧光线宽。
+在螺旋测微器调节得到的 $\mathrm{TEM}_{00}$ 和 $\mathrm{TEM}_{01}$ 状态下，纵模频差分别为 \SI{495.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}；$\mathrm{TEM}_{01}$ 的横模频差为 \SI{150.79}{\mega\hertz}。频谱结果与观察屏上基横模及“8”字形一阶横模的空间分布一致。出光带宽的既有估计仍为 \SI{1460(30)}{\mega\hertz}。
 
-石英晶片引起的分裂频差与 $\sin^2\theta$ 呈线性关系，两个分裂峰的最大透射偏振方向相差 \ang{89.8}，支持其来自两个正交本征偏振分量。改变 PZT 控制电压时两个模式强度反向变化，体现了模式共享增益介质时的竞争。真实实验中应重点控制扫描非线性、光路同轴性、热漂移与偏振片零位，并用正反扫描、多次重复和背景扣除提高结果可靠性。本文模拟数据仅用于形成报告结构和分析范例，正式提交前必须由实测记录替换。
+石英晶片引起的分裂频差与 $\sin^2\theta$ 呈线性关系，两个分裂峰的最大透射偏振方向相差 \ang{89.8}，支持其来自两个正交本征偏振分量。改变 PZT 控制电压时两个模式强度反向变化，体现了模式共享增益介质时的竞争。真实实验中应重点控制扫描非线性、光路同轴性、热漂移与偏振片零位，并用正反扫描、多次重复和背景扣除提高结果可靠性。前两项结论由实测记录支持，后续模拟数据仅用于保留原报告结构和分析示例，正式提交前仍需由对应实测记录替换。
 
 \renewcommand{\refname}{六、参考文献}
 \begin{thebibliography}{9}
@@ -313,55 +347,69 @@ Fig.~\ref{fig:polarization-scan} 中两峰强度随偏振片转角呈互补变�
 \appendix
 \renewcommand{\thetable}{A\arabic{table}}
 \setcounter{table}{0}
-\section*{附录 A\quad 模拟原始数据}
+\section*{附录 A\quad 实验数据与补充数据}
 
-\noindent\textbf{再次说明：}以下记录均为脚本生成的模拟数据，不是真实实验原始记录。CSV 文件保存在 \texttt{data/}，教师签名栏仅作为版式预留。
+\noindent\textbf{数据来源：}表 A1--A3 来自 \texttt{实验数据.xlsx}，为管长测量和模式分析的真实记录；表 A4 及之后各表仍为脚本生成的模拟数据。教师签名栏仅作为版式预留。
 
 \begin{table}[H]
   \centering
-  \caption{自由光谱区周期与单峰半高全宽的重复读数}
-  \label{tab:raw-calibration}
-  \begin{tabular}{ccc}
+  \caption{实验一第一组峰位与逐差数据}
+  \label{tab:exp1-raw}
+  \begin{tabular}{lrrrrrr}
     \toprule
-    次数 & $T_{\mathrm{SR}}$/ms & 峰半高全宽/ms \\
+    记录量 & 1 & 2 & 3 & 4 & 5 & 6 \\
     \midrule
-    1 & 9.98 & 0.084 \\
-    2 & 10.03 & 0.087 \\
-    3 & 10.01 & 0.083 \\
-    4 & 9.97 & 0.086 \\
-    5 & 10.02 & 0.085 \\
+    峰位 $t_i$/ms & -3.85 & -1.60 & 4.55 & 6.55 & 12.20 & 14.00 \\
+    选定峰差 $\delta t_i$/ms & 2.25 & 2.00 & 1.80 & -- & -- & -- \\
+    重复间隔 $\delta T_i$/ms & 8.40 & 8.15 & 7.65 & 7.45 & -- & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \begin{table}[H]
   \centering
-  \caption{激光管 A 的模谱峰位与相对幅值}
-  \begin{tabular}{ccccc}
+  \caption{实验一第二组峰位与逐差数据}
+  \begin{tabular}{lrrrrrr}
     \toprule
-    组次 & $t_{00}$/ms & $I_{00}$ & $t_{10}$/ms & $I_{10}$ \\
+    记录量 & 1 & 2 & 3 & 4 & 5 & 6 \\
     \midrule
-    1 & 0.62 & 0.55 & 0.98 & 0.20 \\
-    2 & 3.05 & 0.90 & 3.42 & 0.31 \\
-    3 & 5.46 & 1.00 & 5.82 & 0.28 \\
-    4 & 7.89 & 0.65 & 8.26 & 0.16 \\
+    峰位 $t_i$/ms & -4.75 & -2.55 & 3.60 & 5.55 & 11.10 & 12.90 \\
+    选定峰差 $\delta t_i$/ms & 2.20 & 1.95 & 1.80 & -- & -- & -- \\
+    重复间隔 $\delta T_i$/ms & 8.35 & 8.10 & 7.50 & 7.35 & -- & -- \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \begin{table}[H]
   \centering
-  \caption{激光管 B 的模谱峰位与相对幅值}
-  \begin{tabular}{ccccc}
+  \caption{实验二 $\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 模谱峰位}
+  \begin{tabular}{lrrrrrr}
     \toprule
-    组次 & $t_{00}$/ms & $I_{00}$ & $t_{01}$/ms & $I_{01}$ \\
+    $\mathrm{TEM}_{00}$ 记录量 & 1 & 2 & 3 & 4 & 5 & 6 \\
     \midrule
-    1 & 0.45 & 0.35 & 0.92 & 0.11 \\
-    2 & 2.12 & 0.61 & 2.60 & 0.19 \\
-    3 & 3.78 & 0.88 & 4.25 & 0.29 \\
-    4 & 5.46 & 1.00 & 5.93 & 0.34 \\
-    5 & 7.13 & 0.82 & 7.61 & 0.25 \\
-    6 & 8.79 & 0.48 & 9.26 & 0.14 \\
+    峰位 $t_i$/ms & -6.35 & -4.80 & 2.00 & 3.35 & 9.40 & 10.65 \\
+    纵模峰差 $\delta t_i$/ms & 1.55 & 1.35 & 1.25 & -- & -- & -- \\
+    重复间隔 $\delta T_i$/ms & 8.35 & 8.15 & 7.40 & 7.30 & -- & -- \\
+    \bottomrule
+  \end{tabular}
+  \par\medskip
+  \begin{tabular}{crrrrr}
+    \toprule
+    $\mathrm{TEM}_{01}$ 组次 & $t_1$/ms & $t_2$/ms & $t_3$/ms & $t_2-t_1$/ms & $t_3-t_2$/ms \\
+    \midrule
+    1 & -7.79 & 0.74 & 8.25 & 8.53 & 7.51 \\
+    2 & -7.29 & 1.19 & 8.64 & 8.48 & 7.45 \\
+    3 & -6.16 & 2.14 & 9.50 & 8.30 & 7.36 \\
+    4 & -5.71 & 2.55 & 9.86 & 8.26 & 7.31 \\
+    \bottomrule
+  \end{tabular}
+  \par\medskip
+  \begin{tabular}{lccc}
+    \toprule
+    派生间隔 & 1 & 2 & 3 \\
+    \midrule
+    横模 $\delta t_i$/ms & 0.50 & 0.45 & 0.39 \\
+    纵模 $\delta t_i$/ms & 1.63 & 1.40 & 1.25 \\
     \bottomrule
   \end{tabular}
 \end{table}
