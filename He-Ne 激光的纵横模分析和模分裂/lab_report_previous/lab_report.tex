@@ -74,18 +74,22 @@
   \end{tabular}
 \end{center}
 
+\vspace{0.8em}
+\noindent\fcolorbox{black!35}{gray!8}{%
+  \parbox{0.965\textwidth}{\textbf{数据说明：}管长测量与激光模式分析采用 \texttt{实验数据.xlsx} 及 Fig.~\ref{fig:exp1-scope}、Fig.~\ref{fig:exp2-scope} 所示的真实实验记录；出光带宽、石英晶体模分裂、偏振和模竞争部分仍保留原有模拟数据，仅作为后续报告结构与分析示例。}}
+
 \begin{center}
   {\heiti\zihao{-4} 摘\quad 要}
 \end{center}
-本实验利用共焦球面扫描干涉仪研究 He-Ne 激光的纵横模结构。以 \SI{2667}{\mega\hertz} 自由光谱区标定频率轴，两组相邻纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，反算激光管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。在模式分析中，$\mathrm{TEM}_{00}$ 状态的纵模频差为 \SI{495.79}{\mega\hertz}；调至观察屏呈“8”字形的 $\mathrm{TEM}_{01}$ 状态后，测得横模和纵模频差分别为 \SI{150.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}。实验结果表明，频谱测量与观察屏上的横模形态能够相互印证。
+本实验利用共焦球面扫描干涉仪研究 He-Ne 激光的纵横模结构。以前两项真实实验所用的 \SI{2667}{\mega\hertz} 自由光谱区标定频率轴，两组相邻纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，反算激光管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。在模式分析中，$\mathrm{TEM}_{00}$ 状态的纵模频差为 \SI{495.79}{\mega\hertz}；调至观察屏呈“8”字形的 $\mathrm{TEM}_{01}$ 状态后，测得横模和纵模频差分别为 \SI{150.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}。后续既有分析给出的出光带宽为 \SI{1460(30)}{\mega\hertz}，石英晶体分裂谱线的偏振方向相差约 \ang{89.8}。
 
-\noindent\textbf{关键词：}He-Ne 激光；纵模；横模；扫描干涉仪；谐振腔长度
+\noindent\textbf{关键词：}He-Ne 激光；纵横模；扫描干涉仪；双折射模分裂；模竞争
 
 \section{引言}
 
 激光谐振腔只允许满足相位自洽条件的电磁场稳定振荡，因此激光输出表现为离散的纵模频率和特定的横向光强分布。纵模决定轴向驻波结构，横模反映有限孔径、衍射及腔镜几何对横向场的约束。模式结构不仅决定激光器的频谱纯度、相干性和光束质量，也影响精密测量、干涉计量与激光稳频等应用。
 
-共焦球面扫描干涉仪把微小频率差转换为随扫描电压变化的透射峰位置，是观察激光模谱的常用工具。本实验首先测量单根 He-Ne 激光管的相邻纵模频差并反算管长；随后通过螺旋测微器改变激光器工作状态，结合观察屏上的横向光斑和示波器上的峰列，辨认 $\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 模式并测量纵、横模频差\cite{guide}。
+共焦球面扫描干涉仪把微小频率差转换为随扫描电压变化的透射峰位置，是观察激光模谱的常用工具。若在谐振腔内加入石英晶体，两个正交偏振分量因折射率不同而具有不同光程，同一纵模可分裂为两个频率。通过改变晶片方向和腔长，还能观察偏振态变化与模式间的增益竞争。本实验前两项工作分别利用纵模频差反算单根 He-Ne 激光管的管长，以及通过螺旋测微器改变激光模式、测量 $\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 状态的纵横模频差；后续内容分析出光带宽、双折射模分裂、正交偏振和模竞争\cite{guide}。
 
 \section{原理}
 
@@ -115,11 +119,26 @@
   L=\frac{c}{2\delta\nu}. \label{eq:tube-length}
 \end{equation}
 
+\subsection{双折射模分裂与偏振}
+
+石英为单轴正晶体。晶片使普通光和非普通光产生光程差 $\delta$，等效为谐振腔光学长度发生差异。由式\eqref{eq:longitudinal-frequency}可得分裂频差的大小
+\begin{equation}
+  \Delta\nu_{oe}=\frac{\nu_0}{L_c}\delta, \label{eq:splitting}
+\end{equation}
+其中 $L_c$ 为激光腔等效长度，$\nu_0=c/\lambda$，本实验波长为 \SI{632.8}{\nano\metre}。在小角度和固定晶片条件下，双折射光程差的主要角度依赖可近似写为 $\delta\propto\sin^2\theta$，因此可检验 $\Delta\nu_{oe}$ 与 $\sin^2\theta$ 的线性关系。
+
+两条分裂谱线分别对应近似正交的线偏振分量\cite{zhang}。偏振片转角为 $\varphi$ 时，峰强应近似服从马吕斯定律
+\begin{equation}
+  I_1=I_{b1}+A_1\cos^2(\varphi-\varphi_0),\qquad
+  I_2=I_{b2}+A_2\sin^2(\varphi-\varphi_0). \label{eq:malus}
+\end{equation}
+当某一模式增强并使对应频率附近的反转粒子数趋于饱和时，其他模式可因可用增益下降而减弱，这就是模竞争\cite{chen}。
+
 \section{实验}
 
 \subsection{仪器与装置}
 
-实验使用 He-Ne 激光管、共焦球面扫描干涉仪、锯齿波与压电陶瓷驱动器、光电接收器、示波器、观察屏和螺旋测微器。光束分为两路：一路投射到观察屏以辨认横向光斑，另一路进入扫描干涉仪，光电接收信号与同步扫描信号分别送入示波器。
+前两项实验使用 He-Ne 激光管、共焦球面扫描干涉仪、锯齿波与压电陶瓷驱动器、光电接收器、示波器、观察屏和螺旋测微器。光束分为两路：一路投射到观察屏以辨认横向光斑，另一路进入扫描干涉仪，光电接收信号与同步扫描信号分别送入示波器。后续实验沿用 JX-1 模分裂激光器、腔内石英晶片和偏振片等原有装置。
 
 \subsection{实验方法}
 
@@ -127,9 +146,11 @@
 
 实验二通过螺旋测微器改变激光腔的工作状态，同时观察屏上光斑形状和示波器模谱。选取基横模 $\mathrm{TEM}_{00}$ 与呈“8”字形光斑的 $\mathrm{TEM}_{01}$ 状态，测量同类峰间隔和横模峰偏移。数据筛选保留锯齿波近似线性的扫描段内、峰形清晰且远离回扫跳变的峰间距。
 
+随后改变模分裂激光器的压电陶瓷电压，记录谱线左右消失点和若干中间点以估计出光带宽；旋转腔内石英晶片，测量分裂间距随晶片角度的变化；在输出镜与扫描干涉仪之间插入偏振片，记录两分裂峰随偏振片角度的幅值变化。最后改变相对 PZT 控制电压，比较两模式强度的反向变化。
+
 \subsection{数据来源与处理方法}
 
-管长测量和激光模式分析的数据取自 \texttt{实验数据.xlsx}，四张原始示波器照片见 Fig.~\ref{fig:exp1-scope} 和 Fig.~\ref{fig:exp2-scope}。表格中的平均值与频率换算均按原工作簿公式复核。
+管长测量和激光模式分析的数据取自 \texttt{实验数据.xlsx}，四张原始示波器照片见 Fig.~\ref{fig:exp1-scope} 和 Fig.~\ref{fig:exp2-scope}。表格中的平均值与频率换算均按原工作簿公式复核。出光带宽及石英晶体之后的内容不在本次实测数据范围内，仍保留脚本 \texttt{generate\_simulated\_data.py} 产生的既有模拟数据和图形。
 
 重复测量量 $x_i$ 的合成标准不确定度采用
 \begin{equation}
@@ -239,38 +260,96 @@
 \end{equation}
 两种状态所得纵模频差相差 \SI{14.15}{\mega\hertz}，相对其平均值 \SI{488.71}{\mega\hertz} 的差异为 \SI{2.90}{\percent}。两者数量级一致，差异可由螺旋测微器调节后腔长变化、模式跳变以及锯齿扫描非线性解释。横模频差明显小于纵模频差，且与观察屏上的 $\mathrm{TEM}_{01}$ “8”字形强度分布相互印证。
 
+\subsection{出光带宽}
+
+谱线左右消失点及中间强度见附录表\ref{tab:raw-gain}。以频率失谐 $f$（MHz）为自变量作二次拟合，得到
+\begin{equation}
+  I(f)=-1.862\times10^{-6}f^2-1.180\times10^{-5}f+0.992,
+  \qquad R^2=0.9994.
+\end{equation}
+拟合零点为 \SI{-733.2}{\mega\hertz} 和 \SI{726.8}{\mega\hertz}，故出光带宽为 \SI{1460(30)}{\mega\hertz}，拟合结果见 Fig.~\ref{fig:gain-curve}。该结果比讲义给出的约 \SI{1.5e3}{\mega\hertz} 荧光线宽小 \SI{2.7}{\percent}。这是合理的，因为只有净增益大于总损耗的频率范围能够形成激光输出，出光带宽应不大于荧光线宽。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{figures/gain_curve.png}
+  \bicaption{相对输出强度随频率失谐的变化及二次拟合。虚线表示拟合得到的左右消失点。}{Relative output intensity versus frequency detuning and the quadratic fit.}
+  \label{fig:gain-curve}
+\end{figure}
+
+\subsection{双折射模分裂与偏振关系}
+
+Fig.~\ref{fig:splitting-fit} 显示分裂频差随 $\sin^2\theta$ 近似线性增加，拟合关系为
+\begin{equation}
+  \Delta\nu_{oe}=(1000.7\sin^2\theta+2.7)\ \mathrm{MHz},
+  \qquad R^2=0.9972.
+\end{equation}
+零角度处的模拟读数为 \SI{3}{\mega\hertz}，小于 \SI{15.38}{\mega\hertz} 的仪器分辨极限，应解释为“未分辨出分裂”，不能据此声称存在真实非零频差。角度增大后光程差增大，\ang{30} 时分裂达到约 \SI{249}{\mega\hertz}，与式\eqref{eq:splitting}的趋势一致。
+
+Fig.~\ref{fig:polarization-scan} 中两峰强度随偏振片转角呈互补变化。马吕斯定律拟合得到两条谱线的最大透射方向分别为 \ang{3.7} 和 \ang{93.9}，夹角为 \ang{89.8}；两组拟合的 $R^2$ 分别为 0.9996 和 0.9989。因此两分裂峰可判定为近似正交线偏振，分别对应石英双折射产生的两个本征偏振分量。
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.485\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/mode_splitting_fit.png}
+    \subcaption{模分裂频差与晶片角度的关系}
+    \label{fig:splitting-fit}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.485\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/polarization_scan.png}
+    \subcaption{两分裂峰的偏振响应}
+    \label{fig:polarization-scan}
+  \end{subfigure}
+  \bicaption{双折射模分裂与偏振分析。}{Birefringent mode splitting and polarization analysis.}
+  \label{fig:splitting-polarization}
+\end{figure}
+
+\subsection{模竞争}
+
+改变相对 PZT 控制电压时，两模式强度呈明显反向变化，如 Fig.~\ref{fig:competition} 所示。模式 1 从约 0.07 增至 1.00，模式 2 同时从约 0.92 降至接近 0，两者 Pearson 相关系数为 $r=-0.999$。在扫描过程中总输出强度大致保持不变，说明主要变化不是整体泵浦强度，而是腔模位置改变后两个模式对同一增益介质的竞争。当一个模式更接近增益峰并获得较大净增益时，其饱和作用会压低另一模式可利用的增益。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{figures/mode_competition.png}
+  \bicaption{改变相对 PZT 控制电压时两模式的强度变化。}{Mode competition under variation of the relative PZT control voltage.}
+  \label{fig:competition}
+\end{figure}
+
 \subsection{误差来源与改进建议}
 
-实验频率间隔由示波器时间轴按自由光谱区比例换算，主要测量限制如下。
+前两项结果来自真实实验记录，出光带宽及石英晶体之后的结果仍为既有模拟数据。以下误差分析同时说明实测频差换算和后续实验中主要的测量限制。
 
 \begin{enumerate}
   \item \textbf{扫描非线性与 PZT 滞回。}式\eqref{eq:scale}把示波器横轴近似视为线性频率轴，而压电陶瓷存在滞回和蠕变。可分别记录正、反向扫描，并利用每个自由光谱区的重复峰作分段标定或低阶多项式校正。
   \item \textbf{光路失调与峰宽增加。}激光束、干涉仪光轴和接收面不完全同轴会降低峰值并增大半高宽，影响峰位和分辨极限。应先用反射光斑重合完成粗调，再以峰值最大、峰宽最小为判据微调，并重复测量峰位。
   \item \textbf{热漂移和腔长漂移。}激光器、PZT 与电子学系统预热不足会使模谱随时间移动。应在仪器稳定后采集数据，固定扫描幅度和偏置电压，并在每组测量前后重新核验自由光谱区。
-  \item \textbf{螺旋测微器调节与模式判别。}调节过程中可能发生模式跳变，单凭某一时刻的光斑或峰列容易误判。应在目标状态附近往返微调，同时记录观察屏图样与示波器峰列，并对同一模式重复取点。
+  \item \textbf{偏振片零位与有限消光比。}偏振片刻度零位误差、漏光和探测器背景会使两个极小值不为零。应独立标定偏振片零位，测量暗背景后扣除，并在最大、最小附近增加角度采样点。
 \end{enumerate}
 
 \section{结论和建议}
 
 本实验依据共焦球面扫描干涉仪的比例标定方法，以 \SI{2667}{\mega\hertz} 自由光谱区处理前两项真实实验数据。单管管长测量的两组纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，平均值为 \SI{677.86}{\mega\hertz}；反算管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。
 
-在螺旋测微器调节得到的 $\mathrm{TEM}_{00}$ 和 $\mathrm{TEM}_{01}$ 状态下，纵模频差分别为 \SI{495.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}；$\mathrm{TEM}_{01}$ 的横模频差为 \SI{150.79}{\mega\hertz}。频谱结果与观察屏上基横模及“8”字形一阶横模的空间分布一致。
+在螺旋测微器调节得到的 $\mathrm{TEM}_{00}$ 和 $\mathrm{TEM}_{01}$ 状态下，纵模频差分别为 \SI{495.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}；$\mathrm{TEM}_{01}$ 的横模频差为 \SI{150.79}{\mega\hertz}。频谱结果与观察屏上基横模及“8”字形一阶横模的空间分布一致。出光带宽的既有估计仍为 \SI{1460(30)}{\mega\hertz}。
 
-后续测量宜采用正、反向扫描检验 PZT 滞回，增加同一模式下的重复测量次数，并同步保存观察屏图样、完整示波器波形和仪器设置，以降低峰位判读和模式跳变造成的影响。
+石英晶片引起的分裂频差与 $\sin^2\theta$ 呈线性关系，两个分裂峰的最大透射偏振方向相差 \ang{89.8}，支持其来自两个正交本征偏振分量。改变 PZT 控制电压时两个模式强度反向变化，体现了模式共享增益介质时的竞争。真实实验中应重点控制扫描非线性、光路同轴性、热漂移与偏振片零位，并用正反扫描、多次重复和背景扣除提高结果可靠性。前两项结论由实测记录支持，后续模拟数据仅用于保留原报告结构和分析示例，正式提交前仍需由对应实测记录替换。
 
 \renewcommand{\refname}{六、参考文献}
 \begin{thebibliography}{9}
   \bibitem{guide} 北京师范大学近代物理实验室．He-Ne 激光的纵横模分析和模分裂实验讲义[实验讲义]．北京：北京师范大学，2020．
   \bibitem{zhou} 周炳琨，高以智，陈家骅，等．激光原理[M]．北京：国防工业出版社，2000．
+  \bibitem{zhang} 张书练．正交偏振激光原理[M]．北京：清华大学出版社，2004．
+  \bibitem{chen} 陈英礼．激光导论[M]．北京：电子工业出版社，1986．
 \end{thebibliography}
 
 \clearpage
 \appendix
 \renewcommand{\thetable}{A\arabic{table}}
 \setcounter{table}{0}
-\section*{附录 A\quad 实验原始数据}
+\section*{附录 A\quad 实验数据与补充数据}
 
-\noindent\textbf{数据来源：}表 A1--A3 来自 \texttt{实验数据.xlsx}，记录管长测量和模式分析的原始峰位及逐差结果。教师签名栏仅作为版式预留。
+\noindent\textbf{数据来源：}表 A1--A3 来自 \texttt{实验数据.xlsx}，为管长测量和模式分析的真实记录；表 A4 及之后各表仍为脚本生成的模拟数据。教师签名栏仅作为版式预留。
 
 \begin{table}[H]
   \centering
@@ -314,7 +393,6 @@
     \bottomrule
   \end{tabular}
   \par\medskip
-  \setlength{\tabcolsep}{8pt}
   \begin{tabular}{crrrrr}
     \toprule
     $\mathrm{TEM}_{01}$ 组次 & $t_1$/ms & $t_2$/ms & $t_3$/ms & $t_2-t_1$/ms & $t_3-t_2$/ms \\
@@ -332,6 +410,75 @@
     \midrule
     横模 $\delta t_i$/ms & 0.50 & 0.45 & 0.39 \\
     纵模 $\delta t_i$/ms & 1.63 & 1.40 & 1.25 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{出光带宽模拟读数}
+  \label{tab:raw-gain}
+  \begin{tabular}{rrrrrrrrrrr}
+    \toprule
+    $f$/MHz & -735 & -600 & -450 & -300 & -150 & 0 & 150 & 300 & 450 & 600 \\
+    $I/I_{\max}$ & 0.01 & 0.32 & 0.61 & 0.82 & 0.95 & 1.00 & 0.96 & 0.83 & 0.60 & 0.31 \\
+    \bottomrule
+  \end{tabular}
+  \par\smallskip
+  \begin{tabular}{cc}
+    \toprule
+    $f$/MHz & $I/I_{\max}$ \\
+    \midrule
+    720 & 0.02 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{石英晶片角度与分裂频差}
+  \begin{tabular}{cccccccc}
+    \toprule
+    $\theta$/\si{\degree} & 0 & 5 & 10 & 15 & 20 & 25 & 30 \\
+    $\Delta\nu_{oe}$/MHz & 3 & 13 & 28 & 72 & 115 & 190 & 249 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{longtable}{cccc}
+  \caption{偏振片转角与两分裂峰的相对强度}\\
+  \toprule
+  $\varphi$/\si{\degree} & 高频峰 & 低频峰 & 两峰强度和 \\
+  \midrule
+  \endfirsthead
+  \toprule
+  $\varphi$/\si{\degree} & 高频峰 & 低频峰 & 两峰强度和 \\
+  \midrule
+  \endhead
+  0   & 0.989 & 0.048 & 1.037 \\
+  15  & 0.963 & 0.069 & 1.032 \\
+  30  & 0.817 & 0.210 & 1.027 \\
+  45  & 0.567 & 0.443 & 1.010 \\
+  60  & 0.332 & 0.668 & 1.000 \\
+  75  & 0.133 & 0.853 & 0.986 \\
+  90  & 0.032 & 0.928 & 0.960 \\
+  105 & 0.073 & 0.947 & 1.020 \\
+  120 & 0.218 & 0.776 & 0.994 \\
+  135 & 0.456 & 0.547 & 1.003 \\
+  150 & 0.711 & 0.318 & 1.029 \\
+  165 & 0.892 & 0.129 & 1.021 \\
+  180 & 0.980 & 0.054 & 1.034 \\
+  \bottomrule
+\end{longtable}
+
+\begin{table}[H]
+  \centering
+  \caption{相对 PZT 控制电压与模式竞争模拟读数}
+  \begin{tabular}{rrrrrrrr}
+    \toprule
+    $U$/V & -12 & -8 & -4 & 0 & 4 & 8 & 12 \\
+    模式 1 & 0.072 & 0.121 & 0.232 & 0.478 & 0.752 & 0.875 & 1.000 \\
+    模式 2 & 0.923 & 0.863 & 0.763 & 0.537 & 0.289 & 0.130 & 0.001 \\
     \bottomrule
   \end{tabular}
 \end{table}

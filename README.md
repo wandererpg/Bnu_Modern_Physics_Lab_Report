@@ -45,7 +45,7 @@
 
 - [实验报告 PDF](<He-Ne 激光的纵横模分析和模分裂/lab_report/lab_report.pdf>)：6 页 A4 文档，已使用 XeLaTeX 编译两遍并完成逐页版面检查。
 - [LaTeX 源文件](<He-Ne 激光的纵横模分析和模分裂/lab_report/lab_report.tex>)：作者、学号、指导老师和实验时间均保留填写横线，不列班级；第一页左上角使用北京师范大学校徽。
-- [上一版实验报告](<He-Ne 激光的纵横模分析和模分裂/lab_report_previous/lab_report.pdf>)：与 `lab_report` 平行保存，并附对应 LaTeX 源文件及编译所需图片。
+- [上一版实验报告](<He-Ne 激光的纵横模分析和模分裂/lab_report_previous/lab_report.pdf>)：对应 Git 提交 `f098a2e` 的 9 页版本，与 `lab_report` 平行保存，并附对应 LaTeX 源文件及编译所需图片。
 - [前半部分实测数据](<He-Ne 激光的纵横模分析和模分裂/lab_report/实验数据.xlsx>)：包含单管管长测量及 $\mathrm{TEM}_{00}$、$\mathrm{TEM}_{01}$ 模式分析的原始峰位、逐差计算和频率换算；同目录的 `fig1.1.jpg` 至 `fig2.2(TEM01).jpg` 为对应示波器照片。
 - 报告内容仅采用现有实测记录，包括单根激光管管长测量、$\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 模式分析以及相应误差分析；没有实测数据支持的后半部分内容未写入报告。
 
