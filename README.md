@@ -43,13 +43,14 @@
 
 ### He-Ne 激光的纵横模分析和模分裂
 
-- [实验报告 PDF](<He-Ne 激光的纵横模分析和模分裂/lab_report/lab_report.pdf>)：7 页 A4 文档，已使用 XeLaTeX 编译两遍并完成逐页版面检查。
+- [实验报告 PDF](<He-Ne 激光的纵横模分析和模分裂/lab_report/lab_report.pdf>)：9 页 A4 文档，已使用 XeLaTeX 编译两遍并完成逐页版面检查。
 - [LaTeX 源文件](<He-Ne 激光的纵横模分析和模分裂/lab_report/lab_report.tex>)：第一行直接列姓名与学号，第二行列指导老师和实验时间，信息栏无下划线，不列班级；第一页左上角使用北京师范大学校徽。
 - [上一版实验报告](<He-Ne 激光的纵横模分析和模分裂/lab_report_previous/lab_report.pdf>)：对应 Git 提交 `f098a2e` 的 9 页版本，与 `lab_report` 平行保存，并附对应 LaTeX 源文件及编译所需图片。
 - [前半部分实测数据](<He-Ne 激光的纵横模分析和模分裂/lab_report/实验数据.xlsx>)：包含单管管长测量及 $\mathrm{TEM}_{00}$、$\mathrm{TEM}_{01}$ 模式分析的原始峰位、逐差计算和频率换算；同目录的 `fig1.1.jpg` 至 `fig2.2(TEM01).jpg` 为对应示波器照片。
 - [第二次实验数据](<He-Ne 激光的纵横模分析和模分裂/lab_report/实验数据第二次.xlsx>)：A1:F5 记录三次出光带宽测量的 $t_R$、$t_L$、$T_{\mathrm{FSR}}$ 和 $\nu_{\mathrm{FSR}}$，报告据此换算带宽并给出重复性统计。
 - [出光带宽标注图](<He-Ne 激光的纵横模分析和模分裂/lab_report/fig3.1_bandwidth_annotated.png>)：在无限余辉下逐步增大压电陶瓷电源形成宽带包络，并标出 $t_L$、$t_R$、$\Delta t$ 和 $T_{\mathrm{FSR}}$ 的读数位置。
-- 报告内容采用现有实测记录，包括单根激光管管长测量、$\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 模式分析、三次出光带宽测量以及相应误差分析；没有实测数据支持的其他后半部分内容未写入报告。
+- [偏振关系数据与照片](<He-Ne 激光的纵横模分析和模分裂/lab_report/实验数据第二次.xlsx>)：A7:C20 记录固定石英晶片、旋转偏振片时两个分裂峰的原始电位；`fig4.1_polarization_0.jpg` 至 `fig4.4_polarization_270.jpg` 分别对应偏振片 $0^\circ$、$90^\circ$、$180^\circ$ 和 $270^\circ$。
+- 报告内容采用现有实测记录，包括单根激光管管长测量、$\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 模式分析、三次出光带宽测量、固定石英晶片下的偏振关系测量以及相应误差分析；偏振关系部分用余弦平方关系拟合，两个峰的极大方向相差约 $91.9^\circ$。
 
 在该实验的 `lab_report/` 目录中，可按以下顺序重新生成 PDF：
 
