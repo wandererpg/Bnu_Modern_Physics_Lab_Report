@@ -77,15 +77,15 @@
 \begin{center}
   {\heiti\zihao{-4} 摘\quad 要}
 \end{center}
-本实验利用共焦球面扫描干涉仪研究 He-Ne 激光的纵横模结构。以 \SI{2667}{\mega\hertz} 自由光谱区标定频率轴，两组相邻纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，反算激光管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。在模式分析中，$\mathrm{TEM}_{00}$ 状态的纵模频差为 \SI{495.79}{\mega\hertz}；调至观察屏呈“8”字形的 $\mathrm{TEM}_{01}$ 状态后，测得横模和纵模频差分别为 \SI{150.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}。实验结果表明，频谱测量与观察屏上的横模形态能够相互印证。
+本实验利用共焦球面扫描干涉仪研究 He-Ne 激光的纵横模结构。以 \SI{2667}{\mega\hertz} 自由光谱区标定频率轴，两组相邻纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，反算激光管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。在模式分析中，$\mathrm{TEM}_{00}$ 状态的纵模频差为 \SI{495.79}{\mega\hertz}；调至观察屏呈“8”字形的 $\mathrm{TEM}_{01}$ 状态后，测得横模和纵模频差分别为 \SI{150.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}。此外，三次出光带宽测量的平均值为 \SI{1103.34}{\mega\hertz}。实验结果表明，频谱测量与观察屏上的横模形态能够相互印证。
 
-\noindent\textbf{关键词：}He-Ne 激光；纵模；横模；扫描干涉仪；谐振腔长度
+\noindent\textbf{关键词：}He-Ne 激光；纵模；横模；扫描干涉仪；出光带宽
 
 \section{引言}
 
 激光谐振腔只允许满足相位自洽条件的电磁场稳定振荡，因此激光输出表现为离散的纵模频率和特定的横向光强分布。纵模决定轴向驻波结构，横模反映有限孔径、衍射及腔镜几何对横向场的约束。模式结构不仅决定激光器的频谱纯度、相干性和光束质量，也影响精密测量、干涉计量与激光稳频等应用。
 
-共焦球面扫描干涉仪把微小频率差转换为随扫描电压变化的透射峰位置，是观察激光模谱的常用工具。本实验首先测量单根 He-Ne 激光管的相邻纵模频差并反算管长；随后通过螺旋测微器改变激光器工作状态，结合观察屏上的横向光斑和示波器上的峰列，辨认 $\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 模式并测量纵、横模频差\cite{guide}。
+共焦球面扫描干涉仪把微小频率差转换为随扫描电压变化的透射峰位置，是观察激光模谱的常用工具。本实验首先测量单根 He-Ne 激光管的相邻纵模频差并反算管长；随后通过螺旋测微器改变激光器工作状态，结合观察屏上的横向光斑和示波器上的峰列，辨认 $\mathrm{TEM}_{00}$ 与 $\mathrm{TEM}_{01}$ 模式并测量纵、横模频差；最后根据谱线左右边界的时间位置换算出光带宽\cite{guide}。
 
 \section{原理}
 
@@ -115,6 +115,15 @@
   L=\frac{c}{2\delta\nu}. \label{eq:tube-length}
 \end{equation}
 
+\subsection{出光带宽}
+
+设示波器上谱线右、左边界的时间位置分别为 $t_R$ 和 $t_L$，相邻自由光谱区重复模谱的时间间隔为 $T_{\mathrm{FSR}}$，则出光带宽可按时间比例换算为
+\begin{equation}
+  \Delta\nu_{\mathrm{out}}
+  =\nu_{\mathrm{FSR}}\frac{t_R-t_L}{T_{\mathrm{FSR}}}. \label{eq:bandwidth}
+\end{equation}
+其中 $\nu_{\mathrm{FSR}}$ 为扫描干涉仪自由光谱区。该处理把左右边界间隔对应的扫描时间换算为频率区间。
+
 \section{实验}
 
 \subsection{仪器与装置}
@@ -127,9 +136,11 @@
 
 实验二通过螺旋测微器改变激光腔的工作状态，同时观察屏上光斑形状和示波器模谱。选取基横模 $\mathrm{TEM}_{00}$ 与呈“8”字形光斑的 $\mathrm{TEM}_{01}$ 状态，测量同类峰间隔和横模峰偏移。数据筛选保留锯齿波近似线性的扫描段内、峰形清晰且远离回扫跳变的峰间距。
 
+实验三记录谱线左右边界的时间位置 $t_R$、$t_L$，同时记录一个自由光谱区的扫描周期 $T_{\mathrm{FSR}}$，并使用仪器给出的 $\nu_{\mathrm{FSR}}=\SI{2667}{\mega\hertz}$，由式\eqref{eq:bandwidth}计算出光带宽。
+
 \subsection{数据来源与处理方法}
 
-四张原始示波器照片见 Fig.~\ref{fig:exp1-scope} 和 Fig.~\ref{fig:exp2-scope}。表格中的平均值与频率换算均按原工作簿公式复核。
+四张原始示波器照片见 Fig.~\ref{fig:exp1-scope} 和 Fig.~\ref{fig:exp2-scope}。表格中的平均值与频率换算均按原工作簿公式复核。出光带宽数据取自 \texttt{实验数据第二次.xlsx} 的 A1:F5，使用其中的 $t_R$、$t_L$、$T_{\mathrm{FSR}}$ 和 $\nu_{\mathrm{FSR}}$ 重新计算。
 
 重复测量量 $x_i$ 的合成标准不确定度采用
 \begin{equation}
@@ -239,24 +250,56 @@
 \end{equation}
 两种状态所得纵模频差相差 \SI{14.15}{\mega\hertz}，相对其平均值 \SI{488.71}{\mega\hertz} 的差异为 \SI{2.90}{\percent}。两者数量级一致，差异可由螺旋测微器调节后腔长变化、模式跳变以及锯齿扫描非线性解释。横模频差明显小于纵模频差，且与观察屏上的 $\mathrm{TEM}_{01}$ “8”字形强度分布相互印证。
 
+\subsection{实验三：出光带宽测量}
+
+出光带宽的三次测量及频率换算结果见表\ref{tab:bandwidth-result}。其中 $t_R-t_L$ 为谱线左右边界的时间差。以第 1 次测量为例，由式\eqref{eq:bandwidth}得到
+\begin{equation}
+  \Delta\nu_{\mathrm{out},1}
+  =\SI{2667}{\mega\hertz}\times
+  \frac{\SI{2.70}{\milli\second}}{\SI{6.325}{\milli\second}}
+  =\SI{1138.48}{\mega\hertz}.
+\end{equation}
+
+\begin{table}[H]
+  \centering
+  \caption{三次出光带宽测量与频率换算}
+  \label{tab:bandwidth-result}
+  \begin{tabular}{ccccccc}
+    \toprule
+    次数 & $t_R$/ms & $t_L$/ms & $t_R-t_L$/ms & $T_{\mathrm{FSR}}$/ms & $\nu_{\mathrm{FSR}}$/MHz & $\Delta\nu_{\mathrm{out}}$/MHz \\
+    \midrule
+    1 & -0.90 & -3.60 & 2.70 & 6.325 & 2667 & 1138.48 \\
+    2 & 4.55 & 2.05 & 2.50 & 6.325 & 2667 & 1054.15 \\
+    3 & -17.25 & -19.90 & 2.65 & 6.325 & 2667 & 1117.40 \\
+    \midrule
+    平均 & -- & -- & -- & -- & -- & 1103.34 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+三次测量的平均出光带宽为 \SI{1103.34}{\mega\hertz}，样本标准差为 \SI{43.89}{\mega\hertz}，标准误为 \SI{25.34}{\mega\hertz}，相对样本标准差为 \SI{3.98}{\percent}。三次结果的离散程度主要反映了左右边界峰判定和扫描时间轴读数的波动。
+
 \subsection{误差来源与改进建议}
 
-实验频率间隔由示波器时间轴按自由光谱区比例换算，主要测量限制如下。
+实验频率间隔和出光带宽均由示波器时间轴按自由光谱区比例换算，主要测量限制如下。
 
 \begin{enumerate}
   \item \textbf{扫描非线性与 PZT 滞回。}式\eqref{eq:scale}把示波器横轴近似视为线性频率轴，而压电陶瓷存在滞回和蠕变。可分别记录正、反向扫描，并利用每个自由光谱区的重复峰作分段标定或低阶多项式校正。
   \item \textbf{光路失调与峰宽增加。}激光束、干涉仪光轴和接收面不完全同轴会降低峰值并增大半高宽，影响峰位和分辨极限。应先用反射光斑重合完成粗调，再以峰值最大、峰宽最小为判据微调，并重复测量峰位。
   \item \textbf{热漂移和腔长漂移。}激光器、PZT 与电子学系统预热不足会使模谱随时间移动。应在仪器稳定后采集数据，固定扫描幅度和偏置电压，并在每组测量前后重新核验自由光谱区。
   \item \textbf{螺旋测微器调节与模式判别。}调节过程中可能发生模式跳变，单凭某一时刻的光斑或峰列容易误判。应在目标状态附近往返微调，同时记录观察屏图样与示波器峰列，并对同一模式重复取点。
+  \item \textbf{出光边界的判定。}左右边界处的谱线强度逐渐减弱，消失点受噪声、峰宽和示波器读数分辨率影响。应统一边界判据，在同一频率标定下重复读取 $t_R$、$t_L$，并记录判据对应的背景水平。
 \end{enumerate}
 
 \section{结论和建议}
 
-本实验依据共焦球面扫描干涉仪的比例标定方法，以 \SI{2667}{\mega\hertz} 自由光谱区处理前两项真实实验数据。单管管长测量的两组纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，平均值为 \SI{677.86}{\mega\hertz}；反算管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。
+本实验依据共焦球面扫描干涉仪的比例标定方法，以 \SI{2667}{\mega\hertz} 自由光谱区处理三项实测数据。单管管长测量的两组纵模频差分别为 \SI{679.74}{\mega\hertz} 和 \SI{675.98}{\mega\hertz}，平均值为 \SI{677.86}{\mega\hertz}；反算管长为 \SI{221.3}{\milli\metre}，与尺量值 \SI{222}{\milli\metre} 的相对偏差为 \SI{0.32}{\percent}。
 
 在螺旋测微器调节得到的 $\mathrm{TEM}_{00}$ 和 $\mathrm{TEM}_{01}$ 状态下，纵模频差分别为 \SI{495.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}；$\mathrm{TEM}_{01}$ 的横模频差为 \SI{150.79}{\mega\hertz}。频谱结果与观察屏上基横模及“8”字形一阶横模的空间分布一致。
 
-后续测量宜采用正、反向扫描检验 PZT 滞回，增加同一模式下的重复测量次数，并同步保存观察屏图样、完整示波器波形和仪器设置，以降低峰位判读和模式跳变造成的影响。
+出光带宽三次测量的平均值为 \SI{1103.34}{\mega\hertz}，样本标准差为 \SI{43.89}{\mega\hertz}。后续测量应统一左右边界判据，采用正、反向扫描检验 PZT 滞回，并增加同一状态下的重复测量次数，以降低边界判读和扫描非线性造成的影响。
+
+同时应同步保存观察屏图样、完整示波器波形和仪器设置，以降低峰位判读和模式跳变造成的影响。
 
 \renewcommand{\refname}{六、参考文献}
 \begin{thebibliography}{9}
@@ -270,7 +313,7 @@
 \setcounter{table}{0}
 \section*{附录 A\quad 实验原始数据}
 
-\noindent\textbf{数据来源：}表 A1--A3 来自 \texttt{实验数据.xlsx}，记录管长测量和模式分析的原始峰位及逐差结果。教师签名栏仅作为版式预留。
+\noindent\textbf{数据来源：}表 A1--A3 来自 \texttt{实验数据.xlsx}，记录管长测量和模式分析的原始峰位及逐差结果；表 A4 来自 \texttt{实验数据第二次.xlsx} 的 A1:F5，记录出光带宽测量的原始时间位置和频率换算量。教师签名栏仅作为版式预留。
 
 \begin{table}[H]
   \centering
@@ -332,6 +375,23 @@
     \midrule
     横模 $\delta t_i$/ms & 0.50 & 0.45 & 0.39 \\
     纵模 $\delta t_i$/ms & 1.63 & 1.40 & 1.25 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{实验三出光带宽原始数据与频率换算}
+  \label{tab:bandwidth-raw}
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{c c c c c c c}
+    \toprule
+    次数 & $t_R$/ms & $t_L$/ms & $t_R-t_L$/ms & $T_{\mathrm{FSR}}$/ms & $\nu_{\mathrm{FSR}}$/MHz & $\Delta\nu_{\mathrm{out}}$/MHz \\
+    \midrule
+    1 & -0.90 & -3.60 & 2.70 & 6.325 & 2667 & 1138.48 \\
+    2 & 4.55 & 2.05 & 2.50 & 6.325 & 2667 & 1054.15 \\
+    3 & -17.25 & -19.90 & 2.65 & 6.325 & 2667 & 1117.40 \\
+    平均 & -- & -- & -- & -- & -- & 1103.34 \\
     \bottomrule
   \end{tabular}
 \end{table}
