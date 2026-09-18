@@ -11,6 +11,8 @@
 \usepackage{subcaption}
 \usepackage{bicaption}
 \usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{cite}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
@@ -359,6 +361,47 @@
   \end{tabular}
 \end{table}
 
+图\ref{fig:polarization-data}给出了原始电位取幅度后的测量点及余弦平方拟合曲线。可以看出，第二个分裂峰的角度变化较接近理想曲线，而第一个分裂峰在 $0^\circ$--$90^\circ$ 区间的变化较平缓，数据点离散更明显。
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.94\linewidth,
+      height=6.8cm,
+      xmin=0,xmax=180,
+      ymin=2.1,ymax=3.9,
+      xtick={0,30,60,90,120,150,180},
+      ytick={2.2,2.6,3.0,3.4,3.8},
+      xlabel={偏振片角度 $\theta$/degree},
+      ylabel={峰值幅度 $U$/V},
+      grid=major,
+      legend style={at={(0.02,0.98)},anchor=north west,font=\scriptsize},
+      tick label style={font=\small},
+      label style={font=\small}
+    ]
+      \addplot[only marks,mark=*,mark size=1.5pt,blue] coordinates {
+        (0,2.983) (15,2.866) (30,2.666) (45,2.516) (60,2.350)
+        (75,2.333) (90,2.346) (105,2.566) (120,2.716) (135,2.800)
+        (150,2.833) (165,2.633) (180,2.683)
+      };
+      \addlegendentry{$U_1$ 测量值}
+      \addplot[blue,thick,domain=0:180,samples=181] {2.622+0.240*cos(2*(x+15.6))};
+      \addlegendentry{$U_1$ 拟合}
+      \addplot[only marks,mark=square*,mark size=1.5pt,red] coordinates {
+        (0,2.433) (15,2.766) (30,3.083) (45,3.100) (60,3.366)
+        (75,3.666) (90,3.650) (105,3.416) (120,3.000) (135,2.600)
+        (150,2.383) (165,2.350) (180,2.400)
+      };
+      \addlegendentry{$U_2$ 测量值}
+      \addplot[red,thick,domain=0:180,samples=181] {2.983+0.636*cos(2*(x-76.3))};
+      \addlegendentry{$U_2$ 拟合}
+    \end{axis}
+  \end{tikzpicture}
+  \bicaption{偏振片转角与两个分裂峰幅度的测量值及余弦平方拟合。}{Measured amplitudes of the two split peaks and cosine-square fits versus polarizer angle.}
+  \label{fig:polarization-data}
+\end{figure}
+
 对两个峰的幅度分别作 $U=C+A\cos[2(\theta-\theta_0)]$ 拟合，得到
 \begin{align}
   U_1(\theta) &= 2.622+0.240\cos[2(\theta+15.6^\circ)]\ \si{\volt},
@@ -367,6 +410,14 @@
   &&R^2=0.958.
 \end{align}
 两个拟合曲线的极大方向相差约 $91.9^\circ$，接近正交偏振所要求的 $90^\circ$。两个峰幅度的 Pearson 相关系数为 $r=-0.815$，说明一个峰增强时另一个峰总体减弱，也支持两分裂模具有近似正交的偏振方向。两峰幅度和的平均值为 \SI{5.58}{\volt}，样本标准差为 \SI{0.34}{\volt}；其并非严格恒定，主要反映激光功率漂移、峰位和峰高读数误差以及探测器响应变化。
+
+从定量结果看，$U_1$ 拟合的 $R^2=0.729$、均方根残差为 \SI{0.119}{\volt}，明显差于 $U_2$ 的 $R^2=0.958$ 和 \SI{0.110}{\volt}；因此实验与理想余弦平方关系的偏差主要集中在第一个分裂峰，而不是两个峰的正交方向判断完全失效。偏差较大的首要原因是示波器读出的原始电位包含零线偏置、探测器暗电平和背景信号。严格来说，理论关系应作用于扣除背景后的峰值变化，测得电位更接近
+\[
+  U_i^{\mathrm{meas}}=U_{i,0}+k_i I_i(\theta),
+\]
+而本处理直接采用 $|V_i|$，会把 $U_{i,0}$ 和增益 $k_i$ 的影响混入偏振变化，尤其会使幅度较小、变化范围较窄的 $U_1$ 曲线看起来偏离余弦平方关系。其次，石英晶片的光轴、激光束和偏振片轴线未必完全对准，实际输出可能含有椭圆偏振或两个正交分量的串扰；偏振片消光比有限，也会造成本应接近零的峰仍保留较大读数。再次，两个谱峰的峰宽和间距有限，峰值光标的位置、峰形重叠以及扫描非线性会改变单次峰值读数。最后，测量过程中激光功率、PZT 扫描状态和探测器响应会漂移；两峰幅度和的相对波动约为 $0.34/5.58\approx6.1\%$，说明强度稳定性已经足以影响幅度拟合。
+
+因此，$91.9^\circ$ 的极大方向差仍支持两个分裂模近似正交偏振，但幅度曲线不能按理想模型作高精度验证。改进时应先记录无光背景和示波器零线，用峰值相对基线的变化量代替 $|V_i|$；同时对每个角度重复测量并取平均，固定垂直档位和扫描参数，校准偏振片零点，并将非理想模型 $U_i^{\mathrm{meas}}=U_{i,0}+A_i\cos^2(\theta-\theta_i)$ 或其正弦形式直接用于拟合。
 
 \subsection{误差来源与改进建议}
 
