@@ -81,7 +81,14 @@
 \end{center}
 本实验利用共焦球面扫描干涉仪研究 He-Ne 激光的纵横模、出光带宽及模分裂。以 \SI{2667}{\mega\hertz} 自由光谱区标定频率轴，测得激光管长为 \SI{221.3}{\milli\metre}，与尺量值的相对偏差为 \SI{0.32}{\percent}；$\mathrm{TEM}_{00}$ 和 $\mathrm{TEM}_{01}$ 的纵模频差分别为 \SI{495.79}{\mega\hertz} 和 \SI{481.64}{\mega\hertz}，后者横模频差为 \SI{150.79}{\mega\hertz}。出光带宽平均为 \SI{1103.34}{\mega\hertz}；石英晶片分裂峰的极大方向相差约 $\SI{89.9}{\degree}$，表明两峰近似正交偏振。晶片转角扫描得到的频差呈分段升降的锯齿状走势，但现有数据不足以确定严格周期。
 
+\begin{center}
+  {\heiti\zihao{-4} Abstract}
+\end{center}
+This experiment investigated the longitudinal and transverse modes, output bandwidth, and mode splitting of a He--Ne laser using a confocal spherical scanning interferometer. The frequency axis was calibrated with a free spectral range of \SI{2667}{\mega\hertz}. The laser-tube length was measured as \SI{221.3}{\milli\metre}, with a relative deviation of \SI{0.32}{\percent} from the ruler measurement. The longitudinal-mode spacings of $\mathrm{TEM}_{00}$ and $\mathrm{TEM}_{01}$ were \SI{495.79}{\mega\hertz} and \SI{481.64}{\mega\hertz}, respectively, while the transverse-mode spacing of $\mathrm{TEM}_{01}$ was \SI{150.79}{\mega\hertz}. The average output bandwidth was \SI{1103.34}{\mega\hertz}. The directions of maximum amplitude of the two split peaks differed by approximately $\SI{89.9}{\degree}$, indicating approximately orthogonal polarization. The frequency difference obtained while scanning the quartz-plate angle showed a piecewise rising-and-falling, sawtooth-like trend, but the present data were insufficient to determine a strict period.
+
 \noindent\textbf{关键词：}He-Ne 激光；纵模；横模；偏振关系；出光带宽
+
+\noindent\textbf{Keywords:} He--Ne laser; longitudinal mode; transverse mode; polarization relation; output bandwidth
 
 \section{引言}
 
@@ -257,8 +264,8 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.94\textwidth]{fig3.1_bandwidth_annotated.png}
-  \bicaption{无限余辉下出光带宽测量的示波器记录及测量量标注。}{Oscilloscope record and measurement annotations for the output bandwidth under infinite persistence.}
+  \includegraphics[width=0.8\textwidth]{fig3.1_bandwidth_annotated.png}
+  \bicaption{无限余辉下出光带宽测量的示波器记录}{Oscilloscope record for the output bandwidth under infinite persistence}
   \label{fig:bandwidth-scope}
 \end{figure}
 
@@ -417,9 +424,9 @@
 
 \begin{figure}[H]
  \centering
- \includegraphics[width=0.96\linewidth]{figures/quartz_angle_scatter.pdf}
- \bicaption{石英晶片转角示数与两峰频差的实测散点。数据按角度升序整理；不连线、不拟合。}
- {Measured peak-frequency separation versus quartz-plate angle reading; scatter points only.}
+ \includegraphics[width=0.8\linewidth]{figures/quartz_angle_scatter.pdf}
+ \bicaption{石英晶片转角示数与两峰频差的实测散点。}
+ {Measured peak-frequency separation versus quartz-plate angle reading.}
  \label{fig:quartz-angle}
 \end{figure}
 
@@ -443,10 +450,6 @@
 其中 $\Delta\nu_{\mathrm{cav}}$ 是激光腔的纵模间隔，$m$ 是所选两峰的级次差。固定 $m$ 时频差沿一条分支变化；谱峰跨越、增益选择或模竞争改变可见峰和配对关系时，读数可能转入另一分支，表现为回落或折返。这为本组锯齿状走势提供了一个可能解释。由于记录只有每个角度的两个峰位，未连续标识峰的偏振身份和纵模序号，尚不能断定具体哪次回落就是模式跳变，也不能求出 $m$。
 
 与此同时，在图中可以发现在靠近垂直位置的方位出现了较低的双峰间隔，对于原始图像可以视为单峰分裂成两个接近的小峰且该组没有出现其他峰。这个现象可能是由于实验过程中，o光和e光出现了耦合现象，在越远离垂直位置的地方越难看到相关现象。
-
-在忽略旋光性等影响的双折射近似下，两个本征偏振方向对应普通光与非常光，彼此正交。外置偏振片旋转时，对这两个方向的投影强度分别按余弦平方与正弦平方变化，从而出现一峰增强、另一峰减弱的互补现象。实验四的幅值角扫描及约 $89.9^\circ$ 的极大方向差支持这一偏振关系；本组频差散点本身不单独确定偏振态。固定晶片时，理想外置检偏器主要改变透射幅值，而非腔内本征频率。
-
-\textbf{误差与改进。}本组比例系数为 \SI{423.33}{\mega\hertz\per\milli\second}，因此峰间距读数若变化 \SI{0.05}{\milli\second}，换算频差将变化约 \SI{21.2}{\mega\hertz}；这只是灵敏度示例，不是已测得的仪器误差。较小的散点起伏可能含峰位判读、扫描非线性和晶片转动回差的贡献。建议在 $9.2^\circ$--$10.2^\circ$ 回落区加密角度采样，正反向重复测量；每次保存完整谱列，用检偏器跟踪同一偏振峰及其纵模级次，并在局部扫描段复核 $T$。只有同时确定峰的身份和重复性，才能区分真实分支切换与换峰、标定漂移造成的表观回落。低角度小峰间距的解释留待后续补充。
 
 \subsection{误差来源与改进建议}
 
@@ -481,8 +484,6 @@
 \renewcommand{\thetable}{A\arabic{table}}
 \setcounter{table}{0}
 \section*{附录 A\quad 实验原始数据}
-
-\noindent\textbf{数据来源：}表 A1--A3 来自 \texttt{实验数据.xlsx}，记录管长测量和模式分析的原始峰位及逐差结果；表 A4 来自 \texttt{实验数据第二次.xlsx} 的 A1:F5，记录出光带宽测量的原始时间位置和频率换算量；表 A5 来自同一工作簿的 A7:C20，记录固定石英晶片、旋转偏振片时两个分裂峰的原始电位，其中 $165^\circ$ 和 $180^\circ$ 的 $V_1$ 按实验记录完成抄录更正。教师签名栏仅作为版式预留。
 
 \begin{table}[H]
   \centering
@@ -623,14 +624,5 @@
  34 & 12.2 & 1.90 & 2.65 & 0.75 & 317.50\\
  \bottomrule
  \end{tabular}
- \par\smallskip
- \parbox{0.94\linewidth}{\footnotesize 数据来源：\texttt{实验数据第二次.xlsx} 的 A23:D43。
- 工作簿行号保留原始记录顺序供追溯；$\Delta t=C-B$，
- $\Delta\nu_{\mathrm{obs}}=2667\Delta t/6.3$。
- 频差保留两位小数用于复核，不表示仪器测量精度；全部20组记录均保留。}
 \end{table}
-
-\vspace{2em}
-\noindent 教师签名：\blankfield{5cm}
-
 \end{document}
