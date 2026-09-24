@@ -1,6 +1,6 @@
 # 近代物理实验报告工作区
 
-本仓库保存北京师范大学近代物理实验报告的通用写作规范和排版参考。具体实验资料、预习报告、实验报告及原始数据只保存在本地工作区。
+本仓库保存北京师范大学近代物理实验报告的通用写作规范、参考模板和可选工作流。具体实验资料、预习报告、实验报告及原始数据只保存在本地工作区。
 
 ## 通用文件
 
@@ -9,7 +9,9 @@
 - [preview.md](preview.md)：预习报告要求。
 - [report.md](report.md)：实验报告要求。
 - `物理学报模板_Acta_Physica_Sinica_/`：排版参考模板。
-- [skills/](skills/)：可选的报告工作流、模板与版面检查工具，使用方法见 [skills/README.md](skills/README.md)。
+- [skills/](skills/)：可选的目录脚手架、绘图与附录表生成、XeLaTeX 编译及 PDF 版面检查工作流。安装与使用方法见 [skills/README.md](skills/README.md)。
+
+报告内容以根目录 `preview.md` 和 `report.md` 为准；工作流只提供生成与检查工具。
 
 ## 本地实验目录
 

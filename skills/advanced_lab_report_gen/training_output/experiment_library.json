@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "lecture_files": [
+      "refer/unpub_1d064aa430d040dfad31973f3d4e05dc.pdf",
+      "refer/unpub_28d1297461fa464dad8b0b8ce38d73bc.pdf",
+      "refer/unpub_3d99785e12424c5787394ccd70b869ee.pdf",
+      "refer/unpub_46911263d99745019ccff921d9d3bc78.pdf",
+      "refer/unpub_63448afba6cb4c199b7307247726f29d.pdf",
+      "refer/unpub_aa1c4bcb87834044b8bca145f2a5a945.pdf",
+      "refer/unpub_dddb8e04ea1e44acaf32634232cb7875.pdf",
+      "refer/unpub_e47108e51b124a138f0fa46d262833dc.pdf",
+      "refer/unpub_f9f7980e9054411596ac6f2004eef957.pdf"
+    ],
+    "formula_note": "LaTeX由讲义文本抽取后按物理惯例重建，编号尽量沿用讲义原始编号；PDF文本层不含原生LaTeX，若有细微出入以讲义原图为准",
+    "ocr_note": "干涉滤光片的镀制讲义为图片型PDF，公式由OCR+人工重建，可靠性低于文本讲义"
+  },
+  "光学多道与氢氘同位素光谱": {
+    "domain": "原子物理/光谱学",
+    "formulas": [
+      {"id": "1", "latex": "\\varepsilon = h\\nu = E_2 - E_1, \\quad \\nu = (E_2-E_1)/h", "description": "原子跃迁光子能量与频率"},
+      {"id": "2", "latex": "\\frac{1}{\\lambda_H} = R_H\\left(\\frac{1}{2^2} - \\frac{1}{n^2}\\right),\\ n=3,4,5,\\dots", "description": "氢原子巴尔末公式（本实验n=3-6）"},
+      {"id": "3", "latex": "\\frac{1}{\\lambda_D} = R_D\\left(\\frac{1}{2^2} - \\frac{1}{n^2}\\right),\\ n=3,4,5,\\dots", "description": "氘原子巴尔末公式"},
+      {"id": "4", "latex": "\\Delta\\lambda = \\lambda_H - \\lambda_D", "description": "氢氘同位素位移（谱线波长差）"},
+      {"id": "5", "latex": "R_H = R_\\infty\\frac{m_p}{m_p+m_e}, \\quad R_D = R_\\infty\\frac{2m_p}{2m_p+m_e}", "description": "由核质量修正的里德堡常数"},
+      {"id": "7", "latex": "\\frac{R_H - R_D}{R_D} \\approx \\frac{m_e}{2m_p}", "description": "里德堡常数相对差与电子质子质量比的关系"},
+      {"id": "9", "latex": "\\frac{\\Delta\\lambda}{\\lambda_D} \\approx \\frac{m_e}{2m_p}", "description": "由同位素位移求电子质子质量比（m_p/m_e约1836）"},
+      {"id": "R-附加", "latex": "n(\\lambda) = 1 + \\frac{n_g-1}{1+\\alpha t}, \\quad n_g = 1 + A + B/\\lambda^2 + C/\\lambda^4", "description": "报告用空气折射率修正（A=2876.04e-7, B=16.288e-7 µm^2, C=0.136e-7 µm^4）"}
+    ],
+    "data_methods": ["标准谱线定标（He/Ne灯线性定标）", "CCD多道光谱采集", "PMT单色扫描", "自动寻峰", "线性拟合求R_H", "空气折射率修正"],
+    "constants": [
+      {"name": "无穷大核质量里德堡常数R_∞", "value": "1.0973731e7", "unit": "m^-1"},
+      {"name": "质子静止质量", "value": "1.6726485e-27", "unit": "kg"},
+      {"name": "电子静止质量", "value": "9.109534e-31", "unit": "kg"},
+      {"name": "实验理论值R_H", "value": "1.09678e7", "unit": "m^-1"},
+      {"name": "H/D巴尔末谱线范围", "value": "410-656", "unit": "nm"}
+    ],
+    "variables": {
+      "independent": {"name": "谱线位置（光栅角度/CCD像元）", "unit": "nm（定标后）"},
+      "dependent": {"name": "光强/谱线波长λ、同位素位移Δλ", "unit": "a.u. / nm"}
+    },
+    "fit_model": "线性（定标）；巴尔末反比平方规律",
+    "error_propagation": "由Δλ/λ_D = m_e/(2m_p) 推 m_p/m_e，误差主要来自Δλ测量与定标；R_H由斜率拟合给出（报告得相对误差约0.026%）"
+  },
+  "铷原子的光泵磁共振实验": {
+    "domain": "原子物理（光抽运/磁共振）",
+    "formulas": [
+      {"id": "1", "latex": "\\mu_J = -g_J\\frac{e}{2m_e}P_J, \\quad g_J = 1 + \\frac{J(J+1)+S(S+1)-L(L+1)}{2J(J+1)}", "description": "电子总磁矩与朗德因子（L-S耦合）"},
+      {"id": "2", "latex": "\\mu_F = -g_F\\frac{e}{2m_e}P_F, \\quad g_F = g_J\\frac{F(F+1)+J(J+1)-I(I+1)}{2F(F+1)}", "description": "计入核自旋后的超精细结构朗德因子"},
+      {"id": "3", "latex": "E = E_0 + \\frac{ah}{2}[F(F+1)-I(I+1)-J(J+1)] + g_F\\mu_B B_0 m_F", "description": "弱磁场下超精细能级能量（a为磁偶极相互作用常数）"},
+      {"id": "4", "latex": "\\Delta E_F = \\frac{ah}{2}[F'(F'+1)-F(F+1)]", "description": "基态两个超精细能级间隔（87Rb:F=1,2; 85Rb:F=2,3）"},
+      {"id": "5", "latex": "\\Delta E_{m_F} = g_F\\mu_B B_0", "description": "相邻塞曼子能级间隔"},
+      {"id": "8", "latex": "\\hbar\\omega_1 = g_F\\mu_B B_0", "description": "磁共振条件（光泵磁共振）"},
+      {"id": "线圈", "latex": "B = \\frac{16\\pi N}{5^{3/2}r}I\\times10^{-3}\\ (\\mathrm{Gs}),\\ I\\ \\mathrm{in\\ A}", "description": "亥姆霍兹线圈电流-磁场换算（报告中使用）"}
+    ],
+    "data_methods": ["光抽运信号观察（方波扫场）", "扫场法磁共振（三角/锯齿波）", "换向法四组磁场组合求解g_F与地磁场", "取平均处理两组数据"],
+    "constants": [
+      {"name": "87Rb丰度", "value": "27.85", "unit": "%"},
+      {"name": "85Rb丰度", "value": "72.15", "unit": "%"},
+      {"name": "87Rb超精细常数a", "value": "3417.34", "unit": "MHz"},
+      {"name": "85Rb超精细常数a", "value": "1011.9", "unit": "MHz"},
+      {"name": "D1线波长", "value": "794.8", "unit": "nm"},
+      {"name": "D2线波长", "value": "780.0", "unit": "nm"},
+      {"name": "g_F理论值（87Rb,F=2）", "value": "0.5", "unit": ""},
+      {"name": "g_F理论值（85Rb,F=3）", "value": "1/3", "unit": ""},
+      {"name": "参考值f_1/B_0（87Rb）", "value": "0.70", "unit": "GHz/T"},
+      {"name": "参考值f_1/B_0（85Rb）", "value": "4.667", "unit": "GHz/T"}
+    ],
+    "variables": {
+      "independent": {"name": "外加水平/垂直磁场B0（线圈电流I）", "unit": "A → Gs"},
+      "dependent": {"name": "透射光强（光抽运/磁共振信号）", "unit": "V（示波器）"}
+    },
+    "fit_model": "线性（共振频率-磁场比例）；无复杂拟合",
+    "error_propagation": "g_F、B_e由四组方程组合平均求解；误差来自共振点定位（示波器判读）、扫场幅度与地磁场抵消不完全（报告中85Rb误差约6%，87Rb约0.5%）"
+  },
+  "塞曼效应": {
+    "domain": "原子物理（塞曼效应/干涉光谱）",
+    "formulas": [
+      {"id": "1", "latex": "\\mu_J = g\\frac{e}{2m_e}P_J", "description": "原子磁矩与总角动量关系"},
+      {"id": "2", "latex": "E = E_0 + Mg\\mu_B B", "description": "外磁场中磁能级能量（μ_B=eh/4πm_e为玻尔磁子）"},
+      {"id": "3", "latex": "g = 1 + \\frac{J(J+1)+S(S+1)-L(L+1)}{2J(J+1)}", "description": "L-S耦合朗德因子"},
+      {"id": "4", "latex": "\\Delta\\tilde{\\nu} = \\frac{eB}{4\\pi m_e c}(g_2M_2 - g_1M_1) = (g_2M_2-g_1M_1)\\tilde{L}", "description": "塞曼分裂谱线波数差"},
+      {"id": "5", "latex": "\\tilde{L} = \\frac{eB}{4\\pi m_e c} = 0.467\\,B\\ (\\mathrm{cm^{-1}})", "description": "洛伦兹单位（B以T为单位）"},
+      {"id": "6", "latex": "2d\\cos\\theta = K\\lambda", "description": "F-P标准具多光束干涉极大条件（d=2mm）"},
+      {"id": "7", "latex": "F = \\frac{\\pi\\sqrt{R}}{1-R}", "description": "标准具精细度"},
+      {"id": "10", "latex": "\\Delta\\tilde{\\nu} = \\frac{1}{2d}", "description": "自由光谱范围（色散范围）"},
+      {"id": "13", "latex": "\\Delta D^2 = D_{K-1}^2 - D_K^2 = \\frac{4\\lambda f^2}{d}", "description": "相邻干涉序直径平方差（与K无关）"},
+      {"id": "17", "latex": "\\tilde{\\nu}_b - \\tilde{\\nu}_a = \\frac{1}{2d}\\frac{D_a^2-D_b^2}{D_{K-1}^2-D_K^2}", "description": "由圆环直径平方差求谱线波数差"},
+      {"id": "18", "latex": "\\frac{e}{m_e} = \\frac{2\\pi c}{(M_2g_2-M_1g_1)Bd}\\cdot\\frac{D_b^2-D_a^2}{D_{K-1}^2-D_K^2}", "description": "电子荷质比计算式"}
+    ],
+    "data_methods": ["B-I磁场标定（升/降电流）", "多项式拟合B-I曲线", "零场测ΔD²求自由光谱区", "谱线分裂间距测量", "偏振特性观察（π/σ线）", "B'-I曲线与标定曲线比较"],
+    "constants": [
+      {"name": "汞绿线波长", "value": "546.1", "unit": "nm"},
+      {"name": "汞黄线波长", "value": "579.0（双线577/579）", "unit": "nm"},
+      {"name": "F-P标准具间隔d", "value": "2", "unit": "mm"},
+      {"name": "标准具反射率R", "value": ">90-95", "unit": "%"},
+      {"name": "成像透镜焦距f", "value": "157", "unit": "mm"},
+      {"name": "测微目镜分辨率", "value": "0.01", "unit": "mm"}
+    ],
+    "variables": {
+      "independent": {"name": "电磁铁电流I（→磁场B）", "unit": "A"},
+      "dependent": {"name": "谱线圆环直径平方差ΔD²、波数差Δν̃", "unit": "像素² / cm^-1"}
+    },
+    "fit_model": "多项式（B-I标定，报告中三次多项式R²=0.9998）；波数差与ΔD²线性",
+    "error_propagation": "Δν̃ = (1/2d)·ΔD²_ab/ΔD²_FSR，d与ΔD²误差传导；B'由谱线间距反推并与标定曲线比较（报告平均偏差1.5-2.2%）"
+  },
+  "液晶物性": {
+    "domain": "光学/凝聚态（液晶电光效应）",
+    "formulas": [
+      {"id": "1", "latex": "\\Delta\\varepsilon = \\varepsilon_{\\parallel}-\\varepsilon_{\\perp}", "description": "介电各向异性（Δε>0正性液晶）"},
+      {"id": "2", "latex": "M_{\\parallel}=\\frac{1}{2}\\alpha_{\\parallel}E^2\\sin 2\\beta,\\ M_{\\perp}=-\\frac{1}{2}\\alpha_{\\perp}E^2\\sin 2\\beta", "description": "电场对液晶分子的取向力矩"},
+      {"id": "3", "latex": "\\delta = \\frac{\\omega d}{c}(n_{\\parallel}-n_{\\perp}) = \\frac{2\\pi d}{\\lambda}\\Delta n", "description": "双折射引入的相位差（光程差公式）"},
+      {"id": "4", "latex": "\\theta = \\alpha(\\lambda)d", "description": "线偏振光通过旋光物质的旋转角"},
+      {"id": "6", "latex": "C = T_{\\max}/T_{\\min}", "description": "对比度"},
+      {"id": "6b", "latex": "V_{th}=V_{90},\\quad V_s=V_{10},\\quad \\beta = V_s/V_{th}>1", "description": "阈值电压、饱和电压与阈值锐度定义"},
+      {"id": "7", "latex": "N \\approx \\frac{\\Delta n\\, d}{\\lambda}", "description": "液晶光栅远场衍射环数目近似"},
+      {"id": "8", "latex": "a\\sin\\theta = k\\lambda", "description": "液晶位相光栅方程（求光栅常数a）"}
+    ],
+    "data_methods": ["线偏度L0=Imax/Imin测量", "二次消光法测扭曲角", "对数极坐标图分析", "电光响应曲线（常黑/常白模式）", "示波器测响应时间（90%/10%）", "衍射条纹观测估算光栅周期"],
+    "constants": [
+      {"name": "半导体激光波长", "value": "650", "unit": "nm"},
+      {"name": "液晶盒扭曲角范围", "value": "100-140", "unit": "度"},
+      {"name": "TN盒设计扭曲角", "value": "90（TN）/110-130（HTN）/180-270（STN）", "unit": "度"},
+      {"name": "驱动电压峰值", "value": "12", "unit": "V"}
+    ],
+    "variables": {
+      "independent": {"name": "外加电压U（或频率f、液晶盒转角）", "unit": "V / Hz / 度"},
+      "dependent": {"name": "透射光强/偏振度、透过率T", "unit": "mW、μW"}
+    },
+    "fit_model": "电光响应曲线分段处理；阈值锐度β=Vs/Vth；光栅方程线性",
+    "error_propagation": "响应时间与电压阈值由曲线读取（90%/10%点），误差源于光强抖动与曲线噪声；报告中响应时间与驱动频率无明显关系"
+  },
+  "光纤性质与应用": {
+    "domain": "光学（光纤通信/传感）",
+    "formulas": [
+      {"id": "1", "latex": "\\gamma = P/P_0", "description": "光源-光纤耦合效率（P0入射端面功率，P耦合入纤功率）"},
+      {"id": "2", "latex": "NA = \\sin\\theta", "description": "数值孔径定义（θ为最大耦合角）"},
+      {"id": "3", "latex": "NA = \\sin\\theta = \\frac{r}{\\sqrt{r^2+h^2}}", "description": "远场光斑法测数值孔径（h为端面-屏距，2r光斑直径）"},
+      {"id": "4", "latex": "P(L) = P(0)e^{-\\alpha(\\lambda)L}", "description": "光纤功率指数衰减"},
+      {"id": "5", "latex": "A(\\lambda) = 10\\lg\\frac{P(0)}{P(L)}\\ (\\mathrm{dB})", "description": "光纤损耗（分贝定义）"},
+      {"id": "6", "latex": "\\alpha(\\lambda) = \\frac{A(\\lambda)}{L}\\ (\\mathrm{dB/km})", "description": "损耗系数（截断法）"},
+      {"id": "7", "latex": "\\varphi(T) = \\frac{2\\pi}{\\lambda}n(T)L(T)", "description": "干涉相位差（温度函数）"},
+      {"id": "8", "latex": "\\Delta\\varphi = \\frac{2\\pi}{\\lambda}(n\\Delta L + L\\Delta n)", "description": "温度引起的相位变化"},
+      {"id": "9-报告", "latex": "\\beta = \\frac{\\Delta N}{\\Delta T} = \\frac{1}{\\lambda}\\left(n\\frac{\\Delta L}{\\Delta T}+L\\frac{\\Delta n}{\\Delta T}\\right)", "description": "光纤温度传感器温度系数（报告推导，β≈5-6/℃量级随单位）"}
+    ],
+    "data_methods": ["截断法（cutback）测损耗", "远场光斑法测NA", "微孔探测器扫描光斑+高斯/插值拟合", "双光束干涉条纹计数测温系数", "LED电光特性与幅频特性（选做）"],
+    "constants": [
+      {"name": "He-Ne激光波长", "value": "632.8", "unit": "nm"},
+      {"name": "光纤折射率n", "value": "1.458", "unit": ""},
+      {"name": "塑料光纤纤芯直径", "value": "约1（多模粗芯）", "unit": "mm"},
+      {"name": "石英光纤纤芯直径", "value": "约8", "unit": "μm"},
+      {"name": "SPD峰值响应波长", "value": "820", "unit": "nm"}
+    ],
+    "variables": {
+      "independent": {"name": "光纤长度L、距离h、温度ΔT", "unit": "m/cm、cm、℃"},
+      "dependent": {"name": "输出光功率P、光斑直径2r、条纹移动数ΔN", "unit": "mW、cm、条"}
+    },
+    "fit_model": "指数衰减（对数化后线性求α）；NA几何公式；温度系数线性β=ΔN/ΔT",
+    "error_propagation": "α=A/(L-l)：A=10lg(P1/P2)，P测量与端面耦合重复性主导误差（报告指出功率计位置与端面质量影响最大）"
+  },
+  "He-Ne激光纵横模分析与模分裂": {
+    "domain": "光学（激光模式）",
+    "formulas": [
+      {"id": "1", "latex": "\\nu_q = q\\frac{c}{2\\mu L}", "description": "纵模频率（谐振条件2μL=qλ）"},
+      {"id": "2", "latex": "\\Delta\\nu_q = \\frac{c}{2\\mu L}", "description": "相邻纵模频率间隔（气体μ≈1）"},
+      {"id": "3", "latex": "\\Delta\\nu_{\\text{纵}} = \\Delta\\nu_q = \\frac{c}{2\\mu L}", "description": "纵模间隔（同横模序）"},
+      {"id": "4", "latex": "\\Delta\\nu_{\\text{横}} = \\nu_{m+\\Delta m,n+\\Delta n,q} - \\nu_{mnq}", "description": "横模频率间隔（与腔结构有关，平行平面腔/共焦腔公式不同）"},
+      {"id": "8", "latex": "\\delta = (n''-n')h", "description": "石英晶片o/e光光程差"},
+      {"id": "9", "latex": "n'' = \\left(\\frac{\\cos^2\\theta}{n_e^2}+\\frac{\\sin^2\\theta}{n_o^2}\\right)^{-1/2},\\quad n'=n_o", "description": "e光有效折射率与入射角关系"},
+      {"id": "11", "latex": "2L = q\\lambda", "description": "驻波条件"},
+      {"id": "14/15", "latex": "\\Delta\\nu = \\frac{\\nu}{L}\\delta", "description": "腔内双折射引入光程差δ导致的频率分裂（Δν=ν_o-ν_e）"}
+    ],
+    "data_methods": ["共焦球面扫描干涉仪定标（自由光谱区）", "模谱时间坐标→频率换算", "纵模/横模间隔测量", "偏振片判别o/e光", "增益曲线（出光带宽）测量", "压电陶瓷电压扫描模分裂"],
+    "constants": [
+      {"name": "He-Ne波长", "value": "632.8", "unit": "nm"},
+      {"name": "石英no", "value": "1.54263", "unit": ""},
+      {"name": "石英ne", "value": "1.55169", "unit": ""},
+      {"name": "扫描干涉仪自由光谱区（仪器标注）", "value": "2667", "unit": "MHz"},
+      {"name": "激光管腔长参考", "value": "约250-350", "unit": "mm"}
+    ],
+    "variables": {
+      "independent": {"name": "扫描时间t/压电陶瓷电压", "unit": "ms/V"},
+      "dependent": {"name": "模谱信号幅度（纵模/横模谱线）", "unit": "mV"}
+    },
+    "fit_model": "线性定标（时间↔频率）；增益曲线包络拟合",
+    "error_propagation": "频率间隔=时间间隔×FSR/自由光谱区时间；误差主要来自模谱读数与信号漂移（报告中纵模间隔相对误差<1.3%）"
+  },
+  "高温超导材料的特性与表征": {
+    "domain": "凝聚态/低温超导（电磁学）",
+    "formulas": [
+      {"id": "1", "latex": "H_c(T) = H_{c0}\\left[1-(T/T_c)^2\\right]", "description": "第I类超导体临界磁场抛物线近似"},
+      {"id": "2", "latex": "\\nabla\\times\\mathbf{B}(\\mathbf{r}) = \\mu_0\\mathbf{j}(\\mathbf{r})", "description": "理想第II类超导体（均匀涡旋阵，体内无净电流）"},
+      {"id": "3", "latex": "\\nabla\\times\\mathbf{B}(\\mathbf{r}) \\neq 0 \\Rightarrow \\mathbf{j}(\\mathbf{r})\\neq 0", "description": "非理想第II类超导体不均匀涡旋分布与钉扎"},
+      {"id": "4", "latex": "\\rho(T) = \\rho_r + \\rho_L(T)", "description": "马德森定则：剩余电阻率+晶格散射电阻率"},
+      {"id": "5", "latex": "\\rho_i = \\frac{1}{en_i(\\mu_e+\\mu_p)}", "description": "本征半导体电阻率"},
+      {"id": "6-报告", "latex": "R = 0.000039\\,T - 0.001141\\ (\\Omega),\\quad R = 0.001387\\,T - 0.123488\\ (\\Omega)", "description": "转变前后线性拟合求Tc,onset（报告实例）"},
+      {"id": "定义", "latex": "T_{c,\\mathrm{onset}},\\ T_c=T_{cm}(R\\downarrow R_n/2),\\ T_{c0}(R=0),\\ \\Delta T_c = T_{90\\%}-T_{10\\%}", "description": "超导转变温度各定义"}
+    ],
+    "data_methods": ["四引线法测电阻", "升降温R-T曲线", "样条插值+线性/多项式拟合", "低温温度计互相比对标定（铂电阻/SID/热电偶）", "磁悬浮演示与磁悬浮力-位移测量", "场冷/零场冷对比"],
+    "constants": [
+      {"name": "YBCO临界温度量级", "value": "约90", "unit": "K"},
+      {"name": "液氮正常沸点", "value": "约77", "unit": "K"},
+      {"name": "铂德拜温度Θ_D", "value": "225", "unit": "K"},
+      {"name": "铂电阻温度计适用范围", "value": "13.8-630.74", "unit": "K"},
+      {"name": "测量电流参考", "value": "50-100", "unit": "mA"}
+    ],
+    "variables": {
+      "independent": {"name": "温度T（铂电阻定标）", "unit": "K"},
+      "dependent": {"name": "样品电阻R、SID正向电压U、温差电动势U_tc、磁悬浮力F", "unit": "Ω、V、mV、N"}
+    },
+    "fit_model": "线性（金属R-T、SID U-T）；幂函数/多项式（热电偶U-T）；抛物线（Hc-T）",
+    "error_propagation": "R=U/I四引线消除接触电阻；温度误差来自数据非同时记录与电流生热（报告量化：电流50→100mA焦耳热×4）"
+  },
+  "非线性电路混沌及其同步控制": {
+    "domain": "电磁学/非线性动力学",
+    "formulas": [
+      {"id": "1", "latex": "\\delta_n = \\frac{\\mu_{n-1}-\\mu_{n-2}}{\\mu_n-\\mu_{n-1}}}", "description": "费根鲍姆参数（相邻分岔点间隔比）"},
+      {"id": "2", "latex": "\\lim_{n\\to\\infty}\\delta_n = 4.6692016091029", "description": "费根鲍姆常数"},
+      {"id": "3-5", "latex": "Z_N = -\\frac{Z_2}{Z_1}Z_L", "description": "负阻抗变换器输入阻抗（Z1=Z2时Z_N=-Z_L，得到有源负阻）"},
+      {"id": "7", "latex": "C_1\\frac{\\mathrm{d}U_{C_1}}{\\mathrm{d}t} = \\frac{U_{C_2}-U_{C_1}}{R} - I_N(U_{C_1}),\\quad C_2\\frac{\\mathrm{d}U_{C_2}}{\\mathrm{d}t} = \\frac{U_{C_1}-U_{C_2}}{R} - i_L,\\quad L\\frac{\\mathrm{d}i_L}{\\mathrm{d}t} = -U_{C_2}", "description": "蔡氏电路状态方程组（I_N为非线性负阻电流，分段线性）"}
+    ],
+    "data_methods": ["相图法/李萨如图", "倍周期分岔序列观测（1→2→4→8周期→混沌）", "负阻I-U伏安特性五段折线拟合", "混沌同步（驱动-响应）", "混沌加密通信"],
+    "constants": [
+      {"name": "费根鲍姆常数δ", "value": "4.6692016091029", "unit": ""},
+      {"name": "蔡氏电路典型参数", "value": "R1=3.3k, R2=R3=22k, R4=2.2k, R5=R6=220Ω, R≈2.1k", "unit": "Ω"},
+      {"name": "C2变化敏感度示例", "value": "0.11024→0.11074（8周期→混沌）", "unit": "μF"}
+    ],
+    "variables": {
+      "independent": {"name": "可调电阻R或电容C2（分岔控制参数）", "unit": "Ω / μF"},
+      "dependent": {"name": "U_C1-U_C2相图轨迹、周期数、δ_n", "unit": "V"}
+    },
+    "fit_model": "分段线性（I-U）；倍周期收敛δ_n（无参数拟合）",
+    "error_propagation": "δ_n由相邻三个分岔参数计算，误差随n增大而放大，实验只取前几级分岔（n=2左右）"
+  },
+  "干涉滤光片的镀制": {
+    "domain": "光学（薄膜光学/镀膜工艺）",
+    "formulas": [
+      {"id": "1-1", "latex": "r = \\frac{n_1-n_2}{n_1+n_2}", "description": "单一界面振幅反射系数（正入射）"},
+      {"id": "1-2", "latex": "R = r^2 = \\left(\\frac{n_1-n_2}{n_1+n_2}\\right)^2", "description": "能量反射率"},
+      {"id": "1-4", "latex": "\\eta = n\\ (\\text{正入射});\\ \\eta_p = n/\\cos\\phi,\\ \\eta_s = n\\cos\\phi\\ (\\text{斜入射})", "description": "光学导纳（OCR重建）"},
+      {"id": "2-1", "latex": "\\begin{bmatrix}B\\\\C\\end{bmatrix} = \\begin{bmatrix}\\cos\\delta & i\\sin\\delta/\\eta\\\\ i\\eta\\sin\\delta & \\cos\\delta\\end{bmatrix}\\begin{bmatrix}1\\\\\\eta_s\\end{bmatrix}", "description": "单层膜特征矩阵法"},
+      {"id": "2-2", "latex": "\\delta = \\frac{2\\pi}{\\lambda}nd\\cos\\phi", "description": "膜层相位因子"},
+      {"id": "2-3/2-4", "latex": "Y = C/B,\\quad R = \\left|\\frac{\\eta_0-Y}{\\eta_0+Y}\\right|^2", "description": "膜系有效导纳与反射率"},
+      {"id": "3-2", "latex": "\\begin{bmatrix}B\\\\C\\end{bmatrix} = \\prod_i M_i\\begin{bmatrix}1\\\\\\eta_s\\end{bmatrix}", "description": "多层膜系特征矩阵乘积"},
+      {"id": "4-2", "latex": "I = \\frac{I_0}{1+\\frac{4R}{(1-R)^2}\\sin^2\\delta}", "description": "法布里-珀罗型滤光片透射强度（δ为间隔层相位）"},
+      {"id": "4-7/4-8", "latex": "\\Delta\\lambda_{1/2} = \\frac{1-R}{m\\pi\\sqrt{R}}\\lambda", "description": "滤光片通带半宽度（m为间隔层干涉级次）"}
+    ],
+    "data_methods": ["真空蒸发镀膜（机械泵+分子泵获取高真空）", "光学极值法监测膜厚（透射率随厚度振荡极值）", "分光光度计测透射率谱", "膜系设计G(HL)^j·2H·L(H L)^j类结构", "半宽度与峰值波长分析"],
+    "constants": [
+      {"name": "控制（峰值）波长", "value": "680", "unit": "nm"},
+      {"name": "高折射率材料（硫化锌H）", "value": "n_H>n_L", "unit": ""},
+      {"name": "低折射率材料（冰晶石L）", "value": "n_L", "unit": ""},
+      {"name": "镀制膜系", "value": "HLHLHL 2H L HLHLHL H（每层光学厚度λ/4）", "unit": ""}
+    ],
+    "variables": {
+      "independent": {"name": "镀膜过程中光学厚度（相位δ）/透射波长λ", "unit": "nm"},
+      "dependent": {"name": "透射率T", "unit": "%"}
+    },
+    "fit_model": "理论膜系模型（特征矩阵计算）；透射率谱与理论曲线比较",
+    "error_propagation": "膜厚监测误差（极值法1/4波长精度）、材料折射率漂移与真空度影响膜层光学厚度（OCR讲义未见显式误差传递公式）"
+  }
+}

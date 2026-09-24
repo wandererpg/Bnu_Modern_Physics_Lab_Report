@@ -1,0 +1,83 @@
+% !TEX program = xelatex
+% ============================================================================
+% 清华近代物理实验报告模板（thuemp）——前置区模板（由 Lab_Workflow_Generator 提供）
+%
+% 用法：本文件是「可直接改用的首页/前置区骨架」，复制到 <实验标题>/lab_report/
+%       并与正文合并为一个 .tex（或按下述顺序整段粘进主文件开头）。
+% 依赖：thuemp.cls（脚手架已复制到同目录）、xelatex、BibTeX + gbt7714。
+% 关键点：
+%   * 类为 twocolumn/twoside/A4；宽表宽图请用 table*/figure*；
+%   * 一级标题中文编号「一、二、三」由下面的 \ctexset 提供（老师格式要求）；
+%   * 摘要/关键词用 empAbstract + \Keyword；英文部分用 EmpAbstractEn/\KeywordEn；
+%   * 首页信息（实验时间/报告时间/学号/E-mail）由 \empfirstfoot 生成；
+%   * 参考文献走 gbt7714-numerical（BibTeX），正文用 \cite{}。
+%   * 首面内容较多时，用 \enlargethispage{-3.3cm}（放在正文第一节内）避免与脚注框重叠。
+% ============================================================================
+\documentclass{thuemp}
+\usepackage{xcolor}          % 数据说明灰框 \fcolorbox 需要
+% array：make_data_tables.py 做列宽自适应时用 >{\centering\arraybackslash}p{...}
+% （数值列居中、文本列左对齐）。缺它时脚本会退化为普通 p 列——仍能放进版心，只是不好看。
+\usepackage{array}
+\sisetup{detect-all,per-mode=symbol,separate-uncertainty=true}
+
+% —— 一级标题中文编号（老师小论文格式：一、二、三）——
+\ctexset{section={name={,、},number=\chinese{section}}}
+
+% —— 关键词（中文，3–5 个，分号分隔）——
+\Keyword{<关键词1>；<关键词2>；<关键词3>}
+
+\begin{document}
+
+% —— 题目与作者：\empauthor{姓名}{指导教师} ——
+\emptitle{<实验题目>}
+\empauthor{<姓名或“待补充”>}{<指导教师或“待补充”>}
+
+% —— 奇数页页眉（作者: 实验报告）——
+\fancyhead[CO]{{\footnotesize <姓名>: <实验题目>实验报告}}
+
+\twocolumn[
+\begin{@twocolumnfalse}
+\maketitle
+
+% —— 数据溯源声明（必须在摘要之前；正文之外还须在 data/README.md 声明）——
+%     ⚠ 不要在 \twocolumn[...] 的可选参数里用 \newcommand{\databox}[1]{...}：
+%        `[1]` 中的 `]` 会提前结束 \twocolumn 的可选参数，报
+%        "Argument of \@newcommand has an extra }"（v1.26 修正）。
+%     直接写裸 \fcolorbox 即可；`\vspace{4.2em}` 用于抵消 empAbstract 自带的
+%     \vspace{-3em}，避免灰框下边框穿过摘要首行。
+\noindent\fcolorbox{black!35}{gray!8}{%
+\parbox{\textwidth}{\textbf{数据说明：}<实测/模拟数据声明；模拟数据须写明“正式提交前必须以实测原始记录替换，并重新完成计算、图表与结论”。>}}
+\vspace{4.2em}
+
+% —— 中文摘要（100–200 字，含 ≥1 关键数值）——
+\begin{empAbstract}
+<摘要正文>
+\end{empAbstract}
+
+% —— 英文题目/作者/摘要/关键词（模板首面结构需要，内容须与中文一致）——
+\emptitleEn{<English Title>}
+\empauthorEn{<Name or To be completed>}{<Supervisor or To be completed>}
+\KeywordEn{<keyword1>; <keyword2>; <keyword3>}
+\begin{empAbstractEn}
+<English abstract consistent with the Chinese one.>
+\end{empAbstractEn}
+
+% —— 首页脚注：实验时间、报告时间、学号、E-mail ——
+\empfirstfoot{<实验日期>}{<报告日期>}{<学号>}{<E-mail>}
+\end{@twocolumnfalse}
+]
+
+\wuhao
+% —— 正文从这里开始（\section 会自动编号为一、二、三…）——
+\section{引言}
+
+% ---------------- 参考文献（GB/T 7714-2015，BibTeX） ----------------
+\renewcommand\refname{\heiti\wuhao\centerline{参考文献}\global\def\refname{参考文献}}
+\vskip 12pt
+{
+\renewcommand{\baselinestretch}{0.9}
+\liuhao
+\bibliographystyle{gbt7714-numerical}
+\bibliography{refs}
+}
+\end{document}
