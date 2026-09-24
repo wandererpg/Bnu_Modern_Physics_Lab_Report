@@ -31,3 +31,8 @@ Thumbs.db
 *.swo
 ~$*.xlsx
 ~$*.xls
+
+# Experiment folders are local only; retain shared workflow and template directories in Git.
+/*/
+!/skills/
+!/物理学报模板_Acta_Physica_Sinica_/
