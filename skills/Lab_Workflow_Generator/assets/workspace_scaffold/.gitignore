@@ -24,14 +24,12 @@
 **/build/
 **/tmp/
 
+# Python caches (data-processing / plotting scripts)
+__pycache__/
+*.pyc
+
 # Local editor and OS files
 .DS_Store
 Thumbs.db
 *.swp
 *.swo
-~$*.xlsx
-~$*.xls
-
-# Python caches（工作流的数据处理/绘图脚本）
-__pycache__/
-*.pyc

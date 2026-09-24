@@ -1,0 +1,395 @@
+{
+  "meta": {
+    "note": "从 report 语料库按‘9个实验讲义锚点’筛选报告，并应委托方要求剔除反例D4份反面案例，最终保留 17 份有效风格样本（学生A7+学生B7+学生C3，2023-2025学年）。反例D报告仅登记于 excluded_counterexamples，不进入风格统计与模板学习。",
+    "extraction_method": "PDF文本层抽取+正则统计+人工精读摘要/讨论段；图/表数按‘图X/表X’引用次数去重统计，可能略低于实际嵌入数",
+    "coverage_gap": "讲义中的‘干涉滤光片的镀制’在 report 目录无对应实验报告；剔除反例后，He-Ne 激光模式分析仅剩 1 份有效样本"
+  },
+  "excluded_counterexamples": {
+    "reason": "反例D（[学号已隐藏]，2022-2023学年）4份报告为反面案例：结构缺失（无独立关键词/结论建议）、章节化图表排版差（图注与表题大多无统一编号）、摘要与讨论单薄、几乎不做深度误差分析与理论对比，不满足PPT要求，禁止作为风格学习对象。",
+    "files": [
+      {"file": "report/近物实验/近物实验/近物实验报告（足球队合集）/20lpr/光学多道与氢氘同位素光谱/光学多道与氢氘同位素光谱仪.pdf", "topic": "光学多道", "defect": "仅‘实验内容与数据/误差分析与总结/参考文献’三段，无摘要关键词独立章节、无图注表题编号"},
+      {"file": "report/近物实验/近物实验/近物实验报告（足球队合集）/20lpr/光纤物性/光纤物性.docx", "topic": "光纤性质与应用", "defect": "封面残留上一实验标题‘液晶物性’，讨论仅为误差条目罗列，无结论建议"},
+      {"file": "report/近物实验/近物实验/近物实验报告（足球队合集）/20lpr/液晶物性/液晶物性.docx", "topic": "液晶物性", "defect": "内容以要点/数据堆叠为主，缺分析讨论与理论对比"},
+      {"file": "report/近物实验/近物实验/近物实验报告（足球队合集）/20lpr/激光模谱/激光模谱.docx", "topic": "激光模式分析", "defect": "结果以‘测量结果如图所示’代替文字分析，误差总结仅1句"}
+    ],
+    "suggested_use": "阶段3可将其作为‘反面校验集’：生成的报告若出现上述缺陷（缺结论建议/图注不编号/讨论单薄/标题错位）应判不合格"
+  },
+  "光学多道与氢氘同位素光谱": {
+    "files": [
+      {"file": "report/1/main.pdf", "author": "学生A", "year": "2025"},
+      {"file": "report/近代物理实验1 (2)(2)/近代物理实验1/近代物理实验1/光学多道与氢氘同位素光谱实验报告.pdf", "author": "学生B", "year": "2025"}
+    ],
+    "common_chapters": ["摘要", "关键词", "引言", "原理", "实验装置/仪器", "实验内容与数据处理", "结果与分析讨论", "误差分析", "总结", "参考文献", "（附录：原始数据/程序）"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": ["实验数据图片/原始数据附录（学生B）", "误差来源专门小节（学生B 4.7 CCD/PMT误差）"],
+      "order_note": "两份均按PPT论文式顺序，结构完整"
+    },
+    "abstract_style": {
+      "avg_length": 199,
+      "range": "194-204字",
+      "typical_sentences": [
+        "本实验利用光学多道分析仪（OMA）研究H的同位素光谱……并测量其同位素位移。",
+        "本实验旨在利用光学多道分析仪（OMA）研究氢（H）与其同位素氘（D）的巴尔末系光谱……"
+      ],
+      "includes_values": true,
+      "value_types": ["里德堡常数R_H数值", "谱线波长λ(nm)", "同位素位移Δλ", "电子质子质量比m_p/m_e", "相对误差/%"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "3-4（估算）",
+      "common_topics": ["波长定标误差", "狭缝宽度对分辨率影响", "CCD与PMT两种探测方式差异", "空气折射率修正", "与理论波长/里德堡常数的比较"],
+      "avg_improvements": "2-3条（如更多定标谱线做线性拟合、使用更高分辨率光谱仪）",
+      "comparison_with_similar": true
+    },
+    "table_figure_style": {
+      "avg_figures": 12,
+      "avg_tables": 6,
+      "caption_format": "图X: 描述（LaTeX式）",
+      "table_note": "三线表风格，表题‘表X: …’，数据表均含单位行"
+    },
+    "reference_style": {
+      "avg_count": "2-3",
+      "main_types": ["教材（原子物理学）", "实验讲义", "专著（光谱仪器设计）"],
+      "citation_format": "顺序编号[1]",
+      "example": "[1] 褚圣麟. 原子物理学. 北京: 高等教育出版社, 1979"
+    },
+    "term_preferences": {
+      "测量_vs_测定": {"测量": 0.98, "测定": 0.02},
+      "unit_style": "符号制（nm/cm^-1/m^-1），基本不写中文单位",
+      "keywords_separator": "顿号/分号/逗号混用"
+    }
+  },
+  "铷原子的光泵磁共振实验": {
+    "files": [
+      {"file": "report/1/main (3).pdf", "author": "学生A", "year": "2025"},
+      {"file": "report/近代物理实验1 (2)(2)/近代物理实验1/近代物理实验1/“铷原子的光泵磁共振”实验报告.pdf", "author": "学生B", "year": "2025"}
+    ],
+    "common_chapters": ["摘要", "关键词", "引言", "原理（超精细结构/光抽运/磁共振）", "实验装置", "实验内容与数据分析", "实验总结", "参考文献"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": ["实验数据图片页（学生B）", "光抽运信号/磁共振信号观察小节"],
+      "order_note": "基本符合PPT小论文结构"
+    },
+    "abstract_style": {
+      "avg_length": 123,
+      "range": "52-194字（学生B版明显短于100字要求）",
+      "typical_sentences": [
+        "本实验采用光泵磁共振技术研究天然铷原子（85Rb与87Rb）基态超精细结构在弱磁场中的Zeeman分裂特性。",
+        "本实验通过对铷原子的光抽运效应和磁共振效应进行观测和测量，通过换向法测量了铷原子的朗德g因子和地磁场的大小。"
+      ],
+      "includes_values": true,
+      "value_types": ["朗德g因子g_F", "地磁场水平/垂直分量(Gs)", "相对误差/%"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "2-4（估算）",
+      "common_topics": ["共振频率与同位素g_F差异", "扫场幅度控制（避免多共振频率）", "光抽运信号判断与误判风险", "地磁场分量测量互相印证（0.36%内符合）"],
+      "avg_improvements": "1-2条（如调小扫场振幅分别测85Rb/87Rb）",
+      "comparison_with_similar": true
+    },
+    "table_figure_style": {
+      "avg_figures": 12,
+      "avg_tables": "1-3",
+      "caption_format": "图X: 描述（LaTeX式）",
+      "table_note": "数据表为三线表风格；学生B另附两页实验数据图片"
+    },
+    "reference_style": {
+      "avg_count": "1-5（学生B仅1条教材，学生A5条）",
+      "main_types": ["教材/专著", "实验讲义"],
+      "citation_format": "顺序编号[1]"
+    },
+    "term_preferences": {
+      "测量_vs_测定": {"测量": 1.0, "测定": 0.0},
+      "unit_style": "符号制（Gs、MHz、A、T）",
+      "keywords_separator": "分号/逗号"
+    }
+  },
+  "塞曼效应": {
+    "files": [
+      {"file": "report/1/main (1).pdf", "author": "学生A", "year": "2025"},
+      {"file": "report/近代物理实验1 (2)(2)/近代物理实验1/近代物理实验1/塞曼效应实验报告.pdf", "author": "学生B", "year": "2025"},
+      {"file": "report/近物实验/近物实验/塞曼效应/塞曼效应实验报告.pdf", "author": "学生C", "year": "2023"}
+    ],
+    "common_chapters": ["摘要", "关键词", "引言", "实验原理（塞曼效应+F-P标准具）", "实验仪器", "实验内容与结果（B-I标定/分裂观测/偏振/谱线间距）", "总结与讨论", "参考文献"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": ["B-I磁场标定小节", "误差来源专题段（学生C）", "附录数据图片"],
+      "order_note": "学生C版将‘结果’与‘分析讨论’放在同一章并按小实验分节，PPT四步要求在正文中逐条实现"
+    },
+    "abstract_style": {
+      "avg_length": 159,
+      "range": "87-206字",
+      "typical_sentences": [
+        "本实验利用法布里–珀罗标准具研究汞原子在外加磁场中的塞曼效应……实验结果表明，汞绿线表现出反常塞曼效应，汞黄线为正常塞曼效应。",
+        "本实验利用法布里-珀罗标准具和CCD等光学元件研究汞绿线（546.1nm）和汞黄线（579.0nm）的塞曼分裂现象。"
+      ],
+      "includes_values": true,
+      "value_types": ["谱线波长546.1/579.0nm", "磁场B'(T)/电流I(A)", "洛伦兹单位", "相对误差/%"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "3-5（估算）",
+      "common_topics": ["磁滞效应（正反向B-I差异约1.5-2.2%）", "仪器读数与调零误差", "ΔD²测量精度/相对标准偏差", "偏振角度判断误差", "F-P腔平行度与光路调节"],
+      "avg_improvements": "2-4条",
+      "comparison_with_similar": true,
+      "comparison_note": "普遍将B'-I测量曲线与B-I标定曲线对比；学生C还对比汞绿线与汞黄线分裂"
+    },
+    "table_figure_style": {
+      "avg_figures": 20,
+      "avg_tables": "4-7",
+      "caption_format": "图X: 描述（LaTeX式，占多数）；学生C用‘图X 描述’（无冒号）",
+      "table_note": "LaTeX报告为三线表；学生C报告表格为Word样式"
+    },
+    "reference_style": {
+      "avg_count": "1-3",
+      "main_types": ["教材（原子物理学/原子光谱）", "实验讲义"],
+      "citation_format": "顺序编号[1]"
+    },
+    "term_preferences": {
+      "measurement_ratio_note": "测量/测定约0.94/0.06（学生C在‘测定’上使用稍多，仍以‘测量’为主）",
+      "测量_vs_测定": {"测量": 0.94, "测定": 0.06},
+      "unit_style": "符号制（nm、mT、A、cm^-1）",
+      "keywords_separator": "分号"
+    }
+  },
+  "液晶物性": {
+    "files": [
+      {"file": "report/1/main (5).pdf", "author": "学生A", "year": "2025"},
+      {"file": "report/近代物理实验1 (2)(2)/近代物理实验1/近代物理实验1/“液晶物性”实验报告.pdf", "author": "学生B", "year": "2025"}
+    ],
+    "common_chapters": ["摘要", "关键词", "引言", "实验原理（介电/光学各向异性、旋光、电光效应）", "实验装置", "实验内容与数据处理（扭曲角/电光响应/响应时间/衍射）", "总结与结论", "参考文献"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": ["实验数据图片附录", "光栅常数计算（学生B）"],
+      "order_note": "均按PPT论文式结构"
+    },
+    "abstract_style": {
+      "avg_length": 197,
+      "range": "147-246字",
+      "typical_sentences": [
+        "本实验以扭曲向列相液晶盒为研究对象，系统研究了液晶的旋光性、双折射效应及其在外电场作用下的电光响应特性。",
+        "本实验运用了液晶分子的光学各向异性以及具有的旋光性等性质……对液晶盒的扭曲角、电光响应时间以及电光响应曲线进行了测量与分析。"
+      ],
+      "includes_values": true,
+      "value_types": ["扭曲角(°)", "阈值/饱和电压(V)", "阈值锐度", "响应时间", "光栅常数"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "3-4（估算）",
+      "common_topics": ["双折射对偏振度的影响", "消光法测量扭曲角的不确定度", "电光响应曲线的阈值与‘磁滞回线’式滞后", "驱动频率对响应时间的影响（结论：基本无关）", "威廉姆斯畴与衍射光栅形成"],
+      "avg_improvements": "2-3条",
+      "comparison_with_similar": true,
+      "comparison_note": "升压与降压曲线对比；不同频率响应对比"
+    },
+    "table_figure_style": {
+      "avg_figures": 18,
+      "avg_tables": "3-5",
+      "caption_format": "图X: 描述（LaTeX式）",
+      "table_note": "三线表，表题‘表X: …’"
+    },
+    "reference_style": {
+      "avg_count": "4-5",
+      "main_types": ["教材/专著（液晶物理学/光学）", "期刊论文", "实验讲义"],
+      "citation_format": "顺序编号[1]"
+    },
+    "term_preferences": {
+      "测量_vs_测定": {"测量": 0.94, "测定": 0.06},
+      "unit_style": "符号制（µm、V、°、mW、μW）",
+      "keywords_separator": "顿号/分号"
+    }
+  },
+  "光纤性质与应用": {
+    "files": [
+      {"file": "report/1/main (4).pdf", "author": "学生A", "year": "2025"},
+      {"file": "report/近代物理实验1 (2)(2)/近代物理实验1/近代物理实验1/光纤通讯实验报告.pdf", "author": "学生B", "year": "2025"}
+    ],
+    "common_chapters": ["摘要", "关键词", "引言", "实验原理（耦合/数值孔径/损耗/温度传感）", "实验装置", "实验内容与数据处理", "误差分析与总结", "参考文献"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": [],
+      "order_note": "均按PPT论文式结构"
+    },
+    "abstract_style": {
+      "avg_length": 180,
+      "range": "107-252字",
+      "typical_sentences": [
+        "本实验围绕光纤的基本物理性质及其应用展开，系统研究了光纤与光源的耦合特性、数值孔径、传输损耗以及光纤温度传感特性。",
+        "本实验使用截断法测量了塑料光纤和商用石英光纤的耦合效率以及损耗系数，使用‘远场光斑法’测量了两种光纤的数值孔径……"
+      ],
+      "includes_values": true,
+      "value_types": ["数值孔径NA", "耦合效率", "损耗系数dB/km", "温度系数/℃"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "3-4（估算）",
+      "common_topics": ["光功率计示数随位置/耦合漂移", "光纤端面质量（切割不平整）", "光斑边界模糊影响NA", "干涉条纹计数与外界扰动", "升温降温温度系数一致性"],
+      "avg_improvements": "2-3条",
+      "comparison_with_similar": true,
+      "comparison_note": "塑料与石英光纤对比；升温与降温温度系数对比"
+    },
+    "table_figure_style": {
+      "avg_figures": 8,
+      "avg_tables": "1-3",
+      "caption_format": "图X: 描述（LaTeX式）",
+      "table_note": "三线表"
+    },
+    "reference_style": {
+      "avg_count": "4-5",
+      "main_types": ["教材/专著（光纤通信/光学）", "实验讲义"],
+      "citation_format": "顺序编号[1]"
+    },
+    "term_preferences": {
+      "测量_vs_测定": {"测量": 0.98, "测定": 0.02},
+      "unit_style": "符号制（cm、mm、dB/km、mW）",
+      "keywords_separator": "逗号/分号"
+    }
+  },
+  "He-Ne激光纵横模分析与模分裂": {
+    "files": [
+      {"file": "report/1/main (2).pdf", "author": "学生A", "year": "2025"}
+    ],
+    "sample_warning": "剔除反例D反例后该组仅剩1份有效样本，风格统计代表性有限，阶段3建议补充优秀样本",
+    "common_chapters": ["摘要", "关键词", "引言", "原理（纵模/横模/频率分裂/扫描干涉仪）", "实验装置", "实验内容与数据处理（模谱/间隔/带宽/偏振）", "结果与分析讨论", "结论与建议", "参考文献"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": [],
+      "order_note": "完整论文式结构"
+    },
+    "abstract_style": {
+      "avg_length": 211,
+      "range": "211字（单样本）",
+      "typical_sentences": [
+        "本实验利用共焦球面扫描干涉仪对He-Ne激光器的纵横模频谱进行观测，研究了激光模式的频率特性、偏振状态及双折射引起的频率分裂现象。"
+      ],
+      "includes_values": true,
+      "value_types": ["纵模/横模频率间隔(MHz)", "出光带宽", "相对误差/%"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "3-4（估算）",
+      "common_topics": ["自由光谱区定标误差", "示波器信号稳定性与读数", "纵模间隔与理论值比较", "偏振片角度与谱线偏振关系"],
+      "avg_improvements": "2-3条",
+      "comparison_with_similar": true,
+      "comparison_note": "测量纵模间隔与理论值比较（相对误差<1.3%）；分裂前后模式对比"
+    },
+    "table_figure_style": {
+      "avg_figures": 8,
+      "avg_tables": 4,
+      "caption_format": "图X: 描述",
+      "table_note": "三线表"
+    },
+    "reference_style": {
+      "avg_count": 3,
+      "main_types": ["教材/专著（激光导论/正交偏振激光原理）", "实验讲义"],
+      "citation_format": "顺序编号[1]"
+    },
+    "term_preferences": {
+      "测量_vs_测定": {"测量": 1.0, "测定": 0.0},
+      "unit_style": "符号制（MHz、ms、μs、nm）",
+      "keywords_separator": "分号"
+    }
+  },
+  "高温超导材料的特性与表征": {
+    "files": [
+      {"file": "report/1/main (6).pdf", "author": "学生A", "year": "2025"},
+      {"file": "report/近代物理实验1 (2)(2)/近代物理实验1/近代物理实验1/高温超导实验报告.pdf", "author": "学生B", "year": "2025"},
+      {"file": "report/近物实验/近物实验/高温超导/高温超导实验报告.pdf", "author": "学生C", "year": "2023"}
+    ],
+    "common_chapters": ["摘要", "关键词", "引言（超导历史与前景）", "原理（零电阻/迈斯纳/临界参数/温度计/四引线）", "实验装置", "实验内容（温度计标定/转变曲线/磁悬浮）", "结果与分析", "总结与讨论", "参考文献"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": ["室温超导热点讨论（学生C）", "磁悬浮力-位移曲线"],
+      "order_note": "完整论文式结构；学生C的‘总结与讨论’含科学报道类拓展内容"
+    },
+    "abstract_style": {
+      "avg_length": 187,
+      "range": "123-259字",
+      "typical_sentences": [
+        "本实验以高温超导材料为研究对象，在液氮温区内系统测量了超导样品(YBCO)的电阻—温度关系，并对铂电阻、硅二极管和铜–康铜温差电偶三种低温温度计进行了比对与标定。",
+        "本实验利用不锈钢杜瓦容器盛装液氮对氧化物高温超导体材料进行降温，使之达到超导态……"
+      ],
+      "includes_values": true,
+      "value_types": ["Tc,onset/Tc/Tc0(K)", "转变宽度ΔTc(K)", "磁悬浮力(N)", "拟合R²"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "4-6（估算）",
+      "common_topics": ["数据记录非同时性导致的温度计误差", "电流切换引入焦耳热（50→100mA）", "相变区间数据点密度", "拟合函数适用范围", "第二类超导体钉扎与磁悬浮", "室温超导事件辨析（学生C）"],
+      "avg_improvements": "2-4条",
+      "comparison_with_similar": true,
+      "comparison_note": "三种温度计互相比对；场冷与零场冷磁悬浮对比；升降温曲线对比"
+    },
+    "table_figure_style": {
+      "avg_figures": 16,
+      "avg_tables": "1-3（另附长数据表）",
+      "caption_format": "图X: 描述（LaTeX式）；学生C‘图X 描述’",
+      "table_note": "LaTeX三线表；数据总表超长"
+    },
+    "reference_style": {
+      "avg_count": "3-24（学生C大量期刊/新闻类文献，学生B含超导原始文献）",
+      "main_types": ["教材/讲义", "期刊论文", "网络科普/新闻报道（学生C）"],
+      "citation_format": "顺序编号[1]"
+    },
+    "term_preferences": {
+      "测量_vs_测定": {"测量": 0.98, "测定": 0.02},
+      "unit_style": "符号制（K、Ω、V、mA、mm）",
+      "keywords_separator": "分号/逗号"
+    }
+  },
+  "非线性电路混沌及其同步控制": {
+    "files": [
+      {"file": "report/近代物理实验1 (2)(2)/近代物理实验1/近代物理实验1/非线性电路实验报告.pdf", "author": "学生B", "year": "2025"},
+      {"file": "report/近物实验/近物实验/非线性电路/非线性电路实验报告.pdf", "author": "学生C", "year": "2023"}
+    ],
+    "common_chapters": ["摘要", "关键词", "引言（混沌科学背景）", "原理（倍周期分岔/负阻/蔡氏电路/同步）", "实验内容", "结果与分析（I-U曲线/相图/同步/加密通信）", "总结与讨论", "参考文献"],
+    "chapter_diff_vs_ppt": {
+      "ppt_only_missing_in_some": [],
+      "reports_extra": ["混沌保密通信讨论（学生B/学生C都扩展）"],
+      "order_note": "均完整；摘要偏‘科普式’开头（非线性科学简介）"
+    },
+    "abstract_style": {
+      "avg_length": 191,
+      "range": "135-247字",
+      "typical_sentences": [
+        "本实验旨在学习有源非线性负阻元件的工作原理，通过蔡氏电路掌握非线性动力学系统运动的一般规律，了解混沌同步和控制及混沌通信原理及操作。",
+        "非线性科学被誉为继相对论和量子力学后，20世纪物理学的‘第三次重大革命’……"
+      ],
+      "includes_values": true,
+      "value_types": ["费根鲍姆常数δ", "分岔参数", "相图周期数"]
+    },
+    "discussion_style": {
+      "avg_paragraphs": "3-5（估算）",
+      "common_topics": ["负阻元件I-U五段折线拟合", "C2微小变化(0.0005μF)导致状态跃迁", "混沌与噪声的区别（奇怪吸引子）", "混沌同步/加密安全性讨论"],
+      "avg_improvements": "1-3条",
+      "comparison_with_similar": true,
+      "comparison_note": "不同R/C2取值下相图（1/2/4/8周期、混沌）横向对比"
+    },
+    "table_figure_style": {
+      "avg_figures": 18,
+      "avg_tables": 2,
+      "caption_format": "图X 描述（学生C无冒号）/图X: （学生B）",
+      "table_note": "相图/示波器截图为主"
+    },
+    "reference_style": {
+      "avg_count": "4-6",
+      "main_types": ["期刊论文（Pecora&Carroll、Chua等）", "教材/讲义", "论文集/学位论文"],
+      "citation_format": "顺序编号[1]"
+    },
+    "term_preferences": {
+      "测量_vs_测定": {"测量": 1.0, "测定": 0.0},
+      "unit_style": "符号制（μF、kΩ、V）",
+      "keywords_separator": "分号"
+    }
+  },
+  "干涉滤光片的镀制": {
+    "files": [],
+    "note": "讲义存在于 refer/（unpub_4691…，图片型PDF已OCR），report 目录无该实验报告，无法统计报告风格",
+    "common_chapters": null,
+    "abstract_style": null,
+    "discussion_style": null,
+    "table_figure_style": null,
+    "reference_style": null,
+    "term_preferences": null
+  },
+  "跨实验风格变异记录": {
+    "variation_1": "学生A（2025）：最完整论文式结构（引言/原理/实验/结果与分析讨论/结论与建议），摘要约190-260字，图注‘图X:’LaTeX式，参考文献3-5条，含MATLAB拟合与相对误差定量表述，最贴合PPT要求",
+    "variation_2": "学生B（2025）：THU/BNU-LaTeX模板式（引言/实验原理/实验装置/实验内容与数据处理/实验总结/实验数据图片/参考文献），部分摘要偏短（52-180字），把原始数据图片作为独立章节，参考文献少（1-6条）",
+    "variation_3": "学生C（2023）：长篇幅LaTeX论文式，小标题层级细（2.1/3.3.1…），讨论与总结丰富甚至引入室温超导时事，但参考文献编号用【1】且部分来源偏科普",
+    "common_core": "三类有效风格共同核心：定量数据表格+误差来源分析+与理论值比较+顺序编号参考文献+SI符号单位；讨论几乎必谈仪器/读数/操作误差与改进；图注与表题统一编号",
+    "excluded_style_note": "反例D的‘精简式/要点式’结构已被剔除并登记为反面案例，不参与风格汇总与阶段3模板学习"
+  }
+}

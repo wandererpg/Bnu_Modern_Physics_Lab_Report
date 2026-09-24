@@ -1,0 +1,12 @@
+temp/
+*.log
+.DS_Store
+*.pyc
+__pycache__/
+outputs/
+*.xlsx~
+.agents/
+*.aux
+*.out
+*.synctex.gz
+Thumbs.db

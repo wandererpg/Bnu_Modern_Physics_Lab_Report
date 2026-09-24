@@ -1,0 +1,15 @@
+# 近物实验报告自动化工作流 —— Python 依赖
+# 安装： python -m pip install -r requirements.txt
+#
+# 说明：数值计算与拟合、绘图（矢量 PDF 出图）、数据表生成、成品 PDF 版式度量。
+# 版本下限按各库常用接口的引入版本给出，不锁死小版本。
+
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+pandas>=2.0
+PyMuPDF>=1.23          # 版式校验（check_pdf_geometry / float_distance / inline_distance）必需
+
+# —— 可选 ——
+# 扫描件讲义 OCR（文本层缺失时自动调用 ocr_lecture.py）
+# rapidocr-onnxruntime>=1.3
