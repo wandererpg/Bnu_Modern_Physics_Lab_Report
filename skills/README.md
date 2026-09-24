@@ -40,9 +40,12 @@ python3 ./verify_install.py --demo
 ## 与本仓库规范的关系
 
 本工作流自带 `Lab_Workflow_Generator/references/` 下的规范副本（`report.md`、
-`preview.md`、`agents.md`），以便脱离本仓库独立运行；仓库根目录的同名文件仍是
-本仓库的权威规范。两者若有出入，以仓库根目录的版本为准，并欢迎把差异同步回
-Skill 的 `references/`。
+`preview.md`、`agents.md`），以便**脱离本仓库独立运行**（安装到 `~/.codex/skills` 后无需本仓库）。
+
+仓库根目录的同名文件是本仓库的**权威规范**，且已经把本工作流的全部规则并入
+（图表规范、浮动体距离、半栏就地图表、行文不得出现括号、数据双落点声明、提交前检查等），
+因此外层文件的规则是本 Skill `references/` 的**超集**。修改规范时请改仓库根目录的文件，
+再把改动同步回 `references/`，避免两处漂移。
 
 ## 许可
 

@@ -8,6 +8,21 @@
 - [`preview.md`](preview.md)：近代物理实验预习报告要求。
 - [`report.md`](report.md)：物理实验报告的内容、数据处理、格式和排版要求。
 - `物理学报模板_Acta_Physica_Sinica_/`：LaTeX 排版参考模板及相关资源。
+- [`skills/`](skills/)：报告自动化工作流（两个 Skill：目录驱动脚手架、绘图脚本执行、附录三线表生成、XeLaTeX 编译与成品 PDF 版式校验）。安装与用法见 `skills/README.md`。
+
+## 报告工作流（skills/）
+
+仓库内的 `skills/` 提供可选的工作流套件，把上述要求工程化为可复现的流程：目录驱动建工作区、
+数据脚本出图与派生 CSV、附录表程序化生成、编译后对成品 PDF 做版式校验（越纸/重叠/穿字/小字）、
+浮动体与引用句距离、以及"行文不得出现括号"等规则检查。
+
+```powershell
+python -m pip install -r skills/requirements.txt
+powershell -ExecutionPolicy Bypass -File skills\install.ps1   # 安装到 ~/.codex/skills
+python skills\verify_install.py                               # 环境与文件自检
+```
+
+工作流只是加速手段：报告内容仍以本仓库根目录的 `report.md`、`preview.md` 与 `AGENTS.md` 为准。
 
 ## 实验资料
 
