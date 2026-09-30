@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Expand all five registered templates into separately named local examples.
+"""Expand registered templates into separately named local examples.
 
 Does not touch experimental reports. Existing source files are preserved.
 """
@@ -7,13 +7,15 @@ import argparse
 import json
 import shutil
 from pathlib import Path
+from select_report_template import resolve_template
 
 
-def create(output: Path):
+def create(output: Path, template: str | None = None):
     assets = Path(__file__).resolve().parent.parent / 'assets'
     root = assets / 'report_templates'
     registry = json.loads((root / 'registry.json').read_text(encoding='utf-8'))
-    planned = [(entry, output / ('MVP_' + entry['source'].removeprefix('template_'))) for entry in registry['templates']]
+    entries = [resolve_template(registry, template)] if template is not None else registry['templates']
+    planned = [(entry, output / ('MVP_' + entry['source'].removeprefix('template_'))) for entry in entries]
     existing = [str(path) for _, path in planned if path.exists()]
     if existing:
         raise FileExistsError('Choose a new output folder; existing MVPs are preserved: ' + ', '.join(existing))
@@ -21,16 +23,21 @@ def create(output: Path):
     (output / 'build').mkdir(exist_ok=True)
     (output / 'assets').mkdir(exist_ok=True)
     shutil.copyfile(assets / 'branding' / 'bnu_logo.png', output / 'assets' / 'bnu_logo.png')
-    shutil.copyfile(assets / 'thu_template' / 'thuemp.cls', output / 'thuemp.cls')
+    if any(entry['id'] == '01' for entry in entries):
+        shutil.copyfile(assets / 'thu_template' / 'thuemp.cls', output / 'thuemp.cls')
     parts = {
         'common': root / 'common.tex',
         'layout_v2': root / 'layout_v2.tex',
+        'layout_06_he_ne': root / 'layout_06_he_ne.tex',
         'metadata': root / 'examples' / 'mvp_metadata.tex',
         'body': root / 'examples' / 'mvp_body.tex',
     }
     for entry, target in planned:
         source = (root / entry['source']).read_text(encoding='utf-8')
-        for key, path in parts.items():
+        selected_parts = dict(parts)
+        if entry['id'] == '06':
+            selected_parts['metadata'] = root / 'examples' / 'mvp_06_metadata.tex'
+        for key, path in selected_parts.items():
             source = source.replace(r'\input{report_template/' + key + '}', path.read_text(encoding='utf-8').rstrip())
         target.write_text('% !TEX encoding = UTF-8\n' + source, encoding='utf-8')
         print(target.name)
@@ -39,4 +46,6 @@ def create(output: Path):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
-    create(parser.parse_args().output.resolve())
+    parser.add_argument('--template', help='Generate only the selected template ID or registered alias')
+    args = parser.parse_args()
+    create(args.output.resolve(), args.template)

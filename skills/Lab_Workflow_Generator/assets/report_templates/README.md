@@ -9,12 +9,13 @@
 | 03 | Nature 风格 | `template_03_nature.tex` | `nature`、杂志、混合 | 科研杂志：大标题、浅色摘要区、引言单栏、后文双栏 |
 | 04 | Applied Physics Letters 风格 | `template_04_applied_physics_letters.tex` | `apl`、简报 | 技术简报：浅色题头、无首行缩进、单栏宽幅图表 |
 | 05 | Journal of Physics 风格 | `template_05_journal_of_physics.tex` | `iop`、长报告 | 学术长报告：独立题头与摘要页、较大字号、单栏正文 |
+| 06 | He-Ne 原报告单栏 | `template_06_he_ne.tex` | `he-ne`、氦氖、原报告单栏 | 黑白单栏：宋体/黑体、1.5倍行距、居中摘要标题、就地图表、题目页眉 |
 
 命名、别名和主源路径以 `registry.json` 为准。[SOURCES.md](SOURCES.md) 记录期刊官方来源及适配边界。这些都是课程报告的风格改编，不是官方模板，不承诺可直接用于投稿。版式参数是本项目的设计选择，不声称复刻期刊成稿。
 
 ## 已编译的版式预览
 
-下面是使用完全相同内容的 MVP 预览，不包含实测数据。五套均已通过 XeLaTeX 编译，并检查了日志、引用、嵌入字体、中文提取、页面边界和渲染版面。正式写作仍需填写内容并再次编译验收。
+01—05使用完全相同内容做MVP对比；06是原报告样式的独立MVP，均不包含实测数据。所有预览均已通过XeLaTeX编译，并检查日志、引用、嵌入字体、中文提取、页面边界和渲染版面。正式写作仍需填写内容并再次编译验收。
 
 ![五套模板首页对比，按01至05排列](previews/comparison.png)
 
@@ -25,6 +26,11 @@
 | 03 Nature | [预览03](previews/template_03_nature.pdf) |
 | 04 Applied Physics Letters | [预览04](previews/template_04_applied_physics_letters.pdf) |
 | 05 Journal of Physics | [预览05](previews/template_05_journal_of_physics.pdf) |
+| 06 He-Ne 原报告单栏 | [预览06](previews/template_06_he_ne.pdf) |
+
+06的设计提炼与调用说明见[DESIGN_06.md](DESIGN_06.md)。它使用独立样式文件及原报告的`ctexart`自动字体设置；在本机继承宋体/黑体，而01—05仍采用各自原有字体设置。英文题目和英文关键词按通用规范补齐，源报告的个人信息、数据和图片不进入模板。
+
+![模板06首页预览](previews/template_06_he_ne.png)
 
 ## AI 调用与文件结构
 
@@ -48,6 +54,7 @@ python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspa
 ├── report_template/
 │   ├── common.tex                   # 共用内容接口与课程约束
 │   ├── layout_v2.tex                # 五种结构不同的新版版式
+│   ├── layout_06_he_ne.tex           # 06独立黑白单栏样式
 │   ├── metadata.tex                 # 题目、基本信息、双语摘要和关键词
 │   ├── body.tex                     # 正文、图表与可选附录
 │   └── references.bib               # 可核实的参考文献
@@ -63,7 +70,7 @@ python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspa
 1. 在 `metadata.tex` 填写信息和双语摘要；在 `body.tex` 依据讲义和真实记录写六部分内容；在 `references.bib` 写实际引用的文献。
    有原始材料或教师要求时，将 `metadata.tex` 中的 `\ReportAppendixfalse` 改为 `\ReportAppendixtrue`，启用现成附录骨架；无补充材料的预览默认不显示附录。
 2. 缺测信息明确标记待补充，保持原始数据可追溯；所有模板占位图表和占位文献在材料齐全、内容核实后替换，在 `metadata.tex` 改用 `\ReportDraftfalse` 移除灰色“模板草稿”提示。材料不全时只能交付明确标注的草稿。
-3. 从 `lab_report/` 编译，运行 XeLaTeX → BibTeX → XeLaTeX → XeLaTeX；编译辅助文件集中在 `build/`，PDF复制至报告目录。中文默认使用 TeX Live 自带 Fandol 字体；教师指定字体时调整并检查。
+3. 从 `lab_report/` 编译，运行 XeLaTeX → BibTeX → XeLaTeX → XeLaTeX；编译辅助文件集中在 `build/`，PDF复制至报告目录。01—05使用TeX Live自带Fandol字体，06沿用原报告的ctex自动字体选择（本机宋体/黑体）；教师指定字体时调整并检查。
 4. 按 `report.md` 检查章节、摘要字数、关键词、单位、有效数字、公式、不确定度依据、拟合质量、至少两条改进建议和引用；查看日志和渲染后的PDF，确认无越界、重叠、小字、裁切、断裂表格或大面积空白。
 
 ```powershell
@@ -83,7 +90,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 新版排版参数保存在`layout_v2.tex`；选择脚本只补齐缺失文件，不改写已安装的正文、信息和共用文件，手工修改的主文件仍受原有保护。更新模板库不会自动转换任何现有实验报告。
 
-重新生成五份独立源码样例（请选择一个尚无同名MVP的目录）：
+重新生成所有注册样式的独立源码样例（请选择一个尚无同名MVP的目录；可用`--template 06`只生成06）：
 
 ```powershell
 python skills/Lab_Workflow_Generator/scripts/create_template_mvps.py --output "排版风格对比"

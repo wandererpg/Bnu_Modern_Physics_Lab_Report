@@ -25,7 +25,7 @@ from pathlib import Path
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 TEMPLATE_ASSETS = ASSETS / "report_templates"
 SELECTION_FILE = "template_selection.json"
-COMMON_FILES = ("common.tex", "layout_v2.tex", "metadata.tex", "body.tex", "references.bib")
+COMMON_FILES = ("common.tex", "layout_v2.tex", "layout_06_he_ne.tex", "metadata.tex", "body.tex", "references.bib")
 
 
 class TemplateSelectionError(ValueError):
@@ -203,7 +203,7 @@ def install_report_template(lab_dir: Path, template: str | None = None,
     if "columns" in entry:
         record["columns"] = entry["columns"]
     record["layout"] = entry.get("layout", "two-column")
-    record["layout_version"] = registry.get("version", 1)
+    record["layout_version"] = entry.get("layout_version", registry.get("version", 1))
     _atomic_write(lab / SELECTION_FILE, json.dumps(record, ensure_ascii=False, indent=2) + "\n")
     print(f"[template] {entry['id']} {entry['name']} -> {master}")
     return record
@@ -228,7 +228,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", default=".", help="实验目录；配合 --experiment 可传工作区根目录")
     parser.add_argument("--experiment", help="工作区根目录下的实验名称")
-    parser.add_argument("--template", help="模板编号 01–05 或注册别名；省略时沿用记录，否则使用默认 01")
+    parser.add_argument("--template", help="模板编号 01–06 或注册别名；省略时沿用记录，否则使用默认 01")
     parser.add_argument("--list-templates", action="store_true", help="列出模板编号、名称和别名后退出")
     args = parser.parse_args()
     try:

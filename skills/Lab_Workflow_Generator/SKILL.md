@@ -2,7 +2,7 @@
 name: Lab_Workflow_Generator
 description: >-
   基于文件目录的半自动化物理实验报告工作区引擎：当用户输入 /build_lab、要求“把实验做成工作区”“扫描实验目录并生成
-  全套预习/实验报告+PDF”，或要求按01—05编号/期刊风格写实验报告、切换报告样式，以及按目录材料生成报告时使用。生成 LaTeX 源文件并调用
+  全套预习/实验报告+PDF”，或要求按01—06编号/期刊风格写实验报告、切换报告样式，以及按目录材料生成报告时使用。生成 LaTeX 源文件并调用
   advanced_lab_report_gen 的文本生成能力与 XeLaTeX 编译，产出预习报告、实验报告、可复现数据处理脚本和 PDF。
 ---
 
@@ -12,9 +12,9 @@ description: >-
 
 ## 编号模板入口（当前规则）
 
-结构版式（2026-09-30）：01经典课程双栏、02紧凑学术双栏（中英文摘要并排）、03杂志式混合布局（引言单栏，其后双栏）、04单栏技术简报、05独立题头页与单栏长报告。编号、期刊别名和必需内容保持稳定；版式参数由版本化`assets/report_templates/layout_v2.tex`提供。用户允许单栏、双栏和混合风格，课程明确要求仍优先。03的`multicols`区域使用`[H]`就地图表，宽幅附录恢复单栏；复杂跨栏浮动体或跨页长表优先用04/05。
+结构版式（2026-09-30）：01经典课程双栏、02紧凑学术双栏（中英文摘要并排）、03杂志式混合布局（引言单栏，其后双栏）、04单栏技术简报、05独立题头页与单栏长报告；06从现有He-Ne报告提炼黑白单栏课程样式（宋体/黑体、1.5倍行距、居中摘要标题、题目页眉）。编号、期刊别名和必需内容保持稳定；版式参数由版本化`assets/report_templates/layout_v2.tex`提供。用户允许单栏、双栏和混合风格，课程明确要求仍优先。03的`multicols`区域使用`[H]`就地图表，宽幅附录恢复单栏；复杂跨栏浮动体或跨页长表优先用04/05。
 
-实验报告先读工作区 `report.md`（缺失时读 `references/report.md`），再依据 `assets/report_templates/registry.json` 选择：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics。后四套为中文课程风格改编，不是官方投稿模板；结构和数据规则不变。
+实验报告先读工作区 `report.md`（缺失时读 `references/report.md`），再依据 `assets/report_templates/registry.json` 选择：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics、06 He-Ne原报告单栏。02—05为中文课程风格改编，不是官方投稿模板；结构和数据规则不变。
 
 优先级：课程明确要求 → 用户编号或名称 → 报告已有 `template_selection.json` → 新报告默认01。可唯一识别的选择直接执行。详细调用、文件布局、切换与检查见 `assets/report_templates/README.md`；仅在需要核对来源时读 `SOURCES.md`。
 

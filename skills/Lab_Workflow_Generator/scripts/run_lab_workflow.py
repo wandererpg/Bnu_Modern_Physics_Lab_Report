@@ -549,7 +549,7 @@ def main() -> int:
         help="stage to run (default: all)",
     )
     parser.add_argument("--force", action="store_true", help="skip lecture-hash guard and force regeneration/compile")
-    parser.add_argument("--template", help="报告模板编号 01–05 或别名；省略时沿用已有选择，新实验默认 01")
+    parser.add_argument("--template", help="报告模板编号 01–06 或别名；省略时沿用已有选择，新实验默认 01")
     parser.add_argument("--list-templates", action="store_true", help="列出可选模板后退出，不创建实验目录")
     args = parser.parse_args()
 
