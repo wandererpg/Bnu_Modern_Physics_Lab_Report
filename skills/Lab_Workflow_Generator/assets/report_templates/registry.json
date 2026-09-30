@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "default": "01",
   "templates": [
     {
@@ -10,12 +10,16 @@
         "thu",
         "清华",
         "清华模板",
-        "默认"
+        "默认",
+        "经典",
+        "课程双栏"
       ],
       "source": "template_01_thu.tex",
       "columns": 2,
       "journal": null,
-      "description": "沿用项目内thuemp.cls的课程双栏样式，统一两行基本信息与双语摘要。"
+      "description": "居中题头、上下双语摘要、传统双栏正文；默认课程样式。",
+      "layout": "two-column",
+      "category": "经典课程双栏"
     },
     {
       "id": "02",
@@ -25,16 +29,20 @@
         "aps",
         "physical-review",
         "Physical Review",
-        "物理评论"
+        "物理评论",
+        "学术双栏",
+        "紧凑学术"
       ],
       "source": "template_02_physical_review.tex",
       "columns": 2,
       "journal": "Physical Review (APS)",
-      "description": "居中衬线标题、紧凑摘要和细线分隔。",
+      "description": "中英文摘要并排、栏间细线、紧凑双栏正文。",
       "source_urls": [
         "https://journals.aps.org/revtex",
         "https://journals.aps.org/revtex/revtex-faq"
-      ]
+      ],
+      "layout": "two-column",
+      "category": "紧凑学术双栏"
     },
     {
       "id": "03",
@@ -43,15 +51,20 @@
         "3",
         "nature",
         "Nature",
-        "自然"
+        "自然",
+        "杂志",
+        "混合",
+        "杂志式"
       ],
       "source": "template_03_nature.tex",
       "columns": 2,
       "journal": "Nature",
-      "description": "左对齐大标题、深蓝标题层级和较疏栏距；保留课程完整结构。",
+      "description": "大标题与浅色摘要区；引言单栏，从原理起同页进入双栏，附录回到单栏。",
       "source_urls": [
         "https://www.nature.com/nature/for-authors/formatting-guide"
-      ]
+      ],
+      "layout": "mixed",
+      "category": "科研杂志混合布局"
     },
     {
       "id": "04",
@@ -61,15 +74,19 @@
         "apl",
         "aip",
         "Applied Physics Letters",
-        "应用物理快报"
+        "应用物理快报",
+        "简报",
+        "技术简报"
       ],
       "source": "template_04_applied_physics_letters.tex",
-      "columns": 2,
+      "columns": 1,
       "journal": "Applied Physics Letters (AIP)",
-      "description": "紧凑题头、窄栏距与短小节间距；不删减分析或附录。",
+      "description": "浅色题头区、无首行缩进、段落留白、单栏宽幅图表。",
       "source_urls": [
         "https://publishing.aip.org/resources/researchers/author-instructions/"
-      ]
+      ],
+      "layout": "one-column",
+      "category": "单栏技术简报"
     },
     {
       "id": "05",
@@ -79,15 +96,19 @@
         "iop",
         "jphys",
         "Journal of Physics",
-        "物理学杂志"
+        "物理学杂志",
+        "长报告",
+        "单栏长报告"
       ],
       "source": "template_05_journal_of_physics.tex",
-      "columns": 2,
+      "columns": 1,
       "journal": "Journal of Physics (IOP)",
-      "description": "左对齐衬线标题、开放行距和灰色双细线。",
+      "description": "题头与双语摘要独立一页；单栏正文使用较大字号、行距和宽幅图表。",
       "source_urls": [
         "https://publishingsupport.iopscience.iop.org/questions/latex-template/"
-      ]
+      ],
+      "layout": "one-column-with-front-page",
+      "category": "单栏学术长报告"
     }
   ]
 }

@@ -25,7 +25,7 @@ from pathlib import Path
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 TEMPLATE_ASSETS = ASSETS / "report_templates"
 SELECTION_FILE = "template_selection.json"
-COMMON_FILES = ("common.tex", "metadata.tex", "body.tex", "references.bib")
+COMMON_FILES = ("common.tex", "layout_v2.tex", "metadata.tex", "body.tex", "references.bib")
 
 
 class TemplateSelectionError(ValueError):
@@ -83,6 +83,7 @@ def list_templates(asset_root: Path | None = None) -> None:
         default = "（默认）" if entry["id"] == registry["default"] else ""
         aliases = "、".join(entry.get("aliases", []))
         print(f"{entry['id']}  {entry['name']}{default}" + (f"；别名：{aliases}" if aliases else ""))
+        print(f"    {entry.get('description', '')}")
 
 
 def read_selection(lab_dir: Path) -> dict | None:
@@ -201,6 +202,8 @@ def install_report_template(lab_dir: Path, template: str | None = None,
     }
     if "columns" in entry:
         record["columns"] = entry["columns"]
+    record["layout"] = entry.get("layout", "two-column")
+    record["layout_version"] = registry.get("version", 1)
     _atomic_write(lab / SELECTION_FILE, json.dumps(record, ensure_ascii=False, indent=2) + "\n")
     print(f"[template] {entry['id']} {entry['name']} -> {master}")
     return record

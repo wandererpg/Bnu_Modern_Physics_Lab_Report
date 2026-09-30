@@ -1,0 +1,131 @@
+% 五种结构不同的课程报告版式。内容与字段由 common/metadata/body 提供。
+% 使用版本化文件，避免覆盖各实验已安装或手工修改的 common.tex。
+\raggedbottom
+\setlength{\columnseprule}{0pt}
+\definecolor{ReportTint}{HTML}{F1F4F7}
+\newcommand{\ReportInfoRows}{%
+  作者（姓名）：\ReportAuthor\quad 学号：\ReportStudentID\\[4pt]
+  指导老师：\ReportTeacher\quad 实验时间：\ReportExperimentDate\par}
+\newcommand{\ReportDraftNotice}{%
+  \ifReportDraft
+    \noindent\fcolorbox{black!25}{black!3}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+      \small 模板草稿：所有“待补充”均须以讲义、原始记录或可核实资料填写；占位图表与文献不能作为实测结果提交。
+    }}\par\vspace{6pt}
+  \fi}
+\newcommand{\ReportChineseSummary}{%
+  \noindent\textbf{摘要}\quad\ReportAbstractCN\par
+  \noindent\textbf{关键词：}\ReportKeywordsCN\par}
+\newcommand{\ReportEnglishSummary}{%
+  \noindent\textbf{Abstract}\quad\ReportAbstractEN\par
+  \noindent\textbf{Keywords:}\ \ReportKeywordsEN\par}
+\newcommand{\ReportEnglishTitle}{%
+  {\bfseries\ReportTitleEN\par}\vspace{3pt}
+  {\small\ReportAuthorEN\par}}
+\newcommand{\ReportClassicFront}{%
+  \vspace*{8mm}
+  {\centering\ReportTitleFont\ReportTitle\par}
+  \begin{center}\ReportInfoRows\end{center}
+  \ReportDraftNotice
+  \ReportChineseSummary\vspace{7pt}
+  {\centering\ReportEnglishTitle}\vspace{5pt}
+  \ReportEnglishSummary
+  \par\vspace{7pt}\hrule height 0.6pt\vspace{2pt}\hrule\vspace{8pt}}
+\newcommand{\ReportJournalFront}{%
+  \vspace*{8mm}
+  {\centering\ReportTitleFont\ReportTitle\par\vspace{5pt}\ReportEnglishTitle}
+  \begin{center}\small\ReportInfoRows\end{center}
+  \ReportDraftNotice
+  \noindent\begin{minipage}[t]{0.475\textwidth}\small\ReportChineseSummary\end{minipage}%
+  \hfill\begin{minipage}[t]{0.475\textwidth}\small\ReportEnglishSummary\end{minipage}
+  \par\vspace{8pt}\hrule\vspace{8pt}}
+\newcommand{\ReportEditorialFront}{%
+  \vspace*{8mm}
+  {\raggedright\ReportTitleFont\ReportTitle\par}\vspace{7pt}
+  {\raggedright\ReportEnglishTitle}\vspace{8pt}
+  {\small\noindent\ReportInfoRows}\vspace{8pt}
+  \ReportDraftNotice
+  \begingroup\setlength{\fboxsep}{9pt}
+  \noindent\colorbox{ReportTint}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+    \small\ReportChineseSummary}}\par\endgroup\vspace{7pt}
+  {\small\ReportEnglishSummary}\vspace{10pt}
+  {\color{ReportAccent}\hrule height 1.2pt}\vspace{8pt}}
+\newcommand{\ReportBriefFront}{%
+  \vspace*{8mm}
+  \begingroup\setlength{\fboxsep}{10pt}
+  \noindent\colorbox{ReportTint}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+    {\small\heiti\color{ReportAccent}物理实验报告\par}\vspace{5pt}
+    {\raggedright\ReportTitleFont\ReportTitle\par}\vspace{5pt}
+    \ReportEnglishTitle}}\par\endgroup
+  \begin{center}\small\ReportInfoRows\end{center}
+  \ReportDraftNotice
+  \ReportChineseSummary\vspace{5pt}
+  {\small\ReportEnglishSummary}\vspace{7pt}
+  {\color{ReportAccent}\hrule height 1pt}\vspace{7pt}}
+\newcommand{\ReportLongFront}{%
+  \vspace*{2cm}
+  {\centering\small\heiti 物理实验报告\par}\vspace{1cm}
+  {\centering\ReportTitleFont\ReportTitle\par}\vspace{10pt}
+  {\centering\ReportEnglishTitle}\vspace{1cm}
+  \begin{center}\ReportInfoRows\end{center}\vspace{1cm}
+  \ReportDraftNotice
+  {\small\ReportChineseSummary}\vspace{10pt}
+  {\small\ReportEnglishSummary}
+  \thispagestyle{plain}\clearpage}
+\ifcase\ReportTemplateID\relax
+\or % 01 经典课程：双栏、居中题头、上下双语摘要。
+  \renewcommand{\ReportTitleFont}{\heiti\fontsize{19pt}{25pt}\selectfont}
+  \renewcommand{\baselinestretch}{1.15}
+  \setlength{\columnsep}{8mm}
+\or % 02 紧凑学术：双栏、并排摘要、细栏间线。
+  \renewcommand{\ReportTitleFont}{\songti\bfseries\fontsize{17pt}{22pt}\selectfont}
+  \renewcommand{\baselinestretch}{1.06}
+  \setlength{\columnsep}{8mm}
+  \setlength{\columnseprule}{0.25pt}
+  \ctexset{section={format=\normalsize\heiti,beforeskip=10pt,afterskip=4pt}}
+\or % 03 科研杂志：单栏引言，其后同页进入双栏。
+  \renewcommand{\ReportTitleFont}{\heiti\fontsize{25pt}{31pt}\selectfont}
+  \renewcommand{\baselinestretch}{1.12}
+  \definecolor{ReportAccent}{HTML}{174C68}
+  \definecolor{ReportTint}{HTML}{EEF5F7}
+  \setlength{\columnsep}{9mm}
+  \ctexset{section={format=\large\heiti\color{ReportAccent}}}
+\or % 04 技术简报：单栏、灰底题头、无首行缩进、段落留白。
+  \renewcommand{\ReportTitleFont}{\heiti\fontsize{19pt}{25pt}\selectfont}
+  \renewcommand{\baselinestretch}{1.08}
+  \definecolor{ReportAccent}{HTML}{225A50}
+  \definecolor{ReportTint}{HTML}{EFF4F1}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{4pt}
+  \ctexset{section={format=\large\heiti\color{ReportAccent},beforeskip=10pt,afterskip=4pt}}
+\or % 05 学术长报告：独立题头页、单栏正文、较大字号与行距。
+  \renewcommand{\ReportTitleFont}{\songti\bfseries\fontsize{25pt}{32pt}\selectfont}
+  \renewcommand{\baselinestretch}{1.18}
+  \ctexset{section={format=\Large\heiti,beforeskip=12pt,afterskip=6pt}}
+\fi
+\makeatletter
+\renewcommand{\MakeReportFrontMatter}{%
+  \ifcase\ReportTemplateID\relax
+  \or\twocolumn[{\begin{@twocolumnfalse}\ReportClassicFront\end{@twocolumnfalse}}]
+  \or\twocolumn[{\begin{@twocolumnfalse}\ReportJournalFront\end{@twocolumnfalse}}]
+  \or\ReportEditorialFront
+  \or\ReportBriefFront
+  \or\ReportLongFront
+  \fi
+  \ifnum\ReportTemplateID<5\thispagestyle{plain}\fi}
+\makeatother
+\newif\ifReportColumnsStarted
+\newif\ifReportColumnsOpen
+\newcommand{\ReportEndColumns}{%
+  \ifReportColumnsOpen\end{multicols}\ReportColumnsOpenfalse\fi}
+\ifnum\ReportTemplateID=3
+  \usepackage{multicol}
+  \AddToHook{cmd/section/before}{%
+    \ifReportColumnsStarted\else
+      \ifnum\value{section}=1\relax
+        \ReportColumnsStartedtrue\ReportColumnsOpentrue
+        \begin{multicols}{2}\raggedcolumns
+      \fi
+    \fi}
+  \AddToHook{cmd/appendix/before}{\ReportEndColumns}
+  \AtEndDocument{\ReportEndColumns}
+\fi

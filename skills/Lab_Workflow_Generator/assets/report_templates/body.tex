@@ -35,7 +35,7 @@
 \end{table}
 \subsection{规律与进一步处理}
 \ReportTODO{说明定标、拟合、统计或插值；给模型、参数、单位及R\textsuperscript{2}或残差。图\ref{fig:result}须由真实数据生成。}
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \fbox{\parbox[c][22mm][c]{0.9\columnwidth}{\centering 待补充：真实数据图\\此框仅为版面占位}}
   \caption{结果图占位。坐标轴、图内字体与图题须标清物理量和单位。}
@@ -56,6 +56,7 @@
 \bibliography{report_template/references}
 
 \ifReportAppendix
+\ifdefined\ReportEndColumns\ReportEndColumns\fi
 \section*{附录：原始记录与复现信息}
 \ReportTODO{按需附原始记录、数据索引、程序、计算依据和补充图表。材料分别在data/、scripts/、figures/；无材料可删附录。}
 \fi

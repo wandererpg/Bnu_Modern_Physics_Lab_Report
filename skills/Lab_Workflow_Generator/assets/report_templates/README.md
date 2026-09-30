@@ -4,17 +4,17 @@
 
 | 编号 | 名称 | 主源文件 | 可用别名 | 版式特点 |
 | --- | --- | --- | --- | --- |
-| 01 | 清华课程双栏（默认） | `template_01_thu.tex` | `thu`、清华、默认 | 原有清华双栏课程样式，统一基本信息 |
-| 02 | Physical Review 风格 | `template_02_physical_review.tex` | `aps`、Physical Review | 居中衬线标题、紧凑摘要、细线分隔 |
-| 03 | Nature 风格 | `template_03_nature.tex` | `nature`、Nature | 左对齐大标题、深蓝层级、较疏栏距 |
-| 04 | Applied Physics Letters 风格 | `template_04_applied_physics_letters.tex` | `apl`、`aip` | 紧凑题头、窄栏距、较短小节间距 |
-| 05 | Journal of Physics 风格 | `template_05_journal_of_physics.tex` | `iop`、`jphys` | 左对齐衬线题头、开放行距、灰色双细线 |
+| 01 | 清华课程双栏（默认） | `template_01_thu.tex` | `thu`、清华、经典 | 经典课程：居中题头、上下双语摘要、传统双栏正文 |
+| 02 | Physical Review 风格 | `template_02_physical_review.tex` | `aps`、紧凑学术 | 紧凑学术：双语摘要并排、栏间细线、紧凑双栏正文 |
+| 03 | Nature 风格 | `template_03_nature.tex` | `nature`、杂志、混合 | 科研杂志：大标题、浅色摘要区、引言单栏、后文双栏 |
+| 04 | Applied Physics Letters 风格 | `template_04_applied_physics_letters.tex` | `apl`、简报 | 技术简报：浅色题头、无首行缩进、单栏宽幅图表 |
+| 05 | Journal of Physics 风格 | `template_05_journal_of_physics.tex` | `iop`、长报告 | 学术长报告：独立题头与摘要页、较大字号、单栏正文 |
 
 命名、别名和主源路径以 `registry.json` 为准。[SOURCES.md](SOURCES.md) 记录期刊官方来源及适配边界。这些都是课程报告的风格改编，不是官方模板，不承诺可直接用于投稿。版式参数是本项目的设计选择，不声称复刻期刊成稿。
 
 ## 已编译的版式预览
 
-下面是含明确占位提示的空白骨架预览，不包含虚构实测数据。五套均已通过 XeLaTeX/BibTeX 编译，并检查了日志、引用、页面边界和渲染版面。正式写作仍需填写内容并再次编译验收。
+下面是使用完全相同内容的 MVP 预览，不包含实测数据。五套均已通过 XeLaTeX 编译，并检查了日志、引用、嵌入字体、中文提取、页面边界和渲染版面。正式写作仍需填写内容并再次编译验收。
 
 ![五套模板首页对比，按01至05排列](previews/comparison.png)
 
@@ -46,7 +46,8 @@ python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspa
 ├── thuemp.cls                       # 01需要的现有类文件
 ├── assets/bnu_logo.png              # 工作区校徽，不变形
 ├── report_template/
-│   ├── common.tex                   # 共享排版及五种风格参数
+│   ├── common.tex                   # 共用内容接口与课程约束
+│   ├── layout_v2.tex                # 五种结构不同的新版版式
 │   ├── metadata.tex                 # 题目、基本信息、双语摘要和关键词
 │   ├── body.tex                     # 正文、图表与可选附录
 │   └── references.bib               # 可核实的参考文献
@@ -73,3 +74,19 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 `--force` 仍遵循原工作流的讲义状态约定，不用于跳过模板的防覆盖检查。未改写内容的模板编译成功，只能证明排版骨架可用，不能代替正式报告内容验收。
 
 通用模板源和工作流可以进入 Git；每个实验的全部材料、报告及编译成果只保存在本地。
+
+## 同内容样例与兼容说明
+
+2026-09-30 的结构版式由用户确认可包含单栏、双栏及混合布局。课程要求优先，期刊名称仅保留为编号别名，不表示对官方刊物版面的严格复刻。图表宽度应使用`\linewidth`或`\columnwidth`，不将双栏图的固定尺寸直接套用到单栏。
+
+03通过`multicol`在引言之后进入双栏，支持`[H]`就地图表，附录恢复单栏。普通浮动体和跨页长表不适合直接放入`multicols`；有大量此类材料时优先用04/05，或将宽幅补充材料放入附录。
+
+新版排版参数保存在`layout_v2.tex`；选择脚本只补齐缺失文件，不改写已安装的正文、信息和共用文件，手工修改的主文件仍受原有保护。更新模板库不会自动转换任何现有实验报告。
+
+重新生成五份独立源码样例（请选择一个尚无同名MVP的目录）：
+
+```powershell
+python skills/Lab_Workflow_Generator/scripts/create_template_mvps.py --output "排版风格对比"
+```
+
+样例展开排版和内容输入，01同时附带`thuemp.cls`，校徽保存在`assets/`，编译缓存集中在`build/`。`examples/mvp_metadata.tex`和`examples/mvp_body.tex`是共同内容源。

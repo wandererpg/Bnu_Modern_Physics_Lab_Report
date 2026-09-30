@@ -12,6 +12,8 @@ description: >-
 
 ## 编号模板入口（当前规则）
 
+结构版式（2026-09-30）：01经典课程双栏、02紧凑学术双栏（中英文摘要并排）、03杂志式混合布局（引言单栏，其后双栏）、04单栏技术简报、05独立题头页与单栏长报告。编号、期刊别名和必需内容保持稳定；版式参数由版本化`assets/report_templates/layout_v2.tex`提供。用户允许单栏、双栏和混合风格，课程明确要求仍优先。03的`multicols`区域使用`[H]`就地图表，宽幅附录恢复单栏；复杂跨栏浮动体或跨页长表优先用04/05。
+
 实验报告先读工作区 `report.md`（缺失时读 `references/report.md`），再依据 `assets/report_templates/registry.json` 选择：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics。后四套为中文课程风格改编，不是官方投稿模板；结构和数据规则不变。
 
 优先级：课程明确要求 → 用户编号或名称 → 报告已有 `template_selection.json` → 新报告默认01。可唯一识别的选择直接执行。详细调用、文件布局、切换与检查见 `assets/report_templates/README.md`；仅在需要核对来源时读 `SOURCES.md`。
