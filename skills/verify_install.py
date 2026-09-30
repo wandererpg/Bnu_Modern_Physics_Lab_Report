@@ -146,11 +146,22 @@ def check_skills(skills_dir):
         where = "已安装" if wf.startswith(os.path.abspath(skills_dir)) else "使用包内副本（未安装）"
         scripts = ["run_lab_workflow.py", "make_data_tables.py", "check_report_tex.py",
                    "check_pdf_geometry.py", "check_float_distance.py",
-                   "check_inline_distance.py", "init_workspace.py", "ocr_lecture.py"]
+               "check_inline_distance.py", "init_workspace.py", "ocr_lecture.py",
+               "select_report_template.py"]
         miss = [s for s in scripts if not os.path.isfile(os.path.join(wf, "scripts", s))]
         assets = ["assets/thu_template/thuemp.cls",
                   "assets/scaffold_template/report_frontmatter_thu.tex",
-                  "references/report.md"]
+                  "references/report.md",
+                  "assets/report_templates/registry.json",
+                  "assets/report_templates/common.tex",
+                  "assets/report_templates/metadata.tex",
+                  "assets/report_templates/body.tex",
+                  "assets/report_templates/references.bib",
+                  "assets/report_templates/template_01_thu.tex",
+                  "assets/report_templates/template_02_physical_review.tex",
+                  "assets/report_templates/template_03_nature.tex",
+                  "assets/report_templates/template_04_applied_physics_letters.tex",
+                  "assets/report_templates/template_05_journal_of_physics.tex"]
         miss += [a for a in assets if not os.path.isfile(os.path.join(wf, *a.split("/")))]
         ver = "?"
         try:
@@ -162,7 +173,7 @@ def check_skills(skills_dir):
         if miss:
             add("FAIL", "Lab_Workflow_Generator v%s 文件不齐" % ver, "缺：" + "、".join(miss))
         else:
-            add("PASS", "Lab_Workflow_Generator v%s（8 脚本 + 模板资产齐全）" % ver, where)
+            add("PASS", "Lab_Workflow_Generator v%s（9 脚本 + 五套报告模板资产齐全）" % ver, where)
 
     core = find_skill("advanced_lab_report_gen", skills_dir)
     if not core:

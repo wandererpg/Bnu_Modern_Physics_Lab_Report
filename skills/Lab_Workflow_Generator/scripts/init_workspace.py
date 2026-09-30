@@ -31,12 +31,16 @@ import subprocess
 import sys
 from pathlib import Path
 
+from select_report_template import (
+    TemplateSelectionError, install_report_template, list_templates,
+)
+
 HERE = Path(__file__).resolve().parent
 SHIP = HERE.parent / "assets"
 
 for _s in (sys.stdout, sys.stderr):
     try:
-        _s.reconfigure(errors="replace")
+        _s.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
 
@@ -82,11 +86,13 @@ def safe_title(t: str) -> str:
     return t or "实验"
 
 
-def ship_files(exp: Path) -> None:
+def ship_files(exp: Path, template: str | None = None) -> None:
     lab = exp / "lab_report"
     lab.mkdir(parents=True, exist_ok=True)
     exp.joinpath("data").mkdir(parents=True, exist_ok=True)
     exp.joinpath("preview_report").mkdir(parents=True, exist_ok=True)
+    had_master = (lab / "lab_report.tex").exists()
+    selection = install_report_template(lab, template, exp.name, allow_legacy=True)
     pairs = [
         (SHIP / "thu_template" / "thuemp.cls", lab / "thuemp.cls"),
         (SHIP / "scaffold_template" / "report_frontmatter_thu.tex", lab / "report_frontmatter_thu.tex"),
@@ -94,6 +100,8 @@ def ship_files(exp: Path) -> None:
         (SHIP / "scaffold_template" / "data_README.md", exp / "data" / "README.md"),
     ]
     for src, dst in pairs:
+        if had_master and selection is None and dst.parent == lab:
+            continue  # An existing legacy report receives no new template files.
         try:
             if src.exists() and not dst.exists():
                 shutil.copyfile(src, dst)
@@ -103,12 +111,23 @@ def ship_files(exp: Path) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--workspace", required=True)
+    ap.add_argument("--workspace", help="工作区根目录（初始化实验时必填）")
     ap.add_argument("--lectures", help="folder of lecture PDFs (batch mode)")
     ap.add_argument("--experiments", help="comma-separated experiment folder names")
     ap.add_argument("--title-map", help="JSON {lecture_filename: title} for scanned lectures")
     ap.add_argument("--force", action="store_true", help="overwrite an existing lecture PDF")
+    ap.add_argument("--template", help="模板编号 01–05 或别名；省略时沿用已有选择，新实验默认 01")
+    ap.add_argument("--list-templates", action="store_true", help="列出模板后退出，不创建工作区")
     a = ap.parse_args()
+    if a.list_templates:
+        try:
+            list_templates()
+            return 0
+        except (TemplateSelectionError, OSError) as exc:
+            print(f"[template] ERROR: {exc}", file=sys.stderr)
+            return 2
+    if not a.workspace:
+        ap.error("初始化实验时须提供 --workspace；仅列出模板时无需该参数。")
 
     ws = Path(a.workspace).resolve()
     ws.mkdir(parents=True, exist_ok=True)
@@ -135,7 +154,11 @@ def main() -> int:
     scans = []
     for title, pdf, ok in jobs:
         exp = ws / title
-        ship_files(exp)
+        try:
+            ship_files(exp, a.template)
+        except (TemplateSelectionError, OSError) as exc:
+            print(f"[template] ERROR: {exc}", file=sys.stderr)
+            return 2
         if pdf is not None:
             dst = exp / (title + ".pdf")
             if dst.exists() and not a.force:

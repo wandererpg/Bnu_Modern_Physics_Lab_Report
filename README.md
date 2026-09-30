@@ -1,5 +1,9 @@
 # 近代物理实验报告工作区
 
+实验报告现有5套可由AI按编号或名称调用的LaTeX模板：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics。可直接说“这份报告使用模板03”或“用 Physical Review 样板写报告”。内容仍按 [report.md](report.md)，预习报告仍按 [preview.md](preview.md)。
+
+模板及选择/编译流程见 [模板库说明](skills/Lab_Workflow_Generator/assets/report_templates/README.md)，期刊参考来源见 [来源说明](skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md)。期刊风格版是中文课程适配，非官方投稿模板。AI按“读材料 → 选择并部署 → 写真实内容 → 编译 → 检查内容和PDF → 交付”完成报告；换样式保留正文与数据。通用模板可同步GitHub，实验实例全部留在本地。
+
 本仓库保存北京师范大学近代物理实验报告的通用写作规范、参考模板和可选工作流。具体实验资料、预习报告、实验报告及原始数据只保存在本地工作区。
 
 ## 通用文件

@@ -2,13 +2,29 @@
 name: Lab_Workflow_Generator
 description: >-
   基于文件目录的半自动化物理实验报告工作区引擎：当用户输入 /build_lab、要求“把实验做成工作区”“扫描实验目录并生成
-  全套预习/实验报告+PDF”，或按指定目录结构放入讲义与数据后需要自动生成报告时使用。生成 LaTeX 源文件并调用
+  全套预习/实验报告+PDF”，或要求按01—05编号/期刊风格写实验报告、切换报告样式，以及按目录材料生成报告时使用。生成 LaTeX 源文件并调用
   advanced_lab_report_gen 的文本生成能力与 XeLaTeX 编译，产出预习报告、实验报告、可复现数据处理脚本和 PDF。
 ---
 
 # Lab Workflow Generator —— 实验报告工程化工作区
 
 > 当被触发时，你的角色是**工作区自动化引擎**：把“对话式生成报告”升级为“目录驱动、可复现、可编译”的实验报告工作区。
+
+## 编号模板入口（当前规则）
+
+实验报告先读工作区 `report.md`（缺失时读 `references/report.md`），再依据 `assets/report_templates/registry.json` 选择：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics。后四套为中文课程风格改编，不是官方投稿模板；结构和数据规则不变。
+
+优先级：课程明确要求 → 用户编号或名称 → 报告已有 `template_selection.json` → 新报告默认01。可唯一识别的选择直接执行。详细调用、文件布局、切换与检查见 `assets/report_templates/README.md`；仅在需要核对来源时读 `SOURCES.md`。
+
+```text
+/build_lab 塞曼效应 --template 02
+/build_lab --experiment 塞曼效应 --template nature
+python scripts/run_lab_workflow.py --workspace <WS> --experiment <实验标题> --stage scaffold --template 02
+```
+
+初始化脚本同样支持 `--template`，两脚本都支持 `--list-templates`。主源固定为 `lab_report/lab_report.tex`；正文、信息和文献分别放在 `report_template/body.tex`、`metadata.tex`、`references.bib`。脚本只部署占位骨架，AI仍须读讲义和真实记录完成内容。已有报告先迁移并检查差异；不覆盖旧源或手工改过的主文件，切换保留正文、数据、文献。
+
+填写后跑正文检查及 XeLaTeX/BibTeX 编译，渲染PDF复核 `report.md`；占位图表/文献及灰色草稿提示在核实后替换或移除。报告未具备内容与版面条件时只能交付草稿。下文旧THU、物理学报模板说明和历史复盘仅用于兼容，不覆盖本入口与现行内容规范（包括结果章节中的定量数据和分析要求）。
 
 ## 1. 核心指令
 

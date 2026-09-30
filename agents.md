@@ -10,6 +10,14 @@
 - `report.md`：物理实验报告的写作要求与检查清单。
 - 本文件：适用于整个工作区的总要求。
 
+## 实验报告模板与持续维护
+
+- AI先读 `report.md`，主动调用 `skills/Lab_Workflow_Generator/assets/report_templates/registry.json` 注册的模板及共同骨架，期刊样式不能改变必需内容。
+- 固定编号：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics。02—05为课程风格适配，不是官方投稿模板。
+- 选择顺序为课程明确要求、用户指定、报告已有选择记录、新报告默认01；在报告目录维护 `template_selection.json`。换样式保留正文、信息、文献和原始数据，不覆盖旧版或手工改过的主文件。
+- 根目录五份Markdown仅承担规范和入口职责；正式报告仍用LaTeX与PDF，新模板不改变预习要求。内容规范更新时同步流程包对应 `references/`，模板清单、选择脚本及流程入口保持一致。
+- 通用模板放在 `skills/`；各实验模板实例、材料和成果只保存本地。完成或修改报告后编译，并复核日志、内容和PDF版面。
+
 ## 持续整理规则
 
 - 用户后续发送的工作区总要求、长期写作偏好和协作规则，应自动整理后补充到本文件；如内容属于预习报告或实验报告的专门要求，则同步整理到相应的 `preview.md` 或 `report.md`。

@@ -26,7 +26,7 @@ import sys
 
 for _s in (sys.stdout, sys.stderr):
     try:
-        _s.reconfigure(errors="replace")
+        _s.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
 
@@ -133,7 +133,7 @@ def table_width_em(block, ncol):
     return total
 
 
-def load_with_inputs(path, seen=None, depth=0):
+def load_with_inputs(path, seen=None, depth=0, root=None):
     """Text of `path` with \\input/\\include-ed files inlined.
 
     Labels routinely live in included fragments (e.g. tables/*.tex produced by
@@ -150,16 +150,20 @@ def load_with_inputs(path, seen=None, depth=0):
     except OSError:
         return ""
     base = os.path.dirname(ap)
+    root = base if root is None else root
 
     def sub(m):
         target = m.group(1).strip()
         if not target:
             return ""
         cand = target if os.path.splitext(target)[1] else target + ".tex"
-        full = os.path.join(base, cand.replace("/", os.sep))
+        # LaTeX以主文件编译工作目录解析input；兼容旧片段的本地相对路径。
+        full = os.path.join(root, cand.replace("/", os.sep))
+        if not os.path.isfile(full):
+            full = os.path.join(base, cand.replace("/", os.sep))
         if not os.path.isfile(full):
             return ""          # let LaTeX report the missing file
-        return load_with_inputs(full, seen, depth + 1)
+        return load_with_inputs(full, seen, depth + 1, root)
 
     return re.sub(r"\\(?:input|include)\s*\{([^}]*)\}", sub, txt)
 
@@ -261,6 +265,19 @@ def brace_arg(s, pos):
 
 
 def abstract_chars(txt):
+    # 编号模板把摘要放在 metadata.tex 的宏中；不要数 common.tex 的排版定义。
+    macro = re.search(r"\\(?:newcommand|renewcommand)\*?\s*\{\\ReportAbstractCN\}\s*\{", txt)
+    if macro:
+        start, depth, end = macro.end(), 1, macro.end()
+        while end < len(txt) and depth:
+            if txt[end] == "{" and (end == 0 or txt[end - 1] != "\\"):
+                depth += 1
+            elif txt[end] == "}" and (end == 0 or txt[end - 1] != "\\"):
+                depth -= 1
+            end += 1
+        if depth == 0:
+            body = re.sub(r"\\[A-Za-z@]+\*?", "", txt[start:end - 1])
+            return len(re.findall(r"[\u4e00-\u9fff]|[0-9A-Za-z]", body))
     """Abstract length, supporting both plain 摘要…关键词 and thuemp's empAbstract env."""
     m = re.search(r"\\begin\{empAbstract\}(.*?)\\end\{empAbstract\}", txt, re.S)
     if m:

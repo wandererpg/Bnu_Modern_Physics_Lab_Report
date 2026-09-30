@@ -8,6 +8,39 @@
 
 本文件只规范实验报告，不替代预习报告要求。报告正式文档须使用 LaTeX 编写并编译生成 PDF；本文件仅作为要求与提交前检查清单，不作为最终报告文件。
 
+## LaTeX 模板选择与 AI 工作流
+
+AI应从本文件提取内容和结构要求，主动调用已整理的模板，不必每次重造排版。模板库在 `skills/Lab_Workflow_Generator/assets/report_templates/`，编号、别名与源路径以 `registry.json` 为准；操作说明见该目录的 `README.md`，官方期刊来源与适配边界见 `SOURCES.md`。
+
+| 编号 | 模板名称 | 选择别名举例 | LaTeX 主模板 |
+| --- | --- | --- | --- |
+| 01 | 清华课程双栏（默认） | 清华、`thu`、默认 | `template_01_thu.tex` |
+| 02 | Physical Review 风格 | Physical Review、`aps` | `template_02_physical_review.tex` |
+| 03 | Nature 风格 | Nature、`nature` | `template_03_nature.tex` |
+| 04 | Applied Physics Letters 风格 | Applied Physics Letters、`apl` | `template_04_applied_physics_letters.tex` |
+| 05 | Journal of Physics 风格 | Journal of Physics、`iop` | `template_05_journal_of_physics.tex` |
+
+1. **选择**：教师或课程明确规定 → 用户指定编号/名称 → 该报告已有 `lab_report/template_selection.json` → 新报告默认01。编号或名称能唯一识别时直接调用；有歧义时说明候选再澄清。课程明确要求优先于用户选择的期刊风格。
+2. **读取材料**：先读本文件、讲义、原始记录和已有报告，确认实验名称及缺失信息；区分原始值、计算值、理论值和估计值，不根据模板虚构实验内容。
+3. **部署与填写**：选择脚本复制模板及依赖到 `<实验标题>/lab_report/`，稳定主入口为 `lab_report.tex`；在 `report_template/metadata.tex` 填写信息、双语摘要和关键词，在 `body.tex` 写正文，在 `references.bib` 写实际引用的资料。选择命令只部署骨架，不代表生成了完整报告。
+4. **切换**：保留已有正文、信息、文献和原始数据；脚本仅切换自身生成且未被改写的主文件。旧版或手工改过的主文件必须先由AI完成可审查的内容迁移，不以空骨架覆盖原报告。原清华前置区和物理学报片段继续兼容已有报告，新建五模板报告以本节和注册表为入口。
+5. **编译并验收**：写完真实内容后运行 XeLaTeX → BibTeX（使用文献库时）→ XeLaTeX → XeLaTeX，辅助文件集中在 `build/`，源文件和最终PDF放报告目录；检查日志、渲染PDF并按文末清单复核。缺失材料或编译受阻时保留源文件并明确交付为草稿，不能声称正式报告完成。
+
+五套模板均为A4双栏的中文课程适配，保留两行基本信息、100—200字中文摘要及对应英文摘要、两组3—5个关键词、六个主体章节、校徽、引用及按需附录。01沿用项目内 `thuemp.cls`；02—05只是期刊风格改编，非官方投稿模板。期刊英文词数、文章长度、投稿日期、作者单位、基金及PACS等不替代或增加课程要求；选择样式不改变下文的内容、数据真实性和质检标准。
+
+用户可说：“为塞曼效应生成实验报告，使用模板02”“这份报告用 Nature 样板”“换成模板05，保留正文和数据”。从工作区根目录可执行：
+
+```powershell
+python skills/Lab_Workflow_Generator/scripts/select_report_template.py --list-templates
+python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspace . --experiment "塞曼效应" --template 02
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "塞曼效应" --stage scaffold --template 02
+# AI依据讲义与真实记录写完正文后，再检查并编译：
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "塞曼效应" --stage check
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "塞曼效应" --stage compile
+```
+
+模板库和通用工作流可以同步GitHub；各实验的材料、报告、模板选择记录及编译结果仅保存在本地。
+
 ## 报告整体结构
 
 正式报告按以下顺序组织：
@@ -23,8 +56,6 @@
 9. 六、参考文献；
 10. 原始数据、程序或其他补充材料附录（有数据或教师要求时）。
 
-2. 摘要；
-3. 关键词；
 
 ### 实验题目与基本信息
 

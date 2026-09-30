@@ -33,6 +33,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+from check_report_tex import load_with_inputs
+
+from select_report_template import (
+    TemplateSelectionError, install_report_template, list_templates, read_selection,
+)
+
 
 # Console robustness: several messages carry non-GBK glyphs (emoji like the
 # guards' ❌/✅), which would crash print() on cp936/GBK Windows consoles.
@@ -40,7 +46,7 @@ from pathlib import Path
 def _force_utf8_stdio():
     for _s in (sys.stdout, sys.stderr):
         try:
-            _s.reconfigure(errors="replace")
+            _s.reconfigure(encoding="utf-8", errors="replace")
         except Exception:
             pass
 
@@ -87,7 +93,7 @@ def lab_tex(exp: Path) -> Path | None:
     return p if p.exists() else None
 
 
-def scaffold(ws: Path, name: str) -> Path:
+def scaffold(ws: Path, name: str, template: str | None = None) -> Path:
     exp = experiment_dir(ws, name)
     ensure_dir(exp / "preview_report")
     ensure_dir(exp / "lab_report" / "data")
@@ -115,6 +121,7 @@ def scaffold(ws: Path, name: str) -> Path:
                 shutil.copyfile(src, dst)
         except OSError as exc:
             print(f"[scaffold] warn: cannot copy {src.name}: {exc}")
+    install_report_template(exp / "lab_report", template, name, allow_legacy=True)
     stage_data(exp)
     print(f"[scaffold] ensured: {exp}")
     return exp
@@ -275,13 +282,14 @@ def has_onecolumn(exp: Path) -> bool:
     (table[H] + tabular*{\textwidth}), which a twocolumn layout cannot do
     for wide tables: table* can only go to the top of a page.
     """
-    for p in (lab_tex(exp), preview_tex(exp)):
-        if p is not None and Path(p).exists():
-            try:
-                if "\\onecolumn" in Path(p).read_text(encoding="utf-8", errors="ignore"):
-                    return True
-            except OSError:
-                pass
+    source = lab_tex(exp)
+    if source is not None and "\\onecolumn" in load_with_inputs(source):
+        return True
+    selection = read_selection(exp / "lab_report")
+    if selection and str(selection.get("columns")) in ("1", "single", "one"):
+        return True
+    if selection and str(selection.get("columns")) in ("2", "double", "two"):
+        return False
     return False
 
 
@@ -297,7 +305,7 @@ def has_strip(exp: Path) -> bool:
     for p in (lab_tex(exp), preview_tex(exp)):
         if p is not None and Path(p).exists():
             try:
-                if pat.search(Path(p).read_text(encoding="utf-8", errors="ignore")):
+                if pat.search(load_with_inputs(p)):
                     return True
             except OSError:
                 pass
@@ -313,7 +321,7 @@ def has_array(exp: Path) -> bool:
               lab / "report_frontmatter_thu.tex"):
         if p is not None and Path(p).exists():
             try:
-                if pat.search(Path(p).read_text(encoding="utf-8", errors="ignore")):
+                if pat.search(load_with_inputs(p)):
                     return True
             except OSError:
                 pass
@@ -373,7 +381,7 @@ def needs_bibtex(tex: Path) -> bool:
     triggers a BibTeX run.
     """
     try:
-        txt = tex.read_text(encoding="utf-8", errors="ignore")
+        txt = load_with_inputs(tex)
     except OSError:
         return False
     # A manual thebibliography never needs a BibTeX run, even if stray .bib
@@ -541,11 +549,25 @@ def main() -> int:
         help="stage to run (default: all)",
     )
     parser.add_argument("--force", action="store_true", help="skip lecture-hash guard and force regeneration/compile")
+    parser.add_argument("--template", help="报告模板编号 01–05 或别名；省略时沿用已有选择，新实验默认 01")
+    parser.add_argument("--list-templates", action="store_true", help="列出可选模板后退出，不创建实验目录")
     args = parser.parse_args()
+
+    if args.list_templates:
+        try:
+            list_templates()
+            return 0
+        except (TemplateSelectionError, OSError) as exc:
+            print(f"[template] ERROR: {exc}", file=sys.stderr)
+            return 2
 
     ws = Path(args.workspace).resolve()
     name = args.experiment or ws.name          # in-place: --workspace IS the experiment folder
-    exp = scaffold(ws, name)
+    try:
+        exp = scaffold(ws, name, args.template)
+    except (TemplateSelectionError, OSError) as exc:
+        print(f"[template] ERROR: {exc}", file=sys.stderr)
+        return 2
 
     if args.stage in ("scaffold", "all"):
         print("[stage] scaffold done")
