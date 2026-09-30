@@ -1,0 +1,43 @@
+# LaTeX auxiliary and temporary build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
+# Generated build and visual-inspection directories
+**/build/
+**/tmp/
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+~$*.xlsx
+~$*.xls
+
+# Experiment folders are local only; retain shared workflow and template directories in Git.
+/*/
+!/skills/
+!/物理学报模板_Acta_Physica_Sinica_/
+!/agent_report_bundle/
+
+# Python caches（工作流的数据处理/绘图脚本）
+__pycache__/
+*.pyc

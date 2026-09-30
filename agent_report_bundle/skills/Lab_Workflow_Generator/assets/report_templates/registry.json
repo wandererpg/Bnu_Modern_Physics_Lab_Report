@@ -1,0 +1,135 @@
+{
+  "version": 2,
+  "default": "01",
+  "templates": [
+    {
+      "id": "01",
+      "name": "清华课程双栏",
+      "aliases": [
+        "1",
+        "thu",
+        "清华",
+        "清华模板",
+        "默认",
+        "经典",
+        "课程双栏"
+      ],
+      "source": "template_01_thu.tex",
+      "columns": 2,
+      "journal": null,
+      "description": "居中题头、上下双语摘要、传统双栏正文；默认课程样式。",
+      "layout": "two-column",
+      "category": "经典课程双栏"
+    },
+    {
+      "id": "02",
+      "name": "Physical Review 风格",
+      "aliases": [
+        "2",
+        "aps",
+        "physical-review",
+        "Physical Review",
+        "物理评论",
+        "学术双栏",
+        "紧凑学术"
+      ],
+      "source": "template_02_physical_review.tex",
+      "columns": 2,
+      "journal": "Physical Review (APS)",
+      "description": "中英文摘要并排、栏间细线、紧凑双栏正文。",
+      "source_urls": [
+        "https://journals.aps.org/revtex",
+        "https://journals.aps.org/revtex/revtex-faq"
+      ],
+      "layout": "two-column",
+      "category": "紧凑学术双栏"
+    },
+    {
+      "id": "03",
+      "name": "Nature 风格",
+      "aliases": [
+        "3",
+        "nature",
+        "Nature",
+        "自然",
+        "杂志",
+        "混合",
+        "杂志式"
+      ],
+      "source": "template_03_nature.tex",
+      "columns": 2,
+      "journal": "Nature",
+      "description": "大标题与浅色摘要区；引言单栏，从原理起同页进入双栏，附录回到单栏。",
+      "source_urls": [
+        "https://www.nature.com/nature/for-authors/formatting-guide"
+      ],
+      "layout": "mixed",
+      "category": "科研杂志混合布局"
+    },
+    {
+      "id": "04",
+      "name": "Applied Physics Letters 风格",
+      "aliases": [
+        "4",
+        "apl",
+        "aip",
+        "Applied Physics Letters",
+        "应用物理快报",
+        "简报",
+        "技术简报"
+      ],
+      "source": "template_04_applied_physics_letters.tex",
+      "columns": 1,
+      "journal": "Applied Physics Letters (AIP)",
+      "description": "浅色题头区、无首行缩进、段落留白、单栏宽幅图表。",
+      "source_urls": [
+        "https://publishing.aip.org/resources/researchers/author-instructions/"
+      ],
+      "layout": "one-column",
+      "category": "单栏技术简报"
+    },
+    {
+      "id": "05",
+      "name": "Journal of Physics 风格",
+      "aliases": [
+        "5",
+        "iop",
+        "jphys",
+        "Journal of Physics",
+        "物理学杂志",
+        "长报告",
+        "单栏长报告"
+      ],
+      "source": "template_05_journal_of_physics.tex",
+      "columns": 1,
+      "journal": "Journal of Physics (IOP)",
+      "description": "题头与双语摘要独立一页；单栏正文使用较大字号、行距和宽幅图表。",
+      "source_urls": [
+        "https://publishingsupport.iopscience.iop.org/questions/latex-template/"
+      ],
+      "layout": "one-column-with-front-page",
+      "category": "单栏学术长报告"
+    },
+    {
+      "id": "06",
+      "name": "He-Ne 原报告单栏",
+      "aliases": [
+        "6",
+        "he-ne",
+        "He-Ne",
+        "hene",
+        "氦氖",
+        "原报告",
+        "原报告单栏",
+        "黑白单栏"
+      ],
+      "source": "template_06_he_ne.tex",
+      "columns": 1,
+      "journal": null,
+      "description": "继承现有He-Ne报告：黑白单栏、宋体正文与黑体标题、1.5倍行距、居中题头和双语摘要标题、就地图表、题目页眉。",
+      "layout": "one-column-native-course",
+      "category": "黑白单栏课程报告",
+      "layout_version": 1
+    }
+  ]
+}

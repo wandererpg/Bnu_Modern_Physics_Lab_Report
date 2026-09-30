@@ -1,0 +1,110 @@
+% 共同版式与课程约束；在生成的 report_template/ 中可按教师要求调整。
+\usepackage{amsmath,amssymb,graphicx,booktabs,array,tabularx,float}
+\usepackage{geometry,xcolor,caption,siunitx,fancyhdr,tikz}
+\usepackage[sort&compress]{gbt7714}
+\setcitestyle{numbers,sort&compress}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm,headheight=15pt,headsep=6mm}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{7mm}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setcounter{topnumber}{3}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\baselinestretch}{1.12}
+\sisetup{detect-all,per-mode=symbol,separate-uncertainty=true}
+\definecolor{ReportAccent}{HTML}{222222}
+\newcommand{\ReportTitleFont}{\heiti\fontsize{18pt}{23pt}\selectfont}
+\newcommand{\ReportTitleAlign}{\centering}
+\newcommand{\ReportRule}{\par\vspace{3pt}\hrule\vspace{6pt}}
+\newcommand{\ReportHeader}{北京师范大学物理实验报告}
+\ifcase\ReportTemplateID\relax
+\or % 01：保留 thuemp 双栏，使用统一的两行基本信息。
+  \renewcommand{\baselinestretch}{1.15}
+  \renewcommand{\ReportHeader}{北京师范大学普通物理实验}
+\or % 02：居中衬线标题、紧凑摘要与细线，参考 APS 两栏成稿。
+  \renewcommand{\ReportTitleFont}{\songti\bfseries\fontsize{17pt}{22pt}\selectfont}
+  \setlength{\columnsep}{6mm}
+  \renewcommand{\baselinestretch}{1.10}
+\or % 03：左对齐黑体大标题、较疏栏距与蓝色标题层级。
+  \renewcommand{\ReportTitleAlign}{\raggedright}
+  \renewcommand{\ReportTitleFont}{\heiti\fontsize{21pt}{26pt}\selectfont}
+  \setlength{\columnsep}{8mm}
+  \definecolor{ReportAccent}{HTML}{163A5F}
+  \renewcommand{\ReportRule}{\par\vspace{4pt}{\color{ReportAccent}\hrule height 0.8pt}\vspace{7pt}}
+\or % 04：紧凑题头、窄栏距与小节间距，保留课程所需完整讨论。
+  \renewcommand{\ReportTitleFont}{\heiti\fontsize{16pt}{20pt}\selectfont}
+  \setlength{\columnsep}{5.5mm}
+  \renewcommand{\baselinestretch}{1.08}
+\or % 05：左对齐题头、开放留白、灰色双细线。
+  \renewcommand{\ReportTitleAlign}{\raggedright}
+  \renewcommand{\ReportTitleFont}{\songti\bfseries\fontsize{19pt}{25pt}\selectfont}
+  \setlength{\columnsep}{7.5mm}
+  \renewcommand{\baselinestretch}{1.13}
+  \renewcommand{\ReportRule}{\par\vspace{4pt}{\color{black!55}\hrule\vspace{2pt}\hrule}\vspace{7pt}}
+\fi
+\ctexset{
+  section={name={,、},number=\chinese{section},format=\large\heiti\color{ReportAccent},beforeskip=12pt,afterskip=6pt},
+  subsection={format=\normalsize\heiti,beforeskip=8pt,afterskip=4pt}
+}
+\ifnum\ReportTemplateID=4
+  \ctexset{section={beforeskip=9pt,afterskip=4pt}}
+\fi
+\captionsetup{font=small,labelfont=bf,labelsep=quad,skip=5pt}
+\captionsetup[figure]{name=图}
+\captionsetup[table]{name=表}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\ReportHeader}
+\fancyhead[R]{\footnotesize 实验报告}
+\fancyfoot[C]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\footnotesize\thepage}\renewcommand{\headrulewidth}{0pt}}
+\newcommand{\ReportBlank}[1]{\makebox[#1]{\hrulefill}}
+\newcommand{\ReportTODO}[1]{\textbf{待补充：}#1}
+\newif\ifReportDraft
+\ReportDrafttrue
+\newif\ifReportAppendix
+\ReportAppendixfalse
+% 校徽左边界 = 正文左边界向左 2cm；等比例宽7cm，仅首页。
+\AddToHook{shipout/foreground}{%
+  \ifnum\value{page}=1\relax
+    \IfFileExists{assets/bnu_logo.png}{%
+      \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north west,inner sep=0pt,xshift=0cm,yshift=-0.6cm]
+          at (current page.north west) {\includegraphics[width=7cm]{assets/bnu_logo.png}};
+      \end{tikzpicture}%
+    }{\PackageWarning{report-template}{Missing assets/bnu_logo.png; course logo must be supplied}}%
+  \fi
+}
+\makeatletter
+\newcommand{\MakeReportFrontMatter}{%
+  \twocolumn[{\begin{@twocolumnfalse}
+    \vspace*{8mm}
+    {\ReportTitleAlign\ReportTitleFont\ReportTitle\par}
+    \vspace{5pt}
+    \begin{center}
+      作者（姓名）：\ReportAuthor\quad 学号：\ReportStudentID\\[4pt]
+      指导老师：\ReportTeacher\quad 实验时间：\ReportExperimentDate
+    \end{center}
+    \ifReportDraft
+    \noindent\fcolorbox{black!25}{black!3}{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+      \small 模板草稿：所有“待补充”均须以讲义、原始记录或可核实资料填写；占位图表与文献不能作为实测结果提交。
+    }}\par\vspace{6pt}
+    \fi
+    \noindent\textbf{摘要}\quad\ReportAbstractCN\par
+    \noindent\textbf{关键词：}\ReportKeywordsCN\par\vspace{6pt}
+    {\ReportTitleAlign\bfseries\ReportTitleEN\par}
+    {\ReportTitleAlign\small\ReportAuthorEN\par}\vspace{3pt}
+    \noindent\textbf{Abstract}\quad\ReportAbstractEN\par
+    \noindent\textbf{Keywords:}\ \ReportKeywordsEN\par
+    \ReportRule
+  \end{@twocolumnfalse}}]
+  \thispagestyle{plain}
+}
+\makeatother

@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "templates": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/.gitattributes",
+      "bytes": 248,
+      "sha256": "d1a82670d2c8797fd128443d319669d8aa91c6f244de7f122bcadc0effe00553"
+    },
+    {
+      "path": ".gitignore",
+      "source": ".gitignore",
+      "bytes": 619,
+      "sha256": "d21ee6bc1b60873c1f4c8b2b9a58d4b440e1583da9e36e26d01f5a01936764aa"
+    },
+    {
+      "path": "AGENT.md",
+      "source": "AGENT.md",
+      "bytes": 1742,
+      "sha256": "144bc5c5f9f045d0051f5f3cd79490a76a851497ddd482af7860fc6830fd6b53"
+    },
+    {
+      "path": "README.md",
+      "source": "README.md",
+      "bytes": 3014,
+      "sha256": "eb209d7627edc53f0bcbfe88c06a1db3a92607c5b4e9255894666f9b1c7c2468"
+    },
+    {
+      "path": "START_HERE.md",
+      "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/START_HERE.md",
+      "bytes": 4717,
+      "sha256": "1a24bd49abad7fb33c3d69570e93b8c5ee8d20ef7e9d984d3b9699056c5d0106"
+    },
+    {
+      "path": "agents.md",
+      "source": "agents.md",
+      "bytes": 8368,
+      "sha256": "139508dfb12ddbb27324b2635f5dcedbeb05741ebe2df6b806cd448daf57e776"
+    },
+    {
+      "path": "preview.md",
+      "source": "preview.md",
+      "bytes": 7451,
+      "sha256": "9a20a54e85a45649f96c6d52fb1f020215241a41c9c1d7715250834690bae573"
+    },
+    {
+      "path": "report.md",
+      "source": "report.md",
+      "bytes": 38480,
+      "sha256": "c0a63e332b08b142e9ea180263042ab795b756b61f102244969ef17cd0d11fcc"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/branding/bnu_logo.png",
+      "source": "skills/Lab_Workflow_Generator/assets/branding/bnu_logo.png",
+      "bytes": 31978,
+      "sha256": "bd82a9c66f50de4974c2b20f3dad865cf9a599230a586a9472754645354dea97"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
+      "bytes": 2749,
+      "sha256": "01aadfdcfa5ff58c5944dbb220ff4f3fd56a6c3eec97e7fc3ced79f67d8044f8"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
+      "bytes": 7547,
+      "sha256": "c24e000f05034dc569423f031c69c7865f7c036c6032bbc80ed8d8527e2718fa"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
+      "bytes": 3330,
+      "sha256": "c323a30f1b59c41b7517939444eb09eb9c574915f9b6f4a49acbfff942fad05d"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
+      "bytes": 3369,
+      "sha256": "e3e51bf491486dc0039d449f18d43cd1848a2c70f76225cf161c5f956b0bdb52"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/common.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/common.tex",
+      "bytes": 5114,
+      "sha256": "b56b1e4fe2ee1827ed58eeb7e8e95e421a1b772a0377b888981eb4fe69fde768"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/layout_06_he_ne.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/layout_06_he_ne.tex",
+      "bytes": 3170,
+      "sha256": "76724a7600fd4356f54f9b0be571b97733b83d7888c631c810891c3d2d7ceef6"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/layout_v2.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/layout_v2.tex",
+      "bytes": 5977,
+      "sha256": "aa10e052d4efa6285a099178e9d625daaba8526e28e4ccdcd6fa2929e226aafb"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/metadata.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/metadata.tex",
+      "bytes": 1244,
+      "sha256": "eb52b203bfbbfcfc100f68a393c11d2df2238464ebc7da68d283c60bfb76110e"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/references.bib",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/references.bib",
+      "bytes": 255,
+      "sha256": "024bd5611ce0456a0c9b4d7e37c2346af014705c66a027a9deb0910fe6995958"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
+      "bytes": 3895,
+      "sha256": "825eb2334970395fa1c7bd8a3eb937bb8e1e550ea96a318f85294ffe9d4ba822"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_01_thu.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_01_thu.tex",
+      "bytes": 379,
+      "sha256": "a5a8b8bfcd17ec3635bebc8b5288d9b7a04cfeeba31aa537a8727f1d31397be9"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_02_physical_review.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_02_physical_review.tex",
+      "bytes": 401,
+      "sha256": "775e3039b766e62b7e01fc35e9810498c70a2adbc121eb00d6ce1a9298a01c46"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_03_nature.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_03_nature.tex",
+      "bytes": 399,
+      "sha256": "4757ff1653796d3667d799c59a015471771667870f75312d0c513ed4c99901ed"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_04_applied_physics_letters.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_04_applied_physics_letters.tex",
+      "bytes": 398,
+      "sha256": "294859d6187f7cee723a586f6feeed43eafb9e0a0fd1ab33fa622d77f0887a4b"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_05_journal_of_physics.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_05_journal_of_physics.tex",
+      "bytes": 393,
+      "sha256": "d712732d56174d1d895196997e9d8fea4e8f7ef2db4ab603b130641273fc473e"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_06_he_ne.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_06_he_ne.tex",
+      "bytes": 409,
+      "sha256": "0d05ad01b05c025d7c4759258a30dd0e49c6e4f16d871c43018b843b399805ac"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/data_README.md",
+      "source": "skills/Lab_Workflow_Generator/assets/scaffold_template/data_README.md",
+      "bytes": 1359,
+      "sha256": "3c8c3e485a78ac52952cae9c81787384b5634b4040b56c8a2d48972686c60133"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_frontmatter_thu.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_frontmatter_thu.tex",
+      "bytes": 4081,
+      "sha256": "8a2bf9fa055d0477e65e1d299885677fc79baf92f8db2e54606a2f5f67b30d5d"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_preamble.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_preamble.tex",
+      "bytes": 3607,
+      "sha256": "2a45fd5a1c908ac6426ab8d4b61f7e43b7d4a186895035482ad4cca5acf2befe"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/thu_template/README.md",
+      "source": "skills/Lab_Workflow_Generator/assets/thu_template/README.md",
+      "bytes": 360,
+      "sha256": "ef525e1d96e83cce353931ceafac37165962df0fa4e7c007d73ac19a94e4ef6c"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/thu_template/thuemp.cls",
+      "source": "skills/Lab_Workflow_Generator/assets/thu_template/thuemp.cls",
+      "bytes": 8036,
+      "sha256": "b3a955c7b1f021ac8b735fb4b4d9cf64cb285cd183f42ca4acf3f4017cb1409b"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/references/agents.md",
+      "source": "agents.md",
+      "bytes": 8368,
+      "sha256": "139508dfb12ddbb27324b2635f5dcedbeb05741ebe2df6b806cd448daf57e776"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/references/preview.md",
+      "source": "preview.md",
+      "bytes": 7451,
+      "sha256": "9a20a54e85a45649f96c6d52fb1f020215241a41c9c1d7715250834690bae573"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/references/report.md",
+      "source": "report.md",
+      "bytes": 38480,
+      "sha256": "c0a63e332b08b142e9ea180263042ab795b756b61f102244969ef17cd0d11fcc"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/scripts/check_float_distance.py",
+      "source": "skills/Lab_Workflow_Generator/scripts/check_float_distance.py",
+      "bytes": 5163,
+      "sha256": "36f99bf990ee6bac0fbd4609bf7bcfa3c1410ca4ecf9d4274116210b26933c29"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/scripts/check_inline_distance.py",
+      "source": "skills/Lab_Workflow_Generator/scripts/check_inline_distance.py",
+      "bytes": 5334,
+      "sha256": "ea3838f82f118848c7ab80f7b9e27d34134a4b99f87bf4752021b800240f78e3"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/scripts/check_pdf_geometry.py",
+      "source": "skills/Lab_Workflow_Generator/scripts/check_pdf_geometry.py",
+      "bytes": 18801,
+      "sha256": "681f70ff84e8853ac71b6bbc93313a833ca0ae390b8f6125332fd7f177c0c154"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/scripts/check_report_tex.py",
+      "source": "skills/Lab_Workflow_Generator/scripts/check_report_tex.py",
+      "bytes": 21382,
+      "sha256": "657a536d3933e080bc35ac464669c988b6fb7cf3fec3a2019b277ea0d8be859a"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/scripts/make_data_tables.py",
+      "source": "skills/Lab_Workflow_Generator/scripts/make_data_tables.py",
+      "bytes": 21082,
+      "sha256": "27fe8afd4a0bc8d7974d461593f13d31de015399b3bc157d23acbcea6d9e1e98"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py",
+      "source": "skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py",
+      "bytes": 23970,
+      "sha256": "9fbf2fdbb9a50ab9dc70ef654b7b4cc3223b5129eb9d22b307be5e47edb24d5e"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/scripts/select_report_template.py",
+      "source": "skills/Lab_Workflow_Generator/scripts/select_report_template.py",
+      "bytes": 11179,
+      "sha256": "3f49e66e425f7e089b945fd9950030570c77b703676956eff4cb2c06cad201ba"
+    },
+    {
+      "path": "skills/README.md",
+      "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/skills_README.md",
+      "bytes": 1334,
+      "sha256": "7c8a2a1c0b2a7f80e66818e3c672ec182165db8fe1726d0ef8e285a0d23069b0"
+    }
+  ]
+}

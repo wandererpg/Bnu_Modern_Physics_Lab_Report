@@ -1,0 +1,4 @@
+# Keep exported file bytes and manifest hashes stable on every platform.
+* -text whitespace=cr-at-eol
+# Preserve the upstream class verbatim, including deliberate TeX spaces.
+skills/Lab_Workflow_Generator/assets/thu_template/thuemp.cls -whitespace

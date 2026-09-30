@@ -1,0 +1,72 @@
+% 模板06独立排版实现；复用 metadata/body 的字段与内容接口。
+% 设计来源：本工作区现有 He-Ne 实验报告；不含其个人信息或实验数据。
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{graphicx,float,geometry,setspace,enumitem,xcolor}
+\usepackage{caption,subcaption,bicaption,tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[sort&compress]{gbt7714}
+\setcitestyle{numbers,sort&compress}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr,siunitx}
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm,headheight=14pt}
+\onehalfspacing
+\raggedbottom
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.15em}
+\setlist{nosep,leftmargin=2.2em}
+\sisetup{detect-all,per-mode=symbol,separate-uncertainty=true}
+\definecolor{ReportAccent}{HTML}{000000}
+\captionsetup{font=small,labelsep=quad}
+\captionsetup[figure][bi-second]{name=Fig.,labelsep=quad}
+\captionsetup[subfigure]{font=small,labelfont=bf,labelsep=space}
+\ctexset{
+  section={name={,、},number=\chinese{section},format=\zihao{4}\heiti\raggedright,
+           beforeskip=1.1ex,afterskip=0.7ex},
+  subsection={format=\zihao{-4}\heiti\raggedright,beforeskip=0.9ex,afterskip=0.5ex}
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\ReportTitle}
+\fancyhead[R]{\small 近代物理实验报告}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
+\newcommand{\ReportBlank}[1]{\makebox[#1]{\hrulefill}}
+\newcommand{\ReportTODO}[1]{\textbf{待补充：}#1}
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newif\ifReportDraft
+\ReportDrafttrue
+\newif\ifReportAppendix
+\ReportAppendixfalse
+\newcommand{\ReportNativeLogo}{%
+  \IfFileExists{assets/bnu_logo.png}{%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=north west,inner sep=0pt]
+        at ([xshift=0cm,yshift=-0.90cm]current page.north west)
+        {\includegraphics[width=7cm]{assets/bnu_logo.png}};
+    \end{tikzpicture}%
+  }{\PackageWarning{report-template-06}{Missing assets/bnu_logo.png}}}
+\newcommand{\MakeReportFrontMatter}{%
+  \thispagestyle{plain}\ReportNativeLogo
+  \begin{center}
+    {\zihao{3}\heiti\ReportTitle\par}\vspace{0.8em}
+    {\zihao{-4}\songti 近代物理实验报告\par}\vspace{0.5em}
+    {\small\ReportTitleEN\par}\vspace{1em}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{@{}c@{\qquad}c@{}}
+      作者（姓名）：\ReportAuthor & 学号：\ReportStudentID\\
+      指导老师：\ReportTeacher & 实验时间：\ReportExperimentDate
+    \end{tabular}
+  \end{center}
+  \ifReportDraft
+    \noindent\fcolorbox{black!25}{black!3}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+      \small 模板草稿：所有“待补充”均须以讲义、原始记录或可核实资料填写；占位图表与文献不能作为实测结果提交。
+    }}\par
+  \fi
+  \begin{center}{\heiti\zihao{-4}摘\quad 要}\end{center}
+  \ReportAbstractCN\par
+  \noindent\textbf{关键词：}\ReportKeywordsCN\par
+  \begin{center}{\heiti\zihao{-4}Abstract}\end{center}
+  \ReportAbstractEN\par
+  \noindent\textbf{Keywords:}\ \ReportKeywordsEN\par}

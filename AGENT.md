@@ -1,8 +1,8 @@
 # 注意事项
 
-实验报告先读 `report.md`，按其中的五套LaTeX模板工作流生成。用户可用01—05或清华、Physical Review、Nature、Applied Physics Letters、Journal of Physics选择；优先课程明确要求，其次用户选择，再沿用已有记录，新报告默认01。AI用 `skills/Lab_Workflow_Generator/scripts/select_report_template.py` 部署，换样式保留正文与数据，编译并检查PDF后交付。模板仅改变版式，预习报告仍按 `preview.md`。
+实验报告先读 `report.md`，按其中的六套LaTeX模板工作流生成。用户可用01—06或清华、Physical Review、Nature、Applied Physics Letters、Journal of Physics、He-Ne原报告单栏选择；优先课程明确要求，其次用户选择，再沿用已有记录，新报告默认01。AI用 `skills/Lab_Workflow_Generator/scripts/select_report_template.py` 部署，换样式保留正文与数据，编译并检查PDF后交付。模板仅改变版式，预习报告仍按 `preview.md`。
 
-各实验子文件夹及其中的讲义、预习报告、实验报告、数据和图片仅保存在本地，不提交或推送到 GitHub；GitHub 仅同步根目录通用规范、`skills/` 工作流及参考模板。
+各实验子文件夹及其中的讲义、预习报告、实验报告、数据和图片仅保存在本地，不提交或推送到 GitHub；GitHub 仅同步根目录通用规范、`skills/` 工作流、参考模板及 `agent_report_bundle/` 通用副本。
 
 1. 每次改动完成后，都必须创建一个对应的 Git Commit，以便后续追踪和回滚。
 2. 每次改动后，都必须编写或更新相关测试，并在交付给用户前，确保所有测试和验证完全通过。
