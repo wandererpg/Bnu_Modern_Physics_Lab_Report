@@ -1,12 +1,7 @@
-# 注意事项
+# Agent 快速入口
 
-实验报告先读 `report.md`，按其中的六套LaTeX模板工作流生成。用户可用01—06或清华、Physical Review、Nature、Applied Physics Letters、Journal of Physics、He-Ne原报告单栏选择；优先课程明确要求，其次用户选择，再沿用已有记录，新报告默认01。AI用 `skills/Lab_Workflow_Generator/scripts/select_report_template.py` 部署，换样式保留正文与数据，编译并检查PDF后交付。模板仅改变版式，预习报告仍按 `preview.md`。
+处理用户请求前，按[运行规范.md](运行规范.md)识别任务、上下文、约束和完成条件，并检查是否缺少会影响正确性或权限边界的信息。
 
-各实验子文件夹及其中的讲义、预习报告、实验报告、数据和图片仅保存在本地，不提交或推送到 GitHub；GitHub 仅同步根目录通用规范、`skills/` 工作流、参考模板及 `agent_report_bundle/` 通用副本。
+本工作区的任务路由、自主权、验证、实验资料与版本管理要求见 [agents.md](agents.md)。预习报告按 [preview.md](preview.md)，实验报告按 [report.md](report.md)；两者是对应报告的内容规范与检查清单。
 
-1. 每次改动完成后，都必须创建一个对应的 Git Commit，以便后续追踪和回滚。
-2. 每次改动后，都必须编写或更新相关测试，并在交付给用户前，确保所有测试和验证完全通过。
-3. 工作区中的实验 PDF 按其内部文章标题重命名，并放入同名的实验子文件夹，文件结构为 `<实验标题>/<实验标题>.pdf`。
-4. 每个实验子文件夹中创建 `preview_report` 和 `lab_report`；前者按照根目录 `preview.md` 编写，后者按照根目录 `report.md` 编写。
-5. 预习报告和实验报告使用 LaTeX 编写，完成后自动编译并将源文件和 PDF 保存在对应的报告子文件夹中。
-6. 需要工程化产出时，可用 `skills/` 下的报告工作流（脚手架 → 数据脚本 → 附录表 → 编译 → 成品 PDF 版式校验）；它不改变本文件的任何要求，报告内容仍以根目录 `preview.md`、`report.md` 为准。
+工作区文件索引与实验目录说明见 [README.md](README.md)。

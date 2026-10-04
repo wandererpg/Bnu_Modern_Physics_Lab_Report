@@ -4,7 +4,7 @@
 
 ## 阅读与执行顺序
 
-1. 先读 [agents.md](agents.md) 和 [AGENT.md](AGENT.md)，确认目录、真实性和历史保留要求。包内涉及原工作区的 Git 提交/推送约定，在其他工作区应结合该用户的授权与远程配置执行。
+1. 先读 [运行规范.md](运行规范.md) 拆解请求，再读 [agents.md](agents.md) 和 [AGENT.md](AGENT.md)，确认任务路由、自主权、目录、真实性和历史保留要求。包内涉及原工作区的 Git 提交/推送约定，在其他工作区应结合该用户的授权与远程配置执行。
 2. 写预习报告时读 [preview.md](preview.md)；写实验报告时读 [report.md](report.md)、讲义、原始记录和已有报告。确认实验标题、教师要求及缺失信息后再写作。
 3. 从 [模板注册表](skills/Lab_Workflow_Generator/assets/report_templates/registry.json) 解析编号或别名。选择顺序：课程明确要求 → 用户指定 → 已有 `template_selection.json` → 新报告默认01。样式对照及限制见 [模板说明](skills/Lab_Workflow_Generator/assets/report_templates/README.md)。
 4. 用下面的选择命令部署到 `<实验标题>/lab_report/`。成功标准是主文件、元数据、正文、文献和所选样式依赖齐全，且记录的编号正确。已有手改主文件应先备份、迁移并核对内容，保留原始数据及历史版本。

@@ -24,26 +24,26 @@
     {
       "path": "AGENT.md",
       "source": "AGENT.md",
-      "bytes": 1742,
-      "sha256": "144bc5c5f9f045d0051f5f3cd79490a76a851497ddd482af7860fc6830fd6b53"
+      "bytes": 527,
+      "sha256": "cb43524566437a1fc746d0de47c7b1ab07ee26b637cb5ad9aaf608303bab9654"
     },
     {
       "path": "README.md",
       "source": "README.md",
-      "bytes": 3014,
-      "sha256": "eb209d7627edc53f0bcbfe88c06a1db3a92607c5b4e9255894666f9b1c7c2468"
+      "bytes": 1485,
+      "sha256": "8b6315862c6ed272821feea7004c9eb6ee8390ee2926bbf901f16819acc627f9"
     },
     {
       "path": "START_HERE.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/START_HERE.md",
-      "bytes": 4717,
-      "sha256": "1a24bd49abad7fb33c3d69570e93b8c5ee8d20ef7e9d984d3b9699056c5d0106"
+      "bytes": 4801,
+      "sha256": "9e77d92ce81d497110ec71affef6e31447217f3ef03954dcea6cf559234dcb88"
     },
     {
       "path": "agents.md",
       "source": "agents.md",
-      "bytes": 8368,
-      "sha256": "139508dfb12ddbb27324b2635f5dcedbeb05741ebe2df6b806cd448daf57e776"
+      "bytes": 5023,
+      "sha256": "69b361a47d6186febb1ad3346885c8da14f8220f8ea2e1f01063cc8566579808"
     },
     {
       "path": "preview.md",
@@ -192,8 +192,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/agents.md",
       "source": "agents.md",
-      "bytes": 8368,
-      "sha256": "139508dfb12ddbb27324b2635f5dcedbeb05741ebe2df6b806cd448daf57e776"
+      "bytes": 5023,
+      "sha256": "69b361a47d6186febb1ad3346885c8da14f8220f8ea2e1f01063cc8566579808"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/preview.md",
@@ -206,6 +206,12 @@
       "source": "report.md",
       "bytes": 38480,
       "sha256": "c0a63e332b08b142e9ea180263042ab795b756b61f102244969ef17cd0d11fcc"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/references/运行规范.md",
+      "source": "运行规范.md",
+      "bytes": 2675,
+      "sha256": "e8b8b831f44b6dd57c555f7afaabdc9b9e763fff99342fc9641be84fd71ab5d8"
     },
     {
       "path": "skills/Lab_Workflow_Generator/scripts/check_float_distance.py",
@@ -254,6 +260,12 @@
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/skills_README.md",
       "bytes": 1334,
       "sha256": "7c8a2a1c0b2a7f80e66818e3c672ec182165db8fe1726d0ef8e285a0d23069b0"
+    },
+    {
+      "path": "运行规范.md",
+      "source": "运行规范.md",
+      "bytes": 2675,
+      "sha256": "e8b8b831f44b6dd57c555f7afaabdc9b9e763fff99342fc9641be84fd71ab5d8"
     }
   ]
 }

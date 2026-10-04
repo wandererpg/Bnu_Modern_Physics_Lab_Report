@@ -11,7 +11,7 @@ SKILL = Path(__file__).resolve().parent.parent
 WORKSPACE = SKILL.parent.parent
 BUNDLE = WORKSPACE / "agent_report_bundle"
 SKILL_REL = Path("skills/Lab_Workflow_Generator")
-DOCS = ("agents.md", "AGENT.md", "README.md", "preview.md", "report.md")
+DOCS = ("agents.md", "AGENT.md", "README.md", "preview.md", "report.md", "运行规范.md")
 SCRIPTS = (
     "select_report_template.py", "run_lab_workflow.py", "make_data_tables.py",
     "check_report_tex.py", "check_pdf_geometry.py",
@@ -38,7 +38,7 @@ def export():
     files[Path(".gitattributes")] = SKILL / "assets/agent_bundle/.gitattributes"
     files[Path("START_HERE.md")] = SKILL / "assets/agent_bundle/START_HERE.md"
     files[Path("skills/README.md")] = SKILL / "assets/agent_bundle/skills_README.md"
-    for name in ("agents.md", "preview.md", "report.md"):
+    for name in ("agents.md", "preview.md", "report.md", "运行规范.md"):
         files[SKILL_REL / "references" / name] = WORKSPACE / name
     for name in SCRIPTS:
         files[SKILL_REL / "scripts" / name] = SKILL / "scripts" / name
