@@ -42,8 +42,8 @@
     {
       "path": "agents.md",
       "source": "agents.md",
-      "bytes": 5023,
-      "sha256": "69b361a47d6186febb1ad3346885c8da14f8220f8ea2e1f01063cc8566579808"
+      "bytes": 5086,
+      "sha256": "9d5dc7f3488ee015e06a1b694e5624371dc195c1ef2965f01b93275dca9dc8be"
     },
     {
       "path": "preview.md",
@@ -192,8 +192,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/agents.md",
       "source": "agents.md",
-      "bytes": 5023,
-      "sha256": "69b361a47d6186febb1ad3346885c8da14f8220f8ea2e1f01063cc8566579808"
+      "bytes": 5086,
+      "sha256": "9d5dc7f3488ee015e06a1b694e5624371dc195c1ef2965f01b93275dca9dc8be"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/preview.md",
