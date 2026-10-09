@@ -54,8 +54,8 @@
     {
       "path": "report.md",
       "source": "report.md",
-      "bytes": 35123,
-      "sha256": "e599f0ed5bb5ef9beb12cf20cf1dadd9c79e4e98a7e2ebe441a2c5cba994227d"
+      "bytes": 35269,
+      "sha256": "4c5b631797f9c7fce01d4519251691d0b9fcfcced23688ce73fa3cde5ee81dc9"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/branding/bnu_logo.png",
@@ -72,8 +72,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
-      "bytes": 7671,
-      "sha256": "46ea2cdd8d980596f0d040583802f5fc8930872a2f3ecf5fe95e3da5cbffb523"
+      "bytes": 7758,
+      "sha256": "36c6a83c54ee26da5c08e5b0e3d0a9b81eac47a702a1aca48a1dedaf34c06959"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
@@ -84,8 +84,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
-      "bytes": 3256,
-      "sha256": "8fbb161517b211e7d3d7e496b840fcb84682a0b348a13403dfa34056e28f0b53"
+      "bytes": 3298,
+      "sha256": "670bed05317630a6414cca9eb53c208531fab106a04e14f73842941ad6d40b0a"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/common.tex",
@@ -108,8 +108,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/metadata.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/metadata.tex",
-      "bytes": 1315,
-      "sha256": "6a871cdc239ae939b08203966b57e96a8091ded1e36dc3d480f75f87e89a54ad"
+      "bytes": 1342,
+      "sha256": "009d109cb608ef99b8eb53e4f4ae6dfdad730b96f55c110e105d2387b50a0e03"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/references.bib",
@@ -162,8 +162,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/data_README.md",
       "source": "skills/Lab_Workflow_Generator/assets/scaffold_template/data_README.md",
-      "bytes": 1359,
-      "sha256": "3c8c3e485a78ac52952cae9c81787384b5634b4040b56c8a2d48972686c60133"
+      "bytes": 1422,
+      "sha256": "f309d5750795427aab3731235656e0436875acaf15d861d5007330afdd1eef83"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_frontmatter_thu.tex",
@@ -204,8 +204,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/report.md",
       "source": "report.md",
-      "bytes": 35123,
-      "sha256": "e599f0ed5bb5ef9beb12cf20cf1dadd9c79e4e98a7e2ebe441a2c5cba994227d"
+      "bytes": 35269,
+      "sha256": "4c5b631797f9c7fce01d4519251691d0b9fcfcced23688ce73fa3cde5ee81dc9"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/运行规范.md",

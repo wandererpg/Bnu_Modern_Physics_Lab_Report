@@ -51,7 +51,7 @@ python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspa
 ## 写作、编译与检查
 
 1. 在 `metadata.tex` 填写信息、中文摘要和中英文关键词；在 `body.tex` 依据讲义和真实记录写正文，并在参考文献后排英文摘要和英文关键词；在 `references.bib` 写实际引用的文献。
-   有原始材料或教师要求时，将 `metadata.tex` 中的 `\ReportAppendixfalse` 改为 `\ReportAppendixtrue`，启用现成附录骨架；无补充材料的骨架默认不显示附录。
+   仅需程序、推导或其他非实验数据补充说明时，将 `metadata.tex` 中的 `\ReportAppendixfalse` 改为 `\ReportAppendixtrue`，启用现成附录骨架；实验数据不列入附录，原始记录单独保存在本地；无上述补充说明时不显示附录。
 2. 缺测信息明确标记待补充，保持原始数据可追溯；所有模板占位图表和占位文献在材料齐全、内容核实后替换，在 `metadata.tex` 改用 `\ReportDraftfalse` 移除灰色“模板草稿”提示。材料不全时只能交付明确标注的草稿。
 3. 从 `lab_report/` 编译，运行 XeLaTeX → BibTeX → XeLaTeX → XeLaTeX；编译辅助文件集中在 `build/`，PDF复制至报告目录。01—05使用TeX Live自带Fandol字体，06沿用原报告的ctex自动字体选择（本机宋体/黑体）；教师指定字体时调整并检查。
 4. 按 `report.md` 检查章节、摘要字数、关键词、单位、有效数字、公式、不确定度依据、拟合质量、至少两条改进建议和引用；查看日志和渲染后的PDF，确认无越界、重叠、小字、裁切、断裂表格或大面积空白。

@@ -216,16 +216,16 @@ workspace_root/
 py lab_report\scripts\generate_plots.py
 ```
 
-### 步骤3.5：生成附录数据表（程序化，不手抄）
+### 步骤3.5：生成必要的正文结果表（程序化，不手抄）
 
-把 `lab_report/data/*.csv` 渲染为 `lab_report/tables/*.tex`（booktabs 三线表；自动转义、数值列右对齐），报告用 `\input{tables/<name>}` 引入：
+把 `lab_report/data/*.csv` 渲染为 `lab_report/tables/*.tex`（booktabs 三线表；自动转义、数值列右对齐），报告只用 `\input{tables/<name>}` 引入理解结果所必需的正文表；完整原始数据单独保存在本地，不生成实验数据附录：
 
 ```powershell
 py <Skill>\scripts\make_data_tables.py --combined     # cwd = lab_report/
 # 或由 runner 统一执行：python run_lab_workflow.py --experiment <实验名> --stage tables
 ```
 
-改数据后重跑即可同步表格；正文与附录不再手抄数字（上游工作区是手抄的，改 CSV 不会更新报告）。
+改数据后重跑即可同步必要的正文表，避免手抄数字；校对报告结果与本地数据文件的一致性。附录范围以 `report.md` 为准。
 
 ### 步骤4：自动编译 PDF
 
