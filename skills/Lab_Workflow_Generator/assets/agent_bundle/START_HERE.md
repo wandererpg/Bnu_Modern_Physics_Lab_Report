@@ -8,7 +8,7 @@
 2. 写预习报告时读 [preview.md](preview.md)；写实验报告时读 [report.md](report.md)、讲义、原始记录和已有报告。确认实验标题、教师要求及缺失信息后再写作。
 3. 从 [模板注册表](skills/Lab_Workflow_Generator/assets/report_templates/registry.json) 解析编号或别名。选择顺序：课程明确要求 → 用户指定 → 已有 `template_selection.json` → 新报告默认01。样式对照及限制见 [模板说明](skills/Lab_Workflow_Generator/assets/report_templates/README.md)。
 4. 用下面的选择命令部署到 `<实验标题>/lab_report/`。成功标准是主文件、元数据、正文、文献和所选样式依赖齐全，且记录的编号正确。已有手改主文件应先备份、迁移并核对内容，保留原始数据及历史版本。
-5. 填写 `report_template/metadata.tex`、`body.tex` 和 `references.bib`。缺测内容标记“待补充”；保留六个主体章节、双语摘要和关键词、基本信息、校徽及按需附录。按 `report.md` 核对数据处理依据、单位、有效数字、图表和引用。
+5. 填写 `report_template/metadata.tex`、`body.tex` 和 `references.bib`。首页仅放中文摘要和中文关键词；正文按 `report.md` 的五个顶层章节撰写，引言恰好两段，“二、原理”下设实验原理、实验装置和实验方法，实验方法按实际步骤设置子子标题；英文摘要和英文关键词放在参考文献之后。缺测内容标记“待补充”，并核对数据处理依据、单位、有效数字、图表和引用。
 6. 保存 LaTeX 源文件，使用支持中文的引擎编译成 PDF；运行源文件与PDF检查，人工查看渲染页面。交付时提供源文件、PDF及缺失项。只有内容核对和编译、版面检查都完成，才称正式报告完成。
 
 ## 直接调用

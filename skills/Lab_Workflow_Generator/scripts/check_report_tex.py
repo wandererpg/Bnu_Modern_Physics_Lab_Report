@@ -30,7 +30,7 @@ for _s in (sys.stdout, sys.stderr):
     except Exception:
         pass
 
-LAB_SECTIONS = ["引言", "原理", "实验", "结果与分析讨论", "结论", "参考文献"]
+LAB_SECTIONS = ["引言", "原理", "结果与分析讨论", "实验总结", "参考文献"]
 PREVIEW_SECTIONS = ["实验目的", "实验原理", "实验仪器", "实验方法", "实验内容"]
 
 ENVS = {"figure": r"\\begin\{figure\*?\}(.*?)\\end\{figure\*?\}",
@@ -326,6 +326,16 @@ def check_file(path, kind, strict):
     missing = [s for s in want if s not in joined]
     if missing:
         errors.append("%s: 缺少必需章节 %s" % (name, "、".join(missing)))
+
+    if kind == "lab":
+        required_subsections = ("实验原理", "实验装置", "实验方法")
+        missing_subsections = [
+            title for title in required_subsections
+            if not re.search(r"\\subsection\s*\{\s*" + re.escape(title) + r"\s*\}", txt)
+        ]
+        if missing_subsections:
+            errors.append("%s: 原理章节缺少子标题 %s" % (name, "、".join(missing_subsections)))
+
 
     # 3b) lab reports must carry 摘要 / 关键词 markers
     #     thuemp 模板由 empAbstract 环境与 \Keyword 宏生成版面上的「摘 要」「关键词」，

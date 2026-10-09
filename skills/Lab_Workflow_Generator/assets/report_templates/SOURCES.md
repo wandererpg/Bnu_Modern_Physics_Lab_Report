@@ -5,7 +5,7 @@
 | 模板 | 官方来源 | 核验内容与适配 |
 | --- | --- | --- |
 | 02 Physical Review | [APS REVTeX](https://journals.aps.org/revtex)、[REVTeX FAQ](https://journals.aps.org/revtex/revtex-faq) | APS 提供 REVTeX。FAQ 区分单栏双倍行距的 `preprint` 与模拟期刊成稿的 `reprint`，并说明 `twocolumn` 选项。这里采用便于课程阅读的双栏、居中题头和紧凑摘要，不加载 REVTeX，不宣称满足 APS 投稿规范。 |
-| 03 Nature | [Nature Formatting guide](https://www.nature.com/nature/for-authors/formatting-guide) | 指南强调面向跨学科读者的摘要及短小子标题。这里借鉴清晰题头与视觉层级；课程仍保留100—200字中文摘要、对应英文摘要、编号六章节，不套用期刊的英文词数或文章长度限制。 |
+| 03 Nature | [Nature Formatting guide](https://www.nature.com/nature/for-authors/formatting-guide) | 指南强调面向跨学科读者的摘要及短小子标题。这里借鉴清晰题头与视觉层级；课程仍保留100—200字中文摘要、参考文献后的英文摘要和英文关键词、五个顶层章节，不套用期刊的英文词数或文章长度限制。 |
 | 04 Applied Physics Letters | [AIP Author instructions](https://publishing.aip.org/resources/researchers/author-instructions/) | AIP 通用指南提供格式说明及官方 Overleaf 模板入口。本项目采用紧凑双栏，但保留课程所需完整结果讨论。APL 专属 [Authors 页面](https://pubs.aip.org/aip/apl/pages/authors) 本次返回HTTP 403，未将未读取内容作为规范依据，也不采用未经核验的篇幅限制。 |
 | 05 Journal of Physics | [IOP LaTeX template support](https://publishingsupport.iopscience.iop.org/questions/latex-template/) | IOP 官方支持页面提供 LaTeX 模板说明及模板入口。此处借鉴物理期刊通用题头和公式友好排版，使用中文 `ctexart` 与课程双栏；不宣称全部 Journal of Physics 期刊具有相同版式或此模板可投稿。 |
 
@@ -19,4 +19,4 @@
 
 ## 模板06的本地设计来源
 
-06来自本工作区现有“He-Ne 激光的纵横模分析和模分裂”实验报告的通用排版语言，不关联官方期刊模板。提炼内容为黑白单栏、宋体/黑体层级、1.5倍行距、居中题头与摘要标题、题目页眉、就地双语图表和三线表；课程内容接口按`report.md`补齐。原始报告、个人信息、实验数据及图像均留在本地，不进入通用模板。详见`DESIGN_06.md`。
+06来自本工作区现有“He-Ne 激光的纵横模分析和模分裂”实验报告的通用排版语言，不关联官方期刊模板。提炼内容为黑白单栏、宋体/黑体层级、1.5倍行距、居中题头与摘要标题、题目页眉、就地中文图表和三线表；课程内容接口按`report.md`补齐。原始报告、个人信息、实验数据及图像均留在本地，不进入通用模板。详见`DESIGN_06.md`。

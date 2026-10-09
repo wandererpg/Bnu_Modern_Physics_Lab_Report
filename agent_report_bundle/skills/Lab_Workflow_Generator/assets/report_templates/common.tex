@@ -1,8 +1,8 @@
 % 共同版式与课程约束；在生成的 report_template/ 中可按教师要求调整。
 \usepackage{amsmath,amssymb,graphicx,booktabs,array,tabularx,float}
 \usepackage{geometry,xcolor,caption,siunitx,fancyhdr,tikz}
-\usepackage[sort&compress]{gbt7714}
-\setcitestyle{numbers,sort&compress}
+\usepackage[super,sort&compress]{gbt7714}
+\setcitestyle{super,sort&compress}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 \geometry{left=2cm,right=2cm,top=2cm,bottom=2cm,headheight=15pt,headsep=6mm}
@@ -67,6 +67,11 @@
 \fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\footnotesize\thepage}\renewcommand{\headrulewidth}{0pt}}
 \newcommand{\ReportBlank}[1]{\makebox[#1]{\hrulefill}}
 \newcommand{\ReportTODO}[1]{\textbf{待补充：}#1}
+\newcommand{\ReportEnglishSummary}{%
+  \par\bigskip
+  \begin{center}\bfseries Abstract\end{center}
+  \ReportAbstractEN\par
+  \noindent\textbf{Keywords:}\ \ReportKeywordsEN\par}
 \newif\ifReportDraft
 \ReportDrafttrue
 \newif\ifReportAppendix
@@ -101,8 +106,6 @@
     \noindent\textbf{关键词：}\ReportKeywordsCN\par\vspace{6pt}
     {\ReportTitleAlign\bfseries\ReportTitleEN\par}
     {\ReportTitleAlign\small\ReportAuthorEN\par}\vspace{3pt}
-    \noindent\textbf{Abstract}\quad\ReportAbstractEN\par
-    \noindent\textbf{Keywords:}\ \ReportKeywordsEN\par
     \ReportRule
   \end{@twocolumnfalse}}]
   \thispagestyle{plain}

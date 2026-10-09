@@ -1,4 +1,4 @@
-% 五种结构不同的课程报告版式。内容与字段由 common/metadata/body 提供。
+% 五种新版结构版式。内容与字段由 common/metadata/body 提供。
 % 使用版本化文件，避免覆盖各实验已安装或手工修改的 common.tex。
 \raggedbottom
 \setlength{\columnseprule}{0pt}
@@ -15,9 +15,6 @@
 \newcommand{\ReportChineseSummary}{%
   \noindent\textbf{摘要}\quad\ReportAbstractCN\par
   \noindent\textbf{关键词：}\ReportKeywordsCN\par}
-\newcommand{\ReportEnglishSummary}{%
-  \noindent\textbf{Abstract}\quad\ReportAbstractEN\par
-  \noindent\textbf{Keywords:}\ \ReportKeywordsEN\par}
 \newcommand{\ReportEnglishTitle}{%
   {\bfseries\ReportTitleEN\par}\vspace{3pt}
   {\small\ReportAuthorEN\par}}
@@ -28,16 +25,13 @@
   \ReportDraftNotice
   \ReportChineseSummary\vspace{7pt}
   {\centering\ReportEnglishTitle}\vspace{5pt}
-  \ReportEnglishSummary
   \par\vspace{7pt}\hrule height 0.6pt\vspace{2pt}\hrule\vspace{8pt}}
 \newcommand{\ReportJournalFront}{%
   \vspace*{8mm}
   {\centering\ReportTitleFont\ReportTitle\par\vspace{5pt}\ReportEnglishTitle}
   \begin{center}\small\ReportInfoRows\end{center}
-  \ReportDraftNotice
-  \noindent\begin{minipage}[t]{0.475\textwidth}\small\ReportChineseSummary\end{minipage}%
-  \hfill\begin{minipage}[t]{0.475\textwidth}\small\ReportEnglishSummary\end{minipage}
-  \par\vspace{8pt}\hrule\vspace{8pt}}
+\ReportDraftNotice
+\ReportChineseSummary\par\vspace{8pt}\hrule\vspace{8pt}}
 \newcommand{\ReportEditorialFront}{%
   \vspace*{8mm}
   {\raggedright\ReportTitleFont\ReportTitle\par}\vspace{7pt}
@@ -47,7 +41,6 @@
   \begingroup\setlength{\fboxsep}{9pt}
   \noindent\colorbox{ReportTint}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
     \small\ReportChineseSummary}}\par\endgroup\vspace{7pt}
-  {\small\ReportEnglishSummary}\vspace{10pt}
   {\color{ReportAccent}\hrule height 1.2pt}\vspace{8pt}}
 \newcommand{\ReportBriefFront}{%
   \vspace*{8mm}
@@ -59,7 +52,6 @@
   \begin{center}\small\ReportInfoRows\end{center}
   \ReportDraftNotice
   \ReportChineseSummary\vspace{5pt}
-  {\small\ReportEnglishSummary}\vspace{7pt}
   {\color{ReportAccent}\hrule height 1pt}\vspace{7pt}}
 \newcommand{\ReportLongFront}{%
   \vspace*{2cm}
@@ -69,14 +61,13 @@
   \begin{center}\ReportInfoRows\end{center}\vspace{1cm}
   \ReportDraftNotice
   {\small\ReportChineseSummary}\vspace{10pt}
-  {\small\ReportEnglishSummary}
   \thispagestyle{plain}\clearpage}
 \ifcase\ReportTemplateID\relax
-\or % 01 经典课程：双栏、居中题头、上下双语摘要。
+\or % 01 经典课程：双栏、居中题头、首页中文摘要。
   \renewcommand{\ReportTitleFont}{\heiti\fontsize{19pt}{25pt}\selectfont}
   \renewcommand{\baselinestretch}{1.15}
   \setlength{\columnsep}{8mm}
-\or % 02 紧凑学术：双栏、并排摘要、细栏间线。
+\or % 02 紧凑学术：双栏、首页中文摘要、细栏间线。
   \renewcommand{\ReportTitleFont}{\songti\bfseries\fontsize{17pt}{22pt}\selectfont}
   \renewcommand{\baselinestretch}{1.06}
   \setlength{\columnsep}{8mm}

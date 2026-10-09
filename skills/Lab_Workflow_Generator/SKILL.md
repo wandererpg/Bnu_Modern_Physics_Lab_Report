@@ -12,7 +12,7 @@ description: >-
 
 ## 编号模板入口（当前规则）
 
-结构版式（2026-09-30）：01经典课程双栏、02紧凑学术双栏（中英文摘要并排）、03杂志式混合布局（引言单栏，其后双栏）、04单栏技术简报、05独立题头页与单栏长报告；06从现有He-Ne报告提炼黑白单栏课程样式（宋体/黑体、1.5倍行距、居中摘要标题、题目页眉）。编号、期刊别名和必需内容保持稳定；版式参数由版本化`assets/report_templates/layout_v2.tex`提供。用户允许单栏、双栏和混合风格，课程明确要求仍优先。03的`multicols`区域使用`[H]`就地图表，宽幅附录恢复单栏；复杂跨栏浮动体或跨页长表优先用04/05。
+结构版式（2026-09-30）：01经典课程双栏、02紧凑学术双栏（首页中文摘要）、03杂志式混合布局（引言单栏，其后双栏）、04单栏技术简报、05独立题头页与单栏长报告；06从现有He-Ne报告提炼黑白单栏课程样式（宋体/黑体、1.5倍行距、居中摘要标题、题目页眉）。所有模板首页均排中文摘要和关键词；英文摘要及对应英文关键词在参考文献之后排版。图表标题和正文引用统一使用中文，参考文献引用以右上角顺序编号显示。编号、期刊别名和必需内容保持稳定；版式参数由版本化`assets/report_templates/layout_v2.tex`提供。用户允许单栏、双栏和混合风格，课程明确要求仍优先。03的`multicols`区域使用`[H]`就地图表，宽幅附录恢复单栏；复杂跨栏浮动体或跨页长表优先用04/05。
 
 实验报告先读工作区 `report.md`（缺失时读 `references/report.md`），再依据 `assets/report_templates/registry.json` 选择：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics、06 He-Ne原报告单栏。02—05为中文课程风格改编，不是官方投稿模板；结构和数据规则不变。
 
@@ -71,8 +71,8 @@ workspace_root/
 ├── .gitignore                   # 忽略 LaTeX 中间产物与 build/、tmp/（复制自 assets/workspace_scaffold/.gitignore）
 ├── 校徽.webp                     # 首页校徽素材（复制自 assets/branding/校徽.webp）
 ├── bnu_logo.png                 # 校徽 PNG（graphicx 可直接引用；复制自 assets/branding/bnu_logo.png）
-├── 清华近物实验报告模板/          # 默认模板（复制自 assets/thu_template/：thuemp.cls、README、TempExample.*、image/）
-├── 物理学报模板_Acta_Physica_Sinica_/   # 备选模板（复制自 assets/aps_template/，含 .sty/.bst/.dbj/bibfile.bib/figures）
+├── 清华近物实验报告模板/          # 旧版清华模板兼容资料（复制自 assets/thu_template/）
+├── 物理学报模板_Acta_Physica_Sinica_/   # 可选版式参考（复制自 assets/aps_template/）
 └── [实验标题]/                  # 实验目录位于工作区根，名为讲义内部标题，如：塞曼效应
     ├── [实验标题].pdf           # 实验讲义（用户放入；缺失则警告）
     ├── preview_report/          # 预习报告（含 .gitkeep）
@@ -103,7 +103,7 @@ workspace_root/
 - `preview_report/`、`lab_report/` 与 `lab_report/{data,figures,scripts,tables,build}` 由脚手架自动创建，并放置 `.gitkeep`；
 - 旧版 `<workspace>/experiments/<实验标题>/` 布局**仍兼容**（runner 会自动识别），新工作区一律采用根级布局；
 - 编译辅助文件只放 `build/`，最终 PDF 与 `.tex` 放报告目录；不得把 `.aux/.log/.out` 散落在源文件目录；
-- **默认使用清华模板**（`thuemp.cls`，双栏）：脚手架会把 `thuemp.cls` 与 `report_frontmatter_thu.tex` 复制到 `lab_report/`；物理学报模板（`report_preamble.tex`）为备选，仅在被明确要求时使用；
+- **模板默认选择01**：按根目录 `report.md` 和模板注册表选择；`thuemp.cls` 作为模板01及旧报告的兼容类，旧清华前置区仍可供已有报告使用；物理学报模板（`report_preamble.tex`）为可选版式，仅在被明确要求时使用；
 - 遇到结构歧义时做最小假设，并在报告 README 中标明待确认项。
 ### 3.1 精简工作区（推荐给日常使用）
 
@@ -132,13 +132,13 @@ workspace_root/
 ### 4.1 两份规范文件（完整内容已打包在本 Skill）
 
 - 预习报告规范：本 Skill `references/preview.md`（内容同步工作区根 `preview.md`）：预习报告必须含实验目的、物理/实验/仪器三层次原理、实验方法、实验内容、第一次课后问题与思考题；正文 2–3 页；不得伪造未做实验的数据。
-- 实验报告规范：本 Skill `references/report.md`（内容同步工作区根 `report.md`）：报告顺序固定为 基本信息行（作者/学号；指导老师/时间，不列班级）→ 摘要(100–200字，含关键数值) → 关键词(3–5) → 一、引言 → 二、原理 → 三、实验 → 四、结果与分析讨论 → 五、结论和建议 → 六、参考文献 → 附录。
+- 实验报告规范：本 Skill references/report.md 与工作区根 report.md 同步；首页为中文摘要和中文关键词，正文依次为一、引言（恰好两段）、二、原理（实验原理/实验装置/实验方法，方法下按真实步骤设三级标题）、三、结果与分析讨论、四、实验总结、五、参考文献；英文摘要和英文关键词紧接参考文献，图表题名与引用只用中文，文献编号以右上角形式呈现。
 
 生成正文前，先读取对应 reference 全文并按其“提交前检查清单”执行。
 
-### 4.2 LaTeX 模板（默认：清华 thuemp；备选：物理学报）
+### 4.2 LaTeX 模板（默认：模板01；兼容：清华 thuemp）
 
-**默认 —— 清华近代物理实验报告模板（`thuemp.cls`，本 Skill `assets/thu_template/`，v1.1 非官方）**
+**清华兼容模板（`thuemp.cls`，本 Skill `assets/thu_template/`，v1.1 非官方；不作为独立默认入口）**
 
 - `ctexart` 派生的 **A4 双栏**类，自带「北京师范大学普通物理实验」页眉与首页结构；主文件头部：
 
@@ -150,16 +150,16 @@ workspace_root/
 \ctexset{section={name={,、},number=\chinese{section}}}     % 一、二、三
 ```
 
-- 前置区按 `report_frontmatter_thu.tex`（脚手架已复制）：`\emptitle` → `\empauthor{姓名}{指导教师}` → `\twocolumn[…\maketitle… empAbstract/\Keyword… 英文块… \empfirstfoot{实验时间}{报告时间}{学号}{E-mail}…]` → `\wuhao` → 正文；
+- 清华前置区可保留英文题目和作者字段；英文摘要与英文关键词必须在参考文献之后；引用使用配置为上角标样式的顺序编码。
 - 图题**单语中文**「图N：描述」，正文 `图~\ref{}`（该类基于 `ccaption`，**无 `\bicaption`**）；表题「表N：描述」；公式统一编号并以“式（x）”/`\eqref` 引用；
 - 宽幅图/表用 `table*`/`figure*`；首面必要时在正文第一节内加 `\enlargethispage{-3.3cm}`；
-- 参考文献按 GB/T 7714—2015：`\bibliographystyle{gbt7714-numerical}` + `\bibliography{./refs}`，正文 `\cite{}`；
+- GB/T 7714—2015：bibliographystyle 使用 gbt7714-numerical；正文使用上角标顺序编码引用。
 - 编译链：`xelatex → bibtex → xelatex → xelatex`（含参考文献必须跑 bibtex）。
 
 **备选 —— 物理学报模板（`assets/aps_template/` + `report_preamble.tex`）**
 
 - `\documentclass[UTF8,a4paper,10pt]{ctexart}` + `\input{report_preamble}`，单栏；仅在被明确要求时使用；
-- 双语图题 `\bicaption{中文}{English}`、正文 `Fig.~\ref{}`；校徽 `\bnulogo`（7 cm、相对正文左页边距左移 2 cm、仅首页、overlay 不占流）。
+- 图表标题和正文中的图表引用只用中文；校徽 `\bnulogo`（7 cm、相对正文左页边距左移 2 cm、仅首页、overlay 不占流）。
 
 ## 5. 核心工作流
 
@@ -388,7 +388,9 @@ python run_lab_workflow.py --experiment 塞曼效应 --stage compile
 
 ---
 
-## 数据表组织规范（v1.20 新增，由真实运行反馈驱动）
+## 历史版本记录（仅供追溯）
+
+以下版本记录保存当时的实现和规则。生成新报告时，以本 Skill 前面的现行流程、工作区根目录 `report.md` 和当前教师要求为准；与现行规范冲突的历史内容不再适用。
 
 用户反馈"报告算得出结果，却无法展示原始数据"，复盘出四条硬规则（已写入 `references/report.md` 与内容核心 `advanced_lab_report_gen`）：
 
@@ -608,10 +610,10 @@ python run_lab_workflow.py --experiment 塞曼效应 --stage compile
 
 ### v1.6（2026-09-10）
 
-- **排版范式固化**：新增随 Skill 提供的、经编译验证的导言区片段 `assets/scaffold_template/report_preamble.tex`（A4/2cm/1.5 倍行距、`\ctexset` 一级标题中文编号「一、」、`siunitx` 不确定度 `\SI{438.5(17)}{\mega\hertz}`、双语图题 `\bicaption`、`\blankfield` 封面留空横线、`\bnulogo` 校徽 overlay 7.0cm/左移 2cm/仅首页）。
+- **排版范式固化**：新增随 Skill 提供的、经编译验证的导言区片段 `assets/scaffold_template/report_preamble.tex`（A4/2cm/1.5 倍行距、`\ctexset` 一级标题中文编号「一、」、`siunitx` 不确定度 `\SI{438.5(17)}{\mega\hertz}`、中文图题和中文正文引用 `\bicaption`、`\blankfield` 封面留空横线、`\bnulogo` 校徽 overlay 7.0cm/左移 2cm/仅首页）。
 - 脚手架新增：把 `bnu_logo.png` 与 `report_preamble.tex` 复制到 `<实验标题>/lab_report/`（`assets/bnu_logo.png`），并创建 `lab_report/assets/`。
 - `references/report.md` 新增「排版实现片段」小节，指向该片段与用法。
-- 验证：用该片段写成的测试报告（校徽/封面/摘要/双语子图+双语图题/三线表/siunitx）xelatex **编译 exit 0**、产出 PDF、日志**零错误**。
+- 验证：用该片段写成的测试报告（校徽/封面/摘要/双语子图+中文图题和中文正文引用/三线表/siunitx）xelatex **编译 exit 0**、产出 PDF、日志**零错误**。
 
 ### v1.5（2026-09-10）
 

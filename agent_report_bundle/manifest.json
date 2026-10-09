@@ -36,8 +36,8 @@
     {
       "path": "START_HERE.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/START_HERE.md",
-      "bytes": 4801,
-      "sha256": "9e77d92ce81d497110ec71affef6e31447217f3ef03954dcea6cf559234dcb88"
+      "bytes": 4987,
+      "sha256": "b6cdacd70f72b73c55687d8f39845ba010da0ea35a7b80efa83a4d7270ed9bb9"
     },
     {
       "path": "agents.md",
@@ -54,8 +54,8 @@
     {
       "path": "report.md",
       "source": "report.md",
-      "bytes": 38480,
-      "sha256": "c0a63e332b08b142e9ea180263042ab795b756b61f102244969ef17cd0d11fcc"
+      "bytes": 35123,
+      "sha256": "e599f0ed5bb5ef9beb12cf20cf1dadd9c79e4e98a7e2ebe441a2c5cba994227d"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/branding/bnu_logo.png",
@@ -66,50 +66,50 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
-      "bytes": 2749,
-      "sha256": "01aadfdcfa5ff58c5944dbb220ff4f3fd56a6c3eec97e7fc3ced79f67d8044f8"
+      "bytes": 2738,
+      "sha256": "dde1622a92c638fbe3f406ac054035ccca2ba9789e62c821017638cc6532f4ad"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
-      "bytes": 7547,
-      "sha256": "c24e000f05034dc569423f031c69c7865f7c036c6032bbc80ed8d8527e2718fa"
+      "bytes": 7671,
+      "sha256": "46ea2cdd8d980596f0d040583802f5fc8930872a2f3ecf5fe95e3da5cbffb523"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
-      "bytes": 3330,
-      "sha256": "c323a30f1b59c41b7517939444eb09eb9c574915f9b6f4a49acbfff942fad05d"
+      "bytes": 3363,
+      "sha256": "b279c3885b2dc3f4c82f36324ef8d42c8d1d2488089838b300db84dfa3a688b5"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
-      "bytes": 3369,
-      "sha256": "e3e51bf491486dc0039d449f18d43cd1848a2c70f76225cf161c5f956b0bdb52"
+      "bytes": 3256,
+      "sha256": "8fbb161517b211e7d3d7e496b840fcb84682a0b348a13403dfa34056e28f0b53"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/common.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/common.tex",
-      "bytes": 5114,
-      "sha256": "b56b1e4fe2ee1827ed58eeb7e8e95e421a1b772a0377b888981eb4fe69fde768"
+      "bytes": 5183,
+      "sha256": "dc784c996a71afb7dd5aeac5607136f17fce03fe169d67e8070d2940bee235dd"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/layout_06_he_ne.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/layout_06_he_ne.tex",
-      "bytes": 3170,
-      "sha256": "76724a7600fd4356f54f9b0be571b97733b83d7888c631c810891c3d2d7ceef6"
+      "bytes": 3213,
+      "sha256": "84477e3816fef2b63cfd41fb91423cb821b2fa562b5a7999d417ed441323b8d7"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/layout_v2.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/layout_v2.tex",
-      "bytes": 5977,
-      "sha256": "aa10e052d4efa6285a099178e9d625daaba8526e28e4ccdcd6fa2929e226aafb"
+      "bytes": 5518,
+      "sha256": "a28e6608c5e10629d20bfb1351945c7b3553d52acacdb3f0df426fa30b7aa40e"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/metadata.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/metadata.tex",
-      "bytes": 1244,
-      "sha256": "eb52b203bfbbfcfc100f68a393c11d2df2238464ebc7da68d283c60bfb76110e"
+      "bytes": 1315,
+      "sha256": "6a871cdc239ae939b08203966b57e96a8091ded1e36dc3d480f75f87e89a54ad"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/references.bib",
@@ -120,8 +120,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
-      "bytes": 3895,
-      "sha256": "825eb2334970395fa1c7bd8a3eb937bb8e1e550ea96a318f85294ffe9d4ba822"
+      "bytes": 4116,
+      "sha256": "32d200443042cd2523879dc6c343b85e808a82682ecf277a4d0e2a2cd986fc58"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_01_thu.tex",
@@ -168,14 +168,14 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_frontmatter_thu.tex",
       "source": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_frontmatter_thu.tex",
-      "bytes": 4081,
-      "sha256": "8a2bf9fa055d0477e65e1d299885677fc79baf92f8db2e54606a2f5f67b30d5d"
+      "bytes": 4107,
+      "sha256": "068626b90a873b22be314960fbe9b9ed0f00180c2a43c36e45f0a9df1a22e80f"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_preamble.tex",
       "source": "skills/Lab_Workflow_Generator/assets/scaffold_template/report_preamble.tex",
-      "bytes": 3607,
-      "sha256": "2a45fd5a1c908ac6426ab8d4b61f7e43b7d4a186895035482ad4cca5acf2befe"
+      "bytes": 3627,
+      "sha256": "900c4dcbafa00ecded5bcfdde58f7a22cd4c62ad3d1f35cd519c44ac84f1d92b"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/thu_template/README.md",
@@ -186,8 +186,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/thu_template/thuemp.cls",
       "source": "skills/Lab_Workflow_Generator/assets/thu_template/thuemp.cls",
-      "bytes": 8036,
-      "sha256": "b3a955c7b1f021ac8b735fb4b4d9cf64cb285cd183f42ca4acf3f4017cb1409b"
+      "bytes": 7789,
+      "sha256": "45b81f4bde3dfa7e5581ebac44198b5e8af67da971d0ed4ea085650b6421982a"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/agents.md",
@@ -204,8 +204,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/report.md",
       "source": "report.md",
-      "bytes": 38480,
-      "sha256": "c0a63e332b08b142e9ea180263042ab795b756b61f102244969ef17cd0d11fcc"
+      "bytes": 35123,
+      "sha256": "e599f0ed5bb5ef9beb12cf20cf1dadd9c79e4e98a7e2ebe441a2c5cba994227d"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/运行规范.md",
@@ -234,8 +234,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/scripts/check_report_tex.py",
       "source": "skills/Lab_Workflow_Generator/scripts/check_report_tex.py",
-      "bytes": 21382,
-      "sha256": "657a536d3933e080bc35ac464669c988b6fb7cf3fec3a2019b277ea0d8be859a"
+      "bytes": 21346,
+      "sha256": "21fa75fa025964d2f2b8fb93b1fa306fec1f94219c09f407e3c0766fa2985c7c"
     },
     {
       "path": "skills/Lab_Workflow_Generator/scripts/make_data_tables.py",

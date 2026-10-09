@@ -1,62 +1,65 @@
 % 六套模板共用同一正文骨架；换版式时保留本文件及全部实测材料。
 \section{引言}
-\ReportTODO{约200--400字，说明背景、目的、意义与研究问题；引用可靠来源，如讲义\cite{manual}（此处为占位）。}
+\ReportTODO{第一段：介绍实验背景、研究对象及意义。}
+
+\ReportTODO{第二段：介绍本次实验内容、目的、研究问题、测量对象和实验思路。}
 
 \section{原理}
-\ReportTODO{约300--800字，自行归纳模型、假设、关系与适用范围，区分物理、实验和仪器原理。}
+\subsection{实验原理}
+\ReportTODO{归纳实际涉及的物理规律、理论模型、关键公式和适用条件，说明符号、单位及理论量与可测量之间的关系。}
 公式须编号并定义符号。例如，模型 $y=f(x_1,\ldots,x_n)$ 在线性近似且输入相互独立时，合成标准不确定度为
 \begin{equation}
-  u_c^2(y)=\sum_{i=1}^{n}
-    \left(\frac{\partial f}{\partial x_i}\right)^2 u^2(x_i).
-  \label{eq:uncertainty}
+u_c^2(y)=\sum_{i=1}^{n}
+\left(\frac{\partial f}{\partial x_i}\right)^2 u^2(x_i).
+\label{eq:uncertainty}
 \end{equation}
-式\eqref{eq:uncertainty}为示例。\ReportTODO{补充实际模型、符号和单位；输入相关时加协方差项，不适用时替换。}
+式\eqref{eq:uncertainty}为示例。\ReportTODO{替换为本实验的实际模型；输入相关时加入协方差项，不适用的示例应删除。}
 
-\section{实验}
-\subsection{仪器与实验条件}
-\ReportTODO{列出实际仪器型号、量程、分辨率、接法、环境和样品状态；未知信息不估造。}
-\subsection{方法与实际步骤}
-\ReportTODO{按实际顺序写测量方法、设置、重复次数、读数与现象，记录偏离讲义的操作及异常。}
+\subsection{实验装置}
+\ReportTODO{列出实际仪器型号、量程、分辨率、连接关系、环境和样品状态；未知信息标注待补充，不得估造。}
+
+\subsection{实验方法}
+\subsubsection{步骤1：按实际操作命名}
+\ReportTODO{按实际顺序说明装置设置、关键操作、观测对象、记录内容和重复次数。}
+\subsubsection{步骤2：按实际操作命名}
+\ReportTODO{根据实验的实际步骤增删本级标题；不得虚构或机械照抄未执行的操作。}
 
 \section{结果与分析讨论}
-\subsection{定量结果与原始记录}
-\ReportTODO{区分原始、计算、理论和估计值，给单位、有效数字及代表性计算。表\ref{tab:raw}仅为格式，无实测数据。}
+\subsection{定量结果与数据处理}
+\ReportTODO{区分原始、计算、理论和估计值，给单位、有效数字及代表性计算。表\ref{tab:raw}仅为格式示例，不含实测数据。}
 \begin{table}[H]
-  \centering\small
-  \caption{原始记录占位；按实测替换列名及单位，保留缺测说明。}
-  \label{tab:raw}
-  \begin{tabularx}{\columnwidth}{@{}cXXX@{}}
-    \toprule
-    序号 & 物理量/单位 & 实测读数 & 状态说明\\
-    \midrule
-    --- & 待补充 & 待补充 & 无原始数据\\
-    \bottomrule
-  \end{tabularx}
+\centering
+\caption{原始数据记录表}
+\label{tab:raw}
+\begin{tabularx}{\columnwidth}{@{}cXXX@{}}
+\toprule
+\ReportTODO{列名及单位} & \ReportTODO{实测值} & \ReportTODO{实测值} & \ReportTODO{备注} \\
+\midrule
+\ReportTODO{仅填写真实原始读数} & & & \\
+\bottomrule
+\end{tabularx}
 \end{table}
-\subsection{规律与进一步处理}
-\ReportTODO{说明定标、拟合、统计或插值；给模型、参数、单位及R\textsuperscript{2}或残差。图\ref{fig:result}须由真实数据生成。}
+\ReportTODO{说明定标、拟合、统计或插值方法；给出模型、参数、单位及适用的 R\textsuperscript{2}、残差或不确定度。图\ref{fig:result}须由真实数据生成。}
 \begin{figure}[H]
-  \centering
-  \fbox{\parbox[c][22mm][c]{0.9\columnwidth}{\centering 待补充：真实数据图\\此框仅为版面占位}}
-  \caption{结果图占位。坐标轴、图内字体与图题须标清物理量和单位。}
-  \label{fig:result}
+\centering
+\fbox{\parbox[c][22mm][c]{0.9\columnwidth}{\centering 待补充：根据真实数据生成的图}}
+\caption{实验结果图}
+\label{fig:result}
 \end{figure}
-\subsection{与理论比较并解释}
-\ReportTODO{与有来源的理论或标准比较，给偏差和适用条件，解释实测现象。}
-\subsection{误差来源与改进建议}
-\ReportTODO{分析系统、随机、读数、环境和仪器误差。保留异常值，剔除须给判据与理由；至少两条对应误差来源的可执行改进。}
 
-\section{结论和建议（总结）}
-\ReportTODO{回答实验目的，归纳有证据的结果及规律，给单位和适当不确定度，说明局限及建议，不引入未经论证的新结果。}
+\subsection{规律、理论比较与误差讨论}
+\ReportTODO{结合实验原理解释实测规律，与理论预期或标准值比较；分析偏差和误差来源，保留异常值并说明必要的剔除判据。至少提出两条对应误差来源、可执行的改进建议。}
 
-% 文献表须只保留正文实际引用的3--6条资料（教师另有规定时以其为准）。
-% 占位条目 manual 不是已核实文献，正式提交前必须替换。
-\renewcommand{\refname}{六、参考文献}
+\section{实验总结}
+\ReportTODO{回应实验目的，总结有证据支持的主要结果和结论，并说明实验局限及改进方向；不引入未经论证的新结果。}
+
+\renewcommand{\refname}{五、参考文献}
 \bibliographystyle{gbt7714-numerical}
 \bibliography{report_template/references}
+\ifdefined\ReportEndColumns\ReportEndColumns\fi
+\ReportEnglishSummary
 
 \ifReportAppendix
-\ifdefined\ReportEndColumns\ReportEndColumns\fi
 \section*{附录：原始记录与复现信息}
-\ReportTODO{按需附原始记录、数据索引、程序、计算依据和补充图表。材料分别在data/、scripts/、figures/；无材料可删附录。}
+\ReportTODO{附原始记录、数据索引、程序、计算依据和补充图表；附录置于英文摘要和英文关键词之后。}
 \fi

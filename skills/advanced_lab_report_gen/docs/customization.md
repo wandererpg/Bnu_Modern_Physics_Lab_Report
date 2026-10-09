@@ -1,13 +1,15 @@
 # 定制化指南（Customization Guide）
 
+现行格式基准是工作区 report.md 和当前教师要求；training_output 中的画像只记录历史样本，不作为新报告结构的覆盖规则。
+
 ## 1. 更新章节模板
 
 修改 `training_output/style_profile.json` 中的 `recommended_chapters`（顺序、`required`、`word_count`），然后把对应内容同步到 `SKILL.md` §2.1 的表格。强制章节缺失会导致报告被判不合格，请保留 PPT 要求的核心章节。
 
-示例：把“结论和建议”字数要求调高：
+示例：把“实验总结”字数要求调高：
 
 ```json
-{"name": "结论和建议（总结）", "required": true, "word_count": "200-300字", "note": "总结+建议"}
+{"name": "实验总结（总结）", "required": true, "word_count": "200-300字", "note": "总结+建议"}
 ```
 
 ## 2. 新增实验
@@ -52,7 +54,7 @@
 
 | 想改什么 | 修改位置 |
 | --- | --- |
-| 报告版式（页边距/行距/中文标题编号/校徽 overlay/双语图题/siunitx） | `assets/scaffold_template/report_preamble.tex` |
+| 报告版式（页边距/行距/中文标题编号/校徽 上角标引用/中文图题/siunitx） | `assets/scaffold_template/report_preamble.tex` |
 | 附录数据表生成（列对齐、转义、行数截断、汇总） | `scripts/make_data_tables.py` |
 | 报告源校验（题注、悬空/孤儿引用、必需章节、摘要长度） | `scripts/check_report_tex.py` |
 | 工作区目录约定与执行流程 | 该 Skill `SKILL.md` §3/§5 |

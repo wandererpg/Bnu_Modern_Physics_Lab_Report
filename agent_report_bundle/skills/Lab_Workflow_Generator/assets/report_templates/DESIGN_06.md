@@ -8,11 +8,11 @@
 | 字体 | 沿用原报告`ctexart`自动字体选择；本机宋体正文、黑体标题，西文与数学沿用LaTeX字体 |
 | 段落 | `\onehalfspacing`，首行缩进2字，段间0.15em，列表紧凑 |
 | 题头 | 三号黑体居中题目，小四宋体“近代物理实验报告”，两行基本信息与填写横线 |
-| 摘要 | “摘 要”和“Abstract”分别居中，摘要正文通栏排版；两组关键词齐全 |
+| 摘要 | 首页中文摘要和中文关键词；英文摘要及对应英文关键词放在参考文献之后 |
 | 层级 | 一级标题四号黑体，中文“一、二、三”编号；二级标题小四黑体，阿拉伯数字编号 |
 | 校徽 | 仅首页，等比宽7cm，叠加在左上角，纵向偏移0.90cm，不占正文流 |
 | 页眉页脚 | 首页无页眉；后续页左侧实验题目、右侧“近代物理实验报告”，0.4pt细线，页码居中 |
-| 图表 | `[H]`就地排版；比较图可并排子图，中文小标题；双语图题；三线表，无装饰性底色 |
+| 图表 | `[H]`就地排版；比较图可并排子图，中文小标题；仅中文图表题名和中文正文引用；三线表，无装饰性底色 |
 | 数学 | 公式居中、编号靠右，单位与符号解释保留在正文，支持`align`与`\dif` |
 
 通用化时补齐英文题目及英文关键词，并采用工作流的GB/T顺序编码文献接口；这些是课程内容接口的适配，不复制源报告缺少的内容或原有引用。`report.md`和明确课程要求始终优先。
@@ -33,9 +33,9 @@ python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspa
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\linewidth]{figures/measured_plot.png}
-  \bicaption{中文图题，说明物理量与单位。}{English caption with quantities and units.}
+  \caption{中文图题，说明物理量与单位。}
   \label{fig:measurement}
 \end{figure}
 ```
 
-正文统一使用`Fig.~\ref{fig:measurement}`。并排子图宽度可各取`0.485\linewidth`；表格使用`booktabs`三线表，跨页原始记录可用`longtable`。数据图必须由真实材料生成。
+正文统一使用`图~\ref{fig:measurement}`。并排子图宽度可各取`0.485\linewidth`；表格使用`booktabs`三线表，跨页原始记录可用`longtable`。数据图必须由真实材料生成。

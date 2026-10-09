@@ -6,7 +6,8 @@
 %         \documentclass[UTF8,a4paper,10pt]{ctexart}
 %       紧随其后 `\input{report_preamble}`（或把本文件内容整段粘贴进导言区）。
 %
-% 依赖：XeLaTeX + ctex；宏包 booktabs/float/caption/subcaption/bicaption/
+% 依赖：XeLaTeX + ctex；宏包 booktabs/float/caption/subcaption/gbt7714/
+% siunitx/tikz/fancyhdr/hyperref。图表标题与正文引用仅使用中文。
 %       siunitx/tikz/fancyhdr/hyperref。
 % 校徽：脚手架会把 bnu_logo.png 复制到 <实验标题>/lab_report/assets/，
 %       因此默认相对路径 assets/bnu_logo.png 在 lab_report/ 目录下即有效。
@@ -20,7 +21,7 @@
 \usepackage{xcolor}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{bicaption}
+\usepackage[super,sort&compress]{gbt7714}
 \usepackage{tikz}
 \usepackage{siunitx}
 \usepackage{fancyhdr}
@@ -39,9 +40,10 @@
 %   \ang{89.8}                    → 89.8°
 \sisetup{detect-all,per-mode=symbol,separate-uncertainty=true}
 
-% —— 图题：中文主图题 + 英文 Fig. 图题（双语）——
+% —— 图表题与编号统一使用中文 ——
+\captionsetup[figure]{name=图,labelsep=quad}
+\captionsetup[table]{name=表,labelsep=quad}
 \captionsetup{font=small,labelsep=quad}
-\captionsetup[figure][bi-second]{name=Fig.,labelsep=quad}
 \captionsetup[subfigure]{font=small,labelfont=bf,labelsep=space}
 
 % —— 一级标题中文编号：一、二、三 …（与老师小论文格式一致）——

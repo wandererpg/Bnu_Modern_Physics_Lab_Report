@@ -17,7 +17,7 @@
       "source": "template_01_thu.tex",
       "columns": 2,
       "journal": null,
-      "description": "居中题头、上下双语摘要、传统双栏正文；默认课程样式。",
+      "description": "居中题头、首页中文摘要、传统双栏正文；默认课程样式。英文摘要和英文关键词置于参考文献之后。",
       "layout": "two-column",
       "category": "经典课程双栏"
     },
@@ -36,7 +36,7 @@
       "source": "template_02_physical_review.tex",
       "columns": 2,
       "journal": "Physical Review (APS)",
-      "description": "中英文摘要并排、栏间细线、紧凑双栏正文。",
+      "description": "首页中文摘要、栏间细线、紧凑双栏正文；英文摘要和英文关键词置于参考文献之后。",
       "source_urls": [
         "https://journals.aps.org/revtex",
         "https://journals.aps.org/revtex/revtex-faq"
@@ -103,7 +103,7 @@
       "source": "template_05_journal_of_physics.tex",
       "columns": 1,
       "journal": "Journal of Physics (IOP)",
-      "description": "题头与双语摘要独立一页；单栏正文使用较大字号、行距和宽幅图表。",
+      "description": "题头与中文摘要独立一页；单栏正文使用较大字号、行距和宽幅图表。英文摘要和英文关键词置于参考文献之后。",
       "source_urls": [
         "https://publishingsupport.iopscience.iop.org/questions/latex-template/"
       ],
@@ -126,7 +126,7 @@
       "source": "template_06_he_ne.tex",
       "columns": 1,
       "journal": null,
-      "description": "继承现有He-Ne报告：黑白单栏、宋体正文与黑体标题、1.5倍行距、居中题头和双语摘要标题、就地图表、题目页眉。",
+      "description": "继承现有He-Ne报告：黑白单栏、宋体正文与黑体标题、1.5倍行距、居中题头和中文摘要标题、就地图表、题目页眉；英文摘要和英文关键词置于参考文献之后。",
       "layout": "one-column-native-course",
       "category": "黑白单栏课程报告",
       "layout_version": 1

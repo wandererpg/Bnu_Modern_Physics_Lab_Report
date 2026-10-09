@@ -1,5 +1,9 @@
 # Advanced Lab Report Generator — 近物实验报告自动生成器
 
+## 当前工作区格式约定
+
+生成的报告须遵循工作区根目录的 report.md：引言恰好两段；“二、原理”下设“实验原理”“实验装置”“实验方法”，方法按实际步骤设子子标题；结果章节后以“实验总结”收尾；正文引用使用上角标，图表标题及图表引用只用中文；英文摘要和英文关键词放在参考文献之后。若本文件夹中的历史训练画像与该规范不同，以 report.md 和当前教师要求为准。
+
 ![Version](https://img.shields.io/badge/version-3.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skill](https://img.shields.io/badge/Codex-Skill-purple)
@@ -24,7 +28,7 @@ Advanced Lab Report Generator 是一个基于 Codex/Harness 平台的专属 Skil
 
 - **实验自动识别**：基于关键词和公式匹配，自动识别 9 个典型近物实验
 - **数据处理自动化**：自动完成线性/非线性拟合、误差传递、信噪比计算
-- **风格锚定**：基于 17 份有效样本（学生A、学生B、学生C），生成符合老师 PPT 要求的报告
+- **风格锚定**：基于 17 份有效样本（学生A、学生B、学生C），生成符合当前项目规范及教师明确要求的报告
 - **反面案例过滤**：自动检测并重写“要点式 / 无图注 / 摘要无数值”等常见缺陷
 - **双格式输出**：Markdown + PDF（依赖 xelatex）
 - **样本不足警告**：对样本少的实验（激光模式分析、干涉滤光片）自动提示人工复核

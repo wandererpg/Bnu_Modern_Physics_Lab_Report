@@ -58,7 +58,7 @@ The LaTeX template for Experiment Report in Modern Physics of Tsinghua Universit
 \usepackage{environ}
 \usepackage{lmodern}
 \usepackage{unicode-math}
-\usepackage[sort&compress]{gbt7714}
+\usepackage[super,sort&compress]{gbt7714}
 \usepackage{anyfontsize}
 \usepackage{hyperref}
 \usepackage{tabu}

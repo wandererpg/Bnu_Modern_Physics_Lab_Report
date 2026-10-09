@@ -1,19 +1,19 @@
 # 实验报告 LaTeX 模板库
 
-内容标准始终是工作区根目录 `report.md`，教师明确规定优先。六套模板仅改变排版，采用单栏、双栏或混合布局；都保留 A4、两行基本信息、双语摘要与关键词、六个主体章节、校徽、顺序编码引用及可选附录。01 沿用项目已有的 `thuemp.cls`；02—06 使用 `ctexart`，不依赖各出版社的投稿文档类。
+内容标准始终是工作区根目录 `report.md`，教师明确规定优先。六套模板仅改变排版，采用单栏、双栏或混合布局；都保留 A4、两行基本信息、首页中文摘要与关键词、五个顶层章节、校徽、上角标顺序编码引用及可选附录；英文摘要和英文关键词统一放在参考文献之后。01 沿用项目已有的 `thuemp.cls`；02—06 使用 `ctexart`，不依赖各出版社的投稿文档类。
 
 | 编号 | 名称 | 主源文件 | 可用别名 | 版式特点 |
 | --- | --- | --- | --- | --- |
-| 01 | 清华课程双栏（默认） | `template_01_thu.tex` | `thu`、清华、经典 | 经典课程：居中题头、上下双语摘要、传统双栏正文 |
-| 02 | Physical Review 风格 | `template_02_physical_review.tex` | `aps`、紧凑学术 | 紧凑学术：双语摘要并排、栏间细线、紧凑双栏正文 |
-| 03 | Nature 风格 | `template_03_nature.tex` | `nature`、杂志、混合 | 科研杂志：大标题、浅色摘要区、引言单栏、后文双栏 |
+| 01 | 清华课程双栏（默认） | `template_01_thu.tex` | `thu`、清华、经典 | 经典课程：居中题头、中文摘要、传统双栏正文 |
+| 02 | Physical Review 风格 | `template_02_physical_review.tex` | `aps`、紧凑学术 | 紧凑学术：中文摘要紧凑排版、栏间细线、紧凑双栏正文 |
+| 03 | Nature 风格 | `template_03_nature.tex` | `nature`、杂志、混合 | 科研杂志：大标题、中文摘要区、引言单栏、后文双栏 |
 | 04 | Applied Physics Letters 风格 | `template_04_applied_physics_letters.tex` | `apl`、简报 | 技术简报：浅色题头、无首行缩进、单栏宽幅图表 |
-| 05 | Journal of Physics 风格 | `template_05_journal_of_physics.tex` | `iop`、长报告 | 学术长报告：独立题头与摘要页、较大字号、单栏正文 |
+| 05 | Journal of Physics 风格 | `template_05_journal_of_physics.tex` | `iop`、长报告 | 学术长报告：独立题头与中文摘要页、较大字号、单栏正文 |
 | 06 | He-Ne 原报告单栏 | `template_06_he_ne.tex` | `he-ne`、氦氖、原报告单栏 | 黑白单栏：宋体/黑体、1.5倍行距、居中摘要标题、就地图表、题目页眉 |
 
 命名、别名和主源路径以 `registry.json` 为准。[SOURCES.md](SOURCES.md) 记录期刊官方来源及适配边界。这些都是课程报告的风格改编，不是官方模板，不承诺可直接用于投稿。版式参数是本项目的设计选择，不声称复刻期刊成稿。
 
-06的设计提炼与调用说明见[DESIGN_06.md](DESIGN_06.md)。它使用独立样式文件及原报告的`ctexart`自动字体设置；在本机继承宋体/黑体，而01—05仍采用各自原有字体设置。英文题目和英文关键词按通用规范补齐，源报告的个人信息、数据和图片不进入模板。
+06的设计提炼与调用说明见[DESIGN_06.md](DESIGN_06.md)。它使用独立样式文件及原报告的`ctexart`自动字体设置；在本机继承宋体/黑体，而01—05仍采用各自原有字体设置。英文题目按需要补齐，英文摘要和英文关键词在参考文献后排版，源报告的个人信息、数据和图片不进入模板。
 
 ## AI 调用与文件结构
 
@@ -38,7 +38,7 @@ python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspa
 │   ├── common.tex                   # 共用内容接口与课程约束
 │   ├── layout_v2.tex                # 五种结构不同的新版版式
 │   ├── layout_06_he_ne.tex           # 06独立黑白单栏样式
-│   ├── metadata.tex                 # 题目、基本信息、双语摘要和关键词
+│   ├── metadata.tex                 # 题目、基本信息、摘要字段和中英文关键词
 │   ├── body.tex                     # 正文、图表与可选附录
 │   └── references.bib               # 可核实的参考文献
 ├── data/ figures/ scripts/ tables/  # 原始数据与复现材料
@@ -50,7 +50,7 @@ python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspa
 
 ## 写作、编译与检查
 
-1. 在 `metadata.tex` 填写信息和双语摘要；在 `body.tex` 依据讲义和真实记录写六部分内容；在 `references.bib` 写实际引用的文献。
+1. 在 `metadata.tex` 填写信息、中文摘要和中英文关键词；在 `body.tex` 依据讲义和真实记录写正文，并在参考文献后排英文摘要和英文关键词；在 `references.bib` 写实际引用的文献。
    有原始材料或教师要求时，将 `metadata.tex` 中的 `\ReportAppendixfalse` 改为 `\ReportAppendixtrue`，启用现成附录骨架；无补充材料的骨架默认不显示附录。
 2. 缺测信息明确标记待补充，保持原始数据可追溯；所有模板占位图表和占位文献在材料齐全、内容核实后替换，在 `metadata.tex` 改用 `\ReportDraftfalse` 移除灰色“模板草稿”提示。材料不全时只能交付明确标注的草稿。
 3. 从 `lab_report/` 编译，运行 XeLaTeX → BibTeX → XeLaTeX → XeLaTeX；编译辅助文件集中在 `build/`，PDF复制至报告目录。01—05使用TeX Live自带Fandol字体，06沿用原报告的ctex自动字体选择（本机宋体/黑体）；教师指定字体时调整并检查。

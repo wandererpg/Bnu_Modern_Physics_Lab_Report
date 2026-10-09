@@ -8,7 +8,7 @@
 % 关键点：
 %   * 类为 twocolumn/twoside/A4；宽表宽图请用 table*/figure*；
 %   * 一级标题中文编号「一、二、三」由下面的 \ctexset 提供（老师格式要求）；
-%   * 摘要/关键词用 empAbstract + \Keyword；英文部分用 EmpAbstractEn/\KeywordEn；
+% 英文摘要与英文关键词统一放在参考文献之后；首页只保留英文题目/作者字段。
 %   * 首页信息（实验时间/报告时间/学号/E-mail）由 \empfirstfoot 生成；
 %   * 参考文献走 gbt7714-numerical（BibTeX），正文用 \cite{}。
 %   * 首面内容较多时，用 \enlargethispage{-3.3cm}（放在正文第一节内）避免与脚注框重叠。
@@ -18,6 +18,7 @@
 % array：make_data_tables.py 做列宽自适应时用 >{\centering\arraybackslash}p{...}
 % （数值列居中、文本列左对齐）。缺它时脚本会退化为普通 p 列——仍能放进版心，只是不好看。
 \usepackage{array}
+\setcitestyle{super,sort&compress}
 \sisetup{detect-all,per-mode=symbol,separate-uncertainty=true}
 
 % —— 一级标题中文编号（老师小论文格式：一、二、三）——
@@ -54,13 +55,9 @@
 <摘要正文>
 \end{empAbstract}
 
-% —— 英文题目/作者/摘要/关键词（模板首面结构需要，内容须与中文一致）——
+% 英文摘要与英文关键词统一放在参考文献之后；首页只保留英文题目/作者字段。
 \emptitleEn{<English Title>}
 \empauthorEn{<Name or To be completed>}{<Supervisor or To be completed>}
-\KeywordEn{<keyword1>; <keyword2>; <keyword3>}
-\begin{empAbstractEn}
-<English abstract consistent with the Chinese one.>
-\end{empAbstractEn}
 
 % —— 首页脚注：实验时间、报告时间、学号、E-mail ——
 \empfirstfoot{<实验日期>}{<报告日期>}{<学号>}{<E-mail>}
@@ -79,5 +76,11 @@
 \liuhao
 \bibliographystyle{gbt7714-numerical}
 \bibliography{refs}
+
+% 参考文献之后：英文摘要与英文关键词
+\begin{empAbstractEn}
+<English abstract translated from the Chinese abstract.>
+\end{empAbstractEn}
+\KeywordEn{<keyword1>; <keyword2>; <keyword3>}
 }
 \end{document}
