@@ -84,7 +84,7 @@ workspace_root/
         ├── scripts/
         │   ├── generate_plots.py
         │   └── make_data_tables.py   # 随 Skill 提供：data/*.csv -> tables/*.tex
-        ├── tables/              # 程序化生成的 LaTeX 表片段（附录用）
+        ├── tables/              # 程序化生成的 LaTeX 表片段（本地留存，正文按需选用）
         ├── build/               # LaTeX 编译临时文件
         ├── lab_report.tex
         ├── lab_report_thu.tex   # 清华模板版（默认）；两种模板可并存以便对比
@@ -262,7 +262,7 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lab_repo
 4. 从 `../data/` 读取（相对路径以脚本所在目录为基准），图表输出到 `../figures/`（PDF 优先）；
 5. 输出数值汇总到 `../data/processed_results.csv`（若适用）并在终端打印关键结果（R²、斜率、误差等）；
 6. 禁止硬编码绝对路径；禁止修改原始数据文件；
-7. 输出 CSV 应各有独立内容：**不要生成内容重复的两个汇总文件**（否则附录会重复成表）；文件命名建议"中文名 英文名.csv"并在报告附录中按其真实文件名引用。
+7. 输出 CSV 应各有独立内容：**不要生成内容重复的两个汇总文件**（避免正文重复列出相同数据）；文件命名建议"中文名 英文名.csv"并在本地数据说明中按其真实文件名记录来源。
 
 `make_data_tables.py`（随 Skill 提供，位于本 Skill `scripts/`）：
 
@@ -271,7 +271,7 @@ xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lab_repo
 - **列宽自适应到版心（`--fit`，默认开）**：自然宽度超版心时改用 `p{\dimexpr f\textwidth-8pt\relax}` 列（每列减去的 `2\tabcolsep` 与列间距相消，故表格总宽恰为 `Σf·\textwidth`，与模板无关）。判据用 em 估算（CJK 1em、ASCII 0.5em，`--fit-em` 默认通栏 45 / 单栏 21）；放不下时报 `FAIL` 并列出「最小宽度 > 可用宽度」，提示必须拆表；`--no-fit` 可退回旧的 `l/r` 自然宽度；
 - `--array`：数值列居中、文本列左对齐（需 `\usepackage{array}`）；runner 检测到文档加载 array 时自动开启，否则退化为普通 `p` 列（仍能放进版心）；
 - 未四舍五入的长小数（>7 位）会告警，建议在数据准备脚本里取 3–5 位有效数字；
-- `--combined` 额外生成 `tables/all_tables.tex`（`\input` 全部表），供附录一次性引入；
+- `--combined` 额外生成 `tables/all_tables.tex`（`\input` 全部表），供本地核对全部表格；正文仅选用必要的表，不作为实验数据附录整体引入；
 - 输出为**生成物**：不要手工编辑；改数据后重跑脚本。
 
 `check_report_tex.py`（随 Skill 提供，位于本 Skill `scripts/`）——把 `report.md` 的文字规则变成可执行检查：
@@ -490,7 +490,7 @@ python run_lab_workflow.py --experiment 塞曼效应 --stage compile
 
 用户要求「表出现在正文提及它的地方」后的一轮版式实验与定稿方案：
 
-- **正文表改“就地通栏表”**：`make_data_tables.py` 新增 **`--strip` / `--strip-csv`**，生成 `cuted` 的 `strip` + `table[H]`（全宽、不浮动）。实测效果：4 张正文表的**题注页 = 首次引用页**，表格横线跨度 481.9pt 恰等于版心。runner 检测到文档加载 `cuted` 时，**只对正文用到的表**（`仪器参数与换算 instrument-params.csv`）传 `--strip-csv`；附录原始数据表保持浮动。
+- **正文表改“就地通栏表”**：`make_data_tables.py` 新增 **`--strip` / `--strip-csv`**，生成 `cuted` 的 `strip` + `table[H]`（全宽、不浮动）。实测效果：4 张正文表的**题注页 = 首次引用页**，表格横线跨度 481.9pt 恰等于版心。runner 检测到文档加载 `cuted` 时，**只对正文用到的表**（`仪器参数与换算 instrument-params.csv`）传 `--strip-csv`；完整原始数据表仅在本地留存，不放入报告附录。
 - **`thuemp` 无 `\captionof`**（它用 `ccaption`，与 `caption` 宏包冲突），因此就地表必须走 `table[H] + \caption`，已在验证文档中确认编号与 `\ref` 正常。
 - **实测负面结论（勿重蹈）**：① `\FloatBarrier` + `flafter` + `dblfloatfix` → 页数 13→16、4 处大空白（最大 438pt）；② 浮动体“交错”到引用段之后 → 末页只剩一行（空白 723pt）；③ 4 张数据图改成 `strip + figure[H]` 就地图 → 14 页、两处约 208pt 空白。三者均已回退，原因写入 `references/report.md`。
 - **`check_report_tex.py` 认识 strip**：strip 区间内的表按通栏宽度判断（原先按单栏 21em 预算 → 误报 8 条“自然宽度超版心”）；strip 内的 `l/r` 表不再做文本估算（真实宽度由 PDF 侧守卫实测）。
@@ -534,15 +534,15 @@ python run_lab_workflow.py --experiment 塞曼效应 --stage compile
 
 ### v1.17（2026-09-16）
 
-- **修正 `make_data_tables.py` 的 slug 冲突（由首次真实运行发现）**：文件名若几乎全为中文，slug 会被剥成空并回退为 `table`，导致**多个 CSV 生成同一个 `table.tex` 互相覆盖、附录静默丢表**。现改为：ASCII 部分为空时用 `tNN`（按排序序号），并对任何重名自动加后缀；已有 ASCII slug 保持不变（旧报告的 `\input` 路径不受影响）。
+- **修正 `make_data_tables.py` 的 slug 冲突（由首次真实运行发现）**：文件名若几乎全为中文，slug 会被剥成空并回退为 `table`，导致**多个 CSV 生成同一个 `table.tex` 互相覆盖、生成表片段静默丢失**。现改为：ASCII 部分为空时用 `tNN`（按排序序号），并对任何重名自动加后缀；已有 ASCII slug 保持不变（旧报告的 `\input` 路径不受影响）。
 - **新增 `--caption-map`**：以 JSON 指定每个 CSV 的表题，生成器据此写 `\caption{}`（缺省仍用文件名）；runner 在 `tables` 阶段自动传入 `lab_report/table_captions.json`（存在时）。
 - 数据脚本规范补充：建议数据文件命名为「中文名 英文名.csv」以便 slug 可读。
 
 ### v1.16（2026-09-16）
 
-- 依据「干涉滤光片的镀制」回归发现的一处质量问题补规则：附录表**不得重复列出同一份数据**（该次生成中 `计算结果汇总 processed_results.csv` 与 `滤光片参数 filter metrics.csv` 内容完全相同，附录 A 因而把同一张表列了两遍）。
+- 依据「干涉滤光片的镀制」回归发现的一处质量问题补规则：表格**不得重复列出同一份数据**（该次生成中 `计算结果汇总 processed_results.csv` 与 `滤光片参数 filter metrics.csv` 内容完全相同，附录 A 因而把同一张表列了两遍）。
   - `references/report.md` 附录条目新增"附录表与数据文件一一对应、不得重复"要求；
-  - `SKILL.md` §6 数据脚本规范新增第 7 条：输出 CSV 应各有独立内容，不要生成内容重复的汇总文件；并建议按"中文名 英文名.csv"命名、附录引用真实文件名。
+  - `SKILL.md` §6 数据脚本规范新增第 7 条：输出 CSV 应各有独立内容，不要生成内容重复的汇总文件；并建议按"中文名 英文名.csv"命名、本地数据说明记录真实文件名。
 
 ### v1.15（2026-09-10）
 
@@ -617,7 +617,7 @@ python run_lab_workflow.py --experiment 塞曼效应 --stage compile
 
 ### v1.5（2026-09-10）
 
-- 新增 **程序化附录数据表**：Skill 自带 `scripts/make_data_tables.py`，把 `lab_report/data/*.csv` 渲染为 `lab_report/tables/*.tex`（booktabs 三线表、自动转义、数值列右对齐、超长截断加表注、`--combined` 汇总）。报告以 `\input{tables/<name>}` 引入，**改数据后重跑即同步**，不再手抄（上游工作区为手抄，改 CSV 不更新报告）。
+- 历史新增 **程序化数据表**（当前按 `report.md` 仅生成本地表片段、正文按需选用）：Skill 自带 `scripts/make_data_tables.py`，把 `lab_report/data/*.csv` 渲染为 `lab_report/tables/*.tex`（booktabs 三线表、自动转义、数值列右对齐、超长截断加表注、`--combined` 汇总）。报告以 `\input{tables/<name>}` 引入，**改数据后重跑即同步**，不再手抄（上游工作区为手抄，改 CSV 不更新报告）。
 - runner 新增 `tables` 阶段并纳入 `all`；脚手架新增 `lab_report/tables/`。
 - 验证：合成 CSV（含下划线与文本列）→ 生成 `fsr-calibration.tex`/`note.tex`/`all_tables.tex`；`\input{tables/all_tables}` 的测试文档 xelatex 编译 **exit 0**、产出 PDF、日志无错误。
 

@@ -55,7 +55,7 @@
 | 想改什么 | 修改位置 |
 | --- | --- |
 | 报告版式（页边距/行距/中文标题编号/校徽 上角标引用/中文图题/siunitx） | `assets/scaffold_template/report_preamble.tex` |
-| 附录数据表生成（列对齐、转义、行数截断、汇总） | `scripts/make_data_tables.py` |
+| 本地数据表片段生成、正文按需选用（列对齐、转义、行数截断、汇总） | `scripts/make_data_tables.py` |
 | 报告源校验（题注、悬空/孤儿引用、必需章节、摘要长度） | `scripts/check_report_tex.py` |
 | 工作区目录约定与执行流程 | 该 Skill `SKILL.md` §3/§5 |
 | 数据溯源声明模板 | `assets/scaffold_template/data_README.md` |

@@ -8,7 +8,7 @@
 
 | 目录 / 文件 | 说明 |
 | --- | --- |
-| `Lab_Workflow_Generator/` | 编排层 v1.27：工作区脚手架、绘图脚本执行、附录三线表生成、XeLaTeX 编译、四项版式校验 |
+| `Lab_Workflow_Generator/` | 编排层 v1.27：工作区脚手架、绘图脚本执行、三线表片段生成（本地留存、正文按需选用）、XeLaTeX 编译、四项版式校验 |
 | `advanced_lab_report_gen/` | 文本核心 v3.1：报告结构、写作与数据处理规则（脱敏版） |
 | `docs/` | 工作流总览、数据与目录约定、校验与验收、故障排查、AI 一键安装提示词 |
 | `install.ps1` / `install.sh` | 安装到用户级 Skill 目录 |

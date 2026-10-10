@@ -54,8 +54,8 @@
     {
       "path": "report.md",
       "source": "report.md",
-      "bytes": 35269,
-      "sha256": "4c5b631797f9c7fce01d4519251691d0b9fcfcced23688ce73fa3cde5ee81dc9"
+      "bytes": 35575,
+      "sha256": "99657f5f40e35b5aad2b5aa9e39a56d589536c4213014178d83c8474630b8ab1"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/branding/bnu_logo.png",
@@ -204,8 +204,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/report.md",
       "source": "report.md",
-      "bytes": 35269,
-      "sha256": "4c5b631797f9c7fce01d4519251691d0b9fcfcced23688ce73fa3cde5ee81dc9"
+      "bytes": 35575,
+      "sha256": "99657f5f40e35b5aad2b5aa9e39a56d589536c4213014178d83c8474630b8ab1"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/运行规范.md",
