@@ -394,14 +394,18 @@ def needs_bibtex(tex: Path) -> bool:
 
 
 def bibtex_env(tex: Path) -> dict:
-    """Let bibtex find the workspace's 物理学报模板* dir (.bst/.bib)."""
+    """Find local bibliography files and bundled template resources."""
     env = os.environ.copy()
     roots = [tex.parent, tex.parent.parent, tex.parent.parent.parent,
              tex.parent.parent.parent.parent]
-    tpls = []
+    skill = Path(__file__).resolve().parent.parent
+    tpls = [skill / "assets" / "aps_template"]
     for r in roots:
         if r and r.exists():
             tpls += [p for p in r.glob("*模板*") if p.is_dir()]
+            packaged = r / "skills" / "Lab_Workflow_Generator" / "assets" / "aps_template"
+            if packaged.is_dir():
+                tpls.append(packaged)
     paths = [str(tex.parent)] + [str(p) for p in tpls] + [str(r) for r in roots if r]
     for var in ("BSTINPUTS", "BIBINPUTS", "TEXINPUTS"):
         env[var] = os.pathsep.join(paths) + os.pathsep

@@ -38,6 +38,8 @@ def export():
     files[Path(".gitattributes")] = SKILL / "assets/agent_bundle/.gitattributes"
     files[Path("START_HERE.md")] = SKILL / "assets/agent_bundle/START_HERE.md"
     files[Path("skills/README.md")] = SKILL / "assets/agent_bundle/skills_README.md"
+    for name in ("LICENSE", "THIRD_PARTY.md"):
+        files[Path(name)] = WORKSPACE / "skills" / name
     for name in ("agents.md", "preview.md", "report.md", "运行规范.md"):
         files[SKILL_REL / "references" / name] = WORKSPACE / name
     for name in SCRIPTS:
@@ -52,6 +54,11 @@ def export():
         relative = SKILL_REL / "assets/report_templates" / name
         files[relative] = WORKSPACE / relative
     for name in (
+        "aps_template/LICENSE", "aps_template/README.md",
+        "aps_template/acta_physica_sinica.bst", "aps_template/acta_physica_sinica.dbj",
+        "aps_template/bibfile.bib", "aps_template/physics_report.sty",
+        "aps_template/template.tex", "aps_template/template.pdf",
+        "aps_template/figures/figure1.png",
         "branding/bnu_logo.png", "thu_template/thuemp.cls", "thu_template/README.md",
         "scaffold_template/data_README.md", "scaffold_template/report_preamble.tex",
         "scaffold_template/report_frontmatter_thu.tex",

@@ -72,7 +72,6 @@ workspace_root/
 ├── 校徽.webp                     # 首页校徽素材（复制自 assets/branding/校徽.webp）
 ├── bnu_logo.png                 # 校徽 PNG（graphicx 可直接引用；复制自 assets/branding/bnu_logo.png）
 ├── 清华近物实验报告模板/          # 旧版清华模板兼容资料（复制自 assets/thu_template/）
-├── 物理学报模板_Acta_Physica_Sinica_/   # 可选版式参考（复制自 assets/aps_template/）
 └── [实验标题]/                  # 实验目录位于工作区根，名为讲义内部标题，如：塞曼效应
     ├── [实验标题].pdf           # 实验讲义（用户放入；缺失则警告）
     ├── preview_report/          # 预习报告（含 .gitkeep）
@@ -384,7 +383,7 @@ python run_lab_workflow.py --experiment 塞曼效应 --stage compile
 
 - 文本生成：读取并调用 `advanced_lab_report_gen` 的 §2 全局配置与 §3 步骤1–5 规则（其安装路径：`~/.codex/skills/advanced_lab_report_gen/SKILL.md`）；
 - LaTeX 工程约定：参考 `lab-assist`（`~/.codex/skills/lab-assist/SKILL.md`）的目录与编译约定；
-- 本 Skill 的 `references/`、`assets/aps_template/`、`scripts/` 是打包资源，工作区初始化时复制使用，不在生成报告后改动。
+- 本 Skill 的 `references/`、`assets/aps_template/`、`scripts/` 是打包资源。初始化时按需复制规范和报告脚手架；物理学报参考模板保留在 Skill 内，编译时由搜索路径定位，无需在工作区根目录再建副本。
 
 ---
 

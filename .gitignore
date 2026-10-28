@@ -35,7 +35,6 @@ Thumbs.db
 # Experiment folders are local only; retain shared workflow and template directories in Git.
 /*/
 !/skills/
-!/物理学报模板_Acta_Physica_Sinica_/
 !/agent_report_bundle/
 
 # Python caches（工作流的数据处理/绘图脚本）

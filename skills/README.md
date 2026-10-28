@@ -1,7 +1,7 @@
 # 实验报告工作流（Skill 套件）
 
 本目录是「实验报告自动化工作流」的完整套件：两个 Codex Skill、安装与自检脚本、
-文档与一个可直接跑通的示例工程。它把本仓库的 `report.md` / `preview.md` 规范
+文档与模板资源（当前仓库不含实验示例数据）。它把本仓库的 `report.md` / `preview.md` 规范
 进一步工程化：目录驱动、图表程序化生成、编译与**成品 PDF 版式校验**一条龙。
 
 ## 组成
@@ -12,7 +12,7 @@
 | `advanced_lab_report_gen/` | 文本核心 v3.1：报告结构、写作与数据处理规则（脱敏版） |
 | `docs/` | 工作流总览、数据与目录约定、校验与验收、故障排查、AI 一键安装提示词 |
 | `install.ps1` / `install.sh` | 安装到用户级 Skill 目录 |
-| `verify_install.py` | 环境自检，`--demo` 会端到端跑一遍示例工程 |
+| `verify_install.py` | 环境自检；可选 `--demo` 需要额外提供示例工程 |
 
 ## 安装
 
@@ -20,22 +20,22 @@
 # Windows
 python -m pip install -r requirements.txt
 powershell -ExecutionPolicy Bypass -File .\install.ps1
-python .\verify_install.py --demo
+python .\verify_install.py
 ```
 
 ```bash
 # macOS / Linux
 python3 -m pip install -r requirements.txt
 bash ./install.sh
-python3 ./verify_install.py --demo
+python3 ./verify_install.py
 ```
 
-`--demo` 需要示例工程；本仓库版本**不含示例数据**，因此该步骤会被跳过并提示 WARN（其余 11 项自检照常执行）。需要端到端冒烟测试时，用随包分发的完整版套件。
+`--demo` 需要示例工程；本仓库版本**不含示例数据**，因此该步骤会被跳过并提示 WARN（其余 11 项自检照常执行）。端到端验收需另行提供有权使用的讲义和实验数据。
 安装后**新开一个会话**，Skill 才会被加载。详细说明见 `INSTALL.md` 与 `docs/`。
 
 ## 关于示例数据
 
-本仓库版本**刻意不含任何实验数据**（含示例工程与拟真数据），只保留工作流、规范、模板与文档，避免与仓库内真实实验记录混淆。完整套件（含可跑 demo）见分发用压缩包。
+本仓库版本**刻意不含任何实验数据**（含示例工程与拟真数据），只保留工作流、规范、模板与文档，避免与仓库内真实实验记录混淆。对外分享的内容、安装依赖和许可限制见 [DISTRIBUTION.md](DISTRIBUTION.md)。
 
 ## 与本仓库规范的关系
 

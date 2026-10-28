@@ -10,7 +10,7 @@
 | 位置 | `skills/Lab_Workflow_Generator/assets/thu_template/`（`thuemp.cls`、`TempExample.tex/.bib`、`image/`） |
 | 出处 | THU_emp —— 清华大学近代物理实验报告 LaTeX 模板（**非官方**） |
 | 许可 | 上游未附明确许可证；上游 README 自述为"非官方模板" |
-| 使用建议 | 课程内部使用无碍；**公开分发/发表前请自行确认授权**，或改用学校下发的官方模板 |
+| 使用建议 | 按使用场景核实许可；**公开分发/发表前请自行确认授权**，或改用学校下发的官方模板 |
 | 注意 | `TempExample.tex` 内自带示例学号 `2018123236` 与示例邮箱 `lmytime@hotmail.com`，均为上游占位符，**使用前必须替换** |
 
 ## 2. 物理学报（Acta Physica Sinica）模板
@@ -28,7 +28,7 @@
 | --- | --- |
 | 位置 | `skills/Lab_Workflow_Generator/assets/branding/`（`bnu_logo.png`、`校徽.webp`） |
 | 版权 | 归学校所有，仅作报告首页排版素材 |
-| 使用建议 | 非本校使用时请替换为自己学校的标识，或删除这两个文件（模板不引用它们也能编译） |
+| 使用建议 | 非本校使用时请替换为自己学校的标识；若移除这两个文件，须同步调整模板引用并验证编译 |
 
 ## 4. 可选（**未随包分发**）的第三方 Skill
 
