@@ -168,8 +168,3 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 | [skills/](skills/) | 可复用工作流、模板和检查工具 |
 | Agent 通用包 | 原工作区入口为 `agent_report_bundle/START_HERE.md`；独立包入口为包根目录 `START_HERE.md` |
 
-模板来源与适配边界见[来源说明](skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md)。
-
-### 维护与 GitHub 同步
-
-通用规范和模板更新按 agents.md 执行：需要时同步技能 references，运行 `skills/Lab_Workflow_Generator/scripts/export_agent_bundle.py`，核对 `agent_report_bundle/manifest.json` 后提交并推送本次相关通用文件。各实验目录、讲义、报告、原始数据、图片、处理脚本、历史版本及编译结果只保存在本地；详细授权与暂存规则以项目规则为准。
