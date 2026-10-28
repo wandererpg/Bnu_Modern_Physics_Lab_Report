@@ -163,6 +163,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 | [AGENT.md](AGENT.md) | Agent 快速入口 |
 | [运行规范.md](运行规范.md) | 提示词拆解、信息缺口处理与完成检查 |
 | [report.md](report.md) | 实验报告内容、数据与排版规范及验收清单 |
+| [report.md 的写作风格](report.md#写作风格) | 直接陈述、结果解释、必要限定及减少防御性说明的执行规则 |
 | [preview.md](preview.md) | 预习报告要求 |
 | [skills/](skills/) | 可复用工作流、模板和检查工具 |
 | Agent 通用包 | 原工作区入口为 `agent_report_bundle/START_HERE.md`；独立包入口为包根目录 `START_HERE.md` |

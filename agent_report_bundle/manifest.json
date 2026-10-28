@@ -24,14 +24,14 @@
     {
       "path": "AGENT.md",
       "source": "AGENT.md",
-      "bytes": 527,
-      "sha256": "cb43524566437a1fc746d0de47c7b1ab07ee26b637cb5ad9aaf608303bab9654"
+      "bytes": 653,
+      "sha256": "b69cfa24551d3f0cedca05fcc42ba4a05f1ddab71a252344117792b1d3bef32d"
     },
     {
       "path": "README.md",
       "source": "README.md",
-      "bytes": 15153,
-      "sha256": "04c226549b7baa9cab1b4bb91ccdf7ffc32518827d1fb9a2d4d0d4718cc82fc7"
+      "bytes": 15293,
+      "sha256": "2ec0d98e96728db037ab49521693d49975a253ee53db5d44212ba1eff8f575bc"
     },
     {
       "path": "START_HERE.md",
@@ -42,8 +42,8 @@
     {
       "path": "agents.md",
       "source": "agents.md",
-      "bytes": 5086,
-      "sha256": "9d5dc7f3488ee015e06a1b694e5624371dc195c1ef2965f01b93275dca9dc8be"
+      "bytes": 5224,
+      "sha256": "23e54d9a9b3a1820ea32aeed4e2737194cb53ecb24f2b9d1481bd818f51c12e8"
     },
     {
       "path": "preview.md",
@@ -54,8 +54,8 @@
     {
       "path": "report.md",
       "source": "report.md",
-      "bytes": 35575,
-      "sha256": "99657f5f40e35b5aad2b5aa9e39a56d589536c4213014178d83c8474630b8ab1"
+      "bytes": 38520,
+      "sha256": "e1387a60dfacd6b1861727b3f71d43c5e878d323d06d89e18a2a88ce7899a5a4"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/branding/bnu_logo.png",
@@ -192,8 +192,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/agents.md",
       "source": "agents.md",
-      "bytes": 5086,
-      "sha256": "9d5dc7f3488ee015e06a1b694e5624371dc195c1ef2965f01b93275dca9dc8be"
+      "bytes": 5224,
+      "sha256": "23e54d9a9b3a1820ea32aeed4e2737194cb53ecb24f2b9d1481bd818f51c12e8"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/preview.md",
@@ -204,8 +204,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/report.md",
       "source": "report.md",
-      "bytes": 35575,
-      "sha256": "99657f5f40e35b5aad2b5aa9e39a56d589536c4213014178d83c8474630b8ab1"
+      "bytes": 38520,
+      "sha256": "e1387a60dfacd6b1861727b3f71d43c5e878d323d06d89e18a2a88ce7899a5a4"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/运行规范.md",

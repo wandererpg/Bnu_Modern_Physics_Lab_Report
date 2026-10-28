@@ -7,6 +7,7 @@
 - [运行规范.md](运行规范.md)：把用户提示词拆分为任务、上下文、约束和完成条件，并处理信息缺口。
 - [preview.md](preview.md)：预习报告内容要求与检查清单。
 - [report.md](report.md)：实验报告内容、模板选择、数据处理和检查要求。
+- [report.md 的写作风格](report.md#写作风格)：报告表达的统一规范，写作与润色前读取，交付前逐段检查。
 - [README.md](README.md)：工作区入口和文件索引。
 - [AGENT.md](AGENT.md)：给 Agent 的简短入口。
 

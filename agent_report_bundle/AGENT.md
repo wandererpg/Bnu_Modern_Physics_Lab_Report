@@ -4,4 +4,6 @@
 
 本工作区的任务路由、自主权、验证、实验资料与版本管理要求见 [agents.md](agents.md)。预习报告按 [preview.md](preview.md)，实验报告按 [report.md](report.md)；两者是对应报告的内容规范与检查清单。
 
+实验报告写作与润色前，读取 [report.md 的写作风格](report.md#写作风格)，按该节完成表达检查。
+
 工作区文件索引与实验目录说明见 [README.md](README.md)。
