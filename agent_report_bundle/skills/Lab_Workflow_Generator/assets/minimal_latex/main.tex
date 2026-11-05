@@ -1,0 +1,41 @@
+% !TEX program = xelatex
+% Save as UTF-8. This file is self-contained.
+\RequirePackage{iftex}
+\RequireXeTeX
+\documentclass[UTF8,a4paper,11pt,fontset=fandol,scheme=plain]{ctexart}
+
+% TeX Live fonts; no dependency on Windows font names.
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath}
+
+% Keep the class's section commands; only declare numbering policy.
+\setcounter{secnumdepth}{2}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\ctexset{section={name={,}},subsection={name={,}}}
+
+\title{最小 LaTeX 模板}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{引言}\label{sec:intro}
+本文用于检查中文、English、公式及章节编号。编号应依次为 1、1.1 和 2。
+
+\subsection{字体与公式}\label{sec:fonts}
+中文正文，\textbf{中文粗体}，\textit{中文斜体}。
+English text, \textbf{bold}, \textit{italic}, \textsf{sans serif}, \texttt{monospace}.
+\begin{equation}\label{eq:energy}
+  E = mc^2
+\end{equation}
+
+\section{交叉引用}\label{sec:refs}
+第一节编号为 \ref{sec:intro}，小节编号为 \ref{sec:fonts}，
+本节编号为 \ref{sec:refs}；公式编号为 \eqref{eq:energy}。
+
+\end{document}

@@ -74,3 +74,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 新版排版参数保存在`layout_v2.tex`；选择脚本只补齐缺失文件，不改写已安装的正文、信息和共用文件，手工修改的主文件仍受原有保护。更新模板库不会自动转换任何现有实验报告。
 
 设计阶段的MVP样例、PDF预览与验证缓存已清理。复用正式模板时，按本页选择命令部署骨架，再填写报告并编译；供其他Agent使用的规范和模板副本见源工作区 `agent_report_bundle/` 的 `START_HERE.md`。
+
+## 编译故障定位
+
+遇到字体不可用、章节编号异常或无法生成 PDF 时，先使用[独立最小模板](../minimal_latex/README.md)逐项检查。它不属于模板 01—06；不会自动修改已有报告。

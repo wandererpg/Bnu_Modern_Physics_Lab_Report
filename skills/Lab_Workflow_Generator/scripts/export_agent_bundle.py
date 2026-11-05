@@ -54,6 +54,13 @@ def export():
         relative = SKILL_REL / "assets/report_templates" / name
         files[relative] = WORKSPACE / relative
     for name in (
+        "minimal_latex/main.tex",
+        "minimal_latex/checks/01_engine.tex",
+        "minimal_latex/checks/02_fonts.tex",
+        "minimal_latex/checks/03_sections.tex",
+        "minimal_latex/build.ps1",
+        "minimal_latex/README.md",
+        "minimal_latex/.gitignore",
         "aps_template/LICENSE", "aps_template/README.md",
         "aps_template/acta_physica_sinica.bst", "aps_template/acta_physica_sinica.dbj",
         "aps_template/bibfile.bib", "aps_template/physics_report.sty",

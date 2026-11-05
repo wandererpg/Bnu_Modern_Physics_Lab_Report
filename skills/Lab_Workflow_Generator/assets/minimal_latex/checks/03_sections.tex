@@ -1,0 +1,14 @@
+% !TEX program = xelatex
+\RequirePackage{iftex}
+\RequireXeTeX
+\documentclass[UTF8,fontset=fandol,scheme=plain]{ctexart}
+\setcounter{secnumdepth}{2}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\ctexset{section={name={,}},subsection={name={,}}}
+\begin{document}
+\section{第一节}\label{sec:first}
+\subsection{第一小节}\label{sec:sub}
+\section{第二节}\label{sec:second}
+Expected: 1, 1.1, 2. Actual: \ref{sec:first}, \ref{sec:sub}, \ref{sec:second}.
+\end{document}

@@ -130,6 +130,48 @@
       "sha256": "bd82a9c66f50de4974c2b20f3dad865cf9a599230a586a9472754645354dea97"
     },
     {
+      "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/.gitignore",
+      "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/.gitignore",
+      "bytes": 10,
+      "sha256": "034b0a145e844b6c7c9df5ccd00fa8efae8f75bebfe134b1d7a57de345181f70"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/README.md",
+      "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/README.md",
+      "bytes": 5321,
+      "sha256": "370bd12f69a0f8e15f2d924a6d26f2cf66af37b183bca91bab4a2038acd9077c"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/build.ps1",
+      "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/build.ps1",
+      "bytes": 2862,
+      "sha256": "094a3596f9c373254167f9feee009ed02f9011001a22d6692759e632e7e2aa49"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/checks/01_engine.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/checks/01_engine.tex",
+      "bytes": 166,
+      "sha256": "1b8eb4e10ca2302977f79e8e7d8ed1c6f3360b091c6d1a9ae5f31a21f96da1df"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/checks/02_fonts.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/checks/02_fonts.tex",
+      "bytes": 459,
+      "sha256": "1b6b0376787946579fb796771ac71025aad2b9cdcb0e093798a92bfb34baee89"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/checks/03_sections.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/checks/03_sections.tex",
+      "bytes": 548,
+      "sha256": "e4ea158171ccc213c5f9065c52bf3054fe6948920c8036626cfb8692f793bbf3"
+    },
+    {
+      "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/main.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/main.tex",
+      "bytes": 1349,
+      "sha256": "93b51de162ba1c2505a993a1911466143661f3954d32c672b988f3a1dd7b1aff"
+    },
+    {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
       "bytes": 2738,
@@ -138,8 +180,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
-      "bytes": 7758,
-      "sha256": "36c6a83c54ee26da5c08e5b0e3d0a9b81eac47a702a1aca48a1dedaf34c06959"
+      "bytes": 7985,
+      "sha256": "e3f85aa0b2780e48e50a7a5dcfdfefdb106812693aeef0bca6be07885a6f64fb"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
