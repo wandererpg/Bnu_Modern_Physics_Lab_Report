@@ -25,6 +25,12 @@
 
 [独立分项诊断模板](Lab_Workflow_Generator/assets/minimal_latex/README.md) 保留用于 `build.ps1 -Verify` 检查引擎、字体和编号；它不替代用户所选的六种报告模板，也不代替正式内容和 PDF 检查。
 
+## 文字写作与润色协作
+
+按根目录 [report.md 的文字写作与润色协作](../report.md#文字写作与润色协作)执行：Codex 负责资料核验、数据处理、写作任务组织与最终验收；`codex-antigravity` 可用且 Gemini 3.8 Flash 实际可调用时，由它起草或润色指定正文、摘要及英文表达。它只返回候选文字，不直接修改报告文件、数据、公式、文献键或模板。
+
+调用使用 `gemini-3.8-flash-medium`、`task_type: simple`、`effort: medium`、`mode: analysis`、`fallback: false`；每次由 Codex 自动填写当前项目绝对工作目录。工具缺失、桥接离线、模型不可选、调用或鉴权等错误、超时、任务失败或需要人工处理时，跳过插件，由 Codex 继续原流程，不换模型、不反复重试，也不要求用户修复环境。它是可选协作环节，不是安装、写作或编译的必备依赖；六种模板选择流程保持原样。
+
 ## 组成
 
 | 目录 / 文件 | 说明 |

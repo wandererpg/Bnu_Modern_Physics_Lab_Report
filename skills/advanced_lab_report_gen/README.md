@@ -4,6 +4,12 @@
 
 生成的报告须遵循工作区根目录的 report.md：引言恰好两段；第2节“原理”下设“实验原理”“实验装置”“实验方法”，方法按实际步骤设子子标题；结果章节后以“实验总结”收尾；正文引用使用上角标，图表标题及图表引用只用中文；英文摘要和英文关键词放在参考文献之后；原始数据及完整实验记录另存本地，不列入报告附录。若本文件夹中的历史训练画像与该规范不同，以 report.md 和当前教师要求为准。
 
+## 文字写作与润色协作
+
+按 [report.md 的文字写作与润色协作](../../report.md#文字写作与润色协作)执行：Codex 核对资料、数据与计算，组织写作任务并负责最终审阅；`codex-antigravity` 可用且 Gemini 3.8 Flash 实际可调用时，由它起草和润色指定章节、摘要及英文表达，只返回候选文字，不直接修改报告文件、数据、公式、引用或模板。调用固定使用 `gemini-3.8-flash-medium`，具体参数和边界见 [SKILL.md](SKILL.md#文字写作与润色协作)。
+
+工具缺失、桥接离线、模型不可选、调用失败、超时或需要人工处理时，跳过插件，由 Codex 继续原流程；不换模型、不反复重试、不要求用户修复环境。该插件是可选协作者，不是报告生成或 PDF 编译依赖，六模板选择与验收流程保持原样。
+
 ![Version](https://img.shields.io/badge/version-3.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Skill](https://img.shields.io/badge/Codex-Skill-purple)

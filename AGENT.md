@@ -1,5 +1,7 @@
 # Agent 快速入口
 
+实验报告的文字起草与润色按 [report.md 的协作规范](report.md#文字写作与润色协作)：可调用时交给 `codex-antigravity` 的 Gemini 3.8 Flash，Codex 核实资料并审核合入；不可调用时跳过插件，由 Codex 完成。模板选择、计算与编译仍按原流程执行。
+
 处理用户请求前，按[运行规范.md](运行规范.md)识别任务、上下文、约束和完成条件，并检查是否缺少会影响正确性或权限边界的信息。
 
 本工作区的任务路由、自主权、验证、实验资料与版本管理要求见 [agents.md](agents.md)。预习报告按 [preview.md](preview.md)，实验报告按 [report.md](report.md)；两者是对应报告的内容规范与检查清单。

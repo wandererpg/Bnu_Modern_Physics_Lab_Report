@@ -8,7 +8,7 @@
 2. 写预习报告时读 [preview.md](preview.md)；写实验报告时读 [report.md](report.md)、讲义、原始记录和已有报告。确认实验标题、教师要求及缺失信息后再写作。
 3. 先检查本份报告已有源稿与 `template_selection.json` 并沿用；用户已针对本份明确选择或要求沿用上一份样式时不重复询问，其他实验的选择不能自动套用。其余新报告须先从 [模板注册表](skills/Lab_Workflow_Generator/assets/report_templates/registry.json) 列01清华课程双栏、02 Physical Review风格、03 Nature风格、04 Applied Physics Letters风格、05 Journal of Physics风格、06 He-Ne原报告单栏，请用户明确选择后再调用。换版须用户明确要求并保留正文、数据及手改。具体特点见 [模板说明](skills/Lab_Workflow_Generator/assets/report_templates/README.md)。
 4. 用下面的选择命令部署到 `<实验标题>/lab_report/`。成功标准是自包含 `lab_report.tex`、校徽和规范依赖齐全，且选择记录与用户选定的01—06编号一致。已有手改主文件应先备份、迁移并核对内容，保留原始数据及历史版本。
-5. 直接填写 `lab_report.tex` 中的作者信息、摘要、正文和真实参考文献，不拆成 metadata/body。首页仅放中文摘要和中文关键词；正文按 `report.md` 的五个顶层章节撰写，引言恰好两段，第2节“原理”下设实验原理、实验装置和实验方法，实验方法按实际步骤设置子子标题；英文摘要和英文关键词放在参考文献之后。缺测内容标记“待补充”，并核对数据处理依据、单位、有效数字、图表和引用。
+5. 直接填写 `lab_report.tex` 中的作者信息、摘要、正文和真实参考文献，不拆成 metadata/body。文字按 [协作规范](report.md#文字写作与润色协作)由可调用的 `codex-antigravity` / Gemini 3.8 Flash 起草、润色，Codex 核实来源并审核合入；不可调用时由 Codex 继续，不额外安装插件。首页仅放中文摘要和中文关键词；正文按 `report.md` 的五个顶层章节撰写，引言恰好两段，第2节“原理”下设实验原理、实验装置和实验方法，实验方法按实际步骤设置子子标题；英文摘要和英文关键词放在参考文献之后。缺测内容标记“待补充”，并核对数据处理依据、单位、有效数字、图表和引用。
 6. 保存 LaTeX 源文件，使用支持中文的引擎编译成 PDF；运行源文件与PDF检查，人工查看渲染页面。交付时提供源文件、PDF及缺失项。只有内容核对和编译、版面检查都完成，才称正式报告完成。
 
 ## 直接调用

@@ -24,8 +24,8 @@
     {
       "path": "AGENT.md",
       "source": "AGENT.md",
-      "bytes": 962,
-      "sha256": "bfd7d6182ac85e9c75b61d9dc42405536f9915a7d9b04ddd171fe7ff1c354baf"
+      "bytes": 1274,
+      "sha256": "70804c29853f8b9bfd7c0a9d831834159ea6d74505075fe9c168ef1026b1b813"
     },
     {
       "path": "LICENSE",
@@ -36,14 +36,14 @@
     {
       "path": "README.md",
       "source": "README.md",
-      "bytes": 10175,
-      "sha256": "4952478aa1f7dfd0da79d17f64b937ca1563636114229fabfb3b5aec7693a7f4"
+      "bytes": 10533,
+      "sha256": "241b3e3e4ed8e0170d4d1d07c81a56465aa3a7e9622e029db5cad03ae15c3c0c"
     },
     {
       "path": "START_HERE.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/START_HERE.md",
-      "bytes": 5852,
-      "sha256": "702f50ce07933a30120cc688a0607c380b58049f3b4f139f58cda3ebfba62297"
+      "bytes": 6082,
+      "sha256": "fee0ec3649ad278ed861cc41b4d121a5fb11bc84c434cdfa558830d52b86fc58"
     },
     {
       "path": "THIRD_PARTY.md",
@@ -54,20 +54,20 @@
     {
       "path": "agents.md",
       "source": "agents.md",
-      "bytes": 5311,
-      "sha256": "fdaf3fa321d7d236cfbae9b36236aebb354c535a969af4e8bb25eb3b18d3b6b2"
+      "bytes": 5667,
+      "sha256": "957a0cbb70be9ae6149082b10b0a7188cad9edf4612acb7cb4bea5af37a844dc"
     },
     {
       "path": "preview.md",
       "source": "preview.md",
-      "bytes": 7822,
-      "sha256": "4e1f60eaed224d3ee560e630240b7f9378449ac2e9fed641d7ffafd905987789"
+      "bytes": 8142,
+      "sha256": "c07e113a4df689e435c3610107f22aa06473b13899cc472d46fea90cab56eb63"
     },
     {
       "path": "report.md",
       "source": "report.md",
-      "bytes": 31834,
-      "sha256": "aaebaf76fca7b9737a2a8cd42a940fe28e3b346509e9fb4e0fc63fa291062cc1"
+      "bytes": 36295,
+      "sha256": "78ad6235fdeca73b7f029078d7b168a46e21ef3f964d51625ad9dbc2653812ba"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/aps_template/LICENSE",
@@ -306,26 +306,26 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/agents.md",
       "source": "agents.md",
-      "bytes": 5311,
-      "sha256": "fdaf3fa321d7d236cfbae9b36236aebb354c535a969af4e8bb25eb3b18d3b6b2"
+      "bytes": 5667,
+      "sha256": "957a0cbb70be9ae6149082b10b0a7188cad9edf4612acb7cb4bea5af37a844dc"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/preview.md",
       "source": "preview.md",
-      "bytes": 7822,
-      "sha256": "4e1f60eaed224d3ee560e630240b7f9378449ac2e9fed641d7ffafd905987789"
+      "bytes": 8142,
+      "sha256": "c07e113a4df689e435c3610107f22aa06473b13899cc472d46fea90cab56eb63"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/report.md",
       "source": "report.md",
-      "bytes": 31834,
-      "sha256": "aaebaf76fca7b9737a2a8cd42a940fe28e3b346509e9fb4e0fc63fa291062cc1"
+      "bytes": 36295,
+      "sha256": "78ad6235fdeca73b7f029078d7b168a46e21ef3f964d51625ad9dbc2653812ba"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/运行规范.md",
       "source": "运行规范.md",
-      "bytes": 2675,
-      "sha256": "e8b8b831f44b6dd57c555f7afaabdc9b9e763fff99342fc9641be84fd71ab5d8"
+      "bytes": 3177,
+      "sha256": "4c99f858ddf08d203614ce3244998dbf4054a009ae811153ac526c010d3d5953"
     },
     {
       "path": "skills/Lab_Workflow_Generator/scripts/check_float_distance.py",
@@ -372,14 +372,14 @@
     {
       "path": "skills/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/skills_README.md",
-      "bytes": 2039,
-      "sha256": "a27920de08866f5ebc55b03a089fc817b842dc2319479a8809dd83cc2f85e300"
+      "bytes": 2379,
+      "sha256": "57be572f92de96c394458cd01afba725ab490090ca455c97df96524a7a0255fc"
     },
     {
       "path": "运行规范.md",
       "source": "运行规范.md",
-      "bytes": 2675,
-      "sha256": "e8b8b831f44b6dd57c555f7afaabdc9b9e763fff99342fc9641be84fd71ab5d8"
+      "bytes": 3177,
+      "sha256": "4c99f858ddf08d203614ce3244998dbf4054a009ae811153ac526c010d3d5953"
     }
   ]
 }
