@@ -3,12 +3,25 @@ name: advanced_lab_report_gen
 description: >-
   近物实验报告自动生成器：当用户输入 /gen_report 或要求按近物实验报告格式生成报告时使用；
   自动识别9个实验、按章节/摘要/讨论模板与全局风格撰写并做反面风格过滤，
-  使用统一最小 LaTeX 模板输出源文件与 PDF，Markdown 可作为中间写作稿。
+  新报告先请用户从六种 LaTeX 模板明确选择，沿用本份报告已选模板，输出源文件与 PDF，Markdown 可作为中间写作稿。
 ---
 
 ## 当前 LaTeX 输出入口
 
-本工作区新报告统一使用 `Lab_Workflow_Generator/assets/report_templates/template_minimal.tex`，安装为 `<实验标题>/lab_report/lab_report.tex`。采用 XeLaTeX、标准 ctexart、Fandol/Latin Modern、A4单栏和阿拉伯 `1`、`1.1` 编号；直接编辑主文件，不再通过六套期刊样板或 lab-assist 分片生成工程。内容及写作要求仍按根目录 `report.md`，预习按 `preview.md`。旧样本及历史记录仅用于参考，不恢复旧模板、中文编号或系统字体依赖。
+制作新实验报告前，先检查本份报告已有源稿和 `template_selection.json`：已有则继续沿用，换版须用户明确要求并保留正文、数据和手动修改。用户已经针对本份报告明确选定模板，或明确要求沿用上一份样式时，不重复询问；其他实验曾选过模板不能自动套用。新实验没有本次选择时，先列出以下六种，请用户明确选择后再部署和撰写，不擅自默认任一模板。
+
+| 编号 | 模板 | 版式特点 |
+| --- | --- | --- |
+| 01 | 清华课程双栏 | 居中题头、传统双栏 |
+| 02 | Physical Review 风格 | 紧凑双栏、栏间细线 |
+| 03 | Nature 风格 | 大标题、浅色摘要；引言单栏，原理起同页双栏，附录单栏 |
+| 04 | Applied Physics Letters 风格 | 浅色题头、无首行缩进、段落留白、单栏宽图表 |
+| 05 | Journal of Physics 风格 | 题头与摘要独立页、大字号与行距、单栏宽图表 |
+| 06 | He-Ne 原报告单栏 | 黑白、1.5倍行距、题目页眉与就地图表；宋黑字体由 Fandol 替代 |
+
+六种模板共用已修复的 XeLaTeX、Fandol 与 Latin Modern 字体底座和自动章节编号，保留各自题头、字号、行距及单/双栏特点。部署后直接填写自包含的 `lab_report/lab_report.tex`，不要求拆成 metadata/body。辅助文件集中到 `build/`，无外部文献库时通常编译两遍；实际使用 `\bibliography` 时再执行相应文献流程。校徽、中文摘要和关键词、末尾英文摘要和关键词及全部实验内容要求继续按 `report.md` 执行。
+
+选定后显式调用 `--template 01` 等对应编号；01仅为示例。无选择的新报告脚手架必须提示缺少选择，不得擅自选 minimal 或01。独立 `minimal_latex` 诊断保留，不能替换用户所选正式版式。
 
 # Advanced Lab Report Generator —— 近物实验报告自动生成器（Skill System Prompt）
 
@@ -366,9 +379,9 @@ C) 部分真实、部分模拟（请说明）”
 
 不得恢复“三、实验”或“结论和建议”等旧标题。发现缺失内容时先检查可用讲义、原始记录和教师要求；只有缺失关键信息影响正确性时才询问用户，其余缺失内容标注待补充。
 
-### 步骤6：PDF 编译（统一最小模板）
+### 步骤6：PDF 编译（沿用用户所选模板）
 
-1. 将核实后的正文写入 `<实验标题>/lab_report/lab_report.tex`；使用正式 `template_minimal.tex` 的文档类、字体与章节设置。已有报告先审查并保留手动修改，不用新骨架覆盖。
+1. 制作新报告前，先确认本份报告已有源稿/选择记录，或用户针对本份的明确选择及明确沿用上一份样式的要求；可沿用时不重复询问。否则列出上面的六种模板，请用户明确选择；其他实验曾选过的样式不能自动套用。取得选择后显式部署对应01—06模板，将核实后的正文写入 `<实验标题>/lab_report/lab_report.tex`。六种模板共用修复后的字体和自动编号，保留所选题头、字号、行距与单/双栏。已有报告先审查并保留手改，不用空骨架覆盖；换版须用户明确要求。
 2. 无外部文献库时使用 XeLaTeX 连续编译两遍。实际使用 `\bibliography` 时增加 BibTeX 后再编译两遍；不因目录里存在 `.bib` 就启用外部文献链。
 3. 使用 `run_lab_workflow.py --workspace <工作区> --experiment "实验标题" --stage compile`；脚本在报告目录编译，新建 `build/run-<唯一标识>/`，检查退出码、日志及非空 PDF，全部成功后才更新 `lab_report.pdf`。
 4. 编译器、字体或编号异常时，运行 `Lab_Workflow_Generator/assets/minimal_latex/build.ps1 -Verify` 的三项检查；详见其 README。不得自动降级 pdfLaTeX。
@@ -550,7 +563,7 @@ outputs/塞曼效应_generation_log.md
 ### 依赖检查（部署前）
 
 ```text
-Lab_Workflow_Generator   同工作区的统一最小模板与编译脚本
+Lab_Workflow_Generator   同工作区的01—06六种模板、独立诊断与编译脚本
 TeX Live / MiKTeX       XeLaTeX、ctexart、Fandol、Latin Modern及模板使用的宏包
 Python                  按数据处理需要安装数值/绘图库
 BibTeX                  仅实际使用外部文献库时需要

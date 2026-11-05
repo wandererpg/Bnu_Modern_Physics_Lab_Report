@@ -8,4 +8,5 @@
 
 工作区文件索引与实验目录说明见 [README.md](README.md)。
 
-新报告统一使用 `minimal` 稳定模板，直接编辑 `lab_report/lab_report.tex`；字体、章节编号和 PDF 输出的分项定位方式见 [report.md](report.md#最小-latex-模板与工作流)。旧报告的正文和手动修改须保留。
+
+制作新实验报告前，先按 [report.md](report.md#六种-latex-模板与选择流程) 展示 01—06 六种模板并询问选择。已有明确选择或维护既有报告时沿用；选择后编辑 `lab_report/lab_report.tex`。六种版式共用稳定编译基础，旧稿与手工修改须保留。

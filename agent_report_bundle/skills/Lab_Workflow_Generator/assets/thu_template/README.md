@@ -1,6 +1,6 @@
 # THU_emp
 
-> 历史兼容资料：本文件记录旧模板的来源或设计，仅供既有报告维护。新报告统一使用 `minimal`；当前入口见 [report_templates/README.md](../report_templates/README.md)。
+> 历史实现资料：保留旧类、旧共享排版或设计供已有报告维护；当前六种报告样式使用重构后的稳定基础，制作前先询问选择。入口见 [模板说明](../report_templates/README.md)。
 
 清华大学近代物理实验报告LaTeX模板（非官方）
 

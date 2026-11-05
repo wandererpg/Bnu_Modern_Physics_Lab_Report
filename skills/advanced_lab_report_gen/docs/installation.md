@@ -24,11 +24,11 @@ kpsewhich FandolSong-Regular.otf
 kpsewhich lmroman10-regular.otf
 ```
 
-新报告使用 minimal：ctexart、Fandol 与 Latin Modern，字体随 TeX 发行版提供，无须安装系统宋体、黑体或微软雅黑。无 .bib 文献库时不要求 BibTeX，真实文献库按需配置。
+新报告先请用户针对本份报告明确选择01—06六种模板；本份已选/已有记录，或用户明确要求沿用上一份样式时不重复询问。其他实验的样式不得自动套用。各模板共用 XeLaTeX、ctex、Fandol 与 Latin Modern，字体随 TeX 发行版提供，无须系统宋体、黑体或微软雅黑，并保留各自字号、行距、单/双栏及题头。无 .bib 文献库时不要求 BibTeX，真实文献库按需配置。
 
 ### 1.3 可选旧流程扩展
 
-当前 minimal 工作流不依赖 `lab-report-writer` 与 `lab-assist`；仅使用旧流程或额外 DOCX 功能时按需安装：
+现行六模板工作流不依赖 `lab-report-writer` 与 `lab-assist`；仅使用旧流程或额外 DOCX 功能时按需安装：
 
 ```bash
 npx skills add https://github.com/mingchen666/Reviva --skill lab-report-writer
@@ -39,7 +39,7 @@ npx skills add https://github.com/Daigui233/lab-assist --skill lab-assist
 
 ### 1.4 配套工作流 Skill（推荐）
 
-如需**目录驱动**、一次产出预习报告 + 实验报告 + PDF，请一并安装 `Lab_Workflow_Generator`（提供 `/build_lab`、工作区脚手架、`run_lab_workflow.py`、`make_data_tables.py`、`check_report_tex.py`，并携带 minimal 正式模板、分项诊断模板与校徽资产）。
+如需**目录驱动**、一次产出预习报告 + 实验报告 + PDF，请一并安装 `Lab_Workflow_Generator`（提供 `/build_lab`、工作区脚手架、`run_lab_workflow.py`、`make_data_tables.py`、`check_report_tex.py`，并携带01—06六种正式模板、独立分项诊断模板与校徽资产）。
 
 注意：该工作流的 `run_lab_workflow.py` 请用**真实 Python 解释器**运行（如 `C:\Users\<你>\AppData\Local\Programs\Python\Python311\python.exe`）。在本机实测中，Windows `py` 启动器对含中文的脚本路径/参数可能直接返回 **9009**（命令未找到），用完整解释器路径即可。
 

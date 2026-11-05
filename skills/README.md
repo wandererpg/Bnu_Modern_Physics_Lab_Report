@@ -4,13 +4,26 @@
 文档与模板资源（当前仓库不含实验示例数据）。它把本仓库的 `report.md` / `preview.md` 规范
 进一步工程化：目录驱动、图表程序化生成、编译与**成品 PDF 版式校验**一条龙。
 
-## 当前模板与编译
+## 模板选择与编译
 
-新报告默认使用唯一注册的 `minimal` 模板，别名为 `default`、`默认`、`最小`；`--template minimal` 可省略，`--list-templates` 用于查看注册表。正式模板是 [template_minimal.tex](Lab_Workflow_Generator/assets/report_templates/template_minimal.tex)，部署后直接填写自包含的 `lab_report/lab_report.tex`，不再按 01—06 选样式或拆成 metadata/body 文件。已有报告及手改源文件保留，历史模板仅用于兼容旧报告。
+模板选择仅针对本份/本次报告；其他实验曾选过的样式不得自动套用。用户明确要求沿用上一份样式时可沿用；新实验没有本次选择则重新列六种供用户选择。
 
-编译固定使用 XeLaTeX、`ctexart[UTF8,fontset=fandol,scheme=plain]`、发行版自带的 Fandol 与 Latin Modern 字体；章节使用标准无星号命令和 `1`、`1.1` 编号。运行器将辅助文件集中到 `build/`，通常编译两遍；没有 BibTeX 文献库时不要求 BibTeX，有真实 `.bib` 文献库时再执行相应文献流程。校徽、首页中文摘要和关键词、参考文献后英文摘要和关键词及其余实验内容要求继续以 `report.md` 为准。
+制作新实验报告前，先检查已有报告和 `template_selection.json`：已有报告或选择记录继续沿用，换版须有用户明确要求并保留正文、数据和手动修改。用户本轮或此前已明确选定模板时沿用，不重复询问；否则先列出以下六种模板，请用户明确选择后再部署和撰写，不擅自默认任一模板。
 
-可用 [分项诊断模板](Lab_Workflow_Generator/assets/minimal_latex/README.md) 的 `build.ps1 -Verify` 分别验证引擎、字体和编号；诊断通过不代替正式实验内容及 PDF 版面的检查。
+| 编号 | 模板 | 版式特点 |
+| --- | --- | --- |
+| 01 | 清华课程双栏 | 居中题头、传统双栏 |
+| 02 | Physical Review 风格 | 紧凑双栏、栏间细线 |
+| 03 | Nature 风格 | 大标题、浅色摘要；引言单栏，原理起同页双栏，附录单栏 |
+| 04 | Applied Physics Letters 风格 | 浅色题头、无首行缩进、段落留白、单栏宽图表 |
+| 05 | Journal of Physics 风格 | 题头与摘要独立页、大字号与行距、单栏宽图表 |
+| 06 | He-Ne 原报告单栏 | 黑白、1.5倍行距、题目页眉与就地图表；宋黑字体由 Fandol 替代 |
+
+用 `--list-templates` 查看注册表；选定后显式传入编号，例如用户选择01时使用 `--template 01`。编号01只是调用示例，不是默认选项。
+
+六种模板共用已修复的 XeLaTeX、Fandol 与 Latin Modern 字体底座和自动章节编号，保留各自题头、页边距、行距及单/双栏特点。部署后直接填写自包含的 `lab_report/lab_report.tex`，不要求拆成 metadata/body。辅助文件集中到 `build/`，无外部文献库时通常编译两遍；实际使用 `\bibliography` 时再执行 BibTeX 等相应文献流程。校徽、中文摘要和关键词、末尾英文摘要和关键词及全部实验内容要求继续按 `report.md` 执行。
+
+[独立分项诊断模板](Lab_Workflow_Generator/assets/minimal_latex/README.md) 保留用于 `build.ps1 -Verify` 检查引擎、字体和编号；它不替代用户所选的六种报告模板，也不代替正式内容和 PDF 检查。
 
 ## 组成
 

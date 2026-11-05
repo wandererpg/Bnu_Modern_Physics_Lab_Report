@@ -4,12 +4,12 @@
 
 Examples:
   python select_report_template.py --list-templates
-  python select_report_template.py --workspace . --experiment "实验标题" --template minimal
-  python select_report_template.py --workspace "实验标题" --template minimal
+  python select_report_template.py --workspace . --experiment "实验标题" --template 01
+  python select_report_template.py --workspace "实验标题" --template 01
 
 The generated lab_report.tex is managed by a recorded SHA-256. User-edited or
 legacy master files require an explicit AI migration; this script never replaces
-them. The current minimal template keeps information and body in a single source.
+them. The six current layouts keep information and body in a single source each.
 """
 
 import argparse
@@ -54,13 +54,17 @@ def load_registry(asset_root: Path | None = None) -> dict:
         source = (root / entry["source"]).resolve()
         if not source.is_relative_to(root.resolve()):
             raise TemplateSelectionError(f"模板源文件必须位于模板资产目录内：{entry['source']}")
-    if registry.get("default") not in identifiers:
+    if registry.get("default") is not None and registry["default"] not in identifiers:
         raise TemplateSelectionError("registry.json 的 default 不是有效模板编号。")
     return registry
 
 
 def resolve_template(registry: dict, requested: str | None = None) -> dict:
-    key = str(requested if requested is not None else registry["default"]).strip().casefold()
+    if requested is None:
+        raise TemplateSelectionError(
+            "制作新报告前须先询问用户选择模板 01–06。请先用 --list-templates 查看，再明确传入 --template；无静默默认。"
+        )
+    key = str(requested).strip().casefold()
     if key.isdigit():
         key = key.zfill(2)
     matches = []
@@ -126,7 +130,7 @@ def install_report_template(lab_dir: Path, template: str | None = None,
                             experiment_title: str | None = None,
                             allow_legacy: bool = False,
                             asset_root: Path | None = None) -> dict | None:
-    """Install the current single-source template without replacing real reports.
+    """Install an explicitly selected single-source layout without replacing real reports.
 
     Legacy records and user-edited masters are preserved by normal runner calls.
     Moving an existing report to the current template requires content migration.
@@ -139,16 +143,21 @@ def install_report_template(lab_dir: Path, template: str | None = None,
     root = Path(asset_root) if asset_root is not None else TEMPLATE_ASSETS
     registry = load_registry(root)
     current_ids = {entry["id"] for entry in registry["templates"]}
-    legacy = selection is not None and selection["id"] not in current_ids
+    legacy = selection is not None and (
+        selection["id"] not in current_ids or selection.get("content_model") != "single-source"
+    )
     edited = existing_hash is not None and (not tracked_hash or existing_hash != tracked_hash)
     if existing_hash is not None and (legacy or edited):
         reason = "旧模板报告" if legacy else "既有或手动修改的报告"
         if allow_legacy and template is None:
-            print(f"[template] 保留{reason}：{master}；迁移到最小模板须先完整保留正文与数据。")
+            print(f"[template] 保留{reason}：{master}；迁移版式须先完整保留正文与数据。")
             return selection
         raise TemplateSelectionError(
             f"拒绝以空骨架覆盖{reason}：{master}。请先由 AI 审查并迁移正文、信息、文献和数据。"
         )
+    if existing_hash is not None and selection is not None and template is None:
+        # Maintenance must reuse the installed source, never regenerate its title/body.
+        return selection
     if legacy:
         raise TemplateSelectionError(
             f"旧模板记录 {selection['id']} 的主文件缺失：{master}。请先恢复报告或显式完成内容迁移。"
@@ -178,7 +187,8 @@ def install_report_template(lab_dir: Path, template: str | None = None,
         raise TemplateSelectionError(f"报告在安装期间发生修改，已停止主文件替换：{master}")
     _atomic_write(master, master_text)
     record = {
-        "schema_version": 2, "id": entry["id"], "name": entry["name"],
+        "schema_version": 3, "content_model": "single-source",
+        "id": entry["id"], "name": entry["name"],
         "source": entry["source"], "installed_master_sha256": sha256(master),
         "columns": entry.get("columns", 1), "layout": entry.get("layout", "single-column"),
         "layout_version": entry.get("layout_version", registry.get("version", 1)),
@@ -207,7 +217,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", default=".", help="实验目录；配合 --experiment 可传工作区根目录")
     parser.add_argument("--experiment", help="工作区根目录下的实验名称")
-    parser.add_argument("--template", help="minimal 或注册别名；新报告默认 minimal，既有报告须保留内容后迁移")
+    parser.add_argument("--template", help="模板 01–06 或注册别名；新报告必须先询问并明确选择，既有报告沿用记录")
     parser.add_argument("--list-templates", action="store_true", help="列出模板编号、名称和别名后退出")
     args = parser.parse_args()
     try:

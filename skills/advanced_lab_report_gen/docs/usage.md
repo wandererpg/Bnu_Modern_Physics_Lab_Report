@@ -27,7 +27,7 @@
 
 ## 3. 输出说明
 
-每次生成默认输出三个文件（实验名使用标准名，如 `塞曼效应`）：
+每次生成的正式输出与辅助目录如下（实验名使用标准名，如 `塞曼效应`）：
 
 ```text
 <实验名称>/lab_report/lab_report.tex   # 自包含正式源文件
@@ -50,7 +50,7 @@
 4. 自动完成数据处理（拟合、误差、信噪比等）并在日志中给出依据；
 5. 按章节/摘要/讨论模板撰写报告；
 6. 执行反面风格过滤；
-7. 默认选择 minimal，直接填写自包含的 lab_report/lab_report.tex；标准章节编号为1/1.1，XeLaTeX两遍编译，缓存集中到build/；真实.bib文献库按需执行文献流程；
+7. 制作新报告前检查本份报告已有源稿及模板记录，已有则沿用；用户针对本份已明确选择或要求沿用上一份样式时不重复询问。否则先列01清华课程双栏、02 Physical Review风格、03 Nature风格、04 Applied Physics Letters风格、05 Journal of Physics风格、06 He-Ne原报告单栏，请用户明确选择后显式部署对应编号，不能自动沿用其他实验的模板。直接填写自包含lab_report/lab_report.tex，保留所选字号、行距、单/双栏与题头；字体统一Fandol/Latin Modern、自动章节编号、XeLaTeX两遍编译及build/缓存，实际外部文献库按需处理；
 8. 核对源文件、PDF和日志，保留已有报告及手改源，不用空骨架覆盖旧稿。
 
 ## 5. 会话示例
@@ -73,7 +73,7 @@
 
 | 想改什么 | 修改位置 |
 | --- | --- |
-| 当前章节与版式 | 工作区 `report.md`、教师要求及 `assets/report_templates/template_minimal.tex`；历史画像不覆盖当前结构 |
+| 当前章节与版式 | 工作区 `report.md`、教师要求及 所选01—06模板；历史画像不覆盖当前结构 |
 | 摘要模板 | SKILL.md §2.2（`abstract_template`） |
 | 讨论框架 | SKILL.md §2.3（`discussion_template`） |
 | 实验映射/公式/拟合/误差 | SKILL.md §2.4（`experiment_mapping` + `experiment_library.json`） |

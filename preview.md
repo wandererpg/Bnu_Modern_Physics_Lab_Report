@@ -1,12 +1,10 @@
-
-
 # 近代物理实验预习报告要求
-
-预习报告同样使用 XeLaTeX、标准 `ctexart`、Fandol 和 Latin Modern 字体；使用标准章节命令，编号统一为 `1`、`1.1`。内容结构仍按本文件，不套用实验报告章节。编译链、字体或编号异常时，使用 `skills/Lab_Workflow_Generator/assets/minimal_latex/` 的分项检查定位。
 
 ## 与实验报告模板的分工
 
-本文件只规范预习报告。实验报告的统一最小 LaTeX 模板及 AI 工作流见根目录 `report.md`；不得以实验报告样式替代本文件的预习内容、篇幅或教师要求。两个正式报告分别保存在实验目录的 `preview_report/` 和 `lab_report/`，均编译成PDF。
+正式实验报告有 01—06 六种模板，制作前按 `report.md` 询问并记录用户选择；预习报告的内容和篇幅仍以本文件为准，不套用实验报告的章节要求。两者共用 XeLaTeX、标准 `ctexart`、Fandol 与 Latin Modern 字体、自动阿拉伯章节编号；字体或输出异常时用 `skills/Lab_Workflow_Generator/assets/minimal_latex/` 分项定位。
+
+用户已指定本次报告样式或维护已有报告时沿用明确选择；教师另有格式要求时优先执行。预习报告和实验报告分别保存在实验目录的 `preview_report/` 与 `lab_report/`，均以 LaTeX 编写并编译成 PDF，辅助文件集中放入各自的 `build/`。
 
 ## 适用范围
 

@@ -91,13 +91,14 @@ def check_xelatex():
 
 
 def check_tex_resources():
-    """Resolve actual minimal-template dependencies through the TeX distribution."""
+    """Resolve actual stable-template dependencies through the TeX distribution."""
     kpse = shutil.which("kpsewhich")
     if not kpse:
-        add("FAIL", "找不到 kpsewhich，无法确认最小模板宏包和字体")
+        add("FAIL", "找不到 kpsewhich，无法确认稳定模板宏包和字体")
         return
     resources = ["iftex.sty", "ctexart.cls", "fontspec.sty", "xeCJK.sty",
                  "geometry.sty", "amsmath.sty", "graphicx.sty", "eso-pic.sty", "natbib.sty",
+                 "xcolor.sty", "multicol.sty", "fancyhdr.sty", "float.sty",
                  "FandolSong-Regular.otf", "FandolSong-Bold.otf", "FandolHei-Regular.otf",
                  "FandolKai-Regular.otf", "lmroman10-regular.otf", "lmsans10-regular.otf",
                  "lmmono10-regular.otf"]
@@ -107,7 +108,7 @@ def check_tex_resources():
                                encoding="utf-8", errors="replace", timeout=30)
             out = (p.stdout or "").strip()
             add("PASS" if p.returncode == 0 and out else "FAIL", resource,
-                out or "最小模板所需资源缺失，请通过 TeX 发行版补装对应宏包/字体")
+                out or "稳定模板所需资源缺失，请通过 TeX 发行版补装对应宏包/字体")
         except Exception as exc:  # noqa: BLE001
             add("FAIL", resource, str(exc))
 
@@ -115,7 +116,7 @@ def check_tex_resources():
 def check_bibtex_style():
     # Manual verified references do not require BibTeX or the gbt7714 style.
     bibtex = shutil.which("bibtex")
-    add("INFO", "BibTeX（按文献方案选用）", bibtex or "未安装；最小模板手工文献不受影响")
+    add("INFO", "BibTeX（按文献方案选用）", bibtex or "未安装；稳定模板手工文献不受影响")
     kpse = shutil.which("kpsewhich")
     if not kpse:
         return
@@ -124,7 +125,7 @@ def check_bibtex_style():
                            text=True, encoding="utf-8", errors="replace", timeout=30)
         out = (p.stdout or "").strip()
         add("INFO", "gbt7714-numerical.bst（使用该外部样式时才需要）",
-            out or "未找到；最小模板不依赖此文件")
+            out or "未找到；稳定模板不依赖此文件")
     except Exception as exc:  # noqa: BLE001
         add("INFO", "可选参考文献样式未检查", str(exc))
 
@@ -171,7 +172,12 @@ def check_skills(skills_dir):
                "select_report_template.py"]
         miss = [s for s in scripts if not os.path.isfile(os.path.join(wf, "scripts", s))]
         assets = ["references/report.md", "assets/report_templates/registry.json",
-                  "assets/report_templates/template_minimal.tex",
+                  "assets/report_templates/template_01_thu.tex",
+                  "assets/report_templates/template_02_physical_review.tex",
+                  "assets/report_templates/template_03_nature.tex",
+                  "assets/report_templates/template_04_applied_physics_letters.tex",
+                  "assets/report_templates/template_05_journal_of_physics.tex",
+                  "assets/report_templates/template_06_he_ne.tex",
                   "assets/minimal_latex/main.tex", "assets/minimal_latex/build.ps1"]
         miss += [a for a in assets if not os.path.isfile(os.path.join(wf, *a.split("/")))]
         ver = "?"

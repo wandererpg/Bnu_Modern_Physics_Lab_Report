@@ -45,7 +45,7 @@
 
 ## 模板与通用包维护
 
-- 新实验报告统一使用 report.md 规定的 minimal 模板、XeLaTeX 和发行版字体；旧六套样板仅用于既有报告兼容。迁移时保留正文、信息、文献、原始数据和手动修改，不得用空骨架覆盖已有主文件。
+- 制作新实验报告前，按 report.md 列出 01—06 六种模板并询问用户选择；已有明确选择或维护既有报告时沿用，不重复询问。六种模板共用 XeLaTeX 和发行版字体。迁移时保留正文、信息、文献、原始数据和手动修改，不得用空骨架覆盖已有主文件。
 - 更新报告内容规范时，同步更新 skills/Lab_Workflow_Generator/references/ 中对应文件。
 - 通用规范、工作流或模板更新后，运行 skills/Lab_Workflow_Generator/scripts/export_agent_bundle.py，并核对 agent_report_bundle/manifest.json。agent_report_bundle/ 只放通用规范、模板和必要依赖，不放实验资料、设计验证稿或编译缓存。
 - 设计任务收尾时，仅清理已确认弃用的模板稿、MVP 验证文档及其缓存；保留正式模板、必要检查工具、实验报告、原始材料和历史版本。删除前核对目标并遵循适用的授权边界。

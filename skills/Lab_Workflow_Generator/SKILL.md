@@ -1,74 +1,82 @@
 ---
 name: Lab_Workflow_Generator
 description: >-
-  根据实验讲义和真实记录建立预习与实验报告工作区，使用统一最小 LaTeX 模板生成源文件、处理数据并编译 PDF；也用于维护报告或迁移旧模板。
+  根据实验讲义和真实记录建立预习与实验报告工作区，制作前询问并调用六种 LaTeX 模板之一，处理数据并编译 PDF；也用于维护报告和迁移旧模板。
 ---
 
 # 实验报告工作流
 
-当前入口为统一 `minimal` 模板。新报告不再按六套样板或期刊别名选版；历史资源只用于维护已有报告。具体内容以工作区 `preview.md`、`report.md` 为准；缺失时读取 `references/` 对应副本。任务权限、资料与 Git 范围遵循工作区 `agents.md`，不扩大授权。
+具体实验内容以工作区 `preview.md`、`report.md` 为准；缺失时读取 `references/` 对应副本。任务权限、资料与 Git 范围遵循工作区 `agents.md`，不扩大授权。
+
+## 制作前的模板选择
+
+新实验报告开始排版前，先向用户展示下列六种样式并询问选择。用户已为本份报告明确选择时直接沿用，不重复询问；维护已有报告时沿用其当前模板与选择记录。教师已明确指定样式时按该要求执行并说明。其他实验的选择不自动套用到新实验，除非用户明确要求沿用。尚未选择可继续读讲义、识别实验、整理数据，不静默选默认模板，不提前生成正式报告版式。
+
+| 编号 | 名称 | 主要差异 |
+| --- | --- | --- |
+| 01 | 清华课程双栏 | 居中题头、传统双栏；11pt、1.5 倍行距 |
+| 02 | Physical Review 风格 | 紧凑双栏、栏间细线；10pt、1.3 倍行距 |
+| 03 | Nature 风格 | 大标题、浅色摘要；引言单栏、原理起双栏、附录单栏 |
+| 04 | Applied Physics Letters 风格 | 单栏、浅色题头、无首行缩进、段间留白 |
+| 05 | Journal of Physics 风格 | 独立题头摘要页；12pt、较大字号及行距 |
+| 06 | He-Ne 原报告单栏 | 黑白单栏、1.5 倍行距、题目页眉、就地图表 |
+
+询问后等待用户明确答复；可用提问工具时一次展示六个选项，不将预选项或超时视为已选择。将用户选择映射到注册表的 01—06 编号后安装。`minimal` 只保留为独立编译诊断，不作为第七个报告样式。名称中的期刊风格是课程排版适配，不代表官方投稿模板。
 
 ## 模板与编辑入口
 
-- 正式实验模板为 `assets/report_templates/template_minimal.tex`，安装后主文件为 `<实验标题>/lab_report/lab_report.tex`。基本信息、摘要、正文和参考文献直接在主文件填写，不要求 metadata/body 分片或自定义文档类。
-- 基础为 XeLaTeX、`iftex`、标准 `ctexart[UTF8,fontset=fandol,scheme=plain]`、Fandol 和 Latin Modern；不依赖宋体、微软雅黑或 Times New Roman 等系统字体名称。
-- 页面采用 A4 单栏、11pt、25mm 页边距和约 1.5 倍行距；标准 `\section`、`\subsection` 生成 `1`、`1.1`，不重定义章节命令，不手写章节数字。
-- 保留两行基本信息、首页校徽、100—200 字中文摘要、3—5 个中文关键词、五个正文顶层章节与上角标顺序引用；英文摘要和对应关键词在参考文献后。校徽缺失标注待补充，正式交付前补齐。
-- 骨架中的待补充提示不是实验内容。不能因编译成功称正式报告完成。
+六套主模板为 `assets/report_templates/template_01_*.tex` 至 `template_06_*.tex`。安装后主文件为 `<实验标题>/lab_report/lab_report.tex`；信息、摘要、正文和参考文献直接在主文件填写。可选校徽在报告目录 `assets/bnu_logo.png`。旧分片工程按其现有结构维护，新报告不要求 metadata/body 分片。
 
-使用与兼容说明见 [模板说明](assets/report_templates/README.md)。只有需要查旧报告来源时才读历史来源与版式文档。
+六种模板共用 XeLaTeX、`iftex`、标准 `ctexart[UTF8,fontset=fandol,scheme=plain]`、Fandol 与 Latin Modern，不依赖系统宋体、微软雅黑或 Times New Roman 名称。标准 `\section`、`\subsection` 自动显示 `1`、`1.1`，不手写章节数字、不重定义章节命令。A4、25mm 页边距；字号、栏式、行距和题头按所选模板保留，不能统一强制为单栏或同一字号。
+
+03 的 `multicols` 正文中图表使用 `[H]` 就地放置，通栏图表放到双栏环境之外；不使用会在多栏环境中丢失的普通浮动体。
+
+内容结构、两行基本信息、校徽、摘要、关键词、引用、末尾英文摘要与附录范围按 `report.md`。模板参数与来源见 [模板说明](assets/report_templates/README.md)。
 
 ## 工作区与内容保护
 
-每份讲义按内部标题建立 `<实验标题>/`，讲义位于 `<实验标题>/<实验标题>.pdf`，分别使用 `preview_report/` 与 `lab_report/`。两份报告均编写为 LaTeX 并生成 PDF，辅助文件集中在各自 `build/`。数据、图片、处理脚本和表格保存在实验目录，不进入通用模板仓库。
+讲义按内部标题保存为 `<实验标题>/<实验标题>.pdf`。每个实验含 `preview_report/` 与 `lab_report/`，均写 LaTeX 并编译成 PDF，辅助文件集中在各自 `build/`。两个报告分别按各自内容规范完成。
 
-新报告选择记录使用 `minimal`；现有主文件、旧选择记录及手动编辑不触发自动换版。迁移前保留原稿并核对正文、信息、文献、数据与手动修改。不得以空骨架替换旧报告；`--force` 也不绕过覆盖保护。
+已有主文件、选择记录与手工修改不得自动覆盖。显式要求迁移时先保存原稿，核对正文、信息、文献、原始数据和手工修改后迁移；不得以空骨架代替旧报告。即使用户选择新样式，生成工具的拒绝覆盖也不能通过删除旧文件来绕过。
 
 ## 按任务执行
 
-1. 读取规范、讲义、原始记录、照片与已有报告，确认实验标题、真实操作和完成条件。扫描讲义不可读时使用可用 OCR；不能用模板常识代替讲义事实。
-2. 新报告部署统一骨架；已有报告按实际源文件维护。讲义更新时记录变更，审查需要更新的正文，保留用户手改内容。
-3. 按 `preview.md` 写预习报告，按 `report.md` 写实验报告。原始值、计算值、理论值和估计值明确区分，缺失内容写待补充。正文按“设定→结果→解释”组织，必要条件和定义集中说明一次，因果推测就近用“可能”。
-4. 依据真实记录生成可复现的数据处理、拟合、绘图脚本及必要正文表。保留异常值及处理依据；原始记录与完整计算表单独保存，不生成实验数据附录。
-5. 运行与改动匹配的检查与编译，核对最终 PDF。说明路径、实测结果、未完成项和验证范围。
+1. 读取讲义与真实记录，确认实验划分、内部标题、目的和实际操作；扫描页按需 OCR，不能用模板常识替代讲义事实。
+2. 新报告未选样式时先询问六选一；已有明确选择或维护旧稿时沿用。取得选择后生成对应骨架，不伪造实验数据或完成情况。
+3. 按 `preview.md`、`report.md` 分别完成内容，处理数据、图表和文献；缺失项标记待补充，必要时询问会影响正确性的事实。
+4. 检查、编译并复核日志、内容与 PDF 版面；报告源文件路径、结果、缺失项与实际验证范围。
 
 ## 命令与阶段
 
-从工作区根目录执行；`--workspace` 也可传绝对路径：
+从工作区根目录执行；以下以用户明确选择 03 为例：
 
 ```powershell
 python skills/Lab_Workflow_Generator/scripts/select_report_template.py --list-templates
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template minimal
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage status
-# 在完成真实正文后：
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template 03
+# 依据讲义与数据完成正文后：
 python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage check
 python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage compile
 ```
 
-其他阶段为 `ocr`、`plots`、`tables`；`all` 按脚本执行整个工程流程，但不会代替 AI 阅读材料和完成报告内容。按需使用 `init_workspace.py` 初始化目录；具体参数以 `--help` 为准。正文所需的三线表由 `make_data_tables.py` 从数据生成，引用 `tables/` 片段；图题、表题和正文引用统一中文。绘图字体与 LaTeX 字体分别检查。
+新报告缺少选择时，脚本要求明确 `--template 01` 至 `--template 06`，不阻塞终端等待输入，也不自行选样式。`init_workspace.py` 同样遵守选择要求；运行前可查 `--help`。`make_data_tables.py` 按实际输入处理数据，不以自动生成成功代替内容检查。
 
 ## 编译与故障定位
 
-正常编译使用 XeLaTeX 两遍；仅实际使用外部 `.bib` 时增加 BibTeX，再用 XeLaTeX 两遍。最小模板可用真实 `thebibliography` 条目，无外部文献库时不要求 BibTeX。按课程要求著录参考文献，正文必须实际引用；没有文献时标记待补充，不塞虚构占位文献。
+普通文档两遍 XeLaTeX。仅本轮实际使用外部 `.bib` 时调用 BibTeX 并完成后续两遍 XeLaTeX；手写文献不运行 BibTeX。每轮使用独立 `build/run-<唯一标识>/`；检查退出码、最终日志、非空 PDF、字体和引用后才更新报告目录 PDF。失败时保留旧 PDF，并明确说明本轮失败。
 
-编译脚本在报告目录工作，新建 `build/run-<唯一标识>/`，逐次检查退出码和日志，确认非空 PDF 后再更新成品。失败保留源码和日志，说明本轮失败，不交付旧 PDF 冒充新结果。不得自动退回 pdfLaTeX。
-
-如不能生成 PDF，先运行独立诊断：
+若编译链、字体或编号异常，先独立定位：
 
 ```powershell
 & .\skills\Lab_Workflow_Generator\assets\minimal_latex\build.ps1 -Verify
 ```
 
-依次检查英文引擎与 PDF 输出、中文文档类与字体、章节及交叉引用。详见 [诊断说明](assets/minimal_latex/README.md)。字体找不到时检查发行版包；编号异常时检查星号章节、编号深度、旧类与章节重定义；输出异常时检查当前目录、主文件、可写输出目录、退出码与最终 PDF 路径。
+[诊断说明](assets/minimal_latex/README.md)对应字体、编号和输出路径问题。字体缺失先检查发行版包；编号异常检查星号章节、编号深度和旧类重定义；输出异常检查主文件、当前目录、可写输出目录、退出码和最终 PDF。
 
 ## 验收与通用包
 
-- 检查摘要、章节、实际数据、单位、有效数字、不确定度、文献和附录范围；正文要求见 `report.md`，预习内容见 `preview.md`。
-- 编译后检查引用、缺字、字体替换、溢出及最终 PDF 页面，必要时使用 `check_report_tex.py`、`check_pdf_geometry.py`、`check_float_distance.py`、`check_inline_distance.py`。判断与页宽/栏宽相关的告警时结合实际模板，不能把历史双栏参数机械套在新单栏上。
-- 输出源文件、PDF、可复现脚本及必要数据说明；记录讲义来源/变更、执行动作、编译链与缺失项。正式交付须内容与版面都完成，资料不足只交付草稿。
-- 变更通用规范后同步 `references/`，运行 `scripts/export_agent_bundle.py` 并核对 `agent_report_bundle/manifest.json`。通用包不放实验材料、报告成品与缓存。
+按 `report.md` 和 `preview.md` 检查内容；复核字体嵌入、章节/交叉引用、校徽、图表、空白页和溢出。运行相关 `check_report_tex.py`、`check_pdf_geometry.py`、`check_float_distance.py`、`check_inline_distance.py` 时结合所选模板的实际栏宽，不将双栏参数机械套到单栏。
 
-以下版本记录用于解释旧工作区，不覆盖上述当前规则。
+输出源文件、PDF、可复现脚本及必要数据说明；正式交付须完成内容和版面，资料不足仅为草稿。通用规范或模板变化后运行 `scripts/export_agent_bundle.py`，核对 `agent_report_bundle/manifest.json`；通用包不放实验材料、成品和缓存。
 
 ## 历史版本记录（仅供追溯）
 

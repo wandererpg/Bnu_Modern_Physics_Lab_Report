@@ -1,21 +1,141 @@
 {
-  "version": 3,
-  "default": "minimal",
+  "version": 4,
+  "default": null,
   "templates": [
     {
-      "id": "minimal",
-      "name": "最小稳定实验报告模板",
+      "id": "01",
+      "name": "清华课程双栏",
       "aliases": [
-        "default",
-        "默认",
-        "最小",
-        "稳定",
-        "最小模板"
+        "1",
+        "thu",
+        "清华",
+        "清华模板",
+        "经典",
+        "课程双栏"
       ],
-      "source": "template_minimal.tex",
+      "source": "template_01_thu.tex",
+      "columns": 2,
+      "journal": null,
+      "description": "传统课程双栏，居中题头、首页中文摘要、双横线分隔；稳定 ctexart 底座。11pt、1.5 倍行距。 所有信息和正文均在单个 lab_report.tex 中编辑。",
+      "layout": "two-column",
+      "category": "经典课程双栏",
+      "content_model": "single-source"
+    },
+    {
+      "id": "02",
+      "name": "Physical Review 风格",
+      "aliases": [
+        "2",
+        "aps",
+        "physical-review",
+        "Physical Review",
+        "物理评论",
+        "学术双栏",
+        "紧凑学术"
+      ],
+      "source": "template_02_physical_review.tex",
+      "columns": 2,
+      "journal": "Physical Review (APS)",
+      "description": "紧凑学术双栏，首页中文摘要、细栏间线；稳定 ctexart 底座。10pt、1.3 倍行距。 所有信息和正文均在单个 lab_report.tex 中编辑。",
+      "source_urls": [
+        "https://journals.aps.org/revtex",
+        "https://journals.aps.org/revtex/revtex-faq"
+      ],
+      "layout": "two-column",
+      "category": "紧凑学术双栏",
+      "content_model": "single-source"
+    },
+    {
+      "id": "03",
+      "name": "Nature 风格",
+      "aliases": [
+        "3",
+        "nature",
+        "Nature",
+        "自然",
+        "杂志",
+        "混合",
+        "杂志式"
+      ],
+      "source": "template_03_nature.tex",
+      "columns": 2,
+      "journal": "Nature",
+      "description": "杂志式混合布局，大标题、浅色摘要区；引言单栏，原理起同页双栏，英文摘要和附录恢复单栏。11pt、1.5 倍行距。 所有信息和正文均在单个 lab_report.tex 中编辑。",
+      "source_urls": [
+        "https://www.nature.com/nature/for-authors/formatting-guide"
+      ],
+      "layout": "mixed",
+      "category": "科研杂志混合布局",
+      "content_model": "single-source"
+    },
+    {
+      "id": "04",
+      "name": "Applied Physics Letters 风格",
+      "aliases": [
+        "4",
+        "apl",
+        "aip",
+        "Applied Physics Letters",
+        "应用物理快报",
+        "简报",
+        "技术简报"
+      ],
+      "source": "template_04_applied_physics_letters.tex",
       "columns": 1,
-      "layout": "single-column",
-      "description": "XeLaTeX + ctexart；Fandol 与 Latin Modern；A4 单栏、25mm 页边距、11pt、1.5 倍行距；标准阿拉伯章节编号。实验内容在单个 lab_report.tex 中填写。"
+      "journal": "Applied Physics Letters (AIP)",
+      "description": "单栏技术简报，浅色题头、无首行缩进、段落留白，适合宽幅图表。11pt、1.5 倍行距。 所有信息和正文均在单个 lab_report.tex 中编辑。",
+      "source_urls": [
+        "https://publishing.aip.org/resources/researchers/author-instructions/"
+      ],
+      "layout": "one-column",
+      "category": "单栏技术简报",
+      "content_model": "single-source"
+    },
+    {
+      "id": "05",
+      "name": "Journal of Physics 风格",
+      "aliases": [
+        "5",
+        "iop",
+        "jphys",
+        "Journal of Physics",
+        "物理学杂志",
+        "长报告",
+        "单栏长报告"
+      ],
+      "source": "template_05_journal_of_physics.tex",
+      "columns": 1,
+      "journal": "Journal of Physics (IOP)",
+      "description": "题头与中文摘要独立一页，正文单栏，较大字号与行距。12pt、1.5 倍行距。 所有信息和正文均在单个 lab_report.tex 中编辑。",
+      "source_urls": [
+        "https://publishingsupport.iopscience.iop.org/questions/latex-template/"
+      ],
+      "layout": "one-column-with-front-page",
+      "category": "单栏学术长报告",
+      "content_model": "single-source"
+    },
+    {
+      "id": "06",
+      "name": "He-Ne 原报告单栏",
+      "aliases": [
+        "6",
+        "he-ne",
+        "He-Ne",
+        "hene",
+        "氦氖",
+        "原报告",
+        "原报告单栏",
+        "黑白单栏"
+      ],
+      "source": "template_06_he_ne.tex",
+      "columns": 1,
+      "journal": null,
+      "description": "黑白单栏课程样式，居中摘要标题、题目页眉、就地图表；Fandol 字体。11pt、1.5 倍行距。 所有信息和正文均在单个 lab_report.tex 中编辑。",
+      "layout": "one-column-native-course",
+      "category": "黑白单栏课程报告",
+      "layout_version": 1,
+      "content_model": "single-source"
     }
-  ]
+  ],
+  "selection_required": true
 }

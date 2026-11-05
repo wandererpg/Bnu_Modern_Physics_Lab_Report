@@ -4,7 +4,7 @@
 
 ## 1. 更新章节模板
 
-新报告以工作区 `report.md`、当前教师要求和 `assets/report_templates/template_minimal.tex` 为准；正文直接写入 `lab_report/lab_report.tex`。章节使用标准无星号命令与 `1`、`1.1` 编号，不再把历史训练画像的 `recommended_chapters` 当作当前结构模板。更新通用内容要求时同步规范副本，保留校徽、中文摘要和关键词、末尾英文摘要和关键词。
+新报告内容以工作区 `report.md` 和当前教师要求为准；版式先从01—06六种模板中取得针对本份报告的明确选择，本份已有报告/记录或用户明确要求沿用上一份样式时不重复询问。其他实验的模板不得自动套用。正文直接写入 `lab_report/lab_report.tex`。章节使用标准无星号命令与 `1`、`1.1` 编号，不再把历史训练画像的 `recommended_chapters` 当作当前结构模板。更新通用内容要求时同步规范副本，保留校徽、中文摘要和关键词、末尾英文摘要和关键词。
 
 ## 2. 新增实验
 
@@ -33,11 +33,11 @@
 
 ## 5. 修改输出格式
 
-正式输出为自包含的 LaTeX 源文件 `lab_report.tex` 和编译成功的 PDF，Markdown 或 DOCX 仅为按需阅读副本。新报告默认部署 `assets/report_templates/template_minimal.tex`，不拆成 metadata/body 或 lab-assist 的信息、记录和总结文件。
+正式输出为自包含的 LaTeX 源文件 `lab_report.tex` 和编译成功的 PDF，Markdown 或 DOCX 仅为按需阅读副本。新报告先列01清华课程双栏、02 Physical Review风格、03 Nature风格、04 Applied Physics Letters风格、05 Journal of Physics风格、06 He-Ne原报告单栏，请用户针对本份报告明确选择后部署；已选则沿用，不重复询问。不拆成 metadata/body 或 lab-assist 的信息、记录和总结文件。
 
-最小模板采用 XeLaTeX、`ctexart[UTF8,fontset=fandol,scheme=plain]`、Fandol 和 Latin Modern。辅助文件集中在 `build/`，无文献库时编译两遍即可；使用真实 `.bib` 文献库时再执行相应文献编译流程。引擎、字体或编号问题用 `assets/minimal_latex/build.ps1 -Verify` 分项诊断，正式报告仍须另做内容和 PDF 检查。
+六种模板共用 XeLaTeX、ctex、Fandol 和 Latin Modern 及自动章节编号，保留各自字号、行距、单/双栏与题头。辅助文件集中在 `build/`，无文献库时编译两遍即可；使用真实 `.bib` 文献库时再执行相应文献编译流程。引擎、字体或编号问题用 `assets/minimal_latex/build.ps1 -Verify` 分项诊断，正式报告仍须另做内容和 PDF 检查。
 
-修改已有报告前备份并保留手改内容，不用新模板空骨架覆盖旧稿；历史模板只兼容已有报告。
+修改已有报告前备份并保留手改，不用空骨架覆盖旧稿；换版须用户明确要求。原六种模板均可调用，独立 minimal 仅作诊断。
 
 ## 6. 工作流层定制（配合 Lab_Workflow_Generator）
 
@@ -45,7 +45,7 @@
 
 | 想改什么 | 修改位置 |
 | --- | --- |
-| 报告版式（页边距、行距、1/1.1章节编号、校徽、上角标引用和中文图题） | `assets/report_templates/template_minimal.tex`；具体报告直接改 `lab_report.tex` |
+| 报告版式（页边距、行距、1/1.1章节编号、校徽、上角标引用和中文图题） | 注册表中所选01—06模板及其样式资源；具体报告直接改 `lab_report.tex` |
 | 本地数据表片段生成、正文按需选用（列对齐、转义、行数截断、汇总） | `scripts/make_data_tables.py` |
 | 报告源校验（题注、悬空/孤儿引用、必需章节、摘要长度） | `scripts/check_report_tex.py` |
 | 工作区目录约定与执行流程 | 该 Skill `SKILL.md` §3/§5 |

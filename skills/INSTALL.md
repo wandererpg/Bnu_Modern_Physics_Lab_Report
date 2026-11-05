@@ -41,7 +41,9 @@ py -m pip install -r requirements.txt
 | macOS | `brew install --cask mactex` |
 | Debian/Ubuntu | `sudo apt install texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-latex-extra` |
 
-新报告使用 `minimal` 模板：`ctexart[UTF8,fontset=fandol,scheme=plain]`，中文为 Fandol，英文为 Latin Modern。安装 `ctex`、`xeCJK`、`fontspec` 和对应字体包即可，不要求安装宋体、黑体或微软雅黑。`thuemp.cls` 与旧模板资产仅兼容已有报告。
+模板选择仅针对本份/本次报告；其他实验曾选过的样式不得自动套用。用户明确要求沿用上一份样式时可沿用；新实验没有本次选择则重新列六种供用户选择。
+
+制作新报告时先列出01—06六种模板并请用户明确选择；本轮或此前已有明确选择则沿用，已有报告或选择记录也继续沿用，不重复询问。换版须用户明确要求并保留全部正文与手改内容。六种现行模板共用 XeLaTeX、ctex、Fandol 和 Latin Modern，保留各自单/双栏、题头及行距。安装 `ctex`、`xeCJK`、`fontspec` 和对应字体包即可，不要求安装宋体、黑体或微软雅黑；旧 `thuemp.cls` 仅供历史实现兼容。
 
 无 `.bib` 文献库时，XeLaTeX 编译两遍即可，不要求 BibTeX。只有报告确实使用真实 `.bib` 库及 `gbt7714` 样式时，才检查并安装 BibTeX 和 `gbt7714-numerical.bst`。
 
@@ -82,7 +84,7 @@ bash ./install.sh --skills-dir /opt/skills --force
 python verify_install.py
 ```
 
-环境自检覆盖 Python、绘图库、编译器和 Skill 资源。若检查器列出绘图用的系统中文字体或旧模板的参考文献样式，应结合实际使用场景判断；`minimal` 正文使用 Fandol 与 Latin Modern，无文献库时不依赖 BibTeX。
+环境自检覆盖 Python、绘图库、编译器和 Skill 资源。若检查器列出绘图用的系统中文字体或额外参考文献样式，应结合实际使用场景判断；六种报告模板正文统一使用 Fandol 与 Latin Modern，无文献库时不依赖 BibTeX。
 
 在本 `skills/` 目录内单独验证引擎、字体、章节编号及 PDF 输出：
 
@@ -90,7 +92,7 @@ python verify_install.py
 powershell -ExecutionPolicy Bypass -File .\Lab_Workflow_Generator\assets\minimal_latex\build.ps1 -Verify
 ```
 
-该诊断使用自带样例，不需要实验数据。正式报告部署 `template_minimal.tex` 后，直接填写 `lab_report.tex`，由运行器用 XeLaTeX 两遍编译，辅助文件集中到 `build/`。仍须按 `report.md` 检查正文、数据和渲染后的 PDF。
+该诊断使用自带样例，不需要实验数据，也不选择或替换正式报告的版式。正式报告先取得用户对01—06的明确选择，再部署对应模板，直接填写 `lab_report.tex`；可用 `--list-templates` 查看列表，部署命令显式写 `--template 01` 等已选编号。运行器用 XeLaTeX 两遍编译，辅助文件集中到 `build/`；真实外部文献库再增加所需文献步骤。仍须按 `report.md` 检查正文、数据和渲染后的 PDF。
 
 `python verify_install.py --demo` 是可选的实验流程验收；本仓库不附实验示例数据，缺少示例时会提示 WARN 并跳过。真实报告的端到端验收需另行提供有权使用的讲义和数据。
 

@@ -10,34 +10,35 @@
 
 本文件只规范实验报告，不替代预习报告要求。报告正式文档须使用 LaTeX 编写并编译生成 PDF；本文件仅作为要求与提交前检查清单，不作为最终报告文件。
 
-## 最小 LaTeX 模板与工作流
+## 六种 LaTeX 模板与选择流程
 
-新报告统一使用重构后的 `minimal` 模板，以稳定编译为基础落实本文件的实验内容要求。正式资产为 `skills/Lab_Workflow_Generator/assets/report_templates/template_minimal.tex`；注册表只登记这一当前模板。操作说明见该目录的 `README.md`，分项诊断见 `assets/minimal_latex/README.md`。
+制作新实验报告前，先列出下列六种模板并询问用户选择。用户已为本份报告明确指定模板时沿用该选择，不重复询问；维护已有报告时优先沿用现有主文件与选择记录。没有明确选择时，可先读取讲义、整理资料，但不开始正式报告排版，不静默采用任一编号。教师有明确模板要求时按该要求执行并说明。其他实验的选择不自动套用到新实验，除非用户明确要求沿用。
 
-| 项目 | 统一方案 |
-| --- | --- |
-| 编译链 | XeLaTeX；`iftex` 提前检查引擎，普通文档连续编译两遍 |
-| 文档类与字体 | 标准 `ctexart`，`fontset=fandol`；英文 Latin Modern，不依赖系统字体名称 |
-| 章节命令 | 标准无星号 `\section`、`\subsection`，编号为 `1`、`1.1`；`secnumdepth=2` |
-| 页面 | A4 单栏，11pt，四边 25mm，约 1.5 倍行距 |
-| 内容入口 | `<实验标题>/lab_report/lab_report.tex`，基本信息、摘要、正文和文献均直接在主文件中编辑 |
-| 输出 | 缓存和日志集中在 `build/run-<唯一标识>/`；本轮编译全部成功后才更新报告目录的 PDF |
+| 编号 | 模板 | 版式特点 |
+| --- | --- | --- |
+| 01 | 清华课程双栏 | 居中题头、传统双栏 |
+| 02 | Physical Review 风格 | 紧凑双栏、栏间细线 |
+| 03 | Nature 风格 | 大标题、浅色摘要；引言单栏、原理起双栏、附录单栏 |
+| 04 | Applied Physics Letters 风格 | 单栏、浅色题头、无首行缩进、段落留白 |
+| 05 | Journal of Physics 风格 | 独立题头摘要页、较大字号及行距、单栏 |
+| 06 | He-Ne 原报告单栏 | 黑白单栏、1.5 倍行距、题目页眉、就地图表 |
 
-1. **读取材料**：先读讲义、课程要求、原始记录和已有报告，确认实验标题及缺失信息。区分实测值、计算值、理论值和估计值。
-2. **部署与填写**：新报告用 `minimal`；教师明确要求其他格式时，保留这一编译与字体基础，再按要求调整。脚本只部署可编译骨架；缺失内容标注待补充，不虚构实验结果。
-3. **维护已有报告**：保留正文、基本信息、文献、原始数据和手动修改。旧六套样板及其资源只用于维护既有报告，不再作为新报告选择入口。旧选择记录不触发自动迁移；迁移必须保留内容并检查差异，不用空骨架覆盖旧文件。
-4. **先定位再扩展**：发生字体、编号或 PDF 问题时，依次运行英文编译、中文字体、章节编号三个独立检查。确认最小链路后，再逐项加入公式、图表及真实文献，不整段复制旧导言区。
-5. **编译并验收**：无外部文献库时编译两遍。使用 `\bibliography` 引入真实 `.bib` 时，采用 XeLaTeX → BibTeX → XeLaTeX → XeLaTeX，并按课程要求配置文献样式；不能仅因目录中存在 `.bib` 就运行 BibTeX。核对退出码、最终日志、引用、PDF 字体与整页版面；编译失败保留日志，不把旧 PDF 当作本轮结果。
+六种模板共用已验证的稳定基础：XeLaTeX、`iftex` 引擎检查、标准 `ctexart[UTF8,fontset=fandol,scheme=plain]`、Fandol 与 Latin Modern；标准章节命令自动生成 `1`、`1.1` 编号，`secnumdepth=2`。各模板保留自己的栏式、题头、字号、行距和段落样式；具体参数见 `skills/Lab_Workflow_Generator/assets/report_templates/README.md`。
 
-模板保留两行基本信息、首页校徽、100—200 字中文摘要、3—5 个中文关键词、五个顶层章节、上角标顺序编码引用和按需附录；英文摘要及对应英文关键词紧接参考文献。缺少校徽可先编译草稿，但应明确标注，正式交付前补齐。教师对格式的明确要求优先于默认页面参数。
+选择后安装为 `<实验标题>/lab_report/lab_report.tex`。基本信息、摘要、正文和文献直接在主文件中编辑。已有报告、旧版分片工程和手动修改均须保留；只有用户明确要求迁移时才换版，迁移前保存原稿并核对正文、信息、数据与文献，不用空骨架覆盖旧稿。
+
+六种模板都保留两行基本信息、校徽、100—200 字中文摘要、3—5 个关键词、引言两段、原理三个子标题、结果与讨论、总结、上角标引用、参考文献后的英文摘要与关键词。模板选择改变版式，不改变本文件的实验内容要求。
+
+普通文档连续运行两遍 XeLaTeX。仅当本轮实际使用外部 `.bib` 时插入 BibTeX，再完成 XeLaTeX 两遍；不因目录里存在 `.bib` 就运行 BibTeX。每轮辅助文件写入独立 `build/run-<唯一标识>/`，全部成功且最终 PDF 非空、日志检查通过后才更新报告目录 PDF；失败时保留旧成品并说明本轮失败。
 
 ```powershell
 python skills/Lab_Workflow_Generator/scripts/select_report_template.py --list-templates
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template minimal
+# 先询问并取得选择；这里以用户选择 03 为例：
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template 03
 # AI 依据讲义与真实记录完成 lab_report.tex 后：
 python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage check
 python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage compile
-# 分开定位编译链、字体及编号：
+# 分开定位编译链、字体及编号；minimal 只作独立诊断：
 & .\skills\Lab_Workflow_Generator\assets\minimal_latex\build.ps1 -Verify
 ```
 
@@ -186,7 +187,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 ### 编译引擎、文档类与字体
 
-正式模板继承最小模板的稳定设置，不重定义章节命令，不加载旧自定义类及成套版式片段：
+六种正式模板共用最小模板的稳定设置，不重定义章节命令，不加载旧自定义类；以下以 11pt 变体示例，02 和 05 的字号按所选模板设置：
 
 ```latex
 % !TEX program = xelatex
@@ -251,13 +252,13 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 ### 页面与段落
 
-- 默认 A4 单栏，正文 11pt，四边页边距 25mm，约 1.5 倍行距；字体使用 Fandol 和 Latin Modern。
-- 段落首行缩进两个汉字；页码位置统一，不用连续空格强行对齐。
+- 六种模板均采用 A4、四边页边距 25mm、Fandol 与 Latin Modern；栏式、字号、行距按用户所选模板保留，不统一强制为单栏。
+- 段落缩进与留白按所选模板；04 使用无首行缩进的段间留白，其余按模板设置。页码位置保持一致，不用连续空格强行对齐。
 - 图、表和公式放在首次引用附近，尺寸按实际版心调整，保证最终 PDF 中标注清晰。
 
 ### 标题与摘要布局
 
-- 实验题目居中；作者/学号位于第一行，指导老师/实验时间位于第二行，不列班级；缺失信息留填写横线。
+- 题目对齐与题头布局按所选模板；作者/学号位于第一行，指导老师/实验时间位于第二行，不列班级；缺失信息留填写横线。
 - 首页只放中文摘要和关键词；英文摘要和对应关键词紧接参考文献。
 - 一级标题依次使用 `1 引言`、`2 原理`、`3 结果与分析讨论`、`4 实验总结`、`5 参考文献`，二级标题为 `2.1`、`2.2` 等。
 - 不将数字写进章节标题参数，也不叠加中文编号前后缀；标题、标签和交叉引用的编号须一致。
@@ -293,7 +294,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 - [ ] 图表和公式在当前页面布局下清晰可读，没有断裂、过小或错位。
 - [ ] LaTeX 已成功编译，编译日志、目录结构、公式、图表、中文排版和 PDF 版面均已检查。
 
-- [ ] 使用统一最小模板的编译、字体与编号设置；首页校徽符合要求，缺失项已补齐。
+- [ ] 新报告已取得用户对 01—06 模板的明确选择；使用稳定编译、字体与编号设置，并保留所选版式；首页校徽符合要求，缺失项已补齐。
 - [ ] 摘要为 100—200 字，包含目的、方法、主要结果和主要结论；有真实数据时含至少一个关键数值。
 - [ ] 摘要后有 3—5 个关键词。
 - [ ] 图、表、公式均已统一编号并在正文引用；图表标题和图表引用只用中文。
@@ -302,7 +303,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 ### 既有双栏报告的版式维护记录（历史兼容）
 
-以下记录只用于维护既有双栏报告，不改变新报告采用统一单栏最小模板的默认设置。
+以下记录用于所选双栏模板和既有双栏报告的版式维护。应用时核对实际栏宽与所选模板，不将双栏参数机械套到单栏模板。
 
 用户要求：**① 保持双栏；② 表中提到“图1”的那句话之后，图1 要立刻、紧贴着出现。**
 两个要求都可以满足，做法如下（已实现并实测验收）：

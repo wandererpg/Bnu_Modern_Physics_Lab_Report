@@ -1,7 +1,12 @@
 {
   "schema_version": 1,
   "templates": [
-    "minimal"
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06"
   ],
   "files": [
     {
@@ -19,8 +24,8 @@
     {
       "path": "AGENT.md",
       "source": "AGENT.md",
-      "bytes": 907,
-      "sha256": "91e305cd29bb5f2b74560e0d7114e4867f772ebee1478adf12f25748e916d81a"
+      "bytes": 962,
+      "sha256": "bfd7d6182ac85e9c75b61d9dc42405536f9915a7d9b04ddd171fe7ff1c354baf"
     },
     {
       "path": "LICENSE",
@@ -31,14 +36,14 @@
     {
       "path": "README.md",
       "source": "README.md",
-      "bytes": 13837,
-      "sha256": "6e7a78f17fe4be06e34e83381f6738ad60f09abf4242a575936507d9e1493659"
+      "bytes": 10175,
+      "sha256": "4952478aa1f7dfd0da79d17f64b937ca1563636114229fabfb3b5aec7693a7f4"
     },
     {
       "path": "START_HERE.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/START_HERE.md",
-      "bytes": 5409,
-      "sha256": "0983375d6e4629ae925748472f3ace97c45a6177c4d524bd78d02c14183f50ba"
+      "bytes": 5852,
+      "sha256": "702f50ce07933a30120cc688a0607c380b58049f3b4f139f58cda3ebfba62297"
     },
     {
       "path": "THIRD_PARTY.md",
@@ -49,20 +54,20 @@
     {
       "path": "agents.md",
       "source": "agents.md",
-      "bytes": 5241,
-      "sha256": "bca1e17c0c5c5330c8aa5ecc6cc8b4e8090a3d3ef53fe0f763743fdb0663a686"
+      "bytes": 5311,
+      "sha256": "fdaf3fa321d7d236cfbae9b36236aebb354c535a969af4e8bb25eb3b18d3b6b2"
     },
     {
       "path": "preview.md",
       "source": "preview.md",
-      "bytes": 7763,
-      "sha256": "d6711e684223e858401a18bdaa668f8e7340f51732f4687ff4a01e976946a042"
+      "bytes": 7822,
+      "sha256": "4e1f60eaed224d3ee560e630240b7f9378449ac2e9fed641d7ffafd905987789"
     },
     {
       "path": "report.md",
       "source": "report.md",
-      "bytes": 31699,
-      "sha256": "2f4674747e4186cd378e1b7e23e24ac98ec2641c732b26446003fa93b17f2c41"
+      "bytes": 31834,
+      "sha256": "aaebaf76fca7b9737a2a8cd42a940fe28e3b346509e9fb4e0fc63fa291062cc1"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/aps_template/LICENSE",
@@ -73,8 +78,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/aps_template/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/aps_template/README.md",
-      "bytes": 6840,
-      "sha256": "06e9f44cd4810490b5738fae678d5f97e8b280545327219d82bfa12bf175bec6"
+      "bytes": 6861,
+      "sha256": "b320048ddf26da4df04879190d129137177d6d85cb347d008d2b8b9350847c56"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/aps_template/acta_physica_sinica.bst",
@@ -133,8 +138,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/README.md",
-      "bytes": 5344,
-      "sha256": "bdd935189e6120c5ec12f8f9c24889c1539b17f2946a7a7cacc851299d9b944a"
+      "bytes": 5403,
+      "sha256": "4021ee941f809966652f3e9338ed3c7eff5cd02e60364eba06a63c16a4f0786c"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/build.ps1",
@@ -169,20 +174,20 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
-      "bytes": 2928,
-      "sha256": "210298d3ce121112243e00d4cb905edb98a922df649307bd6947d2d87df0cb42"
+      "bytes": 2949,
+      "sha256": "0888cb746f4fdda23219e5c073ed60edb4236344c9093c894919b667a294ff34"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
-      "bytes": 2980,
-      "sha256": "482262e63f3ece7bb658275c41e3873747dd64854c44d58600bef17481cd4023"
+      "bytes": 3929,
+      "sha256": "77970dbb8bafa075dd3d347d16b70bbb1cb9889e0b4d064dfe12e0f64af8f40d"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
-      "bytes": 3553,
-      "sha256": "7a1d827a4dc8ec98a4ed3814808233f5bd9d6c915f51489ee6f989a31b6244ad"
+      "bytes": 3604,
+      "sha256": "662d22a1590e1d789943f0fc6f111f17496080e1f87f58492c31fb019b3881f0"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
@@ -223,44 +228,44 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
-      "bytes": 587,
-      "sha256": "784727a8687e6d9f3bd644c54319a44eefd9c2bd432d58095bf85d241047f133"
+      "bytes": 4677,
+      "sha256": "1b4a4e44fa383f3396fb6e7e9b9ac018d0f71504ddd7cf090cb06a4b27c572df"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_01_thu.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_01_thu.tex",
-      "bytes": 379,
-      "sha256": "a5a8b8bfcd17ec3635bebc8b5288d9b7a04cfeeba31aa537a8727f1d31397be9"
+      "bytes": 4252,
+      "sha256": "991a9c18f53c5239216e97dc33d7566874c19f209b9e2f05cba5d5706b873f89"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_02_physical_review.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_02_physical_review.tex",
-      "bytes": 401,
-      "sha256": "775e3039b766e62b7e01fc35e9810498c70a2adbc121eb00d6ce1a9298a01c46"
+      "bytes": 4271,
+      "sha256": "fb5cd0ab7c1d049973f66ba23d832f549557ad93a74b4153ad8e5fa7c072bdae"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_03_nature.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_03_nature.tex",
-      "bytes": 399,
-      "sha256": "4757ff1653796d3667d799c59a015471771667870f75312d0c513ed4c99901ed"
+      "bytes": 4717,
+      "sha256": "23c92eefa8a6d147ae363014e99355515db45020cadfaf098cf8d3596b98ea29"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_04_applied_physics_letters.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_04_applied_physics_letters.tex",
-      "bytes": 398,
-      "sha256": "294859d6187f7cee723a586f6feeed43eafb9e0a0fd1ab33fa622d77f0887a4b"
+      "bytes": 4471,
+      "sha256": "84de023fa8bce4282f114c04e43d983f0955d69eaab23e44c08294a4bb747f9d"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_05_journal_of_physics.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_05_journal_of_physics.tex",
-      "bytes": 393,
-      "sha256": "d712732d56174d1d895196997e9d8fea4e8f7ef2db4ab603b130641273fc473e"
+      "bytes": 4134,
+      "sha256": "17a99bf2e1c14f922451be88282a7de3fcc53ae60a80280ee94002491c67690f"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_06_he_ne.tex",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_06_he_ne.tex",
-      "bytes": 409,
-      "sha256": "0d05ad01b05c025d7c4759258a30dd0e49c6e4f16d871c43018b843b399805ac"
+      "bytes": 4209,
+      "sha256": "f895a4e889df13cac318c8bb19ba2929cd5845f453ca84d9a28a9d1cc1555652"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_minimal.tex",
@@ -289,8 +294,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/thu_template/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/thu_template/README.md",
-      "bytes": 557,
-      "sha256": "fb26be4770f26016c1783c162e318c2f4fe60aeeaf8ba388ef078d6a454b871d"
+      "bytes": 578,
+      "sha256": "7a7e1d941d8ae2364bf8b795398e5e0d5642bfc713847ac4f9067518d8c02624"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/thu_template/thuemp.cls",
@@ -301,20 +306,20 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/agents.md",
       "source": "agents.md",
-      "bytes": 5241,
-      "sha256": "bca1e17c0c5c5330c8aa5ecc6cc8b4e8090a3d3ef53fe0f763743fdb0663a686"
+      "bytes": 5311,
+      "sha256": "fdaf3fa321d7d236cfbae9b36236aebb354c535a969af4e8bb25eb3b18d3b6b2"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/preview.md",
       "source": "preview.md",
-      "bytes": 7763,
-      "sha256": "d6711e684223e858401a18bdaa668f8e7340f51732f4687ff4a01e976946a042"
+      "bytes": 7822,
+      "sha256": "4e1f60eaed224d3ee560e630240b7f9378449ac2e9fed641d7ffafd905987789"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/report.md",
       "source": "report.md",
-      "bytes": 31699,
-      "sha256": "2f4674747e4186cd378e1b7e23e24ac98ec2641c732b26446003fa93b17f2c41"
+      "bytes": 31834,
+      "sha256": "aaebaf76fca7b9737a2a8cd42a940fe28e3b346509e9fb4e0fc63fa291062cc1"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/运行规范.md",
@@ -355,20 +360,20 @@
     {
       "path": "skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py",
       "source": "skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py",
-      "bytes": 24391,
-      "sha256": "8c2d30816e0c153a2dfbc71a15ba72f70592d71da0c7ae5b9e3a13f395a55d3a"
+      "bytes": 24408,
+      "sha256": "c8e8a875398cf167c8716fa6acd5412b3ee8dce6bd5833fe07fa6fe02d334301"
     },
     {
       "path": "skills/Lab_Workflow_Generator/scripts/select_report_template.py",
       "source": "skills/Lab_Workflow_Generator/scripts/select_report_template.py",
-      "bytes": 10579,
-      "sha256": "564946f52e37adccb14aea4ffbcdc5a06127a3e804c8613ae77bc252c7b27ae8"
+      "bytes": 11111,
+      "sha256": "eab6423da3464e3079def5cbcd30a625cc9d193873badfe26ff6ee0596ab2c21"
     },
     {
       "path": "skills/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/skills_README.md",
-      "bytes": 1665,
-      "sha256": "cfb5a84f646fc009b14b4fb54e2bbfe82f73ff0101fdc6741c39fa7684ac7ce3"
+      "bytes": 2039,
+      "sha256": "a27920de08866f5ebc55b03a089fc817b842dc2319479a8809dd83cc2f85e300"
     },
     {
       "path": "运行规范.md",

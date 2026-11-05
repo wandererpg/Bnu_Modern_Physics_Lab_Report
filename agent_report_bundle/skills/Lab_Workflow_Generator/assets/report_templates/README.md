@@ -1,35 +1,47 @@
-# 统一最小实验报告模板
+# 六种实验报告模板
 
-当前唯一注册模板为 `minimal`，源文件 `template_minimal.tex`。它将已验证的最小 LaTeX 基础与实验报告内容要求结合，不依赖六套旧版式、自定义文档类或 metadata/body 分片。
+制作新报告前，先展示六种样式并询问用户选择。用户已为本份报告明确选择或正在维护已有报告时沿用，不重复询问；没有选择不生成默认骨架。
 
-## 部署与填写
+| 编号 | 名称 | 主要差异 |
+| --- | --- | --- |
+| 01 | 清华课程双栏 | 居中题头、传统双栏；11pt、1.5 倍行距 |
+| 02 | Physical Review 风格 | 紧凑双栏、栏间细线；10pt、1.3 倍行距 |
+| 03 | Nature 风格 | 大标题、浅色摘要；引言单栏、原理起双栏、附录单栏 |
+| 04 | Applied Physics Letters 风格 | 单栏、浅色题头、无首行缩进、段间留白 |
+| 05 | Journal of Physics 风格 | 独立题头摘要页；12pt、较大字号及行距 |
+| 06 | He-Ne 原报告单栏 | 黑白单栏、1.5 倍行距、题目页眉、就地图表 |
+
+六种都是课程排版样式。01、02 双栏，03 混排，04—06 单栏；保留各自题头、字号、段落与行距。共同采用 A4、25mm 页边距、XeLaTeX、标准 ctexart、Fandol 与 Latin Modern、自动阿拉伯章节编号，避免旧自定义类和系统字体硬依赖。03、04、06 为 11pt、1.5 倍行距；05 为 12pt、1.5 倍行距。
+
+## 调用和填写
 
 ```powershell
 python skills/Lab_Workflow_Generator/scripts/select_report_template.py --list-templates
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template minimal
+# 用户已选择 03 后：
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template 03
 ```
 
-省略 `--template` 时，新报告默认 minimal。也可直接运行选择脚本安装实验报告骨架；预习报告由 Agent 按 `preview.md` 完成。正文、信息、摘要和参考文献直接编辑 `<实验标题>/lab_report/lab_report.tex`；校徽位于 `assets/bnu_logo.png`，缺失时有待补充提示。生成的 `template_selection.json` 记录来源与主文件摘要，用于覆盖保护，不是报告内容验收记录。
+也可以在对话中直接说“用 03 Nature 风格制作这份报告”；尚未指定时 Agent 会先询问。CLI 新报告必须显式提供 01—06 之一或注册表中的名称/别名；不在终端里阻塞询问。`minimal` 只用于 [故障诊断](../minimal_latex/README.md)。
 
-## 内容与版式
+安装后的主文件为 `<实验标题>/lab_report/lab_report.tex`；基本信息、摘要、正文和文献在这一个文件中填写。校徽位于 `assets/bnu_logo.png`，缺失时允许草稿编译并提示补充。`template_selection.json` 记录选择与来源，用于内容保护，不代表内容已验收。
 
-以根目录 `report.md` 为准：A4单栏、11pt、25mm页边距、约1.5倍行距；两行基本信息、首页校徽、100—200字中文摘要、3—5个中文关键词、引言/原理/结果与分析讨论/实验总结/参考文献五个顶层章节。英文摘要和对应关键词紧接参考文献。附录只按需包含程序、推导等非实验数据材料，原始数据独立保存在本地。
+03 的双栏正文由 `multicols` 管理，栏内图表使用 `figure[H]`、`table[H]` 就地放置；通栏图表应置于双栏环境之外，再恢复双栏。不要在多栏环境里使用会被延后的普通浮动体。
 
-模板固定 XeLaTeX，使用标准 ctexart、Fandol 和 Latin Modern 字体；标准章节命令产生 `1`、`1.1` 编号。编辑器提示不代替实际引擎设置。缺少发行版字体包时安装相应包，不猜测系统字体名。
+六种模板都遵守 `report.md` 的实验内容要求：两行信息、100—200 字中文摘要、3—5 个关键词、引言两段、原理三个子标题、结果与分析讨论、总结、上角标文献引用、参考文献后的英文摘要及关键词。缺少数据时标记待补充，不虚构。
 
-## 编译与检查
+## 编译和检查
 
 ```powershell
 python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage check
 python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage compile
 ```
 
-两遍 XeLaTeX 解析编号和引用；只有实际使用外部文献库时才增加 BibTeX。真实文献可直接使用主文件的 thebibliography，引用保持上角标顺序编号；待补充文献不能编成虚构条目。编译使用新 `build/run-<唯一标识>/`，全部成功后更新报告目录 PDF，失败保留日志。
+普通文档两遍 XeLaTeX，实际使用外部 `.bib` 才运行 BibTeX 并完成后续两遍 XeLaTeX。每轮辅助文件位于独立 `build/run-<唯一标识>/`；全部成功、日志检查通过且最终 PDF 非空后才更新报告目录 PDF，失败保留旧成品。
 
-模板只保证骨架可编译，不保证报告内容完成；填完后按 `report.md` 检查数据、摘要、讨论、文献并查看最终 PDF。字体、编号或输出异常时，先运行[独立分项诊断](../minimal_latex/README.md)。
+需要排查引擎、字体和章节编号时使用 `../minimal_latex/build.ps1 -Verify`，该诊断模板不是报告样式选择。
 
-## 旧报告兼容
+## 已有报告和来源
 
-原六套样板不再注册为新报告入口；资产保留供既有报告维护，历史设计来源见 [SOURCES.md](SOURCES.md)。已有正文、元信息、数据、文献和手改主文件均保留。旧选择记录不自动迁移；显式迁移须先完成内容对照与副本保存，不以空骨架替换旧文件。
+已有主文件、旧分片结构、记录和手工修改均保留；选择新样式不等于授权用空骨架覆盖旧稿。明确迁移前先保存原稿，核对正文、信息、数据与文献，随后编译并复核版面。
 
-通用模板与说明可进入 Git。实验讲义、数据、报告、图片、脚本及编译成果仅本地保存。
+六种当前入口是重构后的自包含版本；旧 `common.tex`、`layout_v2.tex`、`layout_06_he_ne.tex`、`metadata.tex`、`body.tex` 与旧文档类保留供历史报告维护，新六模板不依赖这些旧分片。来源与课程适配边界见 [SOURCES.md](SOURCES.md)，旧 06 实现的设计记录见 [DESIGN_06.md](DESIGN_06.md)。

@@ -1,11 +1,102 @@
 % !TEX program = xelatex
-% 模板06：从现有 He-Ne 报告提炼的黑白单栏课程样式。
-% 沿用原报告的 ctex 自动字体选择；Windows 下为宋体/黑体。
-\documentclass[UTF8,a4paper,10pt]{ctexart}
-\newcommand{\ReportTemplateID}{6}
-\input{report_template/layout_06_he_ne}
-\input{report_template/metadata}
+% 06 He-Ne 原报告单栏; single-source stable XeLaTeX variant.
+% Fill only from the lecture and real measurements; no system-font dependency.
+\RequirePackage{iftex}
+\RequireXeTeX
+\documentclass[UTF8,a4paper,11pt,fontset=fandol,scheme=plain]{ctexart}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage[numbers,super,sort&compress]{natbib}
+\linespread{1.5}
+\setcounter{secnumdepth}{2}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\ctexset{section={name={,}},subsection={name={,}}}
+% natbib's public heading hook keeps real references as numbered section 5.
+\renewcommand{\bibsection}{\section{参考文献}}
+
+\newcommand{\ReportTitle}{实验题目}
+\newcommand{\ReportBlank}[1]{\makebox[#1]{\hrulefill}}
+\newcommand{\ReportTODO}[1]{\textbf{待补充：}#1}
+\newif\ifReportLogo
+\IfFileExists{assets/bnu_logo.png}{\ReportLogotrue}{\ReportLogofalse}
+\ifReportLogo
+  % First page only; 70mm wide, 20mm left of the text margin; no flow space.
+  \AddToShipoutPictureFG*{\AtPageUpperLeft{%
+    \put(\LenToUnit{5mm},\LenToUnit{-8mm}){%
+      \raisebox{-\height}{\includegraphics[width=7cm]{assets/bnu_logo.png}}}}}
+\else
+  \PackageWarningNoLine{lab-report}{Logo missing: assets/bnu_logo.png; draft only}
+\fi
+
+\title{\ReportTitle}
+\author{作者：\ReportBlank{2.4cm}\quad 学号：\ReportBlank{3.0cm}\\
+        指导老师：\ReportBlank{2.0cm}\quad 实验时间：\ReportBlank{2.6cm}}
+\date{}
+
+
+\makeatletter
+\newcommand{\ReportInfo}{\@author}
+\makeatother
+\usepackage{fancyhdr}
+\usepackage{float}
+\setlength{\headheight}{17pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\ReportTitle}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
 \begin{document}
-\MakeReportFrontMatter
-\input{report_template/body}
+\maketitle\thispagestyle{plain}
+\noindent\ReportTODO{当前为模板草稿，请根据讲义与真实记录填写。}
+\ifReportLogo\else
+  \par\noindent\ReportTODO{首页校徽缺失，请补充 assets/bnu_logo.png。}
+\fi
+
+\begin{center}\textbf{摘\quad 要}\end{center}
+\ReportTODO{用100—200字说明目的、方法、主要结果与结论；有真实结果时给出关键数值及单位。}
+\par\noindent\textbf{关键词：}\ReportTODO{填写3—5个中文关键词，用分号分隔。}
+
+\section{引言}\label{sec:introduction}
+\ReportTODO{第一段：实验背景、研究对象及意义。}
+
+\ReportTODO{第二段：本次实验目的、测量对象与实验思路。}
+
+\section{原理}\label{sec:principle}
+\subsection{实验原理}
+\ReportTODO{必要原理、公式、物理量定义、单位及适用条件。}
+\subsection{实验装置}
+\ReportTODO{装置组成、连接方式及必要示意图。}
+\subsection{实验方法}
+\ReportTODO{实际操作、测量条件、数据处理方法。}
+
+\section{结果与分析讨论}\label{sec:results}
+\ReportTODO{由真实数据生成图表，先写结果，再分析规律、物理解释及误差；保留异常值与来源。}
+
+\section{实验总结}\label{sec:conclusion}
+\ReportTODO{主要结果、结论及至少两条有依据的改进建议。}
+
+\section{参考文献}
+\ReportTODO{填写3—6条实际查阅且可核实的文献；正文用 cite 命令作上标顺序引用。}
+% Once real references are available, replace the preceding section and TODO
+% with thebibliography (natbib supplies numbered section 5 via bibsection):
+% \begin{thebibliography}{99}
+% \bibitem{verified-source} <actual source, formatted to GB/T 7714-2015>
+% \end{thebibliography}
+% Do not insert invented sources or leave sample bibitems in a finished report.
+
+\par\bigskip\noindent\begin{minipage}{\linewidth}
+\section*{Abstract}
+\ReportTODO{忠实翻译中文摘要，不增加没有依据的结果。}
+\par\noindent\textbf{Keywords: }\ReportTODO{与中文关键词对应的英文关键词。}
+\end{minipage}\par
+
+% Optional unnumbered appendix: programs, derivations or other non-data material.
+% \section*{附录：程序与补充说明}
 \end{document}

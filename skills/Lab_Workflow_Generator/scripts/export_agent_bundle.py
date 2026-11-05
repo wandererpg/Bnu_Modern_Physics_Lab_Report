@@ -30,9 +30,9 @@ def is_link(path):
 def export():
     registry = json.loads((SKILL / "assets/report_templates/registry.json").read_text(
         encoding="utf-8-sig"))
-    if registry.get("default") != "minimal" or {
-            entry["id"] for entry in registry["templates"]} != {"minimal"}:
-        raise ValueError("Expected the unified minimal template as the only active entry")
+    if registry.get("default") not in (None, "") or {
+            entry["id"] for entry in registry["templates"]} != {f"{i:02d}" for i in range(1, 7)}:
+        raise ValueError("Expected six report templates with explicit user selection")
     files = {Path(name): WORKSPACE / name for name in DOCS}
     files[Path(".gitignore")] = WORKSPACE / ".gitignore"
     files[Path(".gitattributes")] = SKILL / "assets/agent_bundle/.gitattributes"
@@ -46,9 +46,9 @@ def export():
         files[SKILL_REL / "scripts" / name] = SKILL / "scripts" / name
     assets = (
         "registry.json", "common.tex", "layout_v2.tex", "layout_06_he_ne.tex",
-        "metadata.tex", "body.tex", "references.bib", "README.md",
+        "metadata.tex", "body.tex", "references.bib", "template_minimal.tex", "README.md",
         "SOURCES.md", "DESIGN_06.md",
-        # Keep historical assets for existing reports; only minimal is registered.
+        # Keep current six entry points and historical dependencies for existing reports.
         "template_01_thu.tex", "template_02_physical_review.tex",
         "template_03_nature.tex", "template_04_applied_physics_letters.tex",
         "template_05_journal_of_physics.tex", "template_06_he_ne.tex",

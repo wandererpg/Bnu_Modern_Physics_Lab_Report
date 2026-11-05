@@ -46,6 +46,6 @@
 ## 5. 数据使用建议
 
 - **扩展实验**：在 `experiment_library.json` 中新增条目，并在 `style_profile.json` 的 `experiment_mapping` 增加关键词/公式/拟合/误差映射；
-- **当前模板**：新报告使用 `assets/report_templates/template_minimal.tex`，章节内容以 `report.md` 和教师要求为准；历史画像的 `recommended_chapters` 只用于样本追溯，不作为换模板入口；
+- **当前模板**：新报告先请用户针对本份报告明确选择01—06六种模板，本份已有选择/记录或用户明确要求沿用上一份样式时不重复询问；其他实验的样式不得自动套用。章节内容以 `report.md` 和教师要求为准；历史画像的 `recommended_chapters` 只用于样本追溯，不作为换模板入口；
 - **重新训练**：更换 `report/`、`refer/`、`require/` 语料后，重新执行“阶段2 风格分析与知识抽取”流程，再用新 JSON 更新 SKILL.md；
 - **保持可追溯**：修改后建议在 README 或 CHANGELOG 记录训练数据版本。

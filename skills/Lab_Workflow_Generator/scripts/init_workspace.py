@@ -9,7 +9,7 @@ Visible layout (deliberately minimal — users only ever touch these):
         <实验标题>.pdf           # 讲义
         data/                    # ← 把实验数据丢这里（CSV/Excel/图片/txt）
         preview_report/          # 预习报告（纯内容）
-        lab_report/              # 实验报告（最小模板主文件，单文件填写）
+        lab_report/              # 实验报告（所选稳定模板主文件，单文件填写）
 
 Working sub-directories (figures/ scripts/ tables/ build/) are created later by
 `run_lab_workflow.py` when generation actually starts.
@@ -88,10 +88,9 @@ def safe_title(t: str) -> str:
 
 def ship_files(exp: Path, template: str | None = None) -> None:
     lab = exp / "lab_report"
-    lab.mkdir(parents=True, exist_ok=True)
+    install_report_template(lab, template, exp.name, allow_legacy=True)
     exp.joinpath("data").mkdir(parents=True, exist_ok=True)
     exp.joinpath("preview_report").mkdir(parents=True, exist_ok=True)
-    install_report_template(lab, template, exp.name, allow_legacy=True)
     src = SHIP / "scaffold_template" / "data_README.md"
     dst = exp / "data" / "README.md"
     if src.is_file() and not dst.exists():
@@ -105,7 +104,7 @@ def main() -> int:
     ap.add_argument("--experiments", help="comma-separated experiment folder names")
     ap.add_argument("--title-map", help="JSON {lecture_filename: title} for scanned lectures")
     ap.add_argument("--force", action="store_true", help="overwrite an existing lecture PDF")
-    ap.add_argument("--template", help="minimal 或注册别名；新实验默认 minimal，已有报告保留原文")
+    ap.add_argument("--template", help="模板 01–06 或注册别名；新报告先询问并明确选择，已有报告沿用记录")
     ap.add_argument("--list-templates", action="store_true", help="列出模板后退出，不创建工作区")
     a = ap.parse_args()
     if a.list_templates:
