@@ -2,7 +2,7 @@
 
 ## 当前工作区格式约定
 
-生成的报告须遵循工作区根目录的 report.md：引言恰好两段；“二、原理”下设“实验原理”“实验装置”“实验方法”，方法按实际步骤设子子标题；结果章节后以“实验总结”收尾；正文引用使用上角标，图表标题及图表引用只用中文；英文摘要和英文关键词放在参考文献之后；原始数据及完整实验记录另存本地，不列入报告附录。若本文件夹中的历史训练画像与该规范不同，以 report.md 和当前教师要求为准。
+生成的报告须遵循工作区根目录的 report.md：引言恰好两段；第2节“原理”下设“实验原理”“实验装置”“实验方法”，方法按实际步骤设子子标题；结果章节后以“实验总结”收尾；正文引用使用上角标，图表标题及图表引用只用中文；英文摘要和英文关键词放在参考文献之后；原始数据及完整实验记录另存本地，不列入报告附录。若本文件夹中的历史训练画像与该规范不同，以 report.md 和当前教师要求为准。
 
 ![Version](https://img.shields.io/badge/version-3.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -30,10 +30,14 @@ Advanced Lab Report Generator 是一个基于 Codex/Harness 平台的专属 Skil
 - **数据处理自动化**：自动完成线性/非线性拟合、误差传递、信噪比计算
 - **风格锚定**：基于 17 份有效样本（学生A、学生B、学生C），生成符合当前项目规范及教师明确要求的报告
 - **反面案例过滤**：自动检测并重写“要点式 / 无图注 / 摘要无数值”等常见缺陷
-- **双格式输出**：Markdown + PDF（依赖 xelatex）
+- **正式输出**：自包含的 `lab_report.tex` + PDF；Markdown 可作为额外阅读稿，正式编译采用 minimal + XeLaTeX
 - **样本不足警告**：对样本少的实验（激光模式分析、干涉滤光片）自动提示人工复核
-- **含修订的 v3.1 口径**：顶层章节对齐老师小论文格式（「四、结果与分析讨论」为**合并章节**）、摘要 100–200 字、参考文献 3–6 条；相对误差为硬性要求，R²/残差与不确定度为「使用则须给出」的条件项；附录仅按需保留程序或推导，原始实验数据独立保存；数据溯源声明**双落点**（正文灰框 + `data/README.md`）
-- **配套工作流（推荐）**：与 `Lab_Workflow_Generator` 配合可工程化「讲义 → 脚手架 → 图表/正文 → PDF」。该工作流提供 `run_lab_workflow.py`（目录/绘图/BibTeX/编译）、`make_data_tables.py`（由 `data/*.csv` 生成本地三线表片段，正文按需选用）与 `check_report_tex.py`（图/表题注、引用可解析、章节完整性校验）
+- **含修订的 v3.1 口径**：顶层章节对齐老师小论文格式（“结果与分析讨论”为**合并章节**）、摘要 100–200 字、参考文献 3–6 条；相对误差为硬性要求，R²/残差与不确定度为「使用则须给出」的条件项；附录仅按需保留程序或推导，原始实验数据独立保存；数据溯源声明**双落点**（正文灰框 + `data/README.md`）
+- **配套工作流（推荐）**：与 `Lab_Workflow_Generator` 配合可工程化「讲义 → 脚手架 → 图表/正文 → PDF」。该工作流提供 `run_lab_workflow.py`（目录/绘图/按需文献处理/XeLaTeX 编译）、`make_data_tables.py`（由 `data/*.csv` 生成本地三线表片段，正文按需选用）与 `check_report_tex.py`（图/表题注、引用可解析、章节完整性校验）
+
+### 当前模板与编译
+
+新报告唯一注册模板为 `minimal`，别名 `default`、`默认`、`最小`；`--template minimal` 可省略。直接填写 `lab_report/lab_report.tex`，不再使用 metadata/body 或 lab-assist 分片。采用 `ctexart[UTF8,fontset=fandol,scheme=plain]`、Fandol/Latin Modern 与标准无星号章节命令，编号为 `1`、`1.1`。XeLaTeX 编译两遍，辅助文件集中到 `build/`；真实 `.bib` 库才启动相应文献流程。已有报告和手改文件保留，历史模板仅用于兼容。
 
 ### 适用实验（9个）
 
@@ -66,8 +70,8 @@ cp -r advanced_lab_report_gen-skill ~/.codex/skills/advanced_lab_report_gen/
 
 - Codex/Harness 环境
 - Python 3.11+（pandas、numpy、scipy、matplotlib、uncertainties）
-- TeX Live / xelatex（用于 PDF 编译）
-- lab-report-writer 和 lab-assist 两个基础 Skill（安装方式见文档）
+- TeX Live / XeLaTeX、ctex、Fandol 和 Latin Modern（用于 minimal PDF 编译，不依赖系统中文字体）
+- `Lab_Workflow_Generator`（推荐，用于 minimal 脚手架、检查与编译）；lab-report-writer/lab-assist 仅为可选旧流程扩展
 
 ### 示例
 
@@ -98,7 +102,7 @@ The **Advanced Lab Report Generator** is a Codex/Harness Skill that automaticall
 - Built-in data processing: linear/nonlinear fitting, error propagation, SNR calculation
 - Style anchoring from 17 validated reports (Wei Tianxiang, Zhang Ziyang, Li Renzhi)
 - Counterexample filtering against bullet-point style, missing captions, and value-free abstracts
-- Markdown + PDF output (xelatex)
+- Self-contained `lab_report.tex` + PDF output using the minimal XeLaTeX template; Markdown is optional
 - Sample-size warnings for low-coverage experiments
 
 ### Quick Start

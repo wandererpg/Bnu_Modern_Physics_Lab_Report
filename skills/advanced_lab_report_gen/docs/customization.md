@@ -4,13 +4,7 @@
 
 ## 1. 更新章节模板
 
-修改 `training_output/style_profile.json` 中的 `recommended_chapters`（顺序、`required`、`word_count`），然后把对应内容同步到 `SKILL.md` §2.1 的表格。强制章节缺失会导致报告被判不合格，请保留 PPT 要求的核心章节。
-
-示例：把“实验总结”字数要求调高：
-
-```json
-{"name": "实验总结（总结）", "required": true, "word_count": "200-300字", "note": "总结+建议"}
-```
+新报告以工作区 `report.md`、当前教师要求和 `assets/report_templates/template_minimal.tex` 为准；正文直接写入 `lab_report/lab_report.tex`。章节使用标准无星号命令与 `1`、`1.1` 编号，不再把历史训练画像的 `recommended_chapters` 当作当前结构模板。更新通用内容要求时同步规范副本，保留校徽、中文摘要和关键词、末尾英文摘要和关键词。
 
 ## 2. 新增实验
 
@@ -39,14 +33,11 @@
 
 ## 5. 修改输出格式
 
-默认输出 Markdown + PDF：
+正式输出为自包含的 LaTeX 源文件 `lab_report.tex` 和编译成功的 PDF，Markdown 或 DOCX 仅为按需阅读副本。新报告默认部署 `assets/report_templates/template_minimal.tex`，不拆成 metadata/body 或 lab-assist 的信息、记录和总结文件。
 
-- **Markdown**：由 SKILL.md §3 步骤4 直接生成；
-- **PDF**：通过 lab-assist 接口（00_info / 01_lab_record / 02_summary + main.tex）调用 xelatex 两遍编译；
-- **DOCX**：OfficeCLI 可用时由 lab-report-writer 生成 docx 副本；也可用 `python-docx` 编写转换脚本；
-- **纯 LaTeX**：跳过 Markdown 中间层，直接写 main.tex（需额外维护模板宏与目录结构）。
+最小模板采用 XeLaTeX、`ctexart[UTF8,fontset=fandol,scheme=plain]`、Fandol 和 Latin Modern。辅助文件集中在 `build/`，无文献库时编译两遍即可；使用真实 `.bib` 文献库时再执行相应文献编译流程。引擎、字体或编号问题用 `assets/minimal_latex/build.ps1 -Verify` 分项诊断，正式报告仍须另做内容和 PDF 检查。
 
-修改位置：SKILL.md §6“编译逻辑”与 lab-assist 的 `assets/experiment-template/main.tex`。修改后建议用一份真实/拟真数据跑通全流程再发布。
+修改已有报告前备份并保留手改内容，不用新模板空骨架覆盖旧稿；历史模板只兼容已有报告。
 
 ## 6. 工作流层定制（配合 Lab_Workflow_Generator）
 
@@ -54,7 +45,7 @@
 
 | 想改什么 | 修改位置 |
 | --- | --- |
-| 报告版式（页边距/行距/中文标题编号/校徽 上角标引用/中文图题/siunitx） | `assets/scaffold_template/report_preamble.tex` |
+| 报告版式（页边距、行距、1/1.1章节编号、校徽、上角标引用和中文图题） | `assets/report_templates/template_minimal.tex`；具体报告直接改 `lab_report.tex` |
 | 本地数据表片段生成、正文按需选用（列对齐、转义、行数截断、汇总） | `scripts/make_data_tables.py` |
 | 报告源校验（题注、悬空/孤儿引用、必需章节、摘要长度） | `scripts/check_report_tex.py` |
 | 工作区目录约定与执行流程 | 该 Skill `SKILL.md` §3/§5 |

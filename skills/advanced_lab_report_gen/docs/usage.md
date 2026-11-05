@@ -30,16 +30,17 @@
 每次生成默认输出三个文件（实验名使用标准名，如 `塞曼效应`）：
 
 ```text
-outputs/[实验名称]_report.md            # Markdown 源
-outputs/[实验名称]_report.pdf           # xelatex 编译结果（若编译成功）
-outputs/[实验名称]_generation_log.md    # 生成日志
+<实验名称>/lab_report/lab_report.tex   # 自包含正式源文件
+<实验名称>/lab_report/lab_report.pdf   # XeLaTeX 编译成功后的 PDF
+<实验名称>/lab_report/build/           # 编译辅助文件
+<实验名称>/generation_log.md           # 生成日志；Markdown 阅读稿按需另存
 ```
 
 生成日志包含：实验识别结果与置信度、样本状态、数据处理结果、反面风格过滤记录、编译记录。
 
 ## 当前报告结构
 
-输出时以工作区 report.md 为准：中文摘要和中文关键词位于正文前；引言恰好两段；“二、原理”下设置实验原理、实验装置、实验方法，方法按实际步骤设置子子标题；正文顶层章节依次为引言、原理、结果与分析讨论、实验总结、参考文献。英文摘要和英文关键词紧接参考文献。引用使用上角标，图表标题及正文图表引用只用中文。历史训练画像只描述历史样本，不覆盖当前结构。
+输出时以工作区 report.md 为准：中文摘要和中文关键词位于正文前；引言恰好两段；第2节“原理”下设置实验原理、实验装置、实验方法，方法按实际步骤设置子子标题；正文顶层章节依次为引言、原理、结果与分析讨论、实验总结、参考文献。英文摘要和英文关键词紧接参考文献。引用使用上角标，图表标题及正文图表引用只用中文。历史训练画像只描述历史样本，不覆盖当前结构。
 
 ## 4. 交互流程
 
@@ -49,8 +50,8 @@ outputs/[实验名称]_generation_log.md    # 生成日志
 4. 自动完成数据处理（拟合、误差、信噪比等）并在日志中给出依据；
 5. 按章节/摘要/讨论模板撰写报告；
 6. 执行反面风格过滤；
-7. 拆分 Markdown 到 lab-assist 接口（00_info / 01_lab_record / 02_summary），xelatex 两遍编译；
-8. 输出三个文件。
+7. 默认选择 minimal，直接填写自包含的 lab_report/lab_report.tex；标准章节编号为1/1.1，XeLaTeX两遍编译，缓存集中到build/；真实.bib文献库按需执行文献流程；
+8. 核对源文件、PDF和日志，保留已有报告及手改源，不用空骨架覆盖旧稿。
 
 ## 5. 会话示例
 
@@ -72,7 +73,7 @@ outputs/[实验名称]_generation_log.md    # 生成日志
 
 | 想改什么 | 修改位置 |
 | --- | --- |
-| 章节顺序/字数要求 | SKILL.md §2.1（对应 `style_profile.json` 的 `recommended_chapters`） |
+| 当前章节与版式 | 工作区 `report.md`、教师要求及 `assets/report_templates/template_minimal.tex`；历史画像不覆盖当前结构 |
 | 摘要模板 | SKILL.md §2.2（`abstract_template`） |
 | 讨论框架 | SKILL.md §2.3（`discussion_template`） |
 | 实验映射/公式/拟合/误差 | SKILL.md §2.4（`experiment_mapping` + `experiment_library.json`） |
@@ -88,7 +89,7 @@ outputs/[实验名称]_generation_log.md    # 生成日志
 | --- | --- |
 | 实验识别失败 | 手动输入实验名称 |
 | Python 计算失败 | 自动重试 3 次；仍失败标注“待补充数据” |
-| PDF 编译失败 | 输出 Markdown 版并附 LaTeX 错误摘要 |
+| PDF 编译失败 | 保留 `lab_report.tex` 并附首个 LaTeX 错误；用 `assets/minimal_latex/build.ps1 -Verify` 分项诊断，Markdown 阅读稿按需提供 |
 | 反例风格被检测到 | 自动重写并记录到日志 |
 
 ## 8. 历史版本 v3.1 口径（仅供追溯）

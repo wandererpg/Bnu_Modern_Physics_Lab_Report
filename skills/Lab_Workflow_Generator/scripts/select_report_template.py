@@ -4,12 +4,12 @@
 
 Examples:
   python select_report_template.py --list-templates
-  python select_report_template.py --workspace . --experiment "实验标题" --template 03
-  python select_report_template.py --workspace "实验标题" --template nature
+  python select_report_template.py --workspace . --experiment "实验标题" --template minimal
+  python select_report_template.py --workspace "实验标题" --template minimal
 
 The generated lab_report.tex is managed by a recorded SHA-256. User-edited or
 legacy master files require an explicit AI migration; this script never replaces
-them. Body, metadata, bibliography and common layout files are copied only once.
+them. The current minimal template keeps information and body in a single source.
 """
 
 import argparse
@@ -25,7 +25,6 @@ from pathlib import Path
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 TEMPLATE_ASSETS = ASSETS / "report_templates"
 SELECTION_FILE = "template_selection.json"
-COMMON_FILES = ("common.tex", "layout_v2.tex", "layout_06_he_ne.tex", "metadata.tex", "body.tex", "references.bib")
 
 
 class TemplateSelectionError(ValueError):
@@ -127,83 +126,63 @@ def install_report_template(lab_dir: Path, template: str | None = None,
                             experiment_title: str | None = None,
                             allow_legacy: bool = False,
                             asset_root: Path | None = None) -> dict | None:
-    """Deploy a selected master while preserving all user content.
+    """Install the current single-source template without replacing real reports.
 
-    Explicit selection wins over template_selection.json, then registry default.
-    With allow_legacy and no explicit selection, existing untracked or edited
-    masters remain untouched so older runner invocations can still compile them.
+    Legacy records and user-edited masters are preserved by normal runner calls.
+    Moving an existing report to the current template requires content migration.
     """
     lab = Path(lab_dir).resolve()
     master = lab / "lab_report.tex"
     selection = read_selection(lab)
     tracked_hash = selection.get("installed_master_sha256") if selection else None
     existing_hash = sha256(master) if master.exists() else None
-    untracked = existing_hash is not None and not tracked_hash
-    edited = existing_hash is not None and tracked_hash and existing_hash != tracked_hash
-    if untracked or edited:
-        reason = "既存的非托管 LaTeX 主文件" if untracked else "用户已修改的 LaTeX 主文件"
-        if allow_legacy and template is None:
-            print(f"[template] 保留{reason}：{master}；如需换版式，请先由 AI 迁移正文。")
-            return selection
-        raise TemplateSelectionError(
-            f"拒绝覆盖{reason}：{master}。请让 AI 先审查并迁移该报告，"
-            "保留现有正文、数据和元信息后再选择模板。"
-        )
-
     root = Path(asset_root) if asset_root is not None else TEMPLATE_ASSETS
     registry = load_registry(root)
+    current_ids = {entry["id"] for entry in registry["templates"]}
+    legacy = selection is not None and selection["id"] not in current_ids
+    edited = existing_hash is not None and (not tracked_hash or existing_hash != tracked_hash)
+    if existing_hash is not None and (legacy or edited):
+        reason = "旧模板报告" if legacy else "既有或手动修改的报告"
+        if allow_legacy and template is None:
+            print(f"[template] 保留{reason}：{master}；迁移到最小模板须先完整保留正文与数据。")
+            return selection
+        raise TemplateSelectionError(
+            f"拒绝以空骨架覆盖{reason}：{master}。请先由 AI 审查并迁移正文、信息、文献和数据。"
+        )
+    if legacy:
+        raise TemplateSelectionError(
+            f"旧模板记录 {selection['id']} 的主文件缺失：{master}。请先恢复报告或显式完成内容迁移。"
+        )
     entry = resolve_template(registry, template if template is not None else
                              (selection["id"] if selection else None))
     source = root / entry["source"]
-    required = [source, *(root / name for name in COMMON_FILES),
-                ASSETS / "branding" / "bnu_logo.png"]
-    if entry["id"] == "01":
-        required.append(ASSETS / "thu_template" / "thuemp.cls")
-    missing = [str(path) for path in required if not path.is_file()]
-    if missing:
-        raise TemplateSelectionError("模板资产缺失：" + "；".join(missing))
+    if not source.is_file():
+        raise TemplateSelectionError(f"模板资产缺失：{source}")
     master_text = source.read_text(encoding="utf-8-sig")
-    metadata_text = (root / "metadata.tex").read_text(encoding="utf-8-sig")
     if experiment_title:
-        metadata_text = re.sub(
+        master_text = re.sub(
             r"\\newcommand\{\\ReportTitle\}\{实验题目\}",
             lambda _: r"\newcommand{\ReportTitle}{" + _tex_escape(experiment_title) + "}",
-            metadata_text, count=1,
+            master_text, count=1,
         )
-
-    # All asset and overwrite checks precede filesystem changes.
+    # Validate selection, assets and overwrite safety before filesystem changes.
     lab.mkdir(parents=True, exist_ok=True)
     for directory in ("data", "figures", "scripts", "tables", "build"):
         (lab / directory).mkdir(parents=True, exist_ok=True)
-    content = lab / "report_template"
-    content.mkdir(parents=True, exist_ok=True)
-    for name in COMMON_FILES:
-        target = content / name
-        if not target.exists():
-            if name == "metadata.tex":
-                _atomic_write(target, metadata_text)
-            else:
-                shutil.copyfile(root / name, target)
-    branding = lab / "assets"
-    branding.mkdir(parents=True, exist_ok=True)
-    logo = branding / "bnu_logo.png"
-    if not logo.exists():
-        shutil.copyfile(ASSETS / "branding" / "bnu_logo.png", logo)
-    if entry["id"] == "01" and not (lab / "thuemp.cls").exists():
-        shutil.copyfile(ASSETS / "thu_template" / "thuemp.cls", lab / "thuemp.cls")
-    # Check again immediately before replacing the managed master.
+    logo_source = ASSETS / "branding" / "bnu_logo.png"
+    logo = lab / "assets" / "bnu_logo.png"
+    if logo_source.is_file() and not logo.exists():
+        logo.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(logo_source, logo)
     if master.exists() and sha256(master) != existing_hash:
         raise TemplateSelectionError(f"报告在安装期间发生修改，已停止主文件替换：{master}")
     _atomic_write(master, master_text)
     record = {
-        "schema_version": 1,
-        "id": entry["id"], "name": entry["name"], "source": entry["source"],
-        "installed_master_sha256": sha256(master),
+        "schema_version": 2, "id": entry["id"], "name": entry["name"],
+        "source": entry["source"], "installed_master_sha256": sha256(master),
+        "columns": entry.get("columns", 1), "layout": entry.get("layout", "single-column"),
+        "layout_version": entry.get("layout_version", registry.get("version", 1)),
     }
-    if "columns" in entry:
-        record["columns"] = entry["columns"]
-    record["layout"] = entry.get("layout", "two-column")
-    record["layout_version"] = entry.get("layout_version", registry.get("version", 1))
     _atomic_write(lab / SELECTION_FILE, json.dumps(record, ensure_ascii=False, indent=2) + "\n")
     print(f"[template] {entry['id']} {entry['name']} -> {master}")
     return record
@@ -228,7 +207,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", default=".", help="实验目录；配合 --experiment 可传工作区根目录")
     parser.add_argument("--experiment", help="工作区根目录下的实验名称")
-    parser.add_argument("--template", help="模板编号 01–06 或注册别名；省略时沿用记录，否则使用默认 01")
+    parser.add_argument("--template", help="minimal 或注册别名；新报告默认 minimal，既有报告须保留内容后迁移")
     parser.add_argument("--list-templates", action="store_true", help="列出模板编号、名称和别名后退出")
     args = parser.parse_args()
     try:

@@ -1,12 +1,7 @@
 {
   "schema_version": 1,
   "templates": [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06"
+    "minimal"
   ],
   "files": [
     {
@@ -24,8 +19,8 @@
     {
       "path": "AGENT.md",
       "source": "AGENT.md",
-      "bytes": 653,
-      "sha256": "b69cfa24551d3f0cedca05fcc42ba4a05f1ddab71a252344117792b1d3bef32d"
+      "bytes": 907,
+      "sha256": "91e305cd29bb5f2b74560e0d7114e4867f772ebee1478adf12f25748e916d81a"
     },
     {
       "path": "LICENSE",
@@ -36,14 +31,14 @@
     {
       "path": "README.md",
       "source": "README.md",
-      "bytes": 15293,
-      "sha256": "2ec0d98e96728db037ab49521693d49975a253ee53db5d44212ba1eff8f575bc"
+      "bytes": 13837,
+      "sha256": "6e7a78f17fe4be06e34e83381f6738ad60f09abf4242a575936507d9e1493659"
     },
     {
       "path": "START_HERE.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/START_HERE.md",
-      "bytes": 4987,
-      "sha256": "b6cdacd70f72b73c55687d8f39845ba010da0ea35a7b80efa83a4d7270ed9bb9"
+      "bytes": 5409,
+      "sha256": "0983375d6e4629ae925748472f3ace97c45a6177c4d524bd78d02c14183f50ba"
     },
     {
       "path": "THIRD_PARTY.md",
@@ -54,20 +49,20 @@
     {
       "path": "agents.md",
       "source": "agents.md",
-      "bytes": 5224,
-      "sha256": "23e54d9a9b3a1820ea32aeed4e2737194cb53ecb24f2b9d1481bd818f51c12e8"
+      "bytes": 5241,
+      "sha256": "bca1e17c0c5c5330c8aa5ecc6cc8b4e8090a3d3ef53fe0f763743fdb0663a686"
     },
     {
       "path": "preview.md",
       "source": "preview.md",
-      "bytes": 7451,
-      "sha256": "9a20a54e85a45649f96c6d52fb1f020215241a41c9c1d7715250834690bae573"
+      "bytes": 7763,
+      "sha256": "d6711e684223e858401a18bdaa668f8e7340f51732f4687ff4a01e976946a042"
     },
     {
       "path": "report.md",
       "source": "report.md",
-      "bytes": 38562,
-      "sha256": "2984c70b7efc2eb449add9154031df0808ed6e6a39f64a348ebab782e7946c55"
+      "bytes": 31699,
+      "sha256": "2f4674747e4186cd378e1b7e23e24ac98ec2641c732b26446003fa93b17f2c41"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/aps_template/LICENSE",
@@ -78,8 +73,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/aps_template/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/aps_template/README.md",
-      "bytes": 6624,
-      "sha256": "7cc8260ae7ef4615e4ce2c25c0a74e1ca96a1e10c3f8ded0e0cad49b5f1c601e"
+      "bytes": 6840,
+      "sha256": "06e9f44cd4810490b5738fae678d5f97e8b280545327219d82bfa12bf175bec6"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/aps_template/acta_physica_sinica.bst",
@@ -138,8 +133,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/minimal_latex/README.md",
-      "bytes": 5321,
-      "sha256": "370bd12f69a0f8e15f2d924a6d26f2cf66af37b183bca91bab4a2038acd9077c"
+      "bytes": 5344,
+      "sha256": "bdd935189e6120c5ec12f8f9c24889c1539b17f2946a7a7cacc851299d9b944a"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/minimal_latex/build.ps1",
@@ -174,20 +169,20 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/DESIGN_06.md",
-      "bytes": 2738,
-      "sha256": "dde1622a92c638fbe3f406ac054035ccca2ba9789e62c821017638cc6532f4ad"
+      "bytes": 2928,
+      "sha256": "210298d3ce121112243e00d4cb905edb98a922df649307bd6947d2d87df0cb42"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/README.md",
-      "bytes": 7985,
-      "sha256": "e3f85aa0b2780e48e50a7a5dcfdfefdb106812693aeef0bca6be07885a6f64fb"
+      "bytes": 2980,
+      "sha256": "482262e63f3ece7bb658275c41e3873747dd64854c44d58600bef17481cd4023"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md",
-      "bytes": 3363,
-      "sha256": "b279c3885b2dc3f4c82f36324ef8d42c8d1d2488089838b300db84dfa3a688b5"
+      "bytes": 3553,
+      "sha256": "7a1d827a4dc8ec98a4ed3814808233f5bd9d6c915f51489ee6f989a31b6244ad"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/body.tex",
@@ -228,8 +223,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
       "source": "skills/Lab_Workflow_Generator/assets/report_templates/registry.json",
-      "bytes": 4116,
-      "sha256": "32d200443042cd2523879dc6c343b85e808a82682ecf277a4d0e2a2cd986fc58"
+      "bytes": 587,
+      "sha256": "784727a8687e6d9f3bd644c54319a44eefd9c2bd432d58095bf85d241047f133"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_01_thu.tex",
@@ -268,6 +263,12 @@
       "sha256": "0d05ad01b05c025d7c4759258a30dd0e49c6e4f16d871c43018b843b399805ac"
     },
     {
+      "path": "skills/Lab_Workflow_Generator/assets/report_templates/template_minimal.tex",
+      "source": "skills/Lab_Workflow_Generator/assets/report_templates/template_minimal.tex",
+      "bytes": 3742,
+      "sha256": "af54fbe457968ed6ec7228415636de9a3bb4d4f18c485d3c45a802375a395488"
+    },
+    {
       "path": "skills/Lab_Workflow_Generator/assets/scaffold_template/data_README.md",
       "source": "skills/Lab_Workflow_Generator/assets/scaffold_template/data_README.md",
       "bytes": 1422,
@@ -288,8 +289,8 @@
     {
       "path": "skills/Lab_Workflow_Generator/assets/thu_template/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/thu_template/README.md",
-      "bytes": 360,
-      "sha256": "ef525e1d96e83cce353931ceafac37165962df0fa4e7c007d73ac19a94e4ef6c"
+      "bytes": 557,
+      "sha256": "fb26be4770f26016c1783c162e318c2f4fe60aeeaf8ba388ef078d6a454b871d"
     },
     {
       "path": "skills/Lab_Workflow_Generator/assets/thu_template/thuemp.cls",
@@ -300,20 +301,20 @@
     {
       "path": "skills/Lab_Workflow_Generator/references/agents.md",
       "source": "agents.md",
-      "bytes": 5224,
-      "sha256": "23e54d9a9b3a1820ea32aeed4e2737194cb53ecb24f2b9d1481bd818f51c12e8"
+      "bytes": 5241,
+      "sha256": "bca1e17c0c5c5330c8aa5ecc6cc8b4e8090a3d3ef53fe0f763743fdb0663a686"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/preview.md",
       "source": "preview.md",
-      "bytes": 7451,
-      "sha256": "9a20a54e85a45649f96c6d52fb1f020215241a41c9c1d7715250834690bae573"
+      "bytes": 7763,
+      "sha256": "d6711e684223e858401a18bdaa668f8e7340f51732f4687ff4a01e976946a042"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/report.md",
       "source": "report.md",
-      "bytes": 38562,
-      "sha256": "2984c70b7efc2eb449add9154031df0808ed6e6a39f64a348ebab782e7946c55"
+      "bytes": 31699,
+      "sha256": "2f4674747e4186cd378e1b7e23e24ac98ec2641c732b26446003fa93b17f2c41"
     },
     {
       "path": "skills/Lab_Workflow_Generator/references/运行规范.md",
@@ -354,20 +355,20 @@
     {
       "path": "skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py",
       "source": "skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py",
-      "bytes": 24214,
-      "sha256": "16117ab9cb950f6057b75656186a203046d60ce5c213fb5ef2b90d646e8fc08b"
+      "bytes": 24391,
+      "sha256": "8c2d30816e0c153a2dfbc71a15ba72f70592d71da0c7ae5b9e3a13f395a55d3a"
     },
     {
       "path": "skills/Lab_Workflow_Generator/scripts/select_report_template.py",
       "source": "skills/Lab_Workflow_Generator/scripts/select_report_template.py",
-      "bytes": 11179,
-      "sha256": "3f49e66e425f7e089b945fd9950030570c77b703676956eff4cb2c06cad201ba"
+      "bytes": 10579,
+      "sha256": "564946f52e37adccb14aea4ffbcdc5a06127a3e804c8613ae77bc252c7b27ae8"
     },
     {
       "path": "skills/README.md",
       "source": "skills/Lab_Workflow_Generator/assets/agent_bundle/skills_README.md",
-      "bytes": 1334,
-      "sha256": "7c8a2a1c0b2a7f80e66818e3c672ec182165db8fe1726d0ef8e285a0d23069b0"
+      "bytes": 1665,
+      "sha256": "cfb5a84f646fc009b14b4fb54e2bbfe82f73ff0101fdc6741c39fa7684ac7ce3"
     },
     {
       "path": "运行规范.md",

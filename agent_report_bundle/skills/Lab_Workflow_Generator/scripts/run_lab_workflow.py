@@ -31,6 +31,7 @@ import re
 import shutil
 import subprocess
 import sys
+import uuid
 from pathlib import Path
 
 from check_report_tex import load_with_inputs
@@ -95,6 +96,7 @@ def lab_tex(exp: Path) -> Path | None:
 
 def scaffold(ws: Path, name: str, template: str | None = None) -> Path:
     exp = experiment_dir(ws, name)
+    install_report_template(exp / "lab_report", template, name, allow_legacy=True)
     ensure_dir(exp / "preview_report")
     ensure_dir(exp / "lab_report" / "data")
     ensure_dir(exp / "lab_report" / "figures")
@@ -106,22 +108,12 @@ def scaffold(ws: Path, name: str, template: str | None = None) -> Path:
         keep = exp / sub / ".gitkeep"
         if not keep.exists():
             keep.write_text("", encoding="utf-8")
-    # ship the branding logo and the report preamble with every experiment
+    # The current template is self-contained; only ship the raw-data guidance.
     ship = Path(__file__).resolve().parent.parent / "assets"
-    for src, dst in (
-        (ship / "branding" / "bnu_logo.png", exp / "lab_report" / "assets" / "bnu_logo.png"),
-        (ship / "scaffold_template" / "report_preamble.tex", exp / "lab_report" / "report_preamble.tex"),
-        (ship / "scaffold_template" / "data_README.md", exp / "lab_report" / "data" / "README.md"),
-        # default template: THU (thuemp) — the class must sit next to the .tex
-        (ship / "thu_template" / "thuemp.cls", exp / "lab_report" / "thuemp.cls"),
-        (ship / "scaffold_template" / "report_frontmatter_thu.tex", exp / "lab_report" / "report_frontmatter_thu.tex"),
-    ):
-        try:
-            if src.exists() and not dst.exists():
-                shutil.copyfile(src, dst)
-        except OSError as exc:
-            print(f"[scaffold] warn: cannot copy {src.name}: {exc}")
-    install_report_template(exp / "lab_report", template, name, allow_legacy=True)
+    src = ship / "scaffold_template" / "data_README.md"
+    dst = exp / "lab_report" / "data" / "README.md"
+    if src.is_file() and not dst.exists():
+        shutil.copyfile(src, dst)
     stage_data(exp)
     print(f"[scaffold] ensured: {exp}")
     return exp
@@ -381,7 +373,7 @@ def needs_bibtex(tex: Path) -> bool:
     triggers a BibTeX run.
     """
     try:
-        txt = load_with_inputs(tex)
+        txt = re.sub(r"(?<!\\)%[^\n]*", "", load_with_inputs(tex))
     except OSError:
         return False
     # A manual thebibliography never needs a BibTeX run, even if stray .bib
@@ -413,34 +405,44 @@ def bibtex_env(tex: Path) -> dict:
 
 
 def compile_tex(tex: Path) -> int:
-    build = tex.parent / "build"
+    # A unique build directory ensures a previous PDF/aux cannot imply success.
+    build = tex.parent / "build" / ("run-" + uuid.uuid4().hex)
     ensure_dir(build)
     base = tex.stem
-    xelatex = ["xelatex", "-interaction=nonstopmode", "-halt-on-error",
-               "-output-directory=build", f"{base}.tex"]
+    relative_build = build.relative_to(tex.parent).as_posix()
+    xelatex = ["xelatex", "-no-shell-escape", "-interaction=nonstopmode",
+               "-halt-on-error", "-file-line-error",
+               f"-output-directory={relative_build}", tex.name]
     if needs_bibtex(tex):
         print("[compile] bibliography detected -> xelatex, bibtex, xelatex, xelatex")
-        steps = [
-            (xelatex, tex.parent, None),
-            # bibtex must run where ./refs resolves (the .tex dir); the aux lives in build/
-            (["bibtex", f"build/{base}"], tex.parent, bibtex_env(tex)),
-            (xelatex, tex.parent, None),
-            (xelatex, tex.parent, None),
-        ]
+        steps = [(xelatex, tex.parent, None),
+                 (["bibtex", f"{relative_build}/{base}"], tex.parent, bibtex_env(tex)),
+                 (xelatex, tex.parent, None), (xelatex, tex.parent, None)]
     else:
         steps = [(xelatex, tex.parent, None), (xelatex, tex.parent, None)]
     for cmd, cwd, env in steps:
         code = run(cmd, cwd, env)
         if code != 0:
+            print(f"[compile] 失败；本轮日志在 {build}，最终 PDF 未更新。")
             return code
-    log_summary(build / f"{base}.log")
-    pdf = build / f"{base}.pdf"
-    if pdf.exists():
-        shutil.copyfile(pdf, tex.parent / f"{base}.pdf")
-        print(f"[compile] copied -> {tex.parent / (base + '.pdf')}")
-    else:
-        print(f"[compile] WARNING: {pdf} not produced")
+    log = build / f"{base}.log"
+    if not log.is_file():
+        print(f"[compile] ERROR: 编译日志缺失：{log}")
         return 1
+    text = log.read_text(encoding="utf-8", errors="replace")
+    unresolved = re.search(
+        r"(?m)^!|Missing character:|LaTeX Font Warning:|Package fontspec Warning:|"
+        r"LaTeX Warning:.*(?:undefined|Rerun)|Label\(s\) may have changed", text)
+    if unresolved:
+        print(f"[compile] ERROR: 字体或引用问题尚未解决：{unresolved.group(0)}；见 {log}")
+        return 1
+    log_summary(log)
+    pdf = build / f"{base}.pdf"
+    if not pdf.is_file() or pdf.stat().st_size == 0:
+        print(f"[compile] ERROR: 本轮未生成非空 PDF：{pdf}")
+        return 1
+    shutil.copyfile(pdf, tex.parent / f"{base}.pdf")
+    print(f"[compile] copied -> {tex.parent / (base + '.pdf')}；本轮日志：{build}")
     return 0
 
 def log_summary(log: Path) -> None:
@@ -553,7 +555,7 @@ def main() -> int:
         help="stage to run (default: all)",
     )
     parser.add_argument("--force", action="store_true", help="skip lecture-hash guard and force regeneration/compile")
-    parser.add_argument("--template", help="报告模板编号 01–06 或别名；省略时沿用已有选择，新实验默认 01")
+    parser.add_argument("--template", help="minimal 或注册别名；新实验默认 minimal，已有报告保留原文")
     parser.add_argument("--list-templates", action="store_true", help="列出可选模板后退出，不创建实验目录")
     args = parser.parse_args()
 
@@ -593,10 +595,11 @@ def main() -> int:
     if args.stage in ("compile", "all"):
         c = compile_all(exp, ws, name, args.force)
         rc = c or rc
-    # 版式检查必须看得见成品 PDF，故排在编译之后（仅 all/compile 阶段执行）
-    if args.stage in ("compile", "all"):
-        c = pdf_geometry(exp)
-        rc = c or rc
+        if c == 0:
+            c = pdf_geometry(exp)
+            rc = c or rc
+        else:
+            print("[pdf-geo] 本轮编译失败；不检查可能残留的旧 PDF。")
     print("[done] 文本正文(.tex)需由 /build_lab 的 Skill 流程生成；本脚本负责确定性步骤。")
     return rc
 

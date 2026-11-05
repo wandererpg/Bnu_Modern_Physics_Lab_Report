@@ -6,7 +6,7 @@
 
 把讲义、测量表和实验图片放入对应实验目录，然后发送类似请求：
 
-> 请根据“塞曼效应”目录中的讲义和实测数据完成实验报告，使用模板 01，交付 LaTeX 和 PDF。先检查已有材料，主动询问缺少的关键事实，其余按默认配置推进。
+> 请根据“塞曼效应”目录中的讲义和实测数据完成实验报告，使用统一 minimal 模板，交付 LaTeX 和 PDF。先检查已有材料，主动询问缺少的关键事实，其余按默认配置推进。
 
 已有报告可以直接指定文件：
 
@@ -14,22 +14,15 @@
 
 目录、模板和交付范围均可修改。只要求实验报告时，保留预习报告目录，不自动扩大到预习报告撰写。
 
-## 2. 六套实验报告模板及其区别
+## 2. 统一最小实验报告模板
 
-| 编号与别名 | 模板 | 版式特点 | 适合的内容 |
-| --- | --- | --- | --- |
-| **01** / `thu` / 清华 | 清华课程双栏（新报告默认） | 居中题头，首页中文摘要，传统双栏正文 | 常规课程小论文，文字与中小图表均衡 |
-| **02** / `aps` / 物理评论 | Physical Review 风格 | 紧凑双栏，栏间细线，摘要与正文较紧凑 | 内容集中、希望减少篇幅的报告 |
-| **03** / `nature` / 混合 | Nature 风格 | 大标题、浅色摘要区，引言单栏，原理起双栏 | 希望强化标题和摘要层次的报告 |
-| **04** / `apl` / 技术简报 | Applied Physics Letters 风格 | 浅色题头，单栏，段落留白，无首行缩进 | 宽图、宽表较多，强调方法与结果的报告 |
-| **05** / `iop` / 长报告 | Journal of Physics 风格 | 题头与中文摘要独立一页，单栏正文，较大字号和行距 | 长篇分析、较长公式及宽幅图表 |
-| **06** / `he-ne` / 原报告单栏 | He-Ne 原报告单栏 | 黑白单栏，宋体正文、黑体标题，1.5 倍行距，就地图表、题目页眉 | 沿用 He-Ne 报告外观或传统中文单栏样式 |
+新报告统一采用 `minimal`，将已验证的最小 LaTeX 基础与实验报告内容要求结合：XeLaTeX、标准 ctexart、Fandol/Latin Modern 字体、标准章节命令和 `1`、`1.1` 编号，A4 单栏、11pt、25mm 页边距及约 1.5 倍行距。
 
-适用场景是选择建议，六套模板均可用于其他实验。02—05 是中文课程报告的期刊风格改编，不是官方投稿模板。03 使用 `multicol`，大量跨页长表或复杂宽幅浮动体优先考虑 04、05。
+正式骨架保留两行基本信息、校徽、中文摘要与关键词、引言、原理、结果与分析讨论、实验总结、参考文献，以及文献后的英文摘要与关键词。直接在 `lab_report/lab_report.tex` 填写；骨架中的待补充内容不代表报告已完成。
 
-**选择顺序**：课程明确要求 → 用户指定编号或别名 → 已有报告的 `template_selection.json` → 新报告默认 01。课程要求与用户请求有实质冲突时，Agent 应说明冲突并询问；其余工作继续推进。
+[模板说明](skills/Lab_Workflow_Generator/assets/report_templates/README.md)说明安装与编辑方式；[分项诊断](skills/Lab_Workflow_Generator/assets/minimal_latex/README.md)用于检查引擎、字体和编号。注册表仅登记当前 `minimal`；原六套样板保留为旧报告兼容资料，不再作为新报告推荐选择。已有报告不会自动换版，迁移前须核对全部正文、数据、文献和手动修改。
 
-编号、别名和源文件以[模板注册表](skills/Lab_Workflow_Generator/assets/report_templates/registry.json)为准；部署与布局限制见[模板库说明](skills/Lab_Workflow_Generator/assets/report_templates/README.md)。切换已有报告前保留历史副本并迁移内容，核对正文、数据和文献完整性；脚本保护手工修改过的主文件，不能用空模板替换原报告。
+教师明确规定格式时，在稳定编译基础上调整，保留报告内容要求。
 
 ## 3. 默认配置与可修改配置
 
@@ -38,7 +31,7 @@
 | 配置项 | 默认行为 | 如何修改 |
 | --- | --- | --- |
 | 工作范围 | 按请求完成实验报告，每项实验独立建目录 | 指定实验名称、已有主文件，以及是否同时生成预习报告 |
-| 模板 | 新报告 01；已有报告沿用选择记录 | 指定 01—06 或别名，如“使用模板 05” |
+| 模板 | 新报告统一 minimal，旧报告保留已有内容 | 可要求迁移到新模板；教师明确要求的格式优先 |
 | 语言与摘要 | 中文正文；中文摘要和关键词在前，英文摘要及英文关键词紧接参考文献之后 | 提供教师规定的语言、摘要长度等要求 |
 | 章节 | 引言、原理、结果与分析讨论、实验总结、参考文献 | 提供课程指定结构；一般结构细节按 report.md 执行 |
 | 页面与样式 | A4；栏式、字体、字号与行距随模板 | 指定字体、页边距、栏式、篇幅或提交格式；Agent 复核修改后的版面 |
@@ -52,11 +45,11 @@
 
 **参数改在哪里**：
 
-- 模板选择：向 Agent 指定编号，或使用脚本的 `--template`；记录保存在 `lab_report/template_selection.json`。
-- 本次报告信息、摘要、关键词与草稿/附录开关：`lab_report/report_template/metadata.tex`。
-- 正文与文献：`lab_report/report_template/body.tex`、`references.bib`。旧报告可能直接写在主文件中，应按实际结构修改。
-- 本次版式：在该报告的 `report_template/` 内调整对应布局文件；通用模板库的修改按项目维护规则执行。
-- 工作流阶段：脚本支持 `--stage`，脚本本身默认 `all`；日常编辑选择本次需要的阶段，避免小改动重跑全部流程。
+- 基本信息、摘要、正文和文献：直接编辑 `lab_report/lab_report.tex`。
+- 当前模板：新建时省略 `--template` 或传入 `--template minimal`；选择记录位于 `lab_report/template_selection.json`。
+- 版式：在本份报告主文件中调整已核对的导言区设置；不要复制整套旧导言区覆盖新模板。
+- 编译和日志：工作流的 `--stage compile` 使用 `build/run-<唯一标识>/`，成功后更新报告目录 PDF。
+- 阶段：根据本次改动选择 `--stage`，避免为小改动重跑数据与全部生成流程。
 
 实验数值、测量现象、误差来源和引用依据属于事实输入，不能作为可随意设置的排版参数。
 
@@ -97,8 +90,8 @@
 # 查看模板，不创建报告
 python skills/Lab_Workflow_Generator/scripts/select_report_template.py --list-templates
 
-# 新实验部署骨架，示例使用 01；尚未生成真实报告内容
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template 01
+# 新实验部署骨架，示例使用 minimal；尚未生成真实报告内容
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template minimal
 
 # 查看材料与报告状态
 python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage status
@@ -144,10 +137,10 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 ├── <实验标题>.pdf                 # 实验讲义
 ├── preview_report/                # 预习报告源文件与 PDF
 └── lab_report/
-    ├── lab_report.tex             # 稳定主入口
+    ├── lab_report.tex             # 单文件填写信息、摘要、正文和文献
     ├── lab_report.pdf             # 正式或明确标记的草稿 PDF
     ├── template_selection.json    # 模板选择记录
-    ├── report_template/           # 新模板的信息、正文、文献与样式
+    ├── assets/bnu_logo.png        # 首页校徽；缺失时标明待补充
     ├── data/                      # 原始/处理数据与来源说明
     ├── figures/                   # 图表
     ├── scripts/                   # 可复现处理脚本
@@ -169,7 +162,3 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 | Agent 通用包 | 原工作区入口为 `agent_report_bundle/START_HERE.md`；独立包入口为包根目录 `START_HERE.md` |
 
 模板来源与适配边界见[来源说明](skills/Lab_Workflow_Generator/assets/report_templates/SOURCES.md)。
-
-### 维护与 GitHub 同步
-
-通用规范和模板更新按 agents.md 执行：需要时同步技能 references，运行 `skills/Lab_Workflow_Generator/scripts/export_agent_bundle.py`，核对 `agent_report_bundle/manifest.json` 后提交并推送本次相关通用文件。各实验目录、讲义、报告、原始数据、图片、处理脚本、历史版本及编译结果只保存在本地；详细授权与暂存规则以项目规则为准。

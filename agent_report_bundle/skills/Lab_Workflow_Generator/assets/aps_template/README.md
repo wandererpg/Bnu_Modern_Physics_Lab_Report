@@ -1,5 +1,8 @@
 # LaTeX Template for ActaPhysicaSinica (物理学报)
 
+> 历史兼容资料：本文件记录旧模板的来源或设计，仅供既有报告维护。新报告统一使用 `minimal`；当前入口见 [report_templates/README.md](../report_templates/README.md)。
+
+
 ## 物理学报（Acta Physica Sinica）的LaTeX模板
 
 由于物理学报官网给的LaTeX模板是基于CTeX书写的并且已经多年未更新，我重写了新的sty文件并且添加了基本符合要求的bst文件，使之可以正常使用。

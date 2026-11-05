@@ -10,52 +10,38 @@
 
 本文件只规范实验报告，不替代预习报告要求。报告正式文档须使用 LaTeX 编写并编译生成 PDF；本文件仅作为要求与提交前检查清单，不作为最终报告文件。
 
-## LaTeX 模板选择与 AI 工作流
+## 最小 LaTeX 模板与工作流
 
-AI应从本文件提取内容和结构要求，主动调用已整理的模板，不必每次重造排版。模板库在 `skills/Lab_Workflow_Generator/assets/report_templates/`，编号、别名与源路径以 `registry.json` 为准；操作说明见该目录的 `README.md`，官方期刊来源与适配边界见 `SOURCES.md`。
+新报告统一使用重构后的 `minimal` 模板，以稳定编译为基础落实本文件的实验内容要求。正式资产为 `skills/Lab_Workflow_Generator/assets/report_templates/template_minimal.tex`；注册表只登记这一当前模板。操作说明见该目录的 `README.md`，分项诊断见 `assets/minimal_latex/README.md`。
 
-| 编号 | 模板名称 | 选择别名举例 | LaTeX 主模板 |
-| --- | --- | --- | --- |
-| 01 | 清华课程双栏（默认） | 清华、`thu`、默认 | `template_01_thu.tex` |
-| 02 | Physical Review 风格 | Physical Review、`aps` | `template_02_physical_review.tex` |
-| 03 | Nature 风格 | Nature、`nature` | `template_03_nature.tex` |
-| 04 | Applied Physics Letters 风格 | Applied Physics Letters、`apl` | `template_04_applied_physics_letters.tex` |
-| 05 | Journal of Physics 风格 | Journal of Physics、`iop` | `template_05_journal_of_physics.tex` |
-| 06 | He-Ne 原报告单栏 | He-Ne、氦氖、原报告单栏、`he-ne` | `template_06_he_ne.tex` |
+| 项目 | 统一方案 |
+| --- | --- |
+| 编译链 | XeLaTeX；`iftex` 提前检查引擎，普通文档连续编译两遍 |
+| 文档类与字体 | 标准 `ctexart`，`fontset=fandol`；英文 Latin Modern，不依赖系统字体名称 |
+| 章节命令 | 标准无星号 `\section`、`\subsection`，编号为 `1`、`1.1`；`secnumdepth=2` |
+| 页面 | A4 单栏，11pt，四边 25mm，约 1.5 倍行距 |
+| 内容入口 | `<实验标题>/lab_report/lab_report.tex`，基本信息、摘要、正文和文献均直接在主文件中编辑 |
+| 输出 | 缓存和日志集中在 `build/run-<唯一标识>/`；本轮编译全部成功后才更新报告目录的 PDF |
 
-六套样式按结构区分（用户于2026-09-30确认可混用单栏、双栏与混合布局，并增补原报告样式06）：
+1. **读取材料**：先读讲义、课程要求、原始记录和已有报告，确认实验标题及缺失信息。区分实测值、计算值、理论值和估计值。
+2. **部署与填写**：新报告用 `minimal`；教师明确要求其他格式时，保留这一编译与字体基础，再按要求调整。脚本只部署可编译骨架；缺失内容标注待补充，不虚构实验结果。
+3. **维护已有报告**：保留正文、基本信息、文献、原始数据和手动修改。旧六套样板及其资源只用于维护既有报告，不再作为新报告选择入口。旧选择记录不触发自动迁移；迁移必须保留内容并检查差异，不用空骨架覆盖旧文件。
+4. **先定位再扩展**：发生字体、编号或 PDF 问题时，依次运行英文编译、中文字体、章节编号三个独立检查。确认最小链路后，再逐项加入公式、图表及真实文献，不整段复制旧导言区。
+5. **编译并验收**：无外部文献库时编译两遍。使用 `\bibliography` 引入真实 `.bib` 时，采用 XeLaTeX → BibTeX → XeLaTeX → XeLaTeX，并按课程要求配置文献样式；不能仅因目录中存在 `.bib` 就运行 BibTeX。核对退出码、最终日志、引用、PDF 字体与整页版面；编译失败保留日志，不把旧 PDF 当作本轮结果。
 
-| 编号 | 版式类别 | 结构差异 |
-| --- | --- | --- |
-| 01 | 经典课程双栏 | 居中题头、首页中文摘要、传统双栏正文 |
-| 02 | 紧凑学术双栏 | 首页中文摘要、栏间细线、紧凑正文 |
-| 03 | 科研杂志混合布局 | 大标题与浅色摘要区、引言通栏、从原理起同页进入双栏 |
-| 04 | 单栏技术简报 | 浅色题头区、无首行缩进、段落留白、宽幅图表 |
-| 05 | 单栏学术长报告 | 题头与中文摘要独立一页、较大正文与行距、宽幅图表 |
-| 06 | 黑白单栏课程报告 | 同页题头与摘要、居中摘要标题、宋体/黑体、1.5倍行距、就地图表、题目页眉 |
-
-版式差异不能通过删减必需章节、摘要、分析、文献或非实验数据补充材料实现。教师明确要求优先；旧报告不会因通用模板更新而自动改版。03使用`multicol`，图表优先使用`[H]`就地布局，宽幅补充材料在单栏附录中排版。需要跨页长表或复杂通栏浮动体时，优先选择04/05，或按课程要求专门调整。
-
-1. **选择**：教师或课程明确规定 → 用户指定编号/名称 → 该报告已有 `lab_report/template_selection.json` → 新报告默认01。编号或名称能唯一识别时直接调用；有歧义时说明候选再澄清。课程明确要求优先于用户选择的期刊风格。
-2. **读取材料**：先读本文件、讲义、原始记录和已有报告，确认实验名称及缺失信息；区分原始值、计算值、理论值和估计值，不根据模板虚构实验内容。
-3. **部署与填写**：选择脚本复制模板及依赖到 `<实验标题>/lab_report/`，稳定主入口为 `lab_report.tex`；在 `report_template/metadata.tex` 填写信息、中文摘要和关键词；英文摘要和英文关键词由正文模板排在参考文献之后，在 `body.tex` 写正文，在 `references.bib` 写实际引用的资料。选择命令只部署骨架，不代表生成了完整报告。
-4. **切换**：保留已有正文、信息、文献和原始数据；脚本仅切换自身生成且未被改写的主文件。旧版或手工改过的主文件必须先由AI完成可审查的内容迁移，不以空骨架覆盖原报告。原清华前置区和物理学报片段继续兼容已有报告，新建报告以本节的六套模板和注册表为入口。
-5. **编译并验收**：写完真实内容后运行 XeLaTeX → BibTeX（使用文献库时）→ XeLaTeX → XeLaTeX，辅助文件集中在 `build/`，源文件和最终PDF放报告目录；检查日志、渲染PDF并按文末清单复核。缺失材料或编译受阻时保留源文件并明确交付为草稿，不能声称正式报告完成。
-
-六套模板均适配A4纸张和中文课程报告，按编号采用单栏、双栏或混合布局；保留两行基本信息、100—200字中文摘要和中文关键词、五个顶层章节、校徽、上角标顺序编码引用及按需附录。英文摘要和英文关键词统一置于参考文献之后。01沿用项目内 thuemp.cls；02—05只是期刊风格改编，非官方投稿模板。期刊英文词数、文章长度、投稿日期、作者单位、基金及PACS等不替代或增加课程要求。
-
-用户可说：“为塞曼效应生成实验报告，使用模板02”“这份报告用 Nature 样板”“换成模板05，保留正文和数据”。从工作区根目录可执行：
+模板保留两行基本信息、首页校徽、100—200 字中文摘要、3—5 个中文关键词、五个顶层章节、上角标顺序编码引用和按需附录；英文摘要及对应英文关键词紧接参考文献。缺少校徽可先编译草稿，但应明确标注，正式交付前补齐。教师对格式的明确要求优先于默认页面参数。
 
 ```powershell
 python skills/Lab_Workflow_Generator/scripts/select_report_template.py --list-templates
-python skills/Lab_Workflow_Generator/scripts/select_report_template.py --workspace . --experiment "塞曼效应" --template 02
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "塞曼效应" --stage scaffold --template 02
-# AI依据讲义与真实记录写完正文后，再检查并编译：
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "塞曼效应" --stage check
-python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "塞曼效应" --stage compile
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template minimal
+# AI 依据讲义与真实记录完成 lab_report.tex 后：
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage check
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage compile
+# 分开定位编译链、字体及编号：
+& .\skills\Lab_Workflow_Generator\assets\minimal_latex\build.ps1 -Verify
 ```
 
-模板库和通用工作流可以同步GitHub；各实验的材料、报告、模板选择记录及编译结果仅保存在本地。
+模板与通用工作流可同步 GitHub；各实验的讲义、原始记录、报告及编译成果仅保存在本地。
 
 ## 报告整体结构
 
@@ -64,11 +50,11 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 1. 实验题目和基本信息；
 2. 中文摘要；
 3. 中文关键词；
-4. 一、引言；
-5. 二、原理（含“实验原理”“实验装置”“实验方法”三个子标题）；
-6. 三、结果与分析讨论；
-7. 四、实验总结；
-8. 五、参考文献；
+4. 1 引言；
+5. 2 原理（含“实验原理”“实验装置”“实验方法”三个子标题）；
+6. 3 结果与分析讨论；
+7. 4 实验总结；
+8. 5 参考文献；
 9. 英文摘要（Abstract）和英文关键词（Keywords），紧接参考文献之后；
 10. 程序、推导或其他非实验数据补充材料附录（确有需要时，置于英文摘要和关键词之后）；实验数据不列入附录。
 
@@ -95,7 +81,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 ## 正文内容
 
-### 一、引言
+### 1 引言
 
 引言必须分为**恰好两段**，不另设段内小标题：
 
@@ -103,7 +89,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 第二段介绍本次实验内容，说明实验目的、研究问题、主要测量对象以及采用的实验思路或技术路线。不得把未实际完成的工作写成已完成。
 
-### 二、原理
+### 2 原理
 
 本章设置以下三个二级标题，顺序固定：
 
@@ -119,7 +105,7 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 按实际操作顺序，为每个主要操作步骤设置三级标题，例如“步骤1：装置调节”“步骤2：数据测量与记录”。逐步说明测量思路、关键设置、操作、观测对象、记录内容和重复次数；记录与讲义不同的操作及异常。只写实际完成的步骤，不机械照抄讲义，也不虚构实验过程。
 
-### 三、结果与分析讨论
+### 3 结果与分析讨论
 
 以图、表和文字结合的方式呈现实验结果，并按以下层次组织。每项内容都须依据真实数据和实际完成的工作。段落围绕本次测量展开，先给出结果，再解释规律、差异及其原因；关键条件在方法或首次分析时说明。
 
@@ -130,11 +116,11 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 适用时给出不确定度、误差估计和拟合参数，并说明误差传递式、标准差或其他计算依据。明确区分原始测量值、计算值、理论值和估计值；不得为了迎合理想规律而删改异常数据。确需剔除数据时，说明判据和理由并保留原始记录。
 
-### 四、实验总结
+### 4 实验总结
 
 总结实验采用的主要方法、得到的关键结果及其物理含义，直接回应实验目的，以数据、现象或分析支撑结论。影响结论的主要局限和下一步改进简要说明，详细误差分析留在前文。
 
-### 五、参考文献
+### 5 参考文献
 
 引用紧跟其支撑的原理、公式、方法或外部数据。同一来源连续支撑同一段内容时，可在对应论述处集中引用，使来源与论断的关系清楚。
 
@@ -198,27 +184,29 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 ## 写作与排版实现
 
-### 清华模板旧版兼容说明
+### 编译引擎、文档类与字体
 
-- 项目内 `thuemp.cls`（本 Skill `assets/thu_template/`，版本 v1.1）供模板01和既有报告兼容使用，不再作为独立默认入口；新建报告按模板注册表选择，默认模板为01。该类以 `ctexart` 为基础并采用 **A4 双栏**排版；
-- 既有报告可保留原有前置区。新报告首页只排中文摘要和中文关键词；英文题目、作者字段按课程要求填写，英文摘要和英文关键词放在参考文献之后；
-- 一级标题用中文编号「一、二、三」：导言区加 `\ctexset{section={name={,、},number=\chinese{section}}}`；
-- 页眉由模板提供（“北京师范大学普通物理实验”）；正文页眉可写“<姓名>: <题目>实验报告”；
-- 宽幅图、宽幅表与较宽公式使用 `table*`/`figure*` 跨栏；
-- 参考文献按 **GB/T 7714—2015**：`\bibliographystyle{gbt7714-numerical}` + `\bibliography{./refs}`（BibTeX），正文用 `\cite{}`；
-- 首页内容较多时，在正文第一节内加 `\enlargethispage{-3.3cm}`，避免正文与首页脚注框重叠；
-- 编译链：`xelatex → bibtex → xelatex → xelatex`（含参考文献，必须跑 bibtex）。
+正式模板继承最小模板的稳定设置，不重定义章节命令，不加载旧自定义类及成套版式片段：
 
-### 物理学报模板式版面
+```latex
+% !TEX program = xelatex
+\RequirePackage{iftex}
+\RequireXeTeX
+\documentclass[UTF8,a4paper,11pt,fontset=fandol,scheme=plain]{ctexart}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\setcounter{secnumdepth}{2}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\ctexset{section={name={,}},subsection={name={,}}}
+```
 
-- `skills/Lab_Workflow_Generator/assets/aps_template/` 是可选版式参考，不是默认入口；只借鉴适合课程实验报告的版式，不照搬作者单位、基金、PACS 代码等期刊投稿信息。无论采用哪种版式，图表标题及正文中的图表引用只用中文，文献引用以右上角顺序编号显示；
-- 第一页左上角使用工作区根目录的 `校徽.webp`。排版时可转换为 LaTeX 兼容的 PNG，但不得改变校徽比例、文字内容或造成拉伸；
-- 校徽显示宽度设为 **7 cm**，相对于正文左页边距向左偏移 **2 cm**，只出现在第一页；
-- 校徽采用叠加定位，不占用正文流，不应推动标题、基本信息栏或摘要的位置；编译后必须检查校徽没有超出页面、被裁切或遮挡标题。
+`% !TEX program` 只是编辑器提示，实际命令也必须使用 XeLaTeX。Fandol、Latin Modern 需随 TeX 发行版安装；找不到字体时检查包，不将字体名反复换成未确认存在的系统字体。无星号章节参与编号；不编号的摘要可使用 `\section*`。正文引用用 `\ref`、公式引用用 `\eqref`，不手写编号。
 
-- 仅在明确要求时使用：Skill 内的 `assets/aps_template/` + `report_preamble.tex`（`ctexart`，单栏）；无需在工作区根目录保留模板副本；
-- 采用该版式时仍须使用中文图表标题，并在正文中以中文“图”“表”引用；不使用双语图题命令；
-- 校徽：使用工作区根目录 `校徽.webp`（转 PNG 后由 `\bnulogo` 叠加插入），宽 **7 cm**、相对正文左页边距左移 **2 cm**、仅首页、不占正文流；编译后须检查未被裁切或遮挡标题。
+### 首页校徽
+
+第一页左上角使用工作区校徽的 PNG 兼容副本 `assets/bnu_logo.png`；不改变比例与文字。显示宽度 7 cm，相对正文左页边距左移 2 cm，以叠加方式放置，不占正文流，也不推动题目和摘要。正式交付前确认校徽不越界、不裁切、不遮挡正文。缺失时保留待补充提示，不用其他标志代替。
 
 ### 写作风格
 
@@ -263,86 +251,18 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 
 ### 页面与段落
 
-- 使用 A4 纸张，页边距原则上设置为上、下、左、右各约 2 cm；
-- 正文采用约 1.5 倍行距，页码位置统一，全文保持一致；
-- 中文正文使用易读、统一的宋体或同等正文字体，一级标题使用黑体或同等醒目字体；
-- 段落宜首行缩进两个汉字，避免通过连续空格强行对齐；
-- 公式、图和表应尽量放置在首次引用它们的段落附近。
+- 默认 A4 单栏，正文 11pt，四边页边距 25mm，约 1.5 倍行距；字体使用 Fandol 和 Latin Modern。
+- 段落首行缩进两个汉字；页码位置统一，不用连续空格强行对齐。
+- 图、表和公式放在首次引用附近，尺寸按实际版心调整，保证最终 PDF 中标注清晰。
 
 ### 标题与摘要布局
 
-- 实验题目居中、醒目；
-- 标题下方第一行放置作者和学号，第二行放置指导老师和实验时间；两行采用整齐、统一的居中或对齐布局，不列班级；
-- 首页仅排中文摘要和中文关键词；英文摘要和英文关键词紧接参考文献，标题样式统一，摘要正文连续成段；
-- 正文从摘要和关键词之后开始，章节之间保持清晰、适度的留白，不使用过多装饰性元素。
+- 实验题目居中；作者/学号位于第一行，指导老师/实验时间位于第二行，不列班级；缺失信息留填写横线。
+- 首页只放中文摘要和关键词；英文摘要和对应关键词紧接参考文献。
+- 一级标题依次使用 `1 引言`、`2 原理`、`3 结果与分析讨论`、`4 实验总结`、`5 参考文献`，二级标题为 `2.1`、`2.2` 等。
+- 不将数字写进章节标题参数，也不叠加中文编号前后缀；标题、标签和交叉引用的编号须一致。
 
-### 标题层级与栏式
-
-- 一级标题沿用中文编号：“一、引言”“二、原理”“三、结果与分析讨论”“四、实验总结”等，字体、字号和间距统一；
-- 二级标题可使用“1.1”“1.2”或“（1）”“（2）”等连续编号；
-- 三级标题仅在确有必要时使用，不能为了拆分短段落而过度细分；
-- 正文可参考模板采用双栏布局，但宽幅图、宽幅表、复杂公式或原始数据表可以跨栏或改用单栏；
-- 不得因双栏排版造成图表过小、公式断裂、标题孤行或表格无法阅读；可读性优先于机械保持双栏。
-
-教师提供的 Word 模板、字体字号、页边距、栏式、篇幅或提交方式等明确要求，应替代本节的建议。清华模板与物理学报模板都只作为版式参考；即使旧版清华前置区包含英文摘要，新报告仍须将英文摘要和英文关键词放在参考文献之后，也不照搬期刊投稿信息（作者单位、基金、PACS 代码等）。
-
-### 排版实现片段（随 Skill 提供，已编译验证）
-
-**清华模板前置区兼容片段** —— 骨架见 `assets/scaffold_template/report_frontmatter_thu.tex`（脚手架已复制为 `<实验标题>/lab_report/report_frontmatter_thu.tex`）。要点：
-
-```latex
-\documentclass{thuemp}
-\usepackage{xcolor}                 % 数据说明灰框需要
-\sisetup{detect-all,per-mode=symbol,separate-uncertainty=true}
-\ctexset{section={name={,、},number=\chinese{section}}}   % 一、二、三
-\Keyword{关键词1；关键词2；关键词3}
-\begin{document}
-\emptitle{实验题目}
-\empauthor{姓名}{指导教师}
-\fancyhead[CO]{{\footnotesize 姓名: 实验题目实验报告}}
-\twocolumn[
-\begin{@twocolumnfalse}
-\maketitle
-<数据说明灰框：\fcolorbox>
-\begin{empAbstract} 摘要 \end{empAbstract}
-\emptitleEn{...}\empauthorEn{...}{...}
-% 英文摘要和英文关键词放在参考文献之后
-\empfirstfoot{实验时间}{报告时间}{学号}{E-mail}
-\end{@twocolumnfalse}
-]
-\wuhao
-\section{引言} ...
-```
-
-- 图题：单语中文“图N：描述”，正文 `图~\ref{}`；表题“表N：描述”（可用 `\captionnamefont`/`\captiontitlefont` 统一字号）；
-- 参考文献：`\bibliographystyle{gbt7714-numerical}` + `\bibliography{./refs}`（BibTeX）；
-- 宽表/宽图用 `table*`/`figure*`；首页必要时 `\enlargethispage{-3.3cm}`；
-- 数据表仍用 `tables/` 下由 `make_data_tables.py` 生成的片段，`\input{tables/<name>}` 引入，不要手抄。
-
-**备选：物理学报模板**
-
-备选模式下使用导言区片段 `report_preamble.tex`（脚手架同样复制到 `<实验标题>/lab_report/`）。主文件写法：
-
-```latex
-% !TEX program = xelatex
-\documentclass[UTF8,a4paper,10pt]{ctexart}
-\input{report_preamble}
-\begin{document}
-\thispagestyle{plain}
-\bnulogo              % 首页左上角校徽（overlay，7.0cm，不占正文流）
-...
-```
-
-该片段已包含并验证以下约定：
-
-- 版式：A4、四边 2cm、1.5 倍行距、首行缩进 2 字符；
-- 一级标题中文编号「一、二、三」（`\ctexset{section={name={,、},number=\chinese{section}}}`），与老师小论文格式一致；
-- 图表标题和正文中的图表引用只用中文；
-- 不确定度与单位：`\SI{438.5(17)}{\mega\hertz}`、`\SI{0.35}{\percent}`、`\ang{89.8}`（`siunitx` 的 `separate-uncertainty`）；
-- 封面信息栏：`\blankfield{4.0cm}` 留空横线，两行（作者/学号；指导老师/实验时间），**不列班级**；
-- 校徽：`\bnulogo` 读取 `assets/bnu_logo.png`（脚手架已随实验复制），宽 7.0cm、相对正文左页边距左移 2cm、仅首页、overlay 不占流。
-
-数据表请用 `tables/` 下由 `make_data_tables.py` 生成的片段，`\input{tables/<name>}` 引入，不要手抄。
+教师明确规定的页面、字号、栏式、篇幅或提交格式优先。旧双栏报告可沿用原样维护；迁移新模板时先核对内容，不通过删减章节、数据或分析满足排版要求。
 
 ## 提交前检查
 
@@ -373,14 +293,16 @@ python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . -
 - [ ] 图表和公式在当前页面布局下清晰可读，没有断裂、过小或错位。
 - [ ] LaTeX 已成功编译，编译日志、目录结构、公式、图表、中文排版和 PDF 版面均已检查。
 
-- [ ] **物理学报备选模式**：第一页左上角校徽宽 7 cm、相对正文左页边距左移 2 cm，比例正确且没有裁切、拉伸或遮挡正文；**清华默认模式**：使用模板自带页眉，无需校徽，须核对页眉文字与题名一致。
+- [ ] 使用统一最小模板的编译、字体与编号设置；首页校徽符合要求，缺失项已补齐。
 - [ ] 摘要为 100—200 字，包含目的、方法、主要结果和主要结论；有真实数据时含至少一个关键数值。
 - [ ] 摘要后有 3—5 个关键词。
 - [ ] 图、表、公式均已统一编号并在正文引用；图表标题和图表引用只用中文。
 - [ ] **已直接量过成品 PDF，而不是只看编译退出码**：`check_pdf_geometry.py` 无 `FATAL`——没有元素越出纸面（会被裁掉）、没有越出版心出血、没有通栏长行重叠、没有横线穿过文字、图内文字在最终尺寸下不小于 7–8pt、位图 ≥150dpi。
 - [ ] 编译日志里没有 `Float too large for page`（浮动体放不进一页＝整表被挤出纸面），`Overfull \hbox` 数量与最大宽度已知且可接受（一般来自不可断行的长串/公式）。
 
-### 版式定稿：双栏 + 半栏宽“就地图表”（实测结论，2026-09-17 晚）
+### 既有双栏报告的版式维护记录（历史兼容）
+
+以下记录只用于维护既有双栏报告，不改变新报告采用统一单栏最小模板的默认设置。
 
 用户要求：**① 保持双栏；② 表中提到“图1”的那句话之后，图1 要立刻、紧贴着出现。**
 两个要求都可以满足，做法如下（已实现并实测验收）：

@@ -30,9 +30,9 @@ def is_link(path):
 def export():
     registry = json.loads((SKILL / "assets/report_templates/registry.json").read_text(
         encoding="utf-8-sig"))
-    if {entry["id"] for entry in registry["templates"]} != {
-            "01", "02", "03", "04", "05", "06"}:
-        raise ValueError("Expected registered templates 01–06")
+    if registry.get("default") != "minimal" or {
+            entry["id"] for entry in registry["templates"]} != {"minimal"}:
+        raise ValueError("Expected the unified minimal template as the only active entry")
     files = {Path(name): WORKSPACE / name for name in DOCS}
     files[Path(".gitignore")] = WORKSPACE / ".gitignore"
     files[Path(".gitattributes")] = SKILL / "assets/agent_bundle/.gitattributes"
@@ -48,6 +48,10 @@ def export():
         "registry.json", "common.tex", "layout_v2.tex", "layout_06_he_ne.tex",
         "metadata.tex", "body.tex", "references.bib", "README.md",
         "SOURCES.md", "DESIGN_06.md",
+        # Keep historical assets for existing reports; only minimal is registered.
+        "template_01_thu.tex", "template_02_physical_review.tex",
+        "template_03_nature.tex", "template_04_applied_physics_letters.tex",
+        "template_05_journal_of_physics.tex", "template_06_he_ne.tex",
         *(entry["source"] for entry in registry["templates"]),
     )
     for name in assets:

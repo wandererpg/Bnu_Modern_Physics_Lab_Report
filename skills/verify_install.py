@@ -21,7 +21,7 @@ import tempfile
 import time
 
 if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(errors="replace")
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 PKG_ROOT = os.path.dirname(os.path.abspath(__file__))
 RESULTS = []          # (status, title, detail)
@@ -90,22 +90,43 @@ def check_xelatex():
         add("FAIL", "xelatex 无法执行", str(exc))
 
 
-def check_bibtex_style():
+def check_tex_resources():
+    """Resolve actual minimal-template dependencies through the TeX distribution."""
     kpse = shutil.which("kpsewhich")
     if not kpse:
-        add("WARN", "找不到 kpsewhich，跳过 gbt7714 检查")
+        add("FAIL", "找不到 kpsewhich，无法确认最小模板宏包和字体")
+        return
+    resources = ["iftex.sty", "ctexart.cls", "fontspec.sty", "xeCJK.sty",
+                 "geometry.sty", "amsmath.sty", "graphicx.sty", "eso-pic.sty", "natbib.sty",
+                 "FandolSong-Regular.otf", "FandolSong-Bold.otf", "FandolHei-Regular.otf",
+                 "FandolKai-Regular.otf", "lmroman10-regular.otf", "lmsans10-regular.otf",
+                 "lmmono10-regular.otf"]
+    for resource in resources:
+        try:
+            p = subprocess.run([kpse, resource], capture_output=True, text=True,
+                               encoding="utf-8", errors="replace", timeout=30)
+            out = (p.stdout or "").strip()
+            add("PASS" if p.returncode == 0 and out else "FAIL", resource,
+                out or "最小模板所需资源缺失，请通过 TeX 发行版补装对应宏包/字体")
+        except Exception as exc:  # noqa: BLE001
+            add("FAIL", resource, str(exc))
+
+
+def check_bibtex_style():
+    # Manual verified references do not require BibTeX or the gbt7714 style.
+    bibtex = shutil.which("bibtex")
+    add("INFO", "BibTeX（按文献方案选用）", bibtex or "未安装；最小模板手工文献不受影响")
+    kpse = shutil.which("kpsewhich")
+    if not kpse:
         return
     try:
         p = subprocess.run([kpse, "gbt7714-numerical.bst"], capture_output=True,
-                           text=True, encoding="utf-8", errors="replace", timeout=60)
+                           text=True, encoding="utf-8", errors="replace", timeout=30)
         out = (p.stdout or "").strip()
-        if out:
-            add("PASS", "国标参考文献样式 gbt7714-numerical.bst", out)
-        else:
-            add("WARN", "未找到 gbt7714-numerical.bst",
-                "装 texlive-lang-chinese（否则参考文献无法编译）")
-    except Exception as exc:                           # noqa: BLE001
-        add("WARN", "gbt7714 检查失败", str(exc))
+        add("INFO", "gbt7714-numerical.bst（使用该外部样式时才需要）",
+            out or "未找到；最小模板不依赖此文件")
+    except Exception as exc:  # noqa: BLE001
+        add("INFO", "可选参考文献样式未检查", str(exc))
 
 
 def check_cjk_font():
@@ -122,7 +143,7 @@ def check_cjk_font():
         add("PASS", "中文字体可用（matplotlib 出图）", "、".join(hit[:3]))
     else:
         add("WARN", "未找到常见中文字体",
-            "图内中文会显示成方框：装 fonts-noto-cjk（Linux）或在 generate_plots.py 里指定字体")
+            "绘图时可能缺字，请安装绘图字体或在 generate_plots.py 中指定；不影响使用 Fandol 的 TeX 模板")
 
 
 # ---------------------------------------------------------------- 文件检查
@@ -149,19 +170,9 @@ def check_skills(skills_dir):
                "check_inline_distance.py", "init_workspace.py", "ocr_lecture.py",
                "select_report_template.py"]
         miss = [s for s in scripts if not os.path.isfile(os.path.join(wf, "scripts", s))]
-        assets = ["assets/thu_template/thuemp.cls",
-                  "assets/scaffold_template/report_frontmatter_thu.tex",
-                  "references/report.md",
-                  "assets/report_templates/registry.json",
-                  "assets/report_templates/common.tex",
-                  "assets/report_templates/metadata.tex",
-                  "assets/report_templates/body.tex",
-                  "assets/report_templates/references.bib",
-                  "assets/report_templates/template_01_thu.tex",
-                  "assets/report_templates/template_02_physical_review.tex",
-                  "assets/report_templates/template_03_nature.tex",
-                  "assets/report_templates/template_04_applied_physics_letters.tex",
-                  "assets/report_templates/template_05_journal_of_physics.tex"]
+        assets = ["references/report.md", "assets/report_templates/registry.json",
+                  "assets/report_templates/template_minimal.tex",
+                  "assets/minimal_latex/main.tex", "assets/minimal_latex/build.ps1"]
         miss += [a for a in assets if not os.path.isfile(os.path.join(wf, *a.split("/")))]
         ver = "?"
         try:
@@ -269,6 +280,7 @@ def main():
     check_python()
     check_libs()
     check_xelatex()
+    check_tex_resources()
     check_bibtex_style()
     check_cjk_font()
 

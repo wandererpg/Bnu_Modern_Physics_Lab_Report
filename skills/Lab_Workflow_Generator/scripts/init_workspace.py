@@ -9,7 +9,7 @@ Visible layout (deliberately minimal — users only ever touch these):
         <实验标题>.pdf           # 讲义
         data/                    # ← 把实验数据丢这里（CSV/Excel/图片/txt）
         preview_report/          # 预习报告（纯内容）
-        lab_report/              # 实验报告（thuemp.cls 等随脚手架带入）
+        lab_report/              # 实验报告（最小模板主文件，单文件填写）
 
 Working sub-directories (figures/ scripts/ tables/ build/) are created later by
 `run_lab_workflow.py` when generation actually starts.
@@ -91,22 +91,11 @@ def ship_files(exp: Path, template: str | None = None) -> None:
     lab.mkdir(parents=True, exist_ok=True)
     exp.joinpath("data").mkdir(parents=True, exist_ok=True)
     exp.joinpath("preview_report").mkdir(parents=True, exist_ok=True)
-    had_master = (lab / "lab_report.tex").exists()
-    selection = install_report_template(lab, template, exp.name, allow_legacy=True)
-    pairs = [
-        (SHIP / "thu_template" / "thuemp.cls", lab / "thuemp.cls"),
-        (SHIP / "scaffold_template" / "report_frontmatter_thu.tex", lab / "report_frontmatter_thu.tex"),
-        (SHIP / "scaffold_template" / "report_preamble.tex", lab / "report_preamble.tex"),
-        (SHIP / "scaffold_template" / "data_README.md", exp / "data" / "README.md"),
-    ]
-    for src, dst in pairs:
-        if had_master and selection is None and dst.parent == lab:
-            continue  # An existing legacy report receives no new template files.
-        try:
-            if src.exists() and not dst.exists():
-                shutil.copyfile(src, dst)
-        except OSError as exc:
-            print("  [warn] cannot ship %s: %s" % (src.name, exc))
+    install_report_template(lab, template, exp.name, allow_legacy=True)
+    src = SHIP / "scaffold_template" / "data_README.md"
+    dst = exp / "data" / "README.md"
+    if src.is_file() and not dst.exists():
+        shutil.copyfile(src, dst)
 
 
 def main() -> int:
@@ -116,7 +105,7 @@ def main() -> int:
     ap.add_argument("--experiments", help="comma-separated experiment folder names")
     ap.add_argument("--title-map", help="JSON {lecture_filename: title} for scanned lectures")
     ap.add_argument("--force", action="store_true", help="overwrite an existing lecture PDF")
-    ap.add_argument("--template", help="模板编号 01–05 或别名；省略时沿用已有选择，新实验默认 01")
+    ap.add_argument("--template", help="minimal 或注册别名；新实验默认 minimal，已有报告保留原文")
     ap.add_argument("--list-templates", action="store_true", help="列出模板后退出，不创建工作区")
     a = ap.parse_args()
     if a.list_templates:

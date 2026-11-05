@@ -4,6 +4,14 @@
 文档与模板资源（当前仓库不含实验示例数据）。它把本仓库的 `report.md` / `preview.md` 规范
 进一步工程化：目录驱动、图表程序化生成、编译与**成品 PDF 版式校验**一条龙。
 
+## 当前模板与编译
+
+新报告默认使用唯一注册的 `minimal` 模板，别名为 `default`、`默认`、`最小`；`--template minimal` 可省略，`--list-templates` 用于查看注册表。正式模板是 [template_minimal.tex](Lab_Workflow_Generator/assets/report_templates/template_minimal.tex)，部署后直接填写自包含的 `lab_report/lab_report.tex`，不再按 01—06 选样式或拆成 metadata/body 文件。已有报告及手改源文件保留，历史模板仅用于兼容旧报告。
+
+编译固定使用 XeLaTeX、`ctexart[UTF8,fontset=fandol,scheme=plain]`、发行版自带的 Fandol 与 Latin Modern 字体；章节使用标准无星号命令和 `1`、`1.1` 编号。运行器将辅助文件集中到 `build/`，通常编译两遍；没有 BibTeX 文献库时不要求 BibTeX，有真实 `.bib` 文献库时再执行相应文献流程。校徽、首页中文摘要和关键词、参考文献后英文摘要和关键词及其余实验内容要求继续以 `report.md` 为准。
+
+可用 [分项诊断模板](Lab_Workflow_Generator/assets/minimal_latex/README.md) 的 `build.ps1 -Verify` 分别验证引擎、字体和编号；诊断通过不代替正式实验内容及 PDF 版面的检查。
+
 ## 组成
 
 | 目录 / 文件 | 说明 |
@@ -43,7 +51,7 @@ python3 ./verify_install.py
 `preview.md`、`agents.md`），以便**脱离本仓库独立运行**（安装到 `~/.codex/skills` 后无需本仓库）。
 
 仓库根目录的同名文件是本仓库的**权威规范**，且已经把本工作流的全部规则并入
-（图表规范、浮动体距离、半栏就地图表、行文不得出现括号、数据双落点声明、提交前检查等），
+（图表规范、浮动体距离、按版心宽度就地图表、行文不得出现括号、数据双落点声明、提交前检查等），
 因此外层文件的规则是本 Skill `references/` 的**超集**。修改规范时请改仓库根目录的文件，
 再把改动同步回 `references/`，避免两处漂移。
 

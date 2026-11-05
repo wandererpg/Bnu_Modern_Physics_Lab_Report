@@ -10,7 +10,7 @@ skills/
 │   ├── SKILL.md
 │   ├── scripts/                  # 初始化、模板选择、编译、图表与版面检查
 │   ├── references/               # 运行、预习和实验报告规范
-│   └── assets/                   # 六种注册模板、兼容模板、标识和脚手架
+│   └── assets/                   # minimal 正式模板、分项诊断、兼容模板、标识和脚手架
 ├── advanced_lab_report_gen/
 │   ├── SKILL.md
 │   ├── training_output/          # 文本核心引用的脱敏规则和知识资源
@@ -47,7 +47,7 @@ GitHub 仓库可保留根目录通用规范与 `agent_report_bundle/`，帮助�
 
 - Python 3.11 或更高，与 `verify_install.py` 的最低版本检查一致。
 - 安装 `requirements.txt` 中的 Python 库。读取 Excel 时按需安装 `openpyxl`；扫描讲义需要 OCR 时按需安装 `rapidocr-onnxruntime`。
-- 另行安装含 XeLaTeX、BibTeX、所需中文及参考文献宏包的 TeX 发行版，并配置中文字体。Python 安装器不会自动提供这些系统组件。
+- 另行安装含 XeLaTeX、ctex、Fandol 和 Latin Modern 的 TeX 发行版。新报告默认 minimal，无文献库时不要求 BibTeX；实际使用真实 .bib 库时再安装相应文献工具和样式。Python 安装器不会自动提供这些系统组件。
 - 使用依赖 Poppler 的文本提取或预览步骤时，安装 `pdftotext`、`pdftoppm` 并加入可执行程序搜索路径。
 - `lab-assist` 与 `lab-report-writer` 未随包分发。内置编排脚本不导入其代码，但旧版文本核心仍有调用它们的步骤；如采用那些步骤，需另行安装相应 Skill，或明确改用内置 LaTeX 编排流程。不能承诺任意旧分支均能脱离它们运行。
 
@@ -73,7 +73,7 @@ macOS / Linux 使用 `python3` 并运行 `bash ./install.sh`。安装器将两�
 
 以 [THIRD_PARTY.md](THIRD_PARTY.md) 和各资产自带许可证为准，套件的 MIT 许可证只覆盖自有内容。
 
-- **清华 `thuemp` 模板**：当前未附明确的上游许可证。先核实公开再分发许可，或替换为授权明确的模板。模板 01 和旧报告兼容流程使用它，直接删去可能导致编译失败。
+- **清华 `thuemp` 模板**：当前未附明确的上游许可证。先核实公开再分发许可，或替换为授权明确的模板。历史模板 01 和旧报告兼容流程使用它，直接删去可能导致旧报告编译失败；新报告的 minimal 模板不依赖该类文件。
 - **物理学报模板**：保留 `assets/aps_template/LICENSE` 与原作者声明；其 MIT 许可不能替代其他资产的授权。
 - **学校标识**：版权归所属机构。跨学校使用时替换标识，并复核模板中的引用和版面；不要假定删图后所有模板仍能编译。
 - **示例与风格材料**：上游模板中的姓名、学号和邮箱应识别为示例占位信息；检查分发版本，避免用户误认为自己的署名。包含学生报告的原文或衍生材料时，也要核实分享权限。

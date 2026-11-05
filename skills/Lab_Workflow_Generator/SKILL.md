@@ -1,391 +1,74 @@
 ---
 name: Lab_Workflow_Generator
 description: >-
-  基于文件目录的半自动化物理实验报告工作区引擎：当用户输入 /build_lab、要求“把实验做成工作区”“扫描实验目录并生成
-  全套预习/实验报告+PDF”，或要求按01—06编号/期刊风格写实验报告、切换报告样式，以及按目录材料生成报告时使用。生成 LaTeX 源文件并调用
-  advanced_lab_report_gen 的文本生成能力与 XeLaTeX 编译，产出预习报告、实验报告、可复现数据处理脚本和 PDF。
+  根据实验讲义和真实记录建立预习与实验报告工作区，使用统一最小 LaTeX 模板生成源文件、处理数据并编译 PDF；也用于维护报告或迁移旧模板。
 ---
 
-# Lab Workflow Generator —— 实验报告工程化工作区
+# 实验报告工作流
 
-> 当被触发时，你的角色是**工作区自动化引擎**：把“对话式生成报告”升级为“目录驱动、可复现、可编译”的实验报告工作区。
+当前入口为统一 `minimal` 模板。新报告不再按六套样板或期刊别名选版；历史资源只用于维护已有报告。具体内容以工作区 `preview.md`、`report.md` 为准；缺失时读取 `references/` 对应副本。任务权限、资料与 Git 范围遵循工作区 `agents.md`，不扩大授权。
 
-## 编号模板入口（当前规则）
+## 模板与编辑入口
 
-结构版式（2026-09-30）：01经典课程双栏、02紧凑学术双栏（首页中文摘要）、03杂志式混合布局（引言单栏，其后双栏）、04单栏技术简报、05独立题头页与单栏长报告；06从现有He-Ne报告提炼黑白单栏课程样式（宋体/黑体、1.5倍行距、居中摘要标题、题目页眉）。所有模板首页均排中文摘要和关键词；英文摘要及对应英文关键词在参考文献之后排版。图表标题和正文引用统一使用中文，参考文献引用以右上角顺序编号显示。编号、期刊别名和必需内容保持稳定；版式参数由版本化`assets/report_templates/layout_v2.tex`提供。用户允许单栏、双栏和混合风格，课程明确要求仍优先。03的`multicols`区域使用`[H]`就地图表，宽幅附录恢复单栏；复杂跨栏浮动体或跨页长表优先用04/05。
+- 正式实验模板为 `assets/report_templates/template_minimal.tex`，安装后主文件为 `<实验标题>/lab_report/lab_report.tex`。基本信息、摘要、正文和参考文献直接在主文件填写，不要求 metadata/body 分片或自定义文档类。
+- 基础为 XeLaTeX、`iftex`、标准 `ctexart[UTF8,fontset=fandol,scheme=plain]`、Fandol 和 Latin Modern；不依赖宋体、微软雅黑或 Times New Roman 等系统字体名称。
+- 页面采用 A4 单栏、11pt、25mm 页边距和约 1.5 倍行距；标准 `\section`、`\subsection` 生成 `1`、`1.1`，不重定义章节命令，不手写章节数字。
+- 保留两行基本信息、首页校徽、100—200 字中文摘要、3—5 个中文关键词、五个正文顶层章节与上角标顺序引用；英文摘要和对应关键词在参考文献后。校徽缺失标注待补充，正式交付前补齐。
+- 骨架中的待补充提示不是实验内容。不能因编译成功称正式报告完成。
 
-实验报告先读工作区 `report.md`（缺失时读 `references/report.md`），再依据 `assets/report_templates/registry.json` 选择：01清华课程双栏（默认）、02 Physical Review、03 Nature、04 Applied Physics Letters、05 Journal of Physics、06 He-Ne原报告单栏。02—05为中文课程风格改编，不是官方投稿模板；结构和数据规则不变。
+使用与兼容说明见 [模板说明](assets/report_templates/README.md)。只有需要查旧报告来源时才读历史来源与版式文档。
 
-优先级：课程明确要求 → 用户编号或名称 → 报告已有 `template_selection.json` → 新报告默认01。可唯一识别的选择直接执行。详细调用、文件布局、切换与检查见 `assets/report_templates/README.md`；仅在需要核对来源时读 `SOURCES.md`。
+## 工作区与内容保护
 
-```text
-/build_lab 塞曼效应 --template 02
-/build_lab --experiment 塞曼效应 --template nature
-python scripts/run_lab_workflow.py --workspace <WS> --experiment <实验标题> --stage scaffold --template 02
-```
+每份讲义按内部标题建立 `<实验标题>/`，讲义位于 `<实验标题>/<实验标题>.pdf`，分别使用 `preview_report/` 与 `lab_report/`。两份报告均编写为 LaTeX 并生成 PDF，辅助文件集中在各自 `build/`。数据、图片、处理脚本和表格保存在实验目录，不进入通用模板仓库。
 
-初始化脚本同样支持 `--template`，两脚本都支持 `--list-templates`。主源固定为 `lab_report/lab_report.tex`；正文、信息和文献分别放在 `report_template/body.tex`、`metadata.tex`、`references.bib`。脚本只部署占位骨架，AI仍须读讲义和真实记录完成内容。已有报告先迁移并检查差异；不覆盖旧源或手工改过的主文件，切换保留正文、数据、文献。
+新报告选择记录使用 `minimal`；现有主文件、旧选择记录及手动编辑不触发自动换版。迁移前保留原稿并核对正文、信息、文献、数据与手动修改。不得以空骨架替换旧报告；`--force` 也不绕过覆盖保护。
 
-填写后跑正文检查及 XeLaTeX/BibTeX 编译，渲染PDF复核 `report.md`；占位图表/文献及灰色草稿提示在核实后替换或移除。报告未具备内容与版面条件时只能交付草稿。下文旧THU、物理学报模板说明和历史复盘仅用于兼容，不覆盖本入口与现行内容规范（包括结果章节中的定量数据和分析要求）。
+## 按任务执行
 
-## 1. 核心指令
+1. 读取规范、讲义、原始记录、照片与已有报告，确认实验标题、真实操作和完成条件。扫描讲义不可读时使用可用 OCR；不能用模板常识代替讲义事实。
+2. 新报告部署统一骨架；已有报告按实际源文件维护。讲义更新时记录变更，审查需要更新的正文，保留用户手改内容。
+3. 按 `preview.md` 写预习报告，按 `report.md` 写实验报告。原始值、计算值、理论值和估计值明确区分，缺失内容写待补充。正文按“设定→结果→解释”组织，必要条件和定义集中说明一次，因果推测就近用“可能”。
+4. 依据真实记录生成可复现的数据处理、拟合、绘图脚本及必要正文表。保留异常值及处理依据；原始记录与完整计算表单独保存，不生成实验数据附录。
+5. 运行与改动匹配的检查与编译，核对最终 PDF。说明路径、实测结果、未完成项和验证范围。
 
-1. 当用户输入 `/build_lab [实验名称]`（或自然语言指定实验/工作区路径）时启动；
-2. 首先检查或创建第 3 节定义的目录结构；
-3. 然后按第 5 节顺序执行自动化流程：扫描实验目录 → 调用 `advanced_lab_report_gen` 的核心文本生成能力（实验识别、数据处理、章节撰写，而非重新走其完整对话流程）→ 生成 LaTeX 源文件与 Python 脚本 → 执行 XeLaTeX 编译；
-4. 全部产物生成后，向用户汇报文件清单、编译日志摘要与“建议人工复核项”；
-5. 本 Skill 只做工程化封装，不改变既有真实性规则：**不编造数据、现象或结论**，缺失项写“待补充”。
+## 命令与阶段
 
-## 2. 元数据与触发
-
-```yaml
-name: Lab_Workflow_Generator
-version: 1.27
-trigger_command: /build_lab [--force]
-依赖:
-  - advanced_lab_report_gen v3.1（文本核心）
-  - lab-assist（LaTeX 工程约定）
-  - xelatex / python3（numpy、scipy、matplotlib、pandas）
-```
-
-`--force` 参数：忽略讲义状态检查，强制重新生成 .tex 正文、重跑数据处理脚本并重新编译 PDF（适用于用户手动修改 .tex 后刷新或想强制重建全部产物）。
-
-常用触发示例：
-
-```text
-/build_lab 塞曼效应
-/build_lab --workspace ./my_lab_ws --experiment 高温超导材料的特性与表征
-/build_lab --workspace ./my_lab_ws --experiment 塞曼效应 --force
-```
-
-## 3. 工作区目录结构
-
-默认工作区根目录 = 用户指定的 workspace（未指定时 = 当前工作目录）。首次运行时若根目录缺少规范文件，从本 Skill 的 `references/` 复制：
-
-```text
-workspace_root/
-├── AGENTS.md                    # 工作区操作约定（复制自 references/agents.md）
-├── README.md                    # 说明如何“填入数据”并“生成全套报告”
-├── preview.md                   # 预习报告规范（复制自 references/preview.md）
-├── report.md                    # 实验报告规范（复制自 references/report.md）
-├── .gitignore                   # 忽略 LaTeX 中间产物与 build/、tmp/（复制自 assets/workspace_scaffold/.gitignore）
-├── 校徽.webp                     # 首页校徽素材（复制自 assets/branding/校徽.webp）
-├── bnu_logo.png                 # 校徽 PNG（graphicx 可直接引用；复制自 assets/branding/bnu_logo.png）
-├── 清华近物实验报告模板/          # 旧版清华模板兼容资料（复制自 assets/thu_template/）
-└── [实验标题]/                  # 实验目录位于工作区根，名为讲义内部标题，如：塞曼效应
-    ├── [实验标题].pdf           # 实验讲义（用户放入；缺失则警告）
-    ├── preview_report/          # 预习报告（含 .gitkeep）
-    │   ├── preview_report.tex
-    │   └── preview_report.pdf
-    └── lab_report/              # 实验报告（含 .gitkeep）
-        ├── data/                # 原始数据 (CSV/Excel) 与 data/README.md 数据说明
-        ├── figures/             # 生成图表 (PDF/PNG)
-        ├── scripts/
-        │   ├── generate_plots.py
-        │   └── make_data_tables.py   # 随 Skill 提供：data/*.csv -> tables/*.tex
-        ├── tables/              # 程序化生成的 LaTeX 表片段（本地留存，正文按需选用）
-        ├── build/               # LaTeX 编译临时文件
-        ├── lab_report.tex
-        ├── lab_report_thu.tex   # 清华模板版（默认）；两种模板可并存以便对比
-        ├── lab_report.pdf
-        ├── refs.bib             # 参考文献（gbt7714-numerical，BibTeX）
-        ├── thuemp.cls           # 默认模板类（随脚手架复制）
-        ├── report_preamble.tex  # 备选：物理学报/ctexart 版导言区
-        ├── report_frontmatter_thu.tex  # 默认：清华模板前置区骨架
-        └── README.md            # 本实验数据来源、结构与再生说明
-```
-
-规则：
-
-- 实验目录位于工作区根目录、以讲义内部标题命名：`<实验标题>/`；讲义重命名为 `<实验标题>/<实验标题>.pdf`；
-- 预习报告源文件为 `<实验标题>/preview_report/preview_report.tex`（旧名 `preview.tex` 仍兼容）；实验报告为 `<实验标题>/lab_report/lab_report.tex`；
-- `preview_report/`、`lab_report/` 与 `lab_report/{data,figures,scripts,tables,build}` 由脚手架自动创建，并放置 `.gitkeep`；
-- 旧版 `<workspace>/experiments/<实验标题>/` 布局**仍兼容**（runner 会自动识别），新工作区一律采用根级布局；
-- 编译辅助文件只放 `build/`，最终 PDF 与 `.tex` 放报告目录；不得把 `.aux/.log/.out` 散落在源文件目录；
-- **模板默认选择01**：按根目录 `report.md` 和模板注册表选择；`thuemp.cls` 作为模板01及旧报告的兼容类，旧清华前置区仍可供已有报告使用；物理学报模板（`report_preamble.tex`）为可选版式，仅在被明确要求时使用；
-- 遇到结构歧义时做最小假设，并在报告 README 中标明待确认项。
-### 3.1 精简工作区（推荐给日常使用）
-
-面向"每个实验一个文件夹、只放讲义/数据/两个报告"的使用方式，工作区根目录**只保留实验文件夹**，规范与模板全部由本 Skill 自带、生成时自动带入：
-
-```text
-<workspace>/
-└── [实验标题]/                 # 讲义内部标题
-    ├── [实验标题].pdf          # 讲义（用户提供）
-    ├── data/                   # ← 用户把数据丢这里（CSV/Excel/图片）；运行时会自动镜像到 lab_report/data
-    ├── preview_report/         # 预习报告（纯内容，便于手抄）
-    └── lab_report/             # 实验报告；初始含 thuemp.cls / report_frontmatter_thu.tex / report_preamble.tex
-        ├── figures/ scripts/ tables/ build/    # 生成时由脚手架创建
-        └── lab_report.tex / lab_report.pdf / refs.bib / generation_log.md
-```
-
-- 初始化（批量把讲义变成实验文件夹）：`python init_workspace.py --workspace <WS> --lectures <讲义目录>`
-  - 自动读取讲义首页标题作为文件夹名；**扫描件无文本层**时退回文件名并给出警告，可用 `--title-map {"文件.pdf":"正确标题"}` 指定；
-  - 也可只给实验名：`--experiments "塞曼效应,液晶物性"`；
-- 生成（在该实验文件夹内直接执行，无需 `--experiment`）：
-  `python run_lab_workflow.py --workspace . --stage all`
-- 用户视角只需四样东西：**讲义、data/、preview_report/、lab_report/**；根目录不放 `preview.md`/`report.md`/模板目录（如需，仍可按 §3 的完整布局放置作为覆盖）。
-
-## 4. 模板与规范
-
-### 4.1 两份规范文件（完整内容已打包在本 Skill）
-
-- 预习报告规范：本 Skill `references/preview.md`（内容同步工作区根 `preview.md`）：预习报告必须含实验目的、物理/实验/仪器三层次原理、实验方法、实验内容、第一次课后问题与思考题；正文 2–3 页；不得伪造未做实验的数据。
-- 实验报告规范：本 Skill references/report.md 与工作区根 report.md 同步；首页为中文摘要和中文关键词，正文依次为一、引言（恰好两段）、二、原理（实验原理/实验装置/实验方法，方法下按真实步骤设三级标题）、三、结果与分析讨论、四、实验总结、五、参考文献；英文摘要和英文关键词紧接参考文献，图表题名与引用只用中文，文献编号以右上角形式呈现。
-
-生成正文前，先读取对应 reference 全文并按其“提交前检查清单”执行。
-
-### 4.2 LaTeX 模板（默认：模板01；兼容：清华 thuemp）
-
-**清华兼容模板（`thuemp.cls`，本 Skill `assets/thu_template/`，v1.1 非官方；不作为独立默认入口）**
-
-- `ctexart` 派生的 **A4 双栏**类，自带「北京师范大学普通物理实验」页眉与首页结构；主文件头部：
-
-```latex
-% !TEX program = xelatex
-\documentclass{thuemp}
-\usepackage{xcolor}                                        % 数据说明灰框
-\sisetup{detect-all,per-mode=symbol,separate-uncertainty=true}
-\ctexset{section={name={,、},number=\chinese{section}}}     % 一、二、三
-```
-
-- 清华前置区可保留英文题目和作者字段；英文摘要与英文关键词必须在参考文献之后；引用使用配置为上角标样式的顺序编码。
-- 图题**单语中文**「图N：描述」，正文 `图~\ref{}`（该类基于 `ccaption`，**无 `\bicaption`**）；表题「表N：描述」；公式统一编号并以“式（x）”/`\eqref` 引用；
-- 宽幅图/表用 `table*`/`figure*`；首面必要时在正文第一节内加 `\enlargethispage{-3.3cm}`；
-- GB/T 7714—2015：bibliographystyle 使用 gbt7714-numerical；正文使用上角标顺序编码引用。
-- 编译链：`xelatex → bibtex → xelatex → xelatex`（含参考文献必须跑 bibtex）。
-
-**备选 —— 物理学报模板（`assets/aps_template/` + `report_preamble.tex`）**
-
-- `\documentclass[UTF8,a4paper,10pt]{ctexart}` + `\input{report_preamble}`，单栏；仅在被明确要求时使用；
-- 图表标题和正文中的图表引用只用中文；校徽 `\bnulogo`（7 cm、相对正文左页边距左移 2 cm、仅首页、overlay 不占流）。
-
-## 5. 核心工作流
-
-对 `experiments/[实验名称]/` 执行以下流程：
-
-### 步骤1：扫描与识别
-
-1. 列出实验目录文件：讲义 PDF、`lab_report/data/` 下所有数据文件、已有 `figures/scripts/*.tex/*.pdf`；
-2. 用 `advanced_lab_report_gen` 的实验映射（关键词/公式）识别实验；输出标准实验名与置信度；
-3. 无讲义且无数据时停止并提示缺失；只有讲义时仍可生成预习报告与实验报告框架（数据部分“待补充”）。
-
-#### 讲义变更检测（SHA-256）
-
-在执行任何生成操作前执行以下检测：
-
-1. 读取源讲义路径：优先 `<实验标题>/[实验名称].pdf`，其次 `refer/[实验名称].pdf`（或用户指定的源路径）；**若讲义无文本层（扫描件），先运行 `ocr_lecture.py`（或 `--stage ocr`）生成 `lab_report/lecture_ocr.txt`，再据此绑定事实**；
-2. 计算源讲义的 SHA-256；
-3. 读取工作区副本：`experiments/[实验名称]/[实验名称].pdf`；
-4. 若工作区副本不存在 → `lecture_status = "MISSING"`，提示用户先复制讲义，且禁止继续文本生成；
-5. 若副本存在：
-   - 计算副本 SHA-256；
-   - 与源讲义比对：一致 → `"UNCHANGED"`；不一致 → `"CHANGED"`，并自动从源路径复制覆盖工作区副本；
-6. 记录到 `lab_report/generation_log.md`：源讲义路径、源/副本 SHA-256、比对结果（UNCHANGED/CHANGED/MISSING）、讲义页数、文本字符数、文本层状态（可提取/需OCR/不可提取）。
-
-`--force` 时跳过比对，直接视为 CHANGED 处理。
-
-### 步骤2：调用文本生成核心
-
-调用 `advanced_lab_report_gen` 的**核心生成逻辑**（§2 全局配置、§3 步骤1–5 的检查规则），而非其完整对话界面：
-
-- 讲义变更/首次运行/`--force` 时，使用同一份讲义全文（如 13,704 字符）同时重写 `preview_report/preview.tex` 与 `lab_report/lab_report.tex`；preview.tex 必须包含讲义中的真实参数（如 Kastler、Zeeman、a₈₇=3417.34 MHz、缓冲气体类型等），不得仅基于 `preview.md` 模板填空；
-- 实验报告按 `report.md` 生成 → 写入 `lab_report/lab_report.tex` 的正文部分（摘要、引言、原理、实验、结果与分析讨论、结论、参考文献）；
-- 保留该 Skill 的硬性规则：摘要含数值、原理不照抄、讨论四步、图/表/公式规范、封面信息“待补充”清单；
-- 文本按 advanced_lab_report_gen v3.1 规则生成：默认应用老师小论文格式组织章节（与 references/report.md 一致），撰写语言与论证参考《大学物理》期刊学术风格锚点（§2.7），不对特定作者加权。
-
-#### 强制文本重生成条件
-
-满足以下任一条件时，必须重新调用 `advanced_lab_report_gen` 生成 .tex 正文：
-
-1. `lecture_status = "CHANGED"`（讲义已更新）；
-2. `lecture_status = "MISSING"`（讲义缺失，需提示且不得生成）；
-3. 目标 `.tex` 文件不存在（首次运行）；
-4. 用户明确指定 `--force`。
-
-当 `lecture_status = "UNCHANGED"` 且目标 `.tex` 已存在时，可跳过文本生成，直接进入数据处理与编译。
-
-禁止行为：讲义已变更却复用旧 .tex；讲义缺失仍继续生成。
-
-### 步骤3：生成数据处理脚本
-
-在 `lab_report/scripts/generate_plots.py` 生成可复现脚本（规范见第 6 节），并运行一次验证输出：
+从工作区根目录执行；`--workspace` 也可传绝对路径：
 
 ```powershell
-py lab_report\scripts\generate_plots.py
+python skills/Lab_Workflow_Generator/scripts/select_report_template.py --list-templates
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage scaffold --template minimal
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage status
+# 在完成真实正文后：
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage check
+python skills/Lab_Workflow_Generator/scripts/run_lab_workflow.py --workspace . --experiment "实验标题" --stage compile
 ```
 
-### 步骤3.5：生成必要的正文结果表（程序化，不手抄）
+其他阶段为 `ocr`、`plots`、`tables`；`all` 按脚本执行整个工程流程，但不会代替 AI 阅读材料和完成报告内容。按需使用 `init_workspace.py` 初始化目录；具体参数以 `--help` 为准。正文所需的三线表由 `make_data_tables.py` 从数据生成，引用 `tables/` 片段；图题、表题和正文引用统一中文。绘图字体与 LaTeX 字体分别检查。
 
-把 `lab_report/data/*.csv` 渲染为 `lab_report/tables/*.tex`（booktabs 三线表；自动转义、数值列右对齐），报告只用 `\input{tables/<name>}` 引入理解结果所必需的正文表；完整原始数据单独保存在本地，不生成实验数据附录：
+## 编译与故障定位
+
+正常编译使用 XeLaTeX 两遍；仅实际使用外部 `.bib` 时增加 BibTeX，再用 XeLaTeX 两遍。最小模板可用真实 `thebibliography` 条目，无外部文献库时不要求 BibTeX。按课程要求著录参考文献，正文必须实际引用；没有文献时标记待补充，不塞虚构占位文献。
+
+编译脚本在报告目录工作，新建 `build/run-<唯一标识>/`，逐次检查退出码和日志，确认非空 PDF 后再更新成品。失败保留源码和日志，说明本轮失败，不交付旧 PDF 冒充新结果。不得自动退回 pdfLaTeX。
+
+如不能生成 PDF，先运行独立诊断：
 
 ```powershell
-py <Skill>\scripts\make_data_tables.py --combined     # cwd = lab_report/
-# 或由 runner 统一执行：python run_lab_workflow.py --experiment <实验名> --stage tables
+& .\skills\Lab_Workflow_Generator\assets\minimal_latex\build.ps1 -Verify
 ```
 
-改数据后重跑即可同步必要的正文表，避免手抄数字；校对报告结果与本地数据文件的一致性。附录范围以 `report.md` 为准。
+依次检查英文引擎与 PDF 输出、中文文档类与字体、章节及交叉引用。详见 [诊断说明](assets/minimal_latex/README.md)。字体找不到时检查发行版包；编号异常时检查星号章节、编号深度、旧类与章节重定义；输出异常时检查当前目录、主文件、可写输出目录、退出码与最终 PDF 路径。
 
-### 步骤4：自动编译 PDF
+## 验收与通用包
 
-对预习报告与实验报告分别执行：
+- 检查摘要、章节、实际数据、单位、有效数字、不确定度、文献和附录范围；正文要求见 `report.md`，预习内容见 `preview.md`。
+- 编译后检查引用、缺字、字体替换、溢出及最终 PDF 页面，必要时使用 `check_report_tex.py`、`check_pdf_geometry.py`、`check_float_distance.py`、`check_inline_distance.py`。判断与页宽/栏宽相关的告警时结合实际模板，不能把历史双栏参数机械套在新单栏上。
+- 输出源文件、PDF、可复现脚本及必要数据说明；记录讲义来源/变更、执行动作、编译链与缺失项。正式交付须内容与版面都完成，资料不足只交付草稿。
+- 变更通用规范后同步 `references/`，运行 `scripts/export_agent_bundle.py` 并核对 `agent_report_bundle/manifest.json`。通用包不放实验材料、报告成品与缓存。
 
-```text
-# 预习报告（无参考文献，两遍即可）
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=build preview_report.tex   （两遍）
-# 实验报告：默认清华模板含参考文献 → xelatex → bibtex → xelatex → xelatex
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lab_report.tex
-bibtex build/lab_report
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lab_report.tex
-xelatex -interaction=nonstopmode -halt-on-error -output-directory=build lab_report.tex
-```
-
-把 `build/*.pdf` 复制到对应报告目录；无 `.bib` 时跳过 bibtex。上述流程已由 `run_lab_workflow.py` 自动化：检测到 `\bibliography{}/\bibreference`（或 `\cite` 且同目录有 `.bib`）即按 `xelatex→bibtex→xelatex→xelatex` 执行，并为 bibtex 设置 `BSTINPUTS/BIBINPUTS/TEXINPUTS` 以定位工作区模板目录。编译失败时保留源文件、输出完整错误日志并说明阻塞原因。
-
-### 步骤5：生成说明文件
-
-生成 `experiments/[实验名称]/README.md`，包含：
-
-- 数据来源与数据声明（实测 / 模拟 / 混合）；
-- 目录结构与各文件用途；
-- 重新生成命令（脚本 + 两次编译）；
-- 待补充项与已知限制。
-
-## 6. 数据与脚本规范
-
-`generate_plots.py` 必须满足：
-
-1. 文件头注释：实验名称、作者占位、数据文件、依赖、固定随机种子；
-2. `import numpy as np` 后立即设置 `np.random.seed(42)`（如需随机数据），保证结果可复现；
-3. 明确函数结构：`load_data()`、`process_data()`（计算/拟合/误差）、`make_figures()`、`main()`；
-4. 从 `../data/` 读取（相对路径以脚本所在目录为基准），图表输出到 `../figures/`（PDF 优先）；
-5. 输出数值汇总到 `../data/processed_results.csv`（若适用）并在终端打印关键结果（R²、斜率、误差等）；
-6. 禁止硬编码绝对路径；禁止修改原始数据文件；
-7. 输出 CSV 应各有独立内容：**不要生成内容重复的两个汇总文件**（避免正文重复列出相同数据）；文件命名建议"中文名 英文名.csv"并在本地数据说明中按其真实文件名记录来源。
-
-`make_data_tables.py`（随 Skill 提供，位于本 Skill `scripts/`）：
-
-- 从 `data/*.csv` 生成 `tables/*.tex`（`booktabs` 三线表；表题取文件名；`\label{tab:<slug>}`）；
-- 自动转义 `_ % & # $ { } ~ ^`；数值列右对齐、文本列左对齐；超长表默认截断（`--max-rows`，默认 30）并加表注；
-- **列宽自适应到版心（`--fit`，默认开）**：自然宽度超版心时改用 `p{\dimexpr f\textwidth-8pt\relax}` 列（每列减去的 `2\tabcolsep` 与列间距相消，故表格总宽恰为 `Σf·\textwidth`，与模板无关）。判据用 em 估算（CJK 1em、ASCII 0.5em，`--fit-em` 默认通栏 45 / 单栏 21）；放不下时报 `FAIL` 并列出「最小宽度 > 可用宽度」，提示必须拆表；`--no-fit` 可退回旧的 `l/r` 自然宽度；
-- `--array`：数值列居中、文本列左对齐（需 `\usepackage{array}`）；runner 检测到文档加载 array 时自动开启，否则退化为普通 `p` 列（仍能放进版心）；
-- 未四舍五入的长小数（>7 位）会告警，建议在数据准备脚本里取 3–5 位有效数字；
-- `--combined` 额外生成 `tables/all_tables.tex`（`\input` 全部表），供本地核对全部表格；正文仅选用必要的表，不作为实验数据附录整体引入；
-- 输出为**生成物**：不要手工编辑；改数据后重跑脚本。
-
-`check_report_tex.py`（随 Skill 提供，位于本 Skill `scripts/`）——把 `report.md` 的文字规则变成可执行检查：
-
-- **每图每表必须有题注**（缺 `\caption`/`\bicaption` 报错）；
-- **引用必须可解析**：`\ref/\eqref` 指向不存在的 label 报错；label 从未被引用给警告；
-- **必需章节齐全**（实验报告：引言/原理/实验/结果与分析讨论/结论/参考文献；预习：目的/原理/仪器/方法/内容）；
-- **摘要长度提示**（实验报告 100–200 字）；
-- **可读性/几何检查**：`\resizebox/\scalebox`、插图宽度 <0.85 倍版心、题注 <10 字、表格 >20 行、**表格列数 >7**、**自然宽度估算超版心**（会排到纸外而编译不报错）、**表格里 ≥8 位长小数**；
-- 用法：`python check_report_tex.py <file.tex>`、`--dir <目录>`、`--kind lab|preview`、`--strict`（警告也算错误）。
-
-`check_pdf_geometry.py`（随 Skill 提供，位于本 Skill `scripts/`）——**编译后**直接量成品 PDF：
-
-- 为什么必需：LaTeX 对「表格比版心宽」不报错，只把它排到纸外（实测一张 10 列表的横线右端到 x1=1025.6pt，而 A4 纸宽 595.3pt，约 15cm 内容读者看不到），日志里只有一条 Overfull hbox；
-- `FATAL` 元素越出纸面；`WARN` 越出版心（出血）、通栏长行重叠（如首页「数据说明」框压住摘要首行）、**横线/框线从字形中穿过**（区分「图内图例压线条」与「版面间距不足」两种根因）、图内文字过小（<8pt 小字成簇且带图形笔画——矢量图被缩小后字号一起缩）、位图有效分辨率 <150dpi；
-- 版心边界由文字行的众数边界自动估计，无需知道模板 geometry；
-- 用法：`python check_pdf_geometry.py lab_report.pdf [--strict] [--json out.json]`；runner 的 `compile` 阶段会自动执行（缺 PyMuPDF 时跳过，不阻断）。
-
-
-`init_workspace.py`（随 Skill 提供，位于本 Skill `scripts/`）：
-
-- 批量把讲义 PDF 目录变成**精简工作区**：每份讲义建一个 `<实验标题>/`，内含 `<实验标题>.pdf`、`data/`、`preview_report/`、`lab_report/`（随附 `thuemp.cls`、`report_frontmatter_thu.tex`、`report_preamble.tex`、`data/README.md`）；
-- 自动从讲义首页（必要时到第 3 页）提取标题作为文件夹名；无文本层的扫描件退回文件名并警告，可用 `--title-map` 修正；
-- 幂等：重复运行不覆盖既有文件（`--force` 可覆盖讲义）。
-
-
-`ocr_lecture.py`（随 Skill 提供，位于本 Skill `scripts/`）：
-
-- 逐页判断：文本层字符数 **≥50** 直接用文本层，否则**渲染该页为图像并 OCR**（`rapidocr-onnxruntime` + `PyMuPDF`）；
-- 输出 `<<<PAGE n>>>` 标记的文本文件；`--experiment <实验目录>` 时默认写入 `<实验>/lab_report/lecture_ocr.txt`；
-- 供正文/预习报告绑定讲义事实（尤其扫描件），也便于人复核 OCR 质量；
-- runner 的 `all`/`ocr` 阶段会**自动判断**：若讲义是扫描件且尚无 `lecture_ocr.txt`，自动执行本脚本。
-
-工作区根命令：
-
-```powershell
-python run_lab_workflow.py --experiment 塞曼效应            # 打印/执行工作流
-python run_lab_workflow.py --experiment 塞曼效应 --stage plots
-python run_lab_workflow.py --experiment 塞曼效应 --stage tables
-python run_lab_workflow.py --experiment 塞曼效应 --stage check
-python run_lab_workflow.py --experiment 塞曼效应 --stage compile
-```
-
-文本正文（`.tex` 的 prose）必须由本 Skill/`advanced_lab_report_gen` 生成；`run_lab_workflow.py` 只负责目录检查、数据清单、脚本执行与编译等确定性步骤。
-
-## 7. 验收与输出
-
-### generation_log.md 规范（每次运行必生成/更新）
-
-每次运行 `/build_lab`，在 `lab_report/` 下生成或更新 `generation_log.md`：
-
-```markdown
-# 生成日志
-- 生成时间：[ISO 8601 时间戳]
-- Skill版本：Lab_Workflow_Generator v1.19
-- 文本生成核心：advanced_lab_report_gen v3.1
-- 实验名称：[标准实验名]
-
-## 讲义状态
-- 源讲义路径：[路径]
-- 源讲义 SHA-256：[哈希值]
-- 工作区副本 SHA-256：[哈希值]
-- 比对结果：UNCHANGED / CHANGED / MISSING
-- 讲义页数：[页数]
-- 讲义文本字符数：[字符数]
-- 文本层状态：可提取 / 需OCR / 不可提取
-
-## 生成动作
-- 文本重生成：YES / NO（原因：CHANGED / 首次运行 / 强制 / 跳过）
-- preview.tex SHA-256：[哈希值]
-- preview_text_regenerated：YES / NO（原因：CHANGED / 首次运行 / 强制 / 跳过）
-- lab_report.tex SHA-256：[哈希值]
-- 数据处理脚本：已执行 / 已跳过
-- PDF编译（预习）：成功 / 失败
-- PDF编译（实验）：成功 / 失败
-
-## 异常与警告
-- [列出本次运行中出现的任何异常或警告]
-```
-
-完成后汇报：
-
-```text
-✅ 工作区产物
-- preview_report/preview.pdf
-- lab_report/lab_report.pdf
-- lab_report/lab_report.tex
-- lab_report/scripts/generate_plots.py
-- lab_report/figures/（图表）
-- experiments/[实验名称]/README.md
-```
-
-并给出：
-
-- 编译日志摘要（成功/错误）；
-- 数据声明（真实/模拟/混合）；
-- 建议人工复核项（封面信息、实测数据替换、原理重写、讨论误差、参考文献、教师签名原始记录）。
-
-## 8. 错误处理
-
-| 异常 | 处理 |
-| --- | --- |
-| 目录/数据缺失 | 创建骨架并列出缺失项，不编造内容 |
-| 识别失败 | 手动指定实验名，或从 `advanced_lab_report_gen` 映射表人工核对 |
-| 脚本运行失败 | 自动重试 1 次并输出 traceback；标注待修复 |
-| XeLaTeX 编译失败 | 输出完整日志，保留 `.tex`，给出修复建议 |
-| 规范文件缺失 | 从本 Skill `references/` 重新复制 |
-
-## 9. 关联 Skill 使用方式
-
-- 文本生成：读取并调用 `advanced_lab_report_gen` 的 §2 全局配置与 §3 步骤1–5 规则（其安装路径：`~/.codex/skills/advanced_lab_report_gen/SKILL.md`）；
-- LaTeX 工程约定：参考 `lab-assist`（`~/.codex/skills/lab-assist/SKILL.md`）的目录与编译约定；
-- 本 Skill 的 `references/`、`assets/aps_template/`、`scripts/` 是打包资源。初始化时按需复制规范和报告脚手架；物理学报参考模板保留在 Skill 内，编译时由搜索路径定位，无需在工作区根目录再建副本。
-
----
+以下版本记录用于解释旧工作区，不覆盖上述当前规则。
 
 ## 历史版本记录（仅供追溯）
 
@@ -400,7 +83,7 @@ python run_lab_workflow.py --experiment 塞曼效应 --stage compile
 
 配套工具改动：`make_data_tables.py` 新增 **陈旧生成物清理**（CSV 改名/删除后自动删除对应的 `tables/*.tex`，只删带自动生成标记的文件，手写表不动）与 **`--` 连字保护**（TeX 会把 ASCII `--` 连字成 `–`，使数据里的方向组合 `--` 显示成单个短横线与 `-` 无法区分；现插入空组阻断）。
 
-## 更新日志
+## 更新日志（历史记录，不作为当前入口）
 
 ### v1.27（2026-09-18）
 

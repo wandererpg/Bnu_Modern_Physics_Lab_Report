@@ -7,7 +7,8 @@
 ```bash
 python -V                     # 需 3.11 或更高
 xelatex --version             # 需 TeX Live 2023+ 或 MiKTeX
-kpsewhich gbt7714-numerical.bst   # 国标参考文献样式（texlive-lang-chinese 自带）
+kpsewhich FandolSong-Regular.otf # 中文正文使用发行版自带 Fandol
+kpsewhich lmroman10-regular.otf  # 英文正文使用发行版自带 Latin Modern
 ```
 
 任何一条失败，先按下面对应小节安装。
@@ -32,7 +33,7 @@ py -m pip install -r requirements.txt
 > `9009`（命令未找到）。因此文档里的示例统一使用解释器全路径。工作流本身完全支持中文路径
 > （包括中文实验目录名、中文 CSV 文件名）。
 
-## 2. LaTeX（XeLaTeX + 中文 + 参考文献）
+## 2. LaTeX（XeLaTeX + 发行版字体）
 
 | 平台 | 安装方式 |
 | --- | --- |
@@ -40,10 +41,11 @@ py -m pip install -r requirements.txt
 | macOS | `brew install --cask mactex` |
 | Debian/Ubuntu | `sudo apt install texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-latex-extra` |
 
-需要的中文支持：`ctex`、`xeCJK`；参考文献：`gbt7714-numerical.bst`。
-`thuemp.cls` **随包提供**（`skills/Lab_Workflow_Generator/assets/thu_template/`），无需另外下载。
+新报告使用 `minimal` 模板：`ctexart[UTF8,fontset=fandol,scheme=plain]`，中文为 Fandol，英文为 Latin Modern。安装 `ctex`、`xeCJK`、`fontspec` 和对应字体包即可，不要求安装宋体、黑体或微软雅黑。`thuemp.cls` 与旧模板资产仅兼容已有报告。
 
-字体：Windows 自带微软雅黑即可出图；Linux 若缺中文字体，装 `fonts-noto-cjk`。
+无 `.bib` 文献库时，XeLaTeX 编译两遍即可，不要求 BibTeX。只有报告确实使用真实 `.bib` 库及 `gbt7714` 样式时，才检查并安装 BibTeX 和 `gbt7714-numerical.bst`。
+
+绘图字体与 LaTeX 正文字体分别配置。Matplotlib 若选择微软雅黑、黑体或 Noto CJK，需确认相应字体存在；也可显式加载发行版中的 Fandol 字体文件，不能用绘图字体检查代替正文编译检查。
 
 ## 3. 安装 Skill
 
@@ -80,26 +82,17 @@ bash ./install.sh --skills-dir /opt/skills --force
 python verify_install.py
 ```
 
-逐项检查：Python 版本、五个库、`xelatex`、中文字体、`gbt7714` 样式、两个 Skill 的关键文件是否齐全。
-输出形如：
+环境自检覆盖 Python、绘图库、编译器和 Skill 资源。若检查器列出绘图用的系统中文字体或旧模板的参考文献样式，应结合实际使用场景判断；`minimal` 正文使用 Fandol 与 Latin Modern，无文献库时不依赖 BibTeX。
 
-```text
-[PASS] Python 3.11.9
-[PASS] numpy 1.26.4 / scipy / matplotlib / pandas / PyMuPDF
-[PASS] xelatex 在 PATH 中
-[PASS] 中文字体可用（Microsoft YaHei）
-[PASS] Lab_Workflow_Generator 关键文件齐全（8 个脚本 + 模板资产）
-[PASS] advanced_lab_report_gen SKILL.md 存在
-==> ALL PASS（可运行 --demo 做端到端冒烟测试）
-```
-
-想直接验证"能不能产出 PDF"，跑示例工程：
+在本 `skills/` 目录内单独验证引擎、字体、章节编号及 PDF 输出：
 
 ```powershell
-python verify_install.py --demo
+powershell -ExecutionPolicy Bypass -File .\Lab_Workflow_Generator\assets\minimal_latex\build.ps1 -Verify
 ```
 
-它会在临时目录复制示例工程并执行完整流水线。本仓库版本不含示例数据，该步骤会被跳过（WARN），其余自检照常；如需完整冒烟测试请使用随包分发版。
+该诊断使用自带样例，不需要实验数据。正式报告部署 `template_minimal.tex` 后，直接填写 `lab_report.tex`，由运行器用 XeLaTeX 两遍编译，辅助文件集中到 `build/`。仍须按 `report.md` 检查正文、数据和渲染后的 PDF。
+
+`python verify_install.py --demo` 是可选的实验流程验收；本仓库不附实验示例数据，缺少示例时会提示 WARN 并跳过。真实报告的端到端验收需另行提供有权使用的讲义和数据。
 
 ## 5. 可选依赖
 
